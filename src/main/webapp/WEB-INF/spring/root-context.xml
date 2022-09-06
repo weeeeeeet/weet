@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- beans 빈들의 대한 설정 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+   
+   <!-- Root Context: defines shared resources visible to all other web components -->
+   
+   <!-- ============== 1. Hikari Configuration /primary="true" 똑같은게 최우선으로 의존성주입 ============== -->
+  <bean id="hikariConfig" primary="true" class="com.zaxxer.hikari.HikariConfig">
+      <description>HikariCP Configuration</description>
+   
+         <!-- 1. JDBC 연결정보 속성들의 값 설정 -->
+         <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />   
+         <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@db202204131245_high?TNS_ADMIN=C:/opt/OracleCloudWallet/ATP"/>
+   
+         <property name="username" value="ADMIN"/>
+         <property name="password" value="Oracle87761226"/>
+   
+         <!-- 2. Connection Pool의 작동방식과 관련된 속성들의 값 설정 -->
+         <property name="maximumPoolSize" value="10"/>
+         <property name="minimumIdle" value="2"/>
+         <property name="idleTimeout" value="10000"/>
+         <property name="connectionTimeout" value="1000"/>
+         <property name="connectionTestQuery" value="SELECT 1 FROM dual"/>
+         <property name="dataSourceJNDI" value="jdbc/HikariCP"/>
+         <property name="poolName" value="*** HikariDataSource ***"/>
+      </bean>
+   
+      <bean 
+         id="hikariDataSource" 
+         class="com.zaxxer.hikari.HikariDataSource"
+         destroy-method="close"
+         primary="false">
+         <description>HikariCP DataSource</description>
+   
+         <!-- 생성자 매개변수가 2개 이상일 때 사용할 수 있는 속성 -->
+         <!-- <constructor-arg name="" value="" ref="" index=""/> -->
+         <!-- ref : 생성자의 매개변수로 hikariConfig 빈을 사용 -->
+         
+         <constructor-arg ref="hikariConfig"/>
+      </bean>
+   
+   <!-- ============== 2. MyBatis pooled Data Source Configuration ============== -->
+   <bean id="pooledDataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource" destroy-method="forceCloseAll" primary="true">
+      <description>MyBatis Pooled Data Source</description>   
+
+      <!-- 1. JDBC 연결정보 속성들의 값 설정 -->
+      <property name="driver" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+      <property name="url" value="jdbc:log4jdbc:oracle:thin:@db202204131245_high?TNS_ADMIN=C:/opt/OracleCloudWallet/ATP"/>
+
+      <property name="username" value="ADMIN"/>
+      <property name="password" value="Oracle87761226"/>
+
+      <!-- 2. Connection Pool의 작동방식과 관련된 속성들의 값 설정 -->
+      <property name="poolMaximumActiveConnections" value="5"/>
+      <property name="poolMaximumIdleConnections" value="2"/>
+      <property name="poolPingEnabled" value="true"/>
+      <property name="poolPingQuery" value="SELECT 1 FROM dual"/>
+      <property name="loginTimeout" value="1"/>
+   </bean>
+
+   <!-- ============== 3. Mybatis Configuration ============== -->
+
+
+	<bean
+		id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+
+		<!-- <property name="dataSource" ref="hikariDataSource"/> -->
+		<property name="dataSource" ref="pooledDataSource"/>
+
+		<property name="configLocation" value="classpath:mybatis-config.xml"/>
+
+		<!-- 만약, 마이바티스 설정파일 내에서, SQL Mapper 파일의 경로를 직접 지정하는 경우에는 아래처럼 생략가능 -->
+		<!-- <property name="mapperLocations" value="classpath*:mappers/**/SQL*.xml"/> -->
+	</bean>
+	
+	
+	<mybatis-spring:scan base-package="com.weet.app.**.mapper" />
+	<context:component-scan base-package="com.weet.app.**.service" />
+	<context:component-scan base-package="com.weet.app.**.persistence" />
+	
+
+</beans>

@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+* {
+    margin: 0 auto;
+    padding: 0;
+    font-family: 'SCoreDream';
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+}
+ul,li{
+    list-style: none;
+}
+
+/* login content  */
+
+.login-contain {
+    min-width: 800px;
+    margin-top: 100px;
+    text-align: center;
+    /* border: 2px solid red; */
+}
+
+.d-grid gap-2 col-4 mx-auto mx-block {
+    height: 100%;
+}
+
+.login-main-text {
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.lgn-btn{                           /* 버튼 덩어리? */
+    max-width: 370px;
+    margin-bottom: 10px;
+}
+.btn {                              /* 각 버튼 */
+    width: 100%;
+    /* border: 2px solid red; */
+}
+
+.login-text{
+    padding-top: 2px;
+    font-size: 15px;
+    height: 30px;
+}
+.btn{
+    text-align: center;
+}
+
+/* 버튼 색상 지정 */
+.btn > .kakao {
+    background-color:#fee500; 
+    border-color:#fee500; 
+    color:#000000;
+}
+.btn > .naver{
+    background-color:#1ec800; 
+    border-color:#1ec800;
+}
+.btn > .google{
+    background-color:#4285F4; 
+    border-color:#4285F4;
+}
+.btn > .tr{
+    background-color:#FF730E; 
+    border-color:#FF730E;
+}
+
+/* 버튼 하위 정렬 */
+.button-box{
+    display: flex;
+    font-size: 15px;
+}
+.login-icon { 
+    padding-left: 10px;
+}
+.login-icon >i{
+    padding-top: 6px;
+}
+
+.login-text { 
+    box-sizing: border-box; 
+    padding-left: 20px; 
+    width:100%; 
+    /* text-align: center; */
+}
+
+/* 동의 문구 */
+.greement{
+    font-size: 8px;
+    text-align: center;
+
+}

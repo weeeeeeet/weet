@@ -1,0 +1,214 @@
+@charset "UTF-8";
+
+* {
+    margin: 0 auto;
+    padding: 0;
+    font-family: 'SCoreDream';
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul>li{
+    list-style: none;
+}
+
+input{
+    border: 2px solid #2370DF;
+}
+
+
+
+/*======= join-contain========== */
+
+.join-box {                    /* 회원가입 form*/  
+    min-width: 420px;
+    margin-top: 50px;
+    /* border: 2px solid green; */
+}
+
+.join-contain {
+    margin: 0 auto;
+    padding-bottom: 50px;
+    width: 370px;
+    /* border: 2px solid green; */
+}
+.join-contain  h2{                    /* 회원가입문구 */
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.join-contain  h3{
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: 60px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.form-label{                        /* 입력창 문구 */
+    margin-top: 3px;
+    margin-left: 10px;
+    font-size: 12px;
+    /* border: 2px solid green; */
+}
+.boxing{
+    /* border: 2px solid green; */
+    display: flex;
+}
+.join-box > div{
+    margin-bottom: 5px;
+}
+
+.boxing > input{                   /* 입력창 */
+    font-size: 8px;
+    width: 370px;
+    height: 32px;
+    /* border: 2px solid green; */
+}
+
+.checkment{							/* id 중복확인멘트 */
+	font-size: 10px;
+	font-weight: 600;
+}
+
+.id_ok{								/* id 중복X 멘트 */
+color:#008000;
+display: none;
+}
+
+.id_already{						/* id 중복O 멘트 */
+color:#6A82FB; 
+display: none;
+}
+
+.boxing > button{                   /* 입력창 버튼 */
+    width: 20%;
+    color: white;
+    background-color: #2370DF;
+    border: none;
+    border-radius: 3px;
+    font-size:12px;
+}
+
+.partition {                                /* 밑줄 */
+    border: 1px solid rgb(236, 236, 236);
+    background-color: rgb(236, 236, 236);;
+    width: 60%;
+    margin-bottom: 40px;
+}
+
+.info-box{
+    text-align: center;
+    min-width: 420px;
+}
+
+.box1{                               /* 프로필,이름,성별 */
+    width: 370px;
+    display: flex;
+}
+
+.info > .ng{
+    width: 270px;
+    text-align: left;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.name{
+    padding-left: 14px;
+}
+
+.name > input{
+    width: 100%;
+    margin-bottom: 10px;
+}
+.intro ul{
+    width: 370px;
+    padding-left: 0;
+}
+
+.intro input{
+    width: 100%;
+    height: 100px;
+    margin-bottom: 20px;
+    
+}
+.biz ul{
+    width: 370px;
+    padding-left: 0;
+}
+
+.biz input{
+    width: 100%;
+    height: 32px;
+    margin-bottom: 20px;
+}
+.accordion{
+    width: 370px;
+    margin: 0;
+    padding: 0;
+}
+.accordion-item {
+    width: 100%;
+}
+
+.form-control-sm{
+    width: 100%;
+}
+
+p {
+    font-size: 12px;
+}
+
+.agreement{
+    margin-bottom: 100px;
+    padding-left: 0;
+}
+.accordion-item .accordion-button{ 
+    font-size: 12px;
+}
+.accordion-body p{
+    width: 370px;
+    height: 140px;
+    overflow-x:hidden; 
+    overflow-y:auto;
+}
+.accordion-body p::-webkit-scrollbar {
+    width: 5px;
+  }
+  .accordion-body p::-webkit-scrollbar-thumb {
+    background-color: #6092d7;
+  }
+  .accordion-body p::-webkit-scrollbar-track {
+    background-color: rgba(209, 209, 209, 0.386);
+  }
+
+  .btnbox{
+    text-align: center;
+  }
+  .loginbtn{
+    display :inline-block;
+
+    background-color: #2370DF;
+    -webkit-box-shadow: 0px 16px 23px -3px #ABABAB; 
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: aliceblue;
+    width: 370px;
+    height: 50px;
+    border: none;
+    border-radius: 10px; 
+    margin-top: 70px;
+
+    
+  }
+
+.info span{
+    color: red;
+}
+
+.accordion-button.selectall::after { display: none; }
+

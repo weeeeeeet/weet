@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+* {
+    margin: 0 auto; 
+    padding: 0;
+    font-family: 'SCoreDream';
+    box-sizing: border-box;
+}
+
+
+/* Header ================================ */
+.header {
+    padding: 20px 80px 20px 80px;
+    width: 100%;
+    height: 100px;
+    background-color: white;
+    position: fixed;                       /* 헤더 고정 */
+    top: 0px;
+    z-index: 5;
+    box-shadow: 5px 5px 10px 0.5px rgba(0, 0, 0, 0.2);
+}
+.header nav.nav_left a{                     /* 로고 */
+    padding-left: 0px;
+    float: left;
+    display: inline;
+    margin-bottom: 20px;
+    margin-right: 50px;
+}
+.header .categories a {                     /* 커뮤니티,클래스 */
+    margin-top: 20px;
+    display: inline;           
+    padding-right: 0px;
+    font-size: 15px;
+    color: #2370DF;
+    font-weight: 500;
+    text-decoration: none;
+}
+.header div.header_right {                  /* 헤더 우측 */
+    float: right;
+    margin-top: 15px;
+    margin-right: 50px;
+}
+.header div.header_right input {            /* 검색창 */
+    width: 260px;
+    border: 3px solid #2370DF;
+    border-radius: 10px;
+    padding: 6px 12px;
+    font-size: 14px;
+    float: left;
+    position: relative;
+}
+.header .header_right > a:nth-of-type(1) {    /* 검색버튼 */
+    margin-right: 30px;
+    float: left;
+    color: #2370DF;
+    margin-left: 10px;
+    font-size: 20px;
+    padding-top: 8px;
+    text-decoration: none;
+    display: inline;
+}
+.underline {                                /* 밑줄 */
+    border: 0;
+    height: 5px;
+    background: rgb(236, 236, 236);
+}
+.header .login >  a{
+    clear: both;
+    display: inline;           
+    font-size: 15px;
+    color: #2370DF;
+    font-weight: 500;
+    text-decoration: none;
+    float: right;
+    position: relative;
+    top: -60px;
+}

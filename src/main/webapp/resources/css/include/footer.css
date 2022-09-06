@@ -1,0 +1,86 @@
+@charset "UTF-8";
+
+/* WEB FONTS 적용 ----------------- */
+@import url(https://webfontworld.github.io/SCoreDream/SCoreDream.css);
+
+/* 기본적 css 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'SCoreDream';
+    box-sizing: border-box;
+}
+
+/* 가이드라인 */
+/* .g{
+    border: 1px solid rgb(192, 2, 255);
+} */
+
+
+
+/* Footer ==================================================*/
+
+.footer {
+    height: 280px;
+    width: 100%;
+    background-color: white;
+    /* position: fixed;   */
+    bottom: 0;
+    left: 0;
+}
+.footer img {                                   /* footer로고 */
+    width: 120px;
+    margin-top: 25px;
+    margin-left: 80px;
+    display: inline;
+    float: left;
+}
+
+.footer .notice_service {                      /* 공지사항, 고객센터 */
+    float: right;
+    margin-top: 20px;
+    margin-right: 80px;
+}
+.footer .notice_service button {
+    border-radius: 5px;
+    font-weight: bold;
+    width: 160px;
+    height: 33px;
+    border: 2px solid #6C6C6C;
+    background-color: white;
+    cursor:pointer;                             /* 커서 올렸을 때 손모양으로 */
+}
+.footer ul.time {                               /* 운영시간 */
+    margin-top: 10px;
+    list-style: none;
+    font-size: 12px;
+    color: #6C6C6C;
+    margin-bottom: 25px;
+}
+.footer .underline2 {
+    clear: both;
+    border: 0;
+    height: 1.5px;
+    background: rgb(236, 236, 236);
+}
+.footer .terms {                                 /* 이용약관, 개인정보처리방침 */
+    height: 40px;                         
+    list-style: none;
+    margin-left: 80px;
+    margin-top: 20px;
+}
+.footer a {
+    float: left;
+    font-size: 15px;
+    padding-right: 30px;
+    text-decoration: none;
+    color: black;
+}
+.footer .address {
+    margin-top: 20px;
+    margin-left: 80px;
+    line-height: 18px;
+}
+.footer p {
+    font-size: 15px;
+}
