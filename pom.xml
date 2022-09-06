@@ -25,7 +25,17 @@
 		<org.springframework-version>5.3.22</org.springframework-version>
 		<org.aspectj-version>1.9.9.1</org.aspectj-version>
 		<org.apache.logging.log4j-version>2.18.0</org.apache.logging.log4j-version>
+		<io.springfox.swagger-version>2.9.2</io.springfox.swagger-version>
 	</properties>
+	
+	<!-- ================ IamPort REST API 연동 모듈 ================= -->
+
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
 
 
 	<dependencies>
@@ -236,11 +246,11 @@
 	    <!-- ================ Jackson Dataformat XML ================= -->
 	    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml -->
 	     
-	    <dependency>
+	    <!-- <dependency>
 	       <groupId>com.fasterxml.jackson.dataformat</groupId>
 	       <artifactId>jackson-dataformat-xml</artifactId>
 	       <version>2.13.3</version>
-	    </dependency>
+	    </dependency> -->
 	
 	
 		    <!-- =============== HTTP client =============== -->
@@ -257,6 +267,26 @@
 	       <artifactId>gson</artifactId>
 	       <version>2.9.1</version>
 	    </dependency>
+	    
+	    <!-- ================ IamPort REST API 연동 모듈 ================= -->
+		<dependency>
+			<groupId>com.github.iamport</groupId>
+			<artifactId>iamport-rest-client-java</artifactId>
+			<version>0.2.22</version>
+		</dependency>
+		
+		<!-- ================ Swagger ================= -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${io.springfox.swagger-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${io.springfox.swagger-version}</version>
+		</dependency>
 	    
 	    
 	</dependencies>
