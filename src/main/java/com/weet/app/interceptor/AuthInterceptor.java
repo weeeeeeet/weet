@@ -1,4 +1,4 @@
-package com.weet.app.user.controller;
+package com.weet.app.interceptor;
 
 import java.util.Objects;
 
