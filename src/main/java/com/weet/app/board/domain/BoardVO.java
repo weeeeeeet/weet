@@ -4,8 +4,12 @@ import lombok.Value;
 
 @Value
 public class BoardVO {
-
-	private String userId;
+	
+	private Integer commId;
+	
+	private String userId;		// 작성자 아이디
+	private String userNickname; // 작성자 닉네임
+	
 	private String commPostTitle;
 	private String commPostContents;
 	private Integer commLikeNum;
@@ -13,5 +17,4 @@ public class BoardVO {
 	private String commPostInsertTs;
 	private String commPostUpdateTs;
 	private Integer commReplyCount;
-	private Integer commId;
 } // end class
