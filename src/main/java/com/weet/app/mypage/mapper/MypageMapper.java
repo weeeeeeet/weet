@@ -71,12 +71,12 @@ public interface MypageMapper {
 	@Select("SELECT count(class_id) FROM T_CLASS WHERE USER_ID = #{userId}")
 	public abstract Integer selectClassAmount(@Param("userId")String userId) throws DAOException;
 	
-	
-	
-	
-	
-	// 6. 수강종료 클래스
+	// ====================================================================
+	// 6. 수강 종료 클래스룸
+	// ====================================================================
 	public abstract List<MypageClassVO> selectDoneClass() throws DAOException;
+	
+	
 	
 	// 7. 시작 전 클래스
 	public abstract List<MypageClassVO> selectBeforeClass() throws DAOException;
