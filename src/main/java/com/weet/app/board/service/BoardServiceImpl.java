@@ -1,5 +1,51 @@
 package com.weet.app.board.service;
 
-public class BoardServiceImpl {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-}
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.weet.app.board.domain.BoardVO;
+import com.weet.app.board.domain.ReplyVO;
+import com.weet.app.board.mapper.BoardMapper;
+import com.weet.app.exception.DAOException;
+import com.weet.app.exception.ServiceException;
+
+import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
+@Service
+public class BoardServiceImpl implements BoardService {
+	
+	@Setter(onMethod_= @Autowired)
+	private BoardMapper mapper;
+
+	// 인기게시글 + 댓글미리보기 조회
+	@Override
+	public List<Object> getListTop10() throws ServiceException {
+		
+		List<Object> result = new ArrayList<>();
+		
+		try {
+			List<BoardVO> list = this.mapper.selectListTop10();
+			
+			for(BoardVO vo : list) {
+				Map<String, Object> map = new HashMap<>();
+				List<ReplyVO> reply = this.mapper.selectReplyList(vo.getCommId(), true);
+				
+				map.put("board", vo);
+				map.put("reply", reply);
+				
+				result.add(map);
+			} // enhanced for
+			
+		} catch(DAOException e) { throw new ServiceException(e); } // try-catch
+		
+		return result;
+	} // getListTop10
+
+} // end class
