@@ -21,6 +21,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.weet.app.board.domain.BoardVO;
 import com.weet.app.board.domain.ReplyVO;
 import com.weet.app.board.service.BoardService;
+import com.weet.app.common.domain.Criteria;
 import com.weet.app.exception.ServiceException;
 
 import lombok.NoArgsConstructor;
@@ -52,5 +53,48 @@ public class BoardServiceTests {
 		
 		list.forEach(log::info);
 	} // 리뷰조회
+	
+//	@Disabled
+	@Test
+	@Order(2)
+	@DisplayName("2. 전체게시글, 댓글프리뷰 조회")
+	@Timeout(value = 3, unit = TimeUnit.SECONDS)
+	void 전체게시글_댓글프리뷰() throws ServiceException {
+		
+		String keyword = "뉴비";
+		Criteria cri = new Criteria();
+		cri.setAmount(5);
+		cri.setCurrPage(0);
+		cri.setSort("like");
+		
+		List<Object> list = this.service.getAllList(keyword, cri);
+		
+		list.forEach(log::info);
+	} // 전체게시글_댓글프리뷰
+	
+//	@Disabled
+	@Test
+	@Order(3)
+	@DisplayName("3. 게시글갯수 조회")
+	@Timeout(value = 3, unit = TimeUnit.SECONDS)
+	void 게시글갯수() throws ServiceException {
+		
+		String keyword = "뉴비";
+		int count = this.service.getListCount(keyword);
+		
+		log.info("\t+ 총 {} 건", count);
+	} // 게시글갯수조회
+	
+//	@Disabled
+	@Test
+	@Order(4)
+	@DisplayName("4. 게시글상세 조회")
+	@Timeout(value = 3, unit = TimeUnit.SECONDS)
+	void 게시글상세() throws ServiceException {
+		
+		Map<String, Object> map = this.service.getOneBoard(1);
+		
+		log.info("\t+ 조회결과: {}", map);
+	} // 게시글상세
 
 } // end class
