@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+* {
+    margin: 0 auto;
+    padding: 0;
+    font-family: 'SCoreDream';
+    box-sizing: border-box;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+section, li::after{ 
+    clear:both; 
+    content:''; 
+    display:block;
+} 
+
+
+/* ==== login box =========*/
+.login-contain {                 /* 컨텐츠 스타일 */
+    max-width: 1440px;
+    margin-top: 100px;   
+    /* 헤더 높이만큼 밀어주기 */
+    
+}
+.inner_box {
+    height: 100%;
+    position: relative;
+    margin-top: 20vh;
+    text-align: center;
+}
+
+.login-main-text{               /* 메인 문구 */
+    font-size: 27px;
+    font-weight: 600;
+}
+
+.sub-text {                      /* 서브 문구 box */
+    margin-top: 30px;
+}
+
+.sub-text h3 {                  /* 서브 문구 1 */
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.sub-text p {                    /* 서브 문구 2 */
+    font-size: 14px;
+}
+
+.findpwd{
+    width: 400px;
+    /* border: 2px solid green; */
+}
+
+.inner-list{                      /* 라벨+인풋 list(모음) */
+    margin-bottom: 30px;
+}
+
+.la_input {                       /* label + input box */
+    margin: 0px;
+    padding: 20px 10px 0 10px;
+}   
+.form-label{                       /* label 스타일 */
+    font-size: 14px;
+    padding-left: 7px;
+    text-align: left;
+    display: block;
+    color: #3c4144;;
+    /* border: 2px solid green; */
+}
+
+.form-control-sm{                  /* input 스타일 */
+    border: 2px solid #2370DF; 
+    width: 100%;
+    height: 35px;
+}
+
+
+.loginbtn{                                 /* 로그인 버튼 */
+    background-color: #2370DF;
+    -webkit-box-shadow: 0px 16px 23px -3px #ABABAB; 
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: aliceblue;
+    width: 370px;
+    height: 50px;
+    border: none;
+    border-radius: 10px; 
+    margin-bottom: 10px;
+}
+

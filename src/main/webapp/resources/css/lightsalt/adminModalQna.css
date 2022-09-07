@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+#newcouponLabel {
+    font-weight: 600;
+}
+.modal-body span {
+    font-size: 13px;
+}
+.modal-body table{
+    border-bottom: 1px dashed #cccccc;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.modal-body td {
+    font-size: 14px;
+    padding: 7px;
+    border-top: 1px solid #cccccc;
+}
+
+.sbj {
+    color: #2370DF;
+    font-weight: 500;
+    font-size: 15px;
+    text-align: center;
+    border-right: 1px solid #cccccc;
+}
+
+td:nth-child(3) {       
+    border-left: 1px solid #cccccc;
+}
+
+.modal-body p {
+    padding: 20px 0;
+}
+
+.col-form-label {
+    color: #6b6b6b;
+    font-weight: 500;
+    font-size: 15px;
+}

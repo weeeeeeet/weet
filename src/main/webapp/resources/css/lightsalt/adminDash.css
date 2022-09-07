@@ -1,0 +1,50 @@
+* {
+    margin: 0 auto;
+    padding: 0;
+    font-family: 'SCoreDream';
+    box-sizing: border-box;
+}
+li{
+    list-style: none;
+}
+
+a,button{
+    text-decoration:none;
+}
+
+
+#content-body{
+    max-width: 1440px;
+    z-index: 0;
+}
+
+
+/* ================ 컨텐츠 ============= */
+.content-container{
+    /* width: 1100px; */
+    background-color: #e4e4e4;
+
+    width: calc(100% - 330px);
+    float: right;
+    margin-right:40px;
+}
+
+.marginx {
+    margin: 0;
+}
+
+.sidebar-box button{            /* 폰트 재설정 */
+    font-family: 'SCoreDream';
+}
+
+.card-body{
+    width: 380px;
+}
+
+.me-1{
+    margin-left: 0;
+}
+
+.text-sm{
+    margin-left: 0;
+}

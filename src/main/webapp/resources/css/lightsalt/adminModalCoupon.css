@@ -1,0 +1,15 @@
+/* coupon modal */
+
+#newcouponLabel {
+    font-weight: 600;
+}
+
+.col-form-label {
+    color: #2370DF;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.form-control{
+    border: 1px solid #2370DF;
+}
