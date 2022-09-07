@@ -206,11 +206,34 @@ public class MyPageController implements InitializingBean {
 	
 	@GetMapping("/class/expired") // 페이지 확인용
 	//@PostMapping("/class/expired")
-	public String expiredClass() {
+	public String expiredClass(Criteria cri, MypageClassVO vo,Model model) throws ControllerException {
 		log.trace("expiredClass() invoked.");
 		
-		return "mypage/class/expired";
+		try {
+			
+			//1. 게시물 출력
+			List<MypageClassVO> list = this.service.getListDoneClass(cri, vo);
+			list.forEach(log::info);
+			
+			// 2. 페이징 처리
+			cri.setAmount(3);
+			PageDTO pageDTO = new PageDTO( cri, this.service.getTotalDoneClass(vo) );
+			model.addAttribute("__PAGENATION__", pageDTO);
+			
+			// + value가 NULL이면 공유속성에 추가가 안되기에, NULL인지 아닌지 파악하지 않아도 OK!
+			model.addAttribute("__LIST__",list);
+			
+			return "mypage/class/expired";
+			
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try - catch : ServiceException을 ControllerException으로
+		
 	} // expiredClass
+	
+	// =======================================================
+		// + 후기 등록
+	// =======================================================
 	
 	// =======================================================
 		// 6. 일반회원 - 마이페이지 - 내클래스룸 - 예약 클래스룸

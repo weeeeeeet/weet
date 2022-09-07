@@ -68,13 +68,18 @@ public interface MypageMapper {
 	// ====================================================================
 	// + 페이징 처리에 필요한 총 수강 중 클래스의 수 반환 (OK)
 	// ====================================================================
-	@Select("SELECT count(class_id) FROM T_CLASS WHERE USER_ID = #{userId}")
+	@Select("SELECT count(CLASS_LISTENER) FROM t_class_listenr WHERE USER_ID = #{userId}")
 	public abstract Integer selectClassAmount(@Param("userId")String userId) throws DAOException;
 	
 	// ====================================================================
 	// 6. 수강 종료 클래스룸
 	// ====================================================================
-	public abstract List<MypageClassVO> selectDoneClass() throws DAOException;
+	public abstract List<MypageClassVO> selectDoneClass(Criteria cri, @Param("userId")String userId) throws DAOException;
+	
+	// ====================================================================
+	// + 페이징 처리에 필요한 총 수강 중 클래스의 수 반환 (OK)
+	// ====================================================================
+	public abstract Integer selectDoneClassAmount(@Param("userId")String userId) throws DAOException;
 	
 	
 	

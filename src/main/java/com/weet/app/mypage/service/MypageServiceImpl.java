@@ -192,6 +192,28 @@ public class MypageServiceImpl implements MypageService, InitializingBean {
 	// 7 ) 수강완료한 클래스 조회
 	// ======================================================================
 	
+	@Override
+	public List<MypageClassVO> getListDoneClass(Criteria cri, MypageClassVO vo) throws ServiceException {
+		
+		try {
+			return this.mapper.selectDoneClass(cri, vo.getUserId());
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		} // try - catch
+		
+	} // getListDoneClass
+
+	@Override
+	public Integer getTotalDoneClass(MypageClassVO vo) throws ServiceException {
+		
+		try {
+			return this.mapper.selectDoneClassAmount(vo.getUserId());
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		} // try - catch
+		
+	} // getTotalDoneClass
+	
 	// ======================================================================
 	// + 후기 등록 기능
 	// ======================================================================

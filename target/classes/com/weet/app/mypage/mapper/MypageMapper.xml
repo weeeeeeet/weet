@@ -133,4 +133,56 @@
     
     </select>
 
+    <!-- 수강 종료 클래스 조회 -->
+    <select 
+        id="selectDoneClass" 
+        resultType="com.weet.app.mypage.domain.MypageClassVO">
+
+        <![CDATA[
+
+            SELECT
+
+                /*+ INDEX_DESC(T_CLASS) */
+                
+                t.class_id,
+                ls.user_id,
+                t.class_trainer_name,
+                t.class_title,
+                t.CLASS_MAIN_IMG_URL
+                
+            FROM
+                T_CLASS t, t_class_listenr ls
+            WHERE
+                t.class_id = ls.class_id
+                AND ls.USER_ID = #{userId}
+                AND t.CLASS_RECRUIT_END_DATE < CURRENT_DATE
+
+            OFFSET (#{cri.currPage} - 1) * #{cri.amount} ROWS
+            FETCH NEXT #{cri.amount} ROWS ONLY
+        
+        ]]>
+    
+    </select>
+
+    <!-- 수강 종료 클래스 조회 - 페이징 -->
+    <select 
+        id="selectDoneClassAmount" 
+        resultType="Integer">
+
+        <![CDATA[
+
+            SELECT
+                count(CLASS_LISTENER)
+            FROM
+                T_CLASS t, t_class_listenr ls
+            WHERE
+                t.class_id = ls.class_id
+                AND ls.USER_ID = #{userId}
+                AND t.CLASS_RECRUIT_END_DATE < CURRENT_DATE
+
+        ]]>
+    
+    </select>
+
+
 </mapper>

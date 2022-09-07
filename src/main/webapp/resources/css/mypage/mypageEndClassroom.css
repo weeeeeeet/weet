@@ -157,10 +157,10 @@
     margin-left: 10px;
 }
 
-/* 클래스 카드 위치 및 크기 지정 */
+/* 클래스 카드 위치 및 크기 지정 ( 수정 *************** ) */
 .content_right .class_card{
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 70px;
+    margin-right: 70px;
     float: left;
 
     width: 230px;
@@ -176,9 +176,11 @@
 .content_right .class_card .card-text{
     display: inline-block;
     margin-top: 10px;
+    width: 100%;
     height: 50px;
 
     text-align: center;
+    font-weight: bold;
     font-size: 14px;
     color: black;
 }
@@ -333,5 +335,44 @@ color:#fc0;
 .file_comment{
     font-size: 10px;
     color: #8C8C8C;
+}
+
+ /* + 페이지 번호 목록 (***) ================================  */
+#pagenation{
+    margin-left: 250px;
+}
+
+#pagenation ul {
+	
+	width: 400px;
+
+}
+
+#pagenation li {
+    float: left;
+	display: inline-block;
+    list-style: none;
+    /* 가로 중앙 정렬 */
+    text-align: center;
+    /* 세로 중앙 정렬 */
+    line-height: 30px;
+
+    width: 30px;
+    height: 30px;
+}
+
+.prev, .next{
+	display: inline-block;
+    /* !important는 무조건 이것을 적용하라는 의미 */
+    width: 70px !important;
+
+    color: white !important;
+    background-color: darkgray !important;
+}
+
+/* 현재 페이지는 다르게 나오게 하기 */
+
+.currPage{
+    color: red;
 }
 

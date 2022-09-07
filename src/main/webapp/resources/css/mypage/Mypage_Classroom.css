@@ -159,7 +159,7 @@
     margin-left: 10px;
 }
 
-/* 클래스 카드 위치 및 크기 지정 */
+/* 클래스 카드 위치 및 크기 지정 ( 수정 *************** ) */
 .content_right .class_card{
     margin-left: 100px;
     margin-right: 100px;
@@ -168,7 +168,7 @@
     width: 230px;
 }
 
-/* 클래스 카드 이미지 */
+/* 클래스 카드 이미지  */
 .content_right .class_card .card_img{
     width: 230px;
     height: 125px;

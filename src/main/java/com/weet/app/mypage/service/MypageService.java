@@ -40,4 +40,10 @@ public interface MypageService {
 	// + 페이징 처리에 필요한 수강중인 클래스의 총 양 구하기
 	public abstract Integer getTotalClass(MypageClassVO vo) throws ServiceException;
 	
+	// 6. 수강 종료 클래스 조회
+	public abstract List <MypageClassVO> getListDoneClass(Criteria cri, MypageClassVO vo) throws ServiceException;
+	
+	// + 페이징 처리에 필요한 수강 종료 클래스의 총 양 구하기
+	public abstract Integer getTotalDoneClass(MypageClassVO vo) throws ServiceException;
+	
 } // end interface
