@@ -1,5 +1,6 @@
 package com.weet.app.board.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,7 +8,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.weet.app.board.service.BoardService;
+import com.weet.app.common.APIResponse;
+import com.weet.app.exception.ControllerException;
+import com.weet.app.exception.ServiceException;
+
+import io.swagger.annotations.ApiOperation;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -17,17 +25,26 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/board")
 public class BoardController {
 	
+	@Setter(onMethod_= @Autowired)
+	private BoardService service;
+	
 	// 전체 게시글 목록 조회
 	@GetMapping("/list")
 	public String boardList() {
 		return "test!";
 	}
 	
-	// 추천 TOP10 게시글 목록 조회
+	// 추천 TOP10 게시글 조회
 	@GetMapping("/list/top")
-	public String boardBestList() {
-		return "test!";
-	}
+	@ApiOperation(value = "인기글 조회", notes = "최근 7일간 인기글 10개를 조회합니다. 가장 최근 댓글 1개를 같이 반환")
+	public APIResponse boardBestList() throws ControllerException{
+		
+		APIResponse res = new APIResponse();
+		try { res.add(this.service.getListTop10()); } 
+		catch (ServiceException e) { throw new ControllerException(e); } // try-catch
+		
+		return res;
+	} // boardBestList
 	
 	// 최근 게시글 5개 목록 조회
 	@GetMapping("/list/recent")
