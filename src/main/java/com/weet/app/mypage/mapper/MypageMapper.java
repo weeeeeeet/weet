@@ -81,6 +81,11 @@ public interface MypageMapper {
 	// ====================================================================
 	public abstract Integer selectDoneClassAmount(@Param("userId")String userId) throws DAOException;
 	
+	// ====================================================================
+	// 7. 후기 등록하기
+	// ====================================================================
+	public abstract Integer insertReview(MypageReviewDTO dto) throws DAOException;
+	
 	
 	
 	// 7. 시작 전 클래스
@@ -89,8 +94,6 @@ public interface MypageMapper {
 	// 8. 찜한 클래스
 	public abstract List<MypageClassVO> selectLikeClass() throws DAOException;
 	
-	// 9. 후기 등록하기 ( -> .xml파일에 )
-	public abstract List<MypageReviewDTO> insertReview() throws DAOException;
 	
 	// 10. 마이바디 - 날짜선택
 	public abstract Date selectMyBodyDate() throws DAOException;

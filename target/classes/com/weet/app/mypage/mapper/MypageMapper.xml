@@ -184,5 +184,17 @@
     
     </select>
 
+    <!-- 후기 등록 -->
+    <insert id="insertReview">
+
+        <selectKey keyProperty="reviewId" order="BEFORE" resultType="int">
+            SELECT "ADMIN"."ISEQ$$_96847".nextval FROM dual
+        </selectKey>
+
+        INSERT INTO t_review ( REVIEW_ID, USER_ID, CLASS_ID, REVIEW_STAR, REVIEW_CONTENTS, REVIEW_DATETIME, REVIEW_IMG_URL )
+        VALUES( #{reviewId}, #{userId}, #{classId}, #{reviewStar}, #{reviewContents}, to_date(CURRENT_DATE,'yyyy/mm/dd'), #{reviewImgUrl} )
+
+    </insert>
+
 
 </mapper>

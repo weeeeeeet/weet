@@ -159,8 +159,8 @@
 
 /* 클래스 카드 위치 및 크기 지정 ( 수정 *************** ) */
 .content_right .class_card{
-    margin-left: 70px;
-    margin-right: 70px;
+    margin-left: 50px;
+    margin-right: 50px;
     float: left;
 
     width: 230px;
