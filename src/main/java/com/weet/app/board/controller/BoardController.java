@@ -3,6 +3,7 @@ package com.weet.app.board.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.weet.app.board.service.BoardService;
 import com.weet.app.common.APIResponse;
+import com.weet.app.common.domain.Criteria;
+import com.weet.app.common.domain.PageDTO;
 import com.weet.app.exception.ControllerException;
 import com.weet.app.exception.ServiceException;
 
@@ -30,9 +33,20 @@ public class BoardController {
 	
 	// 전체 게시글 목록 조회
 	@GetMapping("/list")
-	public String boardList() {
-		return "test!";
-	}
+	@ApiOperation(value = "전체글 목록 조회", notes = "페이징, 키워드 검색, 정렬을 지원합니다.")
+	public APIResponse boardList(String keyword, Criteria cri) throws ControllerException {
+		
+		APIResponse res = new APIResponse();
+		
+		try { 
+			PageDTO dto = new PageDTO(cri, this.service.getListCount(keyword));
+			res.add("paging", dto);
+			res.add("result", this.service.getAllList(keyword, cri)); 
+			
+		} catch (ServiceException e) { throw new ControllerException(e); } // try-catch
+		
+		return res;
+	} // boardList
 	
 	// 추천 TOP10 게시글 조회
 	@GetMapping("/list/top")
@@ -40,7 +54,7 @@ public class BoardController {
 	public APIResponse boardBestList() throws ControllerException{
 		
 		APIResponse res = new APIResponse();
-		try { res.add(this.service.getListTop10()); } 
+		try { res.add("result", this.service.getListTop10()); } 
 		catch (ServiceException e) { throw new ControllerException(e); } // try-catch
 		
 		return res;
@@ -54,9 +68,16 @@ public class BoardController {
 	
 	// 게시글 상세 조회
 	@GetMapping("/{bno}")
-	public String boardDetail() {
-		return "test!";
-	}
+	@ApiOperation(value = "게시글 상세 조회", notes = "게시글과 모든 댓글목록을 반환합니다.")
+	public APIResponse boardDetail(@PathVariable("bno") int bno) throws ControllerException {
+		
+		APIResponse res = new APIResponse();
+		
+		try { res.add("result", this.service.getOneBoard(bno)); } 
+		catch (ServiceException e) { throw new ControllerException(e); } // try-catch
+		
+		return res;
+	} // boardDetail
 	
 	// 게시글 작성
 	@PostMapping("/{bno}")

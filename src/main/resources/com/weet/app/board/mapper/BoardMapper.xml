@@ -77,5 +77,101 @@
 			FETCH NEXT 1 ROW ONLY
 		</if>
 	</select>
+	
+	<select 
+		id="selectAllList"
+		resultType="com.weet.app.board.domain.BoardVO">
+		
+		SELECT
+		    comm_id,
+		    user_id,
+		    (
+		        SELECT
+		            user_nickname
+		        FROM
+		            t_user t
+		        WHERE
+		            t.user_id = c.user_id
+		    ),
+		    comm_post_title,
+		    comm_post_contents,
+		    comm_like_num,
+		    comm_view_count,
+		    to_char(comm_post_insert_ts, 'yyyy.mm.dd'),
+		    to_char(comm_post_update_ts, 'yyyy.mm.dd'),
+		    comm_reply_count
+		FROM
+		    t_community c
+		<include refid="search"/>
+		<include refid="sort"/>
+		OFFSET
+		    (#{cri.currPage} - 1) * #{cri.amount} ROW
+		FETCH
+		    NEXT #{cri.amount} ROWS ONLY
+	</select>
+	
+	<select 
+		id="selectListCount"
+		resultType="int">
+		SELECT
+			count(comm_id)
+		FROM
+			t_community
+		<include refid="search"/>
+	</select>
+	
+	<select 
+		id="selectOneBoard"
+		resultType="com.weet.app.board.domain.BoardVO">
+		
+		SELECT
+		    comm_id,
+		    user_id,
+		    (
+		        SELECT
+		            user_nickname
+		        FROM
+		            t_user t
+		        WHERE
+		            t.user_id = c.user_id
+		    ),
+		    comm_post_title,
+		    comm_post_contents,
+		    comm_like_num,
+		    comm_view_count,
+		    to_char(comm_post_insert_ts, 'yyyy.mm.dd'),
+		    to_char(comm_post_update_ts, 'yyyy.mm.dd'),
+		    comm_reply_count
+		FROM
+		    t_community c
+		WHERE
+		    comm_id = #{commId}
+	</select>
+	
+	<sql id="sort">
+		<if test="cri.sort == 'undefined'">
+			ORDER BY comm_id DESC
+		</if>
+		<if test="cri.sort == 'recent'">
+			ORDER BY comm_id DESC
+		</if>
+		<if test="cri.sort == 'like'">
+			ORDER BY comm_like_num DESC
+		</if>
+		<if test="cri.sort == 'reply'">
+			ORDER BY comm_reply_count DESC
+		</if>
+		<if test="cri.sort == 'view'">
+			ORDER BY comm_view_count DESC
+		</if>
+	</sql>
+	
+	<sql id="search">
+		<if test="keyword != null">
+			WHERE
+				comm_post_title LIKE '%'||#{keyword}||'%'
+				OR comm_post_contents LIKE '%'||#{keyword}||'%'
+		</if>
+	</sql>
 
 </mapper>
