@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.weet.app.board.mapper.BoardMapper">
+
+	<select 
+		id="selectListTop10"
+		resultType="com.weet.app.board.domain.BoardVO">
+		
+		SELECT
+		    comm_id,
+		    user_id,
+		    (
+		        SELECT
+		            user_nickname
+		        FROM
+		            t_user t
+		        WHERE
+		            t.user_id = c.user_id
+		    ),
+		    comm_post_title,
+		    comm_post_contents,
+		    comm_like_num,
+		    comm_view_count,
+		    to_char(comm_post_insert_ts, 'yyyy.mm.dd'),
+		    to_char(comm_post_update_ts, 'yyyy.mm.dd'),
+		    comm_reply_count
+		FROM
+		    t_community c
+		WHERE
+		    comm_post_insert_ts between current_date - 7 AND current_date
+		ORDER BY
+		    comm_like_num DESC
+		FETCH
+		    NEXT 10 ROWS ONLY
+	</select>
+	
+	<select 
+		id="selectReplyList"
+		resultType="com.weet.app.board.domain.ReplyVO">
+		
+		SELECT
+		    reply_id,
+		    user_id,
+		    (
+		        SELECT
+		            user_nickname
+		        FROM
+		            t_user t
+		        WHERE
+		            t.user_id = r.user_id
+		    ),
+		    (
+		        SELECT
+		            user_level
+		        FROM
+		            t_user t,
+		            t_tr tr
+		        WHERE
+		            t.user_id = r.user_id
+		            AND t.user_id = tr.user_id
+		    ),
+		    reply_contents,
+		    to_char(reply_insert_ts, 'yyyy.mm.dd'),
+		    reply_selected_yn,
+		    reply_delete_yn
+		FROM
+		    t_reply r
+		WHERE
+		    comm_id = #{commId}
+		ORDER BY
+		    reply_id DESC
+		<if test="preview == true">
+			FETCH NEXT 1 ROW ONLY
+		</if>
+	</select>
+
+</mapper>
