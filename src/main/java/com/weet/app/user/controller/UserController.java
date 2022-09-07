@@ -51,7 +51,12 @@ public class UserController {
 	private UserService service;
 	
 	// 1. user Login	
-	// servlet-context 단순 호출
+	@GetMapping("/tr/login")
+	public String loginPage() {
+		log.trace("loginPage() invoked.");
+		
+		return "/login";
+	} // loginPage
 
 
 	// 2. TR 로그인화면
