@@ -29,6 +29,10 @@
 	<!-- <context:component-scan base-package="com.weet.app.*.interceptor" /> -->
 
 
+	<!-- swagger -->    
+    <beans:bean id="swagger2Config" class="com.weet.app.board.config.SwaggerConfig"/>
+    <resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"/>
+    <resources location="classpath:/META-INF/resources/webjars/"  mapping="/webjars/**"/>
 
 	<context:component-scan base-package="com.weet.app.**.controller" />
 	<context:component-scan base-package="com.weet.app.**.exception" />
