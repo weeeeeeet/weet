@@ -9,9 +9,6 @@ import lombok.Data;
 public class MypageReviewDTO {
 	
 	// Null을 넣을 수 있는 건 참조타입
-
-	// 1. 리뷰번호
-	private Integer reviewId;
 	
 	// 2. 리뷰 작성한 아이디
 	private String userId;
@@ -28,7 +25,10 @@ public class MypageReviewDTO {
 	// 6. 리뷰 작성 날짜
 	private Date reviewDateTime;
 	
-	// 7. 리뷰 첨부 파일 URI
-	private String reviewImgUrl;
+	// 7. 이미지 URL
+//	private String reviewImgUrl;
+	
+	// 7. 리뷰 아이디
+//	private String reviewId;
 	
 } // MypageReviewVO

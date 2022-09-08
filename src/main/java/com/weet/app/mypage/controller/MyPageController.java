@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.weet.app.exception.ControllerException;
@@ -18,6 +18,7 @@ import com.weet.app.mypage.domain.Criteria;
 import com.weet.app.mypage.domain.MypageBoardVO;
 import com.weet.app.mypage.domain.MypageClassVO;
 import com.weet.app.mypage.domain.MypageReplyVO;
+import com.weet.app.mypage.domain.MypageReviewDTO;
 import com.weet.app.mypage.domain.PageDTO;
 import com.weet.app.mypage.service.MypageService;
 
@@ -236,34 +237,37 @@ public class MyPageController implements InitializingBean {
 	// =======================================================
 		// + 후기 등록
 	// =======================================================
+	// + MultipartFile에는 파일만 들어가게 된다.
+	// =======================================================
 	
 	@PostMapping("/class/expired/register")
-	public String ClassReplyregister (BoardDTO dto, RedirectAttributes rttrs) throws ControllerException {
+	public String ClassReplyregister (MypageReviewDTO dto, RedirectAttributes rttrs) throws ControllerException {
 		
-		log.trace("\t register2({}, {}) invoked.", dto, rttrs);
+		log.trace("\t + ClassReplyregister({}, {}) invoked.", dto, rttrs);
 		
 		try {
 			
 			// + 필드에 주입받은 서비스 객체의 메소드 호출 -> 핵심 메소드 호출
-			if ( this.boardService.addAuto(dto) ) {
+			if ( this.service.addReview(dto) ) {
 				
 				rttrs.addAttribute("__RESULT__", "success");
-				
-				// rttrs.addFlashAttribute("__RESULT__", "success");
-				// + addFlashAttribute도 Request Scope을 통해 전달은 가능하지만, 추천하지는 x
 				
 			} else {
 				rttrs.addAttribute("__RESULT__", "failed");
 			} // if - else
 			
 			// + 업데이트 한 후에는 전체 목록 조회 페이지로 이동해야 한다. (***)
-			return "redirect:/board/list";
+			return "redirect:/mypage/activity/boardlist?userId=user2";
 			
 		} catch(Exception e) { 
 			throw new ControllerException (e);
 		} // try - catch
 		
 	} // ClassReplyregister
+	
+	// =======================================================
+		// + 파일 업로드
+	// =======================================================
 	
 	// =======================================================
 		// 6. 일반회원 - 마이페이지 - 내클래스룸 - 예약 클래스룸

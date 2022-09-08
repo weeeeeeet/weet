@@ -25,34 +25,35 @@
     <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/63eb3bc178.js" crossorigin="anonymous"></script>
 
-    <!-- <script>
+    <script>
 
         $(function() {
 
-            // 후기 등록 버튼
-            $('#class_card_btn').click( function (e) {
+            // 이전 / 다음 페이지 목록
+            $('a.prev, a.next').click( function (e) {
 
                 e.preventDefault();
 
-                const title = $('#card-text').text();
-
                 // form태그 직접 조작 및 전송
-                let formObj = $('.ClassReplyForm');
-                formObj.attr('action', '/mypage/class/expiredReplyClass');
-                formObj.attr('method', 'get');
-                formObj.find('input[type=hidden][name=classId]').val(title);
-                formObj.find('input[type=hidden][name=userId]').val('user2');
-                formObj.submit();
+                let formObj = $('#pagenationForm');
+                formObj.attr('action', '/mypage/class/my');
+                formObj.attr('method', 'GET');
 
                 console.clear();
+                console.log('>>> this.href : ', $(this).attr('href'));
 
-                var classId = document.getElementById(classTitle).innerText;
+                formObj.find('input[type=hidden][name=currPage]').val($(this).attr('href'));
+                formObj.find('input[type=hidden][name=userId]').val('user2');
+                // formObj.find('input[type=hidden][name=userId]').val(${userId});
+
+                formObj.submit();
 
             });
 
+
         });
 
-    </script> -->
+    </script>
 
 </head>
 
@@ -135,12 +136,12 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
 
-                            <form action="/mypage/class/expired" method="post" enctype="multipart/form-data" id="replyForm">
+                            <form action="/mypage/class/expired/register" method="post" id="replyForm">
 
                                 <div class="modal-body">
                             
-                                    <input type="hidden" name="classId">
-                                    <input type="hidden" name="userId">
+                                    <input type="hidden" name="userId" value="${board.userId}">
+                                    <input type="hidden" name="classId" value="${board.classId}">
 
                                     <p class="modal_class_title">${board.classTitle}</p>
                             
@@ -157,20 +158,20 @@
                                         </div>
                             
                                         <div class="star-rating">
-                                            <input type="radio" id="5-stars" name="rating" value="5" />
+                                            <input type="radio" id="5-stars" name="reviewStar" value="5" />
                                             <label for="5-stars" class="star">&#9733;</label>
-                                            <input type="radio" id="4-stars" name="rating" value="4" />
+                                            <input type="radio" id="4-stars" name="reviewStar" value="4" />
                                             <label for="4-stars" class="star">&#9733;</label>
-                                            <input type="radio" id="3-stars" name="rating" value="3" />
+                                            <input type="radio" id="3-stars" name="reviewStar" value="3" />
                                             <label for="3-stars" class="star">&#9733;</label>
-                                            <input type="radio" id="2-stars" name="rating" value="2" />
+                                            <input type="radio" id="2-stars" name="reviewStar" value="2" />
                                             <label for="2-stars" class="star">&#9733;</label>
-                                            <input type="radio" id="1-star" name="rating" value="1" />
+                                            <input type="radio" id="1-star" name="reviewStar" value="1" />
                                             <label for="1-star" class="star">&#9733;</label>
                                         </div>
                             
                                         <div class="modal_class_content_review">
-                                            <input type="text" name="review" id="modal_class_content_review_inner" placeholder="수강후기를 작성해주세요.">
+                                            <input type="text" name="reviewContents" id="modal_class_content_review_inner" placeholder="수강후기를 작성해주세요.">
                                         </div>
                             
                                     </div>
@@ -178,9 +179,7 @@
                                     <p class="file_comment">사진 용량은 사진 한 장당 10MB까지 등록 가능합니다. <br>
                                         사진은 최대 5장 까지 권장합니다.그 이상은 등록이 불가합니다. </p>
                             
-                                    <div class="modal_class_file">
-                                        <input id="uploadFiles" type="file" name="reply_file" multiple style="width:300px" onchange="uploadFileAdded()">
-                                    </div>
+                                    <input id="uploadFiles" class="modal_class_file" type="file" name="reviewImgUrl" multiple style="width:300px" onchange="uploadFileAdded()">
 
                                     <input type="submit" class="modal_submit btn btn-primary" value="등록하기">
                             

@@ -7,6 +7,7 @@ import com.weet.app.mypage.domain.Criteria;
 import com.weet.app.mypage.domain.MypageBoardVO;
 import com.weet.app.mypage.domain.MypageClassVO;
 import com.weet.app.mypage.domain.MypageReplyVO;
+import com.weet.app.mypage.domain.MypageReviewDTO;
 
 public interface MypageService {
 	
@@ -45,5 +46,8 @@ public interface MypageService {
 	
 	// + 페이징 처리에 필요한 수강 종료 클래스의 총 양 구하기
 	public abstract Integer getTotalDoneClass(MypageClassVO vo) throws ServiceException;
+	
+	// 7. 수강종료 클래스 후기 작성
+	public abstract boolean addReview(MypageReviewDTO dto) throws ServiceException;
 	
 } // end interface

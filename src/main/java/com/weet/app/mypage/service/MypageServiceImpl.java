@@ -13,6 +13,7 @@ import com.weet.app.mypage.domain.Criteria;
 import com.weet.app.mypage.domain.MypageBoardVO;
 import com.weet.app.mypage.domain.MypageClassVO;
 import com.weet.app.mypage.domain.MypageReplyVO;
+import com.weet.app.mypage.domain.MypageReviewDTO;
 import com.weet.app.mypage.mapper.MypageMapper;
 
 import lombok.NoArgsConstructor;
@@ -169,6 +170,8 @@ public class MypageServiceImpl implements MypageService, InitializingBean {
 	@Override
 	public List<MypageClassVO> getListClass(Criteria cri, MypageClassVO vo) throws ServiceException {
 		
+		log.trace("getListClass() invoked.");
+		
 		try {
 			return this.mapper.selectClass(cri, vo.getUserId());
 		} catch (DAOException e) {
@@ -179,6 +182,8 @@ public class MypageServiceImpl implements MypageService, InitializingBean {
 
 	@Override
 	public Integer getTotalClass(MypageClassVO vo) throws ServiceException {
+		
+		log.trace("getTotalClass() invoked.");
 		
 		try {
 			return this.mapper.selectClassAmount(vo.getUserId());
@@ -195,6 +200,8 @@ public class MypageServiceImpl implements MypageService, InitializingBean {
 	@Override
 	public List<MypageClassVO> getListDoneClass(Criteria cri, MypageClassVO vo) throws ServiceException {
 		
+		log.trace("getListDoneClass() invoked.");
+		
 		try {
 			return this.mapper.selectDoneClass(cri, vo.getUserId());
 		} catch (DAOException e) {
@@ -205,6 +212,8 @@ public class MypageServiceImpl implements MypageService, InitializingBean {
 
 	@Override
 	public Integer getTotalDoneClass(MypageClassVO vo) throws ServiceException {
+		
+		log.trace("getTotalDoneClass() invoked.");
 		
 		try {
 			return this.mapper.selectDoneClassAmount(vo.getUserId());
@@ -217,6 +226,19 @@ public class MypageServiceImpl implements MypageService, InitializingBean {
 	// ======================================================================
 	// + 후기 등록 기능
 	// ======================================================================
+	
+	@Override
+	public boolean addReview(MypageReviewDTO dto) throws ServiceException {
+		
+		log.trace("addReview({}) invoked.", dto);
+		
+		try {
+			return this.mapper.insertReview(dto) == 1;
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		} // try - catch
+		
+	} // addAuto
 	
 	// ======================================================================
 	// 8 ) 좋아요 누른 클래스 조회
