@@ -6,6 +6,7 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.weet.app.exception.DAOException;
 import com.weet.app.exception.ServiceException;
@@ -34,18 +35,18 @@ public class UserServiceImpl implements UserService {
 	@Setter(onMethod_= {@Autowired})
 	private UserDAO userDAO;
 	
-
+	@Transactional
 	@Override
-	public boolean trJoin(UserDTO userDTO, TrainerDTO trainerDTO) throws ServiceException {
-		log.trace("trJoin({}) invoked." );
+	public void trJoin(UserDTO userDTO, TrainerDTO trainerDTO) throws ServiceException {
+		log.trace("trJoin({},{}) invoked.", userDTO, trainerDTO );
 				
 		try {
 			Objects.requireNonNull(this.mapper.insertUser(userDTO));
-			assert this.mapper != null;
+			assert this.mapper.insertTr(trainerDTO) != null;
 			
 			// 아래 2개의 DML 작업은 1개의 트랜잭션으로 처리되어야 함(*****)			
-			this.mapper.insertUser(userDTO);				// 가정1: 소스계좌에서 출금
-			this.mapper.insertTr(trainerDTO);				// 가정2: 타겟계좌에 입금
+			this.mapper.insertUser(userDTO);				// 가정1: user 테이블에 가입정보 저장
+			this.mapper.insertTr(trainerDTO);				// 가정2: trainer 테이블에 가입정보 저장
 			
 			log.info("\t+ Transfer Success.");
 			
@@ -56,14 +57,13 @@ public class UserServiceImpl implements UserService {
 			// 그렇지 않고, 다른 Exception 으로 wrapping 해 버리면, Gloval Transaction  처리가 되지 못함 (***)
 			
 		} catch(UncategorizedSQLException e) {	// RuntimeException, and related with Global Transaction
-			throw e;							// For process global transaction, just throw this. *NOT*
+			throw e;							
 		} catch(Exception e) {
 			log.error("\t+ Transfer Failure.");
 			
 			throw new ServiceException(e);
 			
 		} // try-catch
-		return false;
 	}
 
 

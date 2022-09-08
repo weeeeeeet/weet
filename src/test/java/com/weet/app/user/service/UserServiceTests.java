@@ -65,28 +65,19 @@ public class UserServiceTests {
 //	@Disabled
 	@Test
 	@Order(1)
-	@DisplayName("1. UserMapper.testInsertTr() test.")
+	@DisplayName("1. UserMapper.testTrJoin() test.")
 	@Timeout(value=5, unit=TimeUnit.SECONDS)
-	void testInsertTr() throws DAOException, ServiceException {
-		log.trace("testInsertTr() invoked.");
+	void testTrJoin() throws DAOException, ServiceException {
+		log.trace("testTrJoin() invoked.");
 		
-
 		// 1. UserTr 객체 생성 => SQL의 바인드변수들에 넘겨줄 파라미터
-		TrainerDTO trainerDTO = new TrainerDTO("testId", "testPwd!","testCareer","testIntro",1234567890);
-		UserDTO userDTO = new UserDTO("testId", "testName",'T',"testNick","01012344321","test@test.com","testProfile",'F','Y','Y','Y','Y');
-		log.info("\t+ 1-1. trainerDTO: {}", trainerDTO);
-		log.info("\t+ 1-2. userDTO: {}", userDTO);
+		UserDTO userDTO = new UserDTO("testId2", "testName2",'T',"testNick2","01098765432","test2@test.com","testProfile2",'W','Y','Y','Y','Y');
+		TrainerDTO trainerDTO = new TrainerDTO("testId2", "testPwd!2","testCareer2","testIntro2", 987654321);
 		
-		JoinDTO dto = new JoinDTO(trainerDTO, userDTO);
 		
-		if(service.trJoin(dto)){
-			log.info("\t+  New board modified.");
-			
-			log.info("\t+ newVO: ", dto);
-		} else {
-			log.info("\t+ No board modified.");
-		}
-		
+		this.service.trJoin(userDTO, trainerDTO);
+		log.info("\t+ 1-1.newUser:{} ", userDTO);
+		log.info("\t+ 1-2.newUser: {} ", trainerDTO);
 	} // testInsertTr
 	
 //  아이디 중복 테스트

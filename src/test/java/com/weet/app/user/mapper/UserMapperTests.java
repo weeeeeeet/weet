@@ -94,7 +94,7 @@ public class UserMapperTests {
 		
 
 		// 1. UserTr 객체 생성 => SQL의 바인드변수들에 넘겨줄 파라미터
-		TrainerDTO trainerDTO = new TrainerDTO("testId", "testPwd!","testCareer","testIntro",1234567890);
+		TrainerDTO trainerDTO = new TrainerDTO("testPwd!","testCareer","testIntro",1234567890);
 		log.info("\t+ 1-1. trainerDTO: {}", trainerDTO);
 	
 		// 2. Mapper Interface 의 추상메소드 호출 with BoardVO 파라미터 전달

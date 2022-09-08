@@ -11,7 +11,7 @@ import com.weet.app.user.domain.UserVO;
 public interface UserService {
 	
 	// 회원가입 : 회원 등록
-	public abstract boolean trJoin(UserDTO userDTO, TrainerDTO trainerDTO) throws ServiceException;
+	public abstract void trJoin(UserDTO userDTO, TrainerDTO trainerDTO) throws ServiceException;
 	
 	// 아이디 중복체크 : 기존아이디와 입력아이디 비교. 일치여부 cnt로 리턴
 	public abstract int idCheck(String id) throws ServiceException;

@@ -19,8 +19,8 @@ public interface UserMapper {
 							+ "#{userSvcUseAgmtYN}, #{userSvcPCYAgmtYN}, #{userReceiveEmailAgmtYN}, #{userReceiveSMSAgmtYN})")
 	public abstract Integer insertUser(UserDTO userDTO) throws DAOException;
 	
-	@Insert("INSERT INTO t_tr(user_id, user_pwd, user_career, user_intro, user_biz) \r\n"
-			+ "     VALUES( #{userId}, #{user_pwd}, #{user_career}, #{user_intro}, #{user_biz} )")
+	@Insert("INSERT INTO t_tr(user_pwd, user_career, user_intro, user_biz) \r\n"
+			+ "     VALUES(#{userPwd}, #{userCareer}, #{userIntro}, #{userBiz} )")
 	public abstract Integer insertTr(TrainerDTO trainerDTO) throws DAOException;
 	
 
