@@ -102,6 +102,9 @@
 		    comm_reply_count
 		FROM
 		    t_community c
+		WHERE
+			comm_tempsave = '0'
+			AND comm_delete_yn = 'N'
 		<include refid="search"/>
 		<include refid="sort"/>
 		OFFSET
@@ -117,6 +120,9 @@
 			count(comm_id)
 		FROM
 			t_community
+		WHERE
+			comm_tempsave = '0'
+			AND comm_delete_yn = 'N'
 		<include refid="search"/>
 	</select>
 	
@@ -139,14 +145,113 @@
 		    comm_post_contents,
 		    comm_like_num,
 		    comm_view_count,
-		    to_char(comm_post_insert_ts, 'yyyy.mm.dd'),
-		    to_char(comm_post_update_ts, 'yyyy.mm.dd'),
+		    to_char(comm_post_insert_ts, 'yyyy.mm.dd HH:MI'),
+		    to_char(comm_post_update_ts, 'yyyy.mm.dd HH:MI'),
 		    comm_reply_count
 		FROM
 		    t_community c
 		WHERE
 		    comm_id = #{commId}
 	</select>
+	
+	<insert id="insertBoard">
+	
+		<selectKey keyProperty="commId" order="AFTER" resultType="int">
+			SELECT "ISEQ$$_96846".currval FROM dual
+		</selectKey>
+		
+		INSERT INTO t_community
+		(
+			user_id, 
+			comm_post_title, 
+			comm_post_contents,
+			comm_tempsave
+		)
+		VALUES
+		(
+			#{userId}, 
+			#{commPostTitle}, 
+			#{commPostContents},
+			#{commTempsave}
+		)
+	</insert>
+	
+	<insert id="insertBoardLike">
+		INSERT INTO t_like_board
+		(
+			user_id,
+			comm_id
+		)
+		VALUES
+		(
+			#{userId},
+			#{commId}
+		)
+	</insert>
+	
+	<insert id="insertReply">
+		INSERT INTO t_reply
+		(
+		
+		)
+		VALUES
+		(
+		
+		)
+	</insert>
+	
+	<update id="updateBoard">
+		UPDATE t_community
+		SET comm_post_title = #{commPostTitle},
+			comm_post_contents = #{commPostContents},
+			comm_post_update_ts = current_date,
+			comm_tempsave = #{commTempsave}
+		WHERE
+			comm_id = #{commId}
+	</update>
+	
+	<update id="updateViewCount">
+		UPDATE t_community
+		SET comm_view_count = comm_view_count + 1
+		WHERE
+			comm_id = #{commId}
+	</update>
+	
+	<update id="updateReplyCount">
+		UPDATE t_community c
+		SET comm_reply_count = (
+									SELECT count(reply_id) 
+									FROM t_reply r 
+									WHERE c.comm_id = r.comm_id
+								)
+		WHERE
+			comm_id = #{commId}
+	</update>
+	
+	<update id="updateLikeCount">
+		UPDATE t_community c
+		SET comm_like_num = (
+								SELECT count(lb_id) 
+								FROM t_like_board l 
+								WHERE c.comm_id = l.comm_id
+							)
+		WHERE
+			comm_id = #{commId}
+	</update>
+	
+	<update id="deleteBoard">
+		UPDATE t_community
+		SET comm_delete_yn = 'Y'
+		WHERE
+			comm_id = #{commId}
+	</update>
+	
+	<delete id="deleteBoardLike">
+		DELETE FROM t_like_board
+		WHERE 
+			user_id = #{userId}
+			AND comm_id = #{commId}
+	</delete>
 	
 	<sql id="sort">
 		<if test="cri.sort == 'undefined'">
@@ -168,9 +273,8 @@
 	
 	<sql id="search">
 		<if test="keyword != null">
-			WHERE
-				comm_post_title LIKE '%'||#{keyword}||'%'
-				OR comm_post_contents LIKE '%'||#{keyword}||'%'
+			AND (comm_post_title LIKE '%'||#{keyword}||'%'
+			OR comm_post_contents LIKE '%'||#{keyword}||'%')
 		</if>
 	</sql>
 
