@@ -3,12 +3,10 @@ package com.weet.app.user.controller;
 import java.util.Date;
 import java.util.Objects;
 
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,7 +49,7 @@ public class UserController {
 	private UserService service;
 	
 	// 1. user Login	
-	@GetMapping("/tr/login")
+	@GetMapping("/login")
 	public String loginPage() {
 		log.trace("loginPage() invoked.");
 		
@@ -94,15 +92,15 @@ public class UserController {
 			//-------------------------------------------------------------//
 			// 2. If rememberMe on, process Remember-Me option.
 			//-------------------------------------------------------------//
-//			if(dto.isRememberMe()) {
-//				int timeAmount = 1000 * 60 * 60 * 24 * 7;	// 7 days.
-//				
-//				String userId = dto.getUserid();
-//				String rememberMe = session.getId();
-//				Date rememberAge = new Date(System.currentTimeMillis() + timeAmount);
-//				
-//				this.service.modifyUserWithRememberMe(userId, rememberMe, rememberAge);
-//			} // if
+			if(dto.isRememberMe()) {
+				int timeAmount = 1000 * 60 * 60 * 24 * 7;	// 7 days.
+				
+				String userId = dto.getUserid();
+				String rememberMe = session.getId();
+				Date rememberAge = new Date(System.currentTimeMillis() + timeAmount);
+				
+				this.service.modifyUserWithRememberMe(userId, rememberMe, rememberAge);
+			} // if
 			
 		} // if
 		

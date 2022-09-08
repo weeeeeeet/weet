@@ -2,17 +2,28 @@ package com.weet.app.user.mapper;
 
 import java.util.Date;
 
+import org.apache.ibatis.annotations.Insert;
+
 import com.weet.app.exception.DAOException;
-import com.weet.app.exception.ServiceException;
-import com.weet.app.user.domain.JoinDTO;
 import com.weet.app.user.domain.LoginDTO;
+import com.weet.app.user.domain.TrainerDTO;
+import com.weet.app.user.domain.UserDTO;
 import com.weet.app.user.domain.UserVO;
 
 public interface UserMapper {
 	
 	// 회원가입
-	public abstract Integer insertTr(JoinDTO joinDTO) throws DAOException;
+	@Insert("INSERT INTO t_user(user_id, user_name, user_type, user_nickname, user_phone, user_email, user_profile, user_gender, \r\n"
+							+ "user_svc_use_agmt_yn, user_svc_pcy_Agmt_yn, user_receive_email_agmt_yn, user_receive_sms_agmt_yn) \r\n"
+							+ "VALUES( #{userId}, #{userName}, #{userType}, #{userNickname}, #{userPhone}, #{userEmail}, #{userProfile}, #{userGender}, \r\n"
+							+ "#{userSvcUseAgmtYN}, #{userSvcPCYAgmtYN}, #{userReceiveEmailAgmtYN}, #{userReceiveSMSAgmtYN})")
+	public abstract Integer insertUser(UserDTO userDTO) throws DAOException;
 	
+	@Insert("INSERT INTO t_tr(user_id, user_pwd, user_career, user_intro, user_biz) \r\n"
+			+ "     VALUES( #{userId}, #{user_pwd}, #{user_career}, #{user_intro}, #{user_biz} )")
+	public abstract Integer insertTr(TrainerDTO trainerDTO) throws DAOException;
+	
+
 	// 아이디 중복확인
 	public abstract Integer selectId(String id) throws DAOException;
 

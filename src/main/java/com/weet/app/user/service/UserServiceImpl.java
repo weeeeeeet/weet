@@ -4,12 +4,16 @@ import java.util.Date;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.stereotype.Service;
 
+import com.weet.app.exception.DAOException;
 import com.weet.app.exception.ServiceException;
-import com.weet.app.user.domain.JoinDTO;
 import com.weet.app.user.domain.LoginDTO;
+import com.weet.app.user.domain.TrainerDTO;
+import com.weet.app.user.domain.UserDTO;
 import com.weet.app.user.domain.UserVO;
+import com.weet.app.user.mapper.UserMapper;
 import com.weet.app.user.persistence.UserDAO;
 
 import lombok.NoArgsConstructor;
@@ -23,13 +27,42 @@ import lombok.extern.log4j.Log4j2;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
+
+	@Setter(onMethod_= @Autowired)
+	private UserMapper mapper;
 	
 	@Setter(onMethod_= {@Autowired})
 	private UserDAO userDAO;
+	
 
 	@Override
-	public boolean trJoin(JoinDTO joinDTO) throws ServiceException {
-		// TODO Auto-generated method stub
+	public boolean trJoin(UserDTO userDTO, TrainerDTO trainerDTO) throws ServiceException {
+		log.trace("trJoin({}) invoked." );
+				
+		try {
+			Objects.requireNonNull(this.mapper.insertUser(userDTO));
+			assert this.mapper != null;
+			
+			// 아래 2개의 DML 작업은 1개의 트랜잭션으로 처리되어야 함(*****)			
+			this.mapper.insertUser(userDTO);				// 가정1: 소스계좌에서 출금
+			this.mapper.insertTr(trainerDTO);				// 가정2: 타겟계좌에 입금
+			
+			log.info("\t+ Transfer Success.");
+			
+			// ======================== 매우 주의할 것 ========================== //
+			// Spring TX manager 가 Global Transaction 처리를 해주려면,
+			// 아래의 메소드에서, org.springframework.jdbc.UncategorizedSQLException (RuntimeException) 예외 
+			// 그대로 throw 하도록 해야 됨 (***)
+			// 그렇지 않고, 다른 Exception 으로 wrapping 해 버리면, Gloval Transaction  처리가 되지 못함 (***)
+			
+		} catch(UncategorizedSQLException e) {	// RuntimeException, and related with Global Transaction
+			throw e;							// For process global transaction, just throw this. *NOT*
+		} catch(Exception e) {
+			log.error("\t+ Transfer Failure.");
+			
+			throw new ServiceException(e);
+			
+		} // try-catch
 		return false;
 	}
 
@@ -37,8 +70,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int idCheck(String id) throws ServiceException {
-		// TODO Auto-generated method stub
-		return 0;
+		log.trace("idCheck({}) invoked.", id);
+				
+		try { return this.mapper.selectId(id);}
+		catch (DAOException e) { throw new ServiceException(e); } // try-catch
 	}
 	
 	
@@ -90,6 +125,7 @@ public class UserServiceImpl implements UserService {
 		int modifiedUsers = this.userDAO.updateUserWithRememberMe(userId, rememberMe, rememberAge);
 		log.info("\t+ modifiedUsers: " + modifiedUsers);
 
+	
 	} // modifyUserWithRememberMe
 
 } // end class

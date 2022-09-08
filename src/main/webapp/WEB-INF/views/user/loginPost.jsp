@@ -11,7 +11,9 @@
     <h1>/WEB-INF/views/user/loginPost.jsp</h1>
     <hr>
 
-    <% response.sendRedirect("/index"); %>
+    setTimeout(function () {
+            self.location = "/index";
+        }, 3000);
 
 
 </body>

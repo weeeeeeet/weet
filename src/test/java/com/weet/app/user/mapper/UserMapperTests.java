@@ -66,7 +66,28 @@ public class UserMapperTests {
 //	@Disabled
 	@Test
 	@Order(1)
-	@DisplayName("1. UserMapper.testInsertTr() test.")
+	@DisplayName("1. UserMapper.testInsertUser() test.")
+	@Timeout(value=5, unit=TimeUnit.SECONDS)
+	void testInsertUser() throws DAOException {
+		log.trace("testInsertUser() invoked.");
+		
+
+		// 1. UserTr 객체 생성 => SQL의 바인드변수들에 넘겨줄 파라미터
+		UserDTO userDTO = new UserDTO("testId", "testName",'T',"testNick","01012344321","test@test.com","testProfile",'F','Y','Y','Y','Y');
+		log.info("\t+ 1-2. userDTO: {}", userDTO);
+		
+		// 2. Mapper Interface 의 추상메소드 호출 파라미터 전달
+		int affectedLines = this.usermapper.insertUser(userDTO);
+		log.info("\t+ 2. affectedLines: {}", affectedLines);
+		
+		// 3. 입력 검증
+		assert affectedLines == 1;
+	} // testInsertUser
+	
+//	@Disabled
+	@Test
+	@Order(2)
+	@DisplayName("2. UserMapper.testInsertTr() test.")
 	@Timeout(value=5, unit=TimeUnit.SECONDS)
 	void testInsertTr() throws DAOException {
 		log.trace("testInsertTr() invoked.");
@@ -74,14 +95,10 @@ public class UserMapperTests {
 
 		// 1. UserTr 객체 생성 => SQL의 바인드변수들에 넘겨줄 파라미터
 		TrainerDTO trainerDTO = new TrainerDTO("testId", "testPwd!","testCareer","testIntro",1234567890);
-		UserDTO userDTO = new UserDTO("testId", "testName",'T',"testNick","01012344321","test@test.com","testProfile",'F','Y','Y','Y','Y');
 		log.info("\t+ 1-1. trainerDTO: {}", trainerDTO);
-		log.info("\t+ 1-2. userDTO: {}", userDTO);
-		
-		JoinDTO dto = new JoinDTO(trainerDTO, userDTO);
-		
+	
 		// 2. Mapper Interface 의 추상메소드 호출 with BoardVO 파라미터 전달
-		int affectedLines = this.usermapper.insertTr(dto);
+		int affectedLines = this.usermapper.insertTr(trainerDTO);
 		log.info("\t+ 2. affectedLines: {}", affectedLines);
 		
 		// 3. 입력 검증
@@ -91,7 +108,7 @@ public class UserMapperTests {
 //  아이디 중복 테스트
 //	@Disabled
 	@Test
-	@Order(2)
+	@Order(3)
 	@DisplayName("2. UserMapper.testSelectId() test.")
 	@Timeout(value=5, unit=TimeUnit.SECONDS)
 	void testSelectId() throws DAOException {

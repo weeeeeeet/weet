@@ -87,7 +87,7 @@
                     <label for="user_id" class="form-label">아이디</label>
                     <div class="boxing">
                         <input type="text" class="form-control-sm" name="user_id" id="user_id" minlength="8" maxlength="15"
-                            placeholder="8-15자의 영문 소문자, 숫자만 가능합니다.">
+                            placeholder="8-15자의 영문 소문자, 숫자만 가능합니다." required>
                         <button type="button" id="checkIdBtn" onclick="checkId()">중복확인</button>
                     </div>
                     <span class="checkment id_ok">사용 가능한 아이디입니다.</span>
@@ -148,14 +148,14 @@
                             <ul>
                                 <li><label for="user_name" class="form-label">이름</label><span>*</span></li>
                                 <li><input type="text" class="form-control-sm" name="user_name" id="user_name" minlength="2" maxlength="15"
-                                        placeholder="김영희"></li>
+                                        placeholder="김영희" required></li>
                             </ul>
                         </div>
                         <div class="info gender">
                             <ul>
                                 <li><label for="user_gender" class="form-label">성별</label><span>*</span></li>
-                                <li><input type="radio" value="F" name="user_gender" id="female" > 여 &nbsp
-                                    <input type="radio" value="M" name="user_gender" id="male"> 남
+                                <li><input type="radio" value="F" name="user_gender" id="female" required> 여 &nbsp
+                                    <input type="radio" value="M" name="user_gender" id="male" required> 남
                                 </li>
                             </ul>
                         </div>
@@ -165,9 +165,9 @@
                 <div class="info intro">
                     <ul>
                         <li><label for="user_career" class="form-label">경력사항 및 수료사항</label></li>
-                        <li><input type="text" class="form-control-sm" id="user_career" maxlength="100"></li>
+                        <li><input type="text" class="form-control-sm" id="user_career" maxlength="100" required></li>
                         <li><label for="user_intro" class="form-label">트레이너 소개</label><span>*</span></li>
-                        <li><input type="text" class="form-control-sm" id="user_intro" maxlength="100" ></li>
+                        <li><input type="text" class="form-control-sm" id="user_intro" maxlength="100" required></li>
                     </ul>
                 </div>
             </section>
@@ -182,13 +182,13 @@
                         <ul>
                             <li><label for="user_biz" class="form-label">사업자 번호 <span>*</span></label></li>
                             <li><input type="tel" name="b_no" class="form-control-sm" id="user_biz" length="10"
-                                    placeholder=" ' - ' 제외하고 입력해주세요">
+                                    placeholder=" ' - ' 제외하고 입력해주세요" required>
                                 <p>사업자번호를 도용하여 가입시, 형사처벌 대상에 해당됩니다</p>
                             </li>
                             <li><label for="tel" class="form-label"> 개업일자 <span>*</span></label></li>
-                            <li><input type="date" name="start_dt" id="start_dt" class="form-control-sm"></li>
+                            <li><input type="date" name="start_dt" id="start_dt" class="form-control-sm" required></li>
                             <li><label for="openDate" class="form-label"> 대표자 성명<span>*</span> </label></li>
-                            <li><input type="text" name="p_nm" class="form-control-sm" id="ceoName" length="15"></li>
+                            <li><input type="text" name="p_nm" class="form-control-sm" id="ceoName" length="15" required></li>
                         </ul>
                     </div>
 
@@ -213,7 +213,7 @@
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseTwo" aria-expanded="false"
                                 aria-controls="flush-collapseTwo">
-                                (필수) 이용약관 동의<input class="agree_check" type="checkbox" id="SvcUse" value="SvcUse" name="agreechk">
+                                (필수) 이용약관 동의<input class="agree_check" type="checkbox" id="SvcUse" value="SvcUse" name="agreechk" required>
                             </button>
                         </h5>
                         <div id="flush-collapseTwo" class="accordion-collapse collapse"
@@ -576,8 +576,8 @@
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseThree" aria-expanded="false"
                                 aria-controls="flush-collapseThree">
-                                (필수) 개인정보취급방침 동의<input class="agree_check" type="checkbox" id="SvcPCY" value="SvcPCY"
-                                    name="agreechk">
+                                (필수) 개인정보취급방침 동의<input class="agree_check" type="checkbox" id="SvcPcy" value="SvcPcy"
+                                    name="agreechk" required>
                             </button>
                         </h5>
                         <div id="flush-collapseThree" class="accordion-collapse collapse"
@@ -789,7 +789,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="loginbtn" id="btn_login_trhome" onclick="joinform_check()">가입하기</button>
+                <button type="button" class="loginbtn" id="btn_login_trhome" onclick="joinform_check()">가입하기</button>
                 <div>
                 </div>
             

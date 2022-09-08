@@ -8,6 +8,5 @@ public class LoginDTO {
 	private String userid;
 	private String userpw;
 
-	private Boolean rememberMe;
-	
+	private boolean rememberMe;
 } // end class
