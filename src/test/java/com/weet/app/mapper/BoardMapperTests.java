@@ -1,5 +1,7 @@
 package com.weet.app.mapper;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -17,6 +19,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.weet.app.board.domain.BoardDTO;
 import com.weet.app.board.domain.BoardVO;
 import com.weet.app.board.domain.ReplyVO;
 import com.weet.app.board.mapper.BoardMapper;
@@ -63,6 +66,25 @@ public class BoardMapperTests {
 		
 		log.info("\t+ vo: {}", vo);
 		log.info("\t+ vo.size: {}", vo.size());
+	} // 인기글조회
+	
+//	@Disabled
+	@Test
+	@Order(3)
+	@DisplayName("3. 게시글 작성")
+	@Timeout(value = 3, unit = TimeUnit.SECONDS)
+	void 글작성() throws DAOException {
+		
+		BoardDTO dto = new BoardDTO();
+		dto.setUserId("user4");
+		dto.setCommPostTitle("하루 1분 스트레칭법!!");
+		dto.setCommPostContents("의자에 앉아서 고개를 이렇게저렇게 돌리면 거북목예방에 도움이 된대요!!");
+		dto.setCommTempsave('0');
+		
+		int affectedLine = this.mapper.insertBoard(dto);
+		
+		log.info("\t+ dto: {}", dto);
+		assertEquals(1, affectedLine);
 	} // 인기글조회
 
 } // end class
