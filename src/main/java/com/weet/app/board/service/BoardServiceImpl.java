@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.weet.app.board.domain.BoardDTO;
 import com.weet.app.board.domain.BoardVO;
 import com.weet.app.board.domain.ReplyVO;
 import com.weet.app.board.mapper.BoardMapper;
@@ -99,5 +100,32 @@ public class BoardServiceImpl implements BoardService {
 			return map;
 		} catch(DAOException e) { throw new ServiceException(e); } // try-catch
 	} // getAllList
+
+	// 게시글 작성
+	@Override
+	public boolean createBoard(BoardDTO dto) throws ServiceException {
+		log.trace("CreateBoard({}) invoked.", dto);
+		
+		try { return this.mapper.insertBoard(dto) == 1 ? true : false; }
+		catch(DAOException e) { throw new ServiceException(e); } // try-catch
+	} // createBoard
+
+	// 게시글 수정
+	@Override
+	public boolean modifyBoard(BoardDTO dto) throws ServiceException {
+		log.trace("ModifyBoard({}) invoked.", dto);
+		
+		try { return this.mapper.updateBoard(dto) == 1 ? true : false; }
+		catch(DAOException e) { throw new ServiceException(e); } // try-catch
+	} // modifyBoard
+
+	// 게시글 삭제
+	@Override
+	public boolean removeBoard(int commId) throws ServiceException {
+		log.trace("removeBoard({}) invoked.", commId);
+		
+		try { return this.mapper.deleteBoard(commId) == 1 ? true : false; }
+		catch(DAOException e) { throw new ServiceException(e); } // try-catch
+	} // removeBoard
 
 } // end class

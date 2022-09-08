@@ -2,6 +2,7 @@ package com.weet.app.board.mapper;
 
 import java.util.List;
 
+import com.weet.app.board.domain.BoardDTO;
 import com.weet.app.board.domain.BoardVO;
 import com.weet.app.board.domain.ReplyVO;
 import com.weet.app.common.domain.Criteria;
@@ -23,5 +24,30 @@ public interface BoardMapper {
 	
 	// 게시글 상세조회
 	public abstract BoardVO selectOneBoard(int commId) throws DAOException;
-
+	
+	// 게시글 작성
+	public abstract int insertBoard(BoardDTO dto) throws DAOException;
+	
+	// 게시글 수정
+	public abstract int updateBoard(BoardDTO dto) throws DAOException;
+	
+	// 조회수 업데이트
+	public abstract int updateViewCount(int commId) throws DAOException;
+	
+	// 댓글수 업데이트
+	public abstract int updateReplyCount(int commId) throws DAOException;
+	
+	// 추천수 업데이트
+	public abstract int updateLikeCount(int commId) throws DAOException;
+	
+	// 게시글 삭제
+	public abstract int deleteBoard(int commId) throws DAOException;
+	
+	// 게시글 추천
+	public abstract int insertBoardLike(String userId, int commId) throws DAOException;
+	
+	// 게시글 추천삭제
+	public abstract int deleteBoardLike(String userId, int commId) throws DAOException;
+	
+	
 } // end interface
