@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'SCoreDream';
+}
+.contents {
+    padding-top: 100px;
+    width: 650px;
+    /* border: 1px solid red; */
+    margin: 0 auto;
+    margin-bottom: 150px;
+}
+.contents h2 {
+    text-align: center;
+    font-size: 27px;
+    font-weight: bold;
+}
+.contents h2>span {
+    color: #2370DF;
+}
+
+.inner-contents {
+    margin: 50px 20px;
+    background-color: rgb(246, 246, 246);
+}
+.area {
+    padding: 15px 30px;
+}
+.order-num, .order-info, .buy-product {
+    margin: 20px 0;
+}
+table {
+    /* border: 1px solid red; */
+    display: block;
+    padding: 10px;
+    background-color: lightgray;
+}
+.order-num td:nth-of-type(2), .order-num td:nth-of-type(3) {
+    text-align: right;
+    font-weight: bold;
+    color: #2370DF;
+}
+.order-info td:nth-of-type(2) {
+    text-align: right;
+}
+.order-info tr:last-of-type {
+    font-size: 17px;
+    font-weight: bold;
+}
+.buy-product img {
+    width: 200px;
+}
+.buy-product td:nth-of-type(2) {
+    text-align: right;
+}
+.pay-button {
+    width: 400px;
+    height: 50px;
+    margin: 0 auto;
+
+    text-align: center;
+    line-height: 50px;
+
+    color: white;
+    background-color: #2370DF;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px gray;
+}
+.button-link {
+    text-decoration: none;
+}

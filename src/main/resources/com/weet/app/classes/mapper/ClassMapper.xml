@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.weet.app.classes.mapper.ClassMapper">
+
+	<select id="selectDetail" resultType="com.weet.app.classes.domain.ClassVO">
+		SELECT
+		    class_id,
+		    user_id,
+		    (
+		    	SELECT
+		    		user_name
+		    	FROM
+		    		t_user
+		    	WHERE
+		    		t_user.user_id = t_class.user_id
+		    ),
+		    class_type,
+		    class_title,
+		    class_trainer_name,
+		    class_main_img_url,
+		    class_intro,
+		    class_video_url,
+		    class_recruit_start_date,
+		    class_recruit_end_date,
+		    class_recruit_max_num,
+		    class_fee,
+		    class_tag1,
+		    class_tag2,
+		    class_tag3,
+		    class_avg_star,
+		    class_running_time,
+		    class_count,
+		    class_aderess,
+		    class_heart_cnt,
+		    
+		    (
+		    	SELECT
+		    		count(user_id) AS current_reg_cnt
+		    	FROM
+		    		t_class_listenr
+		    	WHERE
+		    		class_id = #{classId}
+		    )
+		FROM
+		    t_class
+		WHERE
+		    class_id = #{classId}
+	</select>
+	
+	<select 
+		id="selectReviews" 
+		resultType="com.weet.app.classes.domain.ReviewVO">
+		
+		SELECT
+		    user_nickname,
+		    review_contents,
+		    to_char(review_datetime, 'yyyy.mm.dd'),
+		    review_star,
+		    review_img_url
+		FROM
+		    t_review r,
+		    t_user u
+		WHERE
+		    r.user_id = u.user_id
+		    AND r.class_id = #{classId}
+		<include refid="sort"/>
+		OFFSET
+		    (#{cri.currPage} - 1) * #{cri.amount} ROW
+		FETCH
+		    NEXT #{cri.amount} ROWS ONLY
+	</select>
+	
+	<sql id="sort">
+		<if test="cri.sort == 'undefined'">
+			ORDER BY review_id DESC
+		</if>
+		<if test="cri.sort == 'recent'">
+			ORDER BY review_id DESC
+		</if>
+		<if test="cri.sort == 'starDESC'">
+			ORDER BY review_star DESC
+		</if>
+		<if test="cri.sort == 'starASC'">
+			ORDER BY review_star ASC
+		</if>
+	</sql>
+	
+	<select id="selectTotalReviewInfo" resultType="com.weet.app.classes.domain.TotalReviewVO">
+		SELECT
+		    count(review_id) AS total_review,
+		    round(avg(review_star), 1) AS avg_star,
+		    count(CASE WHEN review_star = 1 THEN 1 END) AS star1,
+		    count(CASE WHEN review_star = 2 THEN 1 END) AS star2,
+		    count(CASE WHEN review_star = 3 THEN 1 END) AS star3,
+		    count(CASE WHEN review_star = 4 THEN 1 END) AS star4,
+		    count(CASE WHEN review_star = 5 THEN 1 END) AS star5
+		FROM
+		    t_review
+		WHERE
+		    class_id = #{classId}
+	</select>
+    
+    <insert id="insertMyLike">
+    	INSERT INTO t_like_class
+    	(
+    		user_id,
+    		class_id
+    	)
+    	VALUES
+    	(
+    		#{userId},
+    		#{classId}
+    	)
+    </insert>
+    
+    <delete id="deleteMyLike">
+    	DELETE FROM t_like_class
+    	WHERE
+    		class_id = #{classId}
+    		AND user_id = #{userId}
+    </delete>
+    
+</mapper>
