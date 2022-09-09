@@ -21,6 +21,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.weet.app.board.domain.BoardDTO;
 import com.weet.app.board.domain.BoardVO;
+import com.weet.app.board.domain.ReplyDTO;
 import com.weet.app.board.domain.ReplyVO;
 import com.weet.app.board.mapper.BoardMapper;
 import com.weet.app.exception.DAOException;
@@ -85,6 +86,37 @@ public class BoardMapperTests {
 		
 		log.info("\t+ dto: {}", dto);
 		assertEquals(1, affectedLine);
+	} // 인기글조회
+	
+//	@Disabled
+	@Test
+	@Order(4)
+	@DisplayName("4. 댓글 작성")
+	@Timeout(value = 3, unit = TimeUnit.SECONDS)
+	void 댓글작성() throws DAOException {
+		
+		ReplyDTO dto = new ReplyDTO();
+		dto.setUserId("tr4");
+		dto.setReplyContents("댓글 테스트");
+		dto.setCommId(10);
+		
+		int affectedLine = this.mapper.insertReply(dto);
+		this.mapper.updateReplyGroup(dto);
+			
+		log.info("\t+ dto: {}", dto);
+		assertEquals(1, affectedLine);
+	} // 인기글조회
+	
+//	@Disabled
+	@Test
+	@Order(5)
+	@DisplayName("5. 대댓글 조회")
+	@Timeout(value = 3, unit = TimeUnit.SECONDS)
+	void 대댓글조회() throws DAOException {
+		
+		List<ReplyVO> vo = this.mapper.selectReReplyList(4, 253);
+		
+		vo.forEach(log::info);
 	} // 인기글조회
 
 } // end class

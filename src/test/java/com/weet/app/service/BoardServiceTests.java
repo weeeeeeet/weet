@@ -1,5 +1,7 @@
 package com.weet.app.service;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -19,6 +21,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.weet.app.board.domain.BoardVO;
+import com.weet.app.board.domain.ReplyDTO;
 import com.weet.app.board.domain.ReplyVO;
 import com.weet.app.board.service.BoardService;
 import com.weet.app.common.domain.Criteria;
@@ -96,5 +99,20 @@ public class BoardServiceTests {
 		
 		log.info("\t+ 조회결과: {}", map);
 	} // 게시글상세
+	
+//	@Disabled
+	@Test
+	@Order(5)
+	@DisplayName("5. 댓글 작성")
+	@Timeout(value = 3, unit = TimeUnit.SECONDS)
+	void 댓글작성() throws ServiceException {
+		
+		ReplyDTO dto = new ReplyDTO();
+		dto.setUserId("tr3");
+		dto.setReplyContents("댓글 테스트");
+		dto.setCommId(8);
+		
+		assertTrue(this.service.createReply(dto));
+	} // 댓글작성
 
 } // end class
