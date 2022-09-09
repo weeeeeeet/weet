@@ -11,9 +11,13 @@
     <h1>/WEB-INF/views/user/loginPost.jsp</h1>
     <hr>
 
+<<<<<<< Updated upstream
     setTimeout(function () {
             self.location = "/index";
         }, 3000);
+=======
+    <% response.sendRedirect("/index"); %>
+>>>>>>> Stashed changes
 
 
 </body>

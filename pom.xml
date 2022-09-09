@@ -8,7 +8,11 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
+<<<<<<< Updated upstream
 	<groupId>com.weet</groupId>
+=======
+	<groupId>org.zerock</groupId>
+>>>>>>> Stashed changes
 	<artifactId>weet</artifactId>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 
@@ -16,7 +20,11 @@
 
 	<name>weet</name>
 	<url>http://weet.com</url>
+<<<<<<< Updated upstream
 	<description>Weet project</description>
+=======
+	<description>Spring MVC project</description>
+>>>>>>> Stashed changes
 
 
 	<properties>
@@ -32,11 +40,19 @@
 
 		<!-- =============== 1. Logging =============== -->
 
+<<<<<<< Updated upstream
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${org.apache.logging.log4j-version}</version>
         </dependency>
+=======
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${org.apache.logging.log4j-version}</version>
+		</dependency>
+>>>>>>> Stashed changes
 
 		<!-- For Spring framework, HikariCP, DriverSpy logging -->
 		<dependency>

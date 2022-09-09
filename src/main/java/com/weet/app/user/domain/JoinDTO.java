@@ -14,4 +14,8 @@ public class JoinDTO {		// Join form
 	private TrainerDTO trainerDTO;
 	private UserDTO userDTO;
 	
+<<<<<<< Updated upstream
 } // EmployeeVO
+=======
+} // EmployeeVO
+>>>>>>> Stashed changes

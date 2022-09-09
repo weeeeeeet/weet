@@ -2,12 +2,19 @@ package com.weet.app.user.mapper;
 
 import java.util.Date;
 
+<<<<<<< Updated upstream
 import org.apache.ibatis.annotations.Insert;
 
 import com.weet.app.exception.DAOException;
 import com.weet.app.user.domain.LoginDTO;
 import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.UserDTO;
+=======
+import com.weet.app.exception.DAOException;
+import com.weet.app.exception.ServiceException;
+import com.weet.app.user.domain.JoinDTO;
+import com.weet.app.user.domain.LoginDTO;
+>>>>>>> Stashed changes
 import com.weet.app.user.domain.UserVO;
 
 public interface UserMapper {
@@ -19,10 +26,9 @@ public interface UserMapper {
 							+ "#{userSvcUseAgmtYN}, #{userSvcPCYAgmtYN}, #{userReceiveEmailAgmtYN}, #{userReceiveSMSAgmtYN})")
 	public abstract Integer insertUser(UserDTO userDTO) throws DAOException;
 	
-	@Insert("INSERT INTO t_tr(user_pwd, user_career, user_intro, user_biz) \r\n"
-			+ "     VALUES(#{userPwd}, #{userCareer}, #{userIntro}, #{userBiz} )")
+	@Insert("INSERT INTO t_tr(user_id, user_pwd, user_career, user_intro, user_biz) \r\n"
+			+ "     VALUES(#{userId}, #{userPwd}, #{userCareer}, #{userIntro}, #{userBiz} )")
 	public abstract Integer insertTr(TrainerDTO trainerDTO) throws DAOException;
-	
 
 	// 아이디 중복확인
 	public abstract Integer selectId(String id) throws DAOException;
@@ -31,7 +37,7 @@ public interface UserMapper {
 	public abstract UserVO selectUser(LoginDTO dto) throws DAOException;
 	
 	// 자동로그인 쿠키값으로 사용자를 조회하여 인증정보를 생성
-	public abstract UserVO selectUserByRememberMe(String rememberMe) throws DAOException;
+	public abstract UserVO selectUserWithRememberMe(String rememberMe) throws DAOException;
 
 	// 자동로그인 설정이 on된 상태로 로그인 성공 수행시, 쿠키정보를 기록
 	public abstract int updateUserWithRememberMe(String userid, String rememberMe, Date rememberAge) throws DAOException;

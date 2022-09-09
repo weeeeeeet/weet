@@ -24,7 +24,7 @@
     
 
     <select 
-        id="selectUserByRememberMe"
+        id="selectUserWithRememberMe"
         resultType="com.weet.app.user.domain.UserVO"> 
         SELECT userId, userPwd
         FROM tbl_user

@@ -1,3 +1,4 @@
+
   let IMP = window.IMP; // 생략 가능
   IMP.init("{imp13984691}"); // 예: imp00000000
   

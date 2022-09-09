@@ -1,3 +1,4 @@
+
 // ==========================================
 //  joinform_check 함수로 유효성 검사
 //===========================================
@@ -126,7 +127,7 @@ function joinform_check() {
       SvcUse.focus();
       return false;
     }
-    if (!SvcPCY.checked) { //체크박스 미체크시
+    if (!SvcPcy.checked) { //체크박스 미체크시
       alert("개인정보 약관 동의를 체크하세요.");
       SvcPcy.focus();
       return false;
