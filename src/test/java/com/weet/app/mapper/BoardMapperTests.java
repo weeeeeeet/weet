@@ -63,7 +63,7 @@ public class BoardMapperTests {
 	@Timeout(value = 3, unit = TimeUnit.SECONDS)
 	void 댓글조회() throws DAOException {
 		
-		List<ReplyVO> vo = this.mapper.selectReplyList(52, true);
+		List<ReplyVO> vo = this.mapper.selectReplyList(10, true);
 		
 		log.info("\t+ vo: {}", vo);
 		log.info("\t+ vo.size: {}", vo.size());

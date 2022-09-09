@@ -109,10 +109,20 @@ public class BoardServiceTests {
 		
 		ReplyDTO dto = new ReplyDTO();
 		dto.setUserId("tr3");
-		dto.setReplyContents("댓글 테스트");
+		dto.setReplyContents("댓글 테스트 댓글 수가 업데이트 될까?");
 		dto.setCommId(8);
 		
 		assertTrue(this.service.createReply(dto));
 	} // 댓글작성
+	
+//	@Disabled
+	@Test
+	@Order(6)
+	@DisplayName("6. 댓글 삭제")
+	@Timeout(value = 3, unit = TimeUnit.SECONDS)
+	void 댓글삭제() throws ServiceException {
+		
+		assertTrue(this.service.removeReply(254, 8));
+	} // 댓글삭제
 
 } // end class
