@@ -3,19 +3,11 @@ package com.weet.app.user.controller;
 import java.util.Date;
 import java.util.Objects;
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,14 +24,9 @@ import org.springframework.web.util.WebUtils;
 
 import com.weet.app.exception.ControllerException;
 import com.weet.app.exception.ServiceException;
-<<<<<<< Updated upstream
 import com.weet.app.user.domain.LoginDTO;
 import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.UserDTO;
-=======
-import com.weet.app.user.domain.JoinDTO;
-import com.weet.app.user.domain.LoginDTO;
->>>>>>> Stashed changes
 import com.weet.app.user.domain.UserVO;
 import com.weet.app.user.service.UserService;
 
@@ -63,17 +50,12 @@ public class UserController {
 	private UserService service;
 	
 	// 1. user Login	
-<<<<<<< Updated upstream
 	@GetMapping("/login")
 	public String loginPage() {
 		log.trace("loginPage() invoked.");
 		
 		return "/login";
 	} // loginPage
-=======
-	// servlet-context 단순 호출
->>>>>>> Stashed changes
-
 
 	// 2. TR 로그인화면
 	@GetMapping("/tr/login")
@@ -110,7 +92,6 @@ public class UserController {
 			//-------------------------------------------------------------//
 			// 2. If rememberMe on, process Remember-Me option.
 			//-------------------------------------------------------------//
-<<<<<<< Updated upstream
 			if(dto.isRememberMe()) {
 				int timeAmount = 1000 * 60 * 60 * 24 * 7;	// 7 days.
 				
@@ -120,17 +101,6 @@ public class UserController {
 				
 				this.service.modifyUserWithRememberMe(userId, rememberMe, rememberAge);
 			} // if
-=======
-//			if(dto.isRememberMe()) {
-//				int timeAmount = 1000 * 60 * 60 * 24 * 7;	// 7 days.
-//				
-//				String userId = dto.getUserid();
-//				String rememberMe = session.getId();
-//				Date rememberAge = new Date(System.currentTimeMillis() + timeAmount);
-//				
-//				this.service.modifyUserWithRememberMe(userId, rememberMe, rememberAge);
-//			} // if
->>>>>>> Stashed changes
 			
 		} // if
 		
@@ -143,17 +113,6 @@ public class UserController {
 	public String trainerJoinPage() {
 		log.trace("trainerJoinPage() invoked.");
 		
-<<<<<<< Updated upstream
-=======
-//		String userPwd = "1q2w3e4r!!" + "__SALT__";					// Plain Text
-//		
-//		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//		String cipherText = encoder.encode(password);					// Cipher Text
-//		
-//		Objects.requireNonNull(cipherText);
-//		log.info("\t+ cipherText - length :{}, value:{}", cipherText.length(), cipherText);
->>>>>>> Stashed changes
-		
 		return "/user/join";
 	} // trainerJoinPage
 
@@ -162,7 +121,6 @@ public class UserController {
 	// TR 회원가입 처리 -> DB 등록 후 완료 view로 redirect
 	@PostMapping("/tr/join")
 	public String trainerJoin(
-<<<<<<< Updated upstream
 			UserDTO userDTO, TrainerDTO trainerDTO, 
 			RedirectAttributes rttrs
 			) throws ControllerException {
@@ -183,13 +141,6 @@ public class UserController {
 			} else {
 				rttrs.addFlashAttribute("_RESULT_", "FAILED");	
 			}
-=======
-			JoinDTO joinDTO, RedirectAttributes rttrs) throws ControllerException {
-		log.trace("trainerLogin() invoked.");
-		
-		try {
-			this.service.trJoin(joinDTO);
->>>>>>> Stashed changes
 			return "redirect:/user/tr/joindone";
 		} catch(Exception e) {
 			throw new ControllerException(e);

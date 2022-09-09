@@ -17,16 +17,10 @@ import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-<<<<<<< Updated upstream
-import org.springframework.test.context.junit.jupiter.SpringExtension;	
-
-=======
 import org.springframework.test.context.junit.jupiter.SpringExtension;
->>>>>>> Stashed changes
 
 import com.weet.app.exception.DAOException;
 import com.weet.app.exception.ServiceException;
-import com.weet.app.user.domain.JoinDTO;
 import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.UserDTO;
 
@@ -69,7 +63,6 @@ public class UserServiceTests {
 //	@Disabled
 	@Test
 	@Order(1)
-<<<<<<< Updated upstream
 	@DisplayName("1. UserMapper.testTrJoin() test.")
 	@Timeout(value=5, unit=TimeUnit.SECONDS)
 	void testTrJoin() throws DAOException, ServiceException {
@@ -83,29 +76,6 @@ public class UserServiceTests {
 		this.service.trJoin(userDTO, trainerDTO);
 		log.info("\t+ 1-1.newUser:{} ", userDTO);
 		log.info("\t+ 1-2.newUser: {} ", trainerDTO);
-=======
-	@DisplayName("1. UserMapper.testInsertTr() test.")
-	@Timeout(value=5, unit=TimeUnit.SECONDS)
-	void testInsertTr() throws DAOException, ServiceException {
-		log.trace("testInsertTr() invoked.");
-		
-
-		// 1. UserTr 객체 생성 => SQL의 바인드변수들에 넘겨줄 파라미터
-		TrainerDTO trainerDTO = new TrainerDTO("testId", "testPwd!","testCareer","testIntro",1234567890);
-		UserDTO userDTO = new UserDTO("testId", "testName",'T',"testNick","01012344321","test@test.com","testProfile",'F','Y','Y','Y','Y');
-		log.info("\t+ 1-1. trainerDTO: {}", trainerDTO);
-		log.info("\t+ 1-2. userDTO: {}", userDTO);
-		
-		JoinDTO dto = new JoinDTO(trainerDTO, userDTO);
-		
-		if(service.trJoin(dto)){
-			log.info("\t+  New board modified.");
-			
-			log.info("\t+ newVO: ", dto);
-		} else {
-			log.info("\t+ No board modified.");
-		}
->>>>>>> Stashed changes
 		
 	} // testInsertTr
 	

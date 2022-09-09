@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< Updated upstream
 import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,15 +15,6 @@ import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.UserDTO;
 import com.weet.app.user.domain.UserVO;
 import com.weet.app.user.mapper.UserMapper;
-=======
-import org.springframework.stereotype.Service;
-
-import com.weet.app.exception.ServiceException;
-import com.weet.app.user.domain.JoinDTO;
-import com.weet.app.user.domain.LoginDTO;
-import com.weet.app.user.domain.UserVO;
-import com.weet.app.user.persistence.UserDAO;
->>>>>>> Stashed changes
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -37,7 +27,6 @@ import lombok.extern.log4j.Log4j2;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
-<<<<<<< Updated upstream
 
 	@Setter(onMethod_= @Autowired)
 	private UserMapper mapper;

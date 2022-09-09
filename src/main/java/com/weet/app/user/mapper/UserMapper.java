@@ -2,19 +2,12 @@ package com.weet.app.user.mapper;
 
 import java.util.Date;
 
-<<<<<<< Updated upstream
 import org.apache.ibatis.annotations.Insert;
 
 import com.weet.app.exception.DAOException;
 import com.weet.app.user.domain.LoginDTO;
 import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.UserDTO;
-=======
-import com.weet.app.exception.DAOException;
-import com.weet.app.exception.ServiceException;
-import com.weet.app.user.domain.JoinDTO;
-import com.weet.app.user.domain.LoginDTO;
->>>>>>> Stashed changes
 import com.weet.app.user.domain.UserVO;
 
 public interface UserMapper {
