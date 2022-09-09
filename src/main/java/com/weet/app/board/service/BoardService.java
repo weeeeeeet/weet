@@ -39,5 +39,5 @@ public interface BoardService {
 	public abstract boolean modifyReply(ReplyDTO dto) throws ServiceException;
 	
 	// 댓글 삭제
-	public abstract boolean removeReply(int replyId) throws ServiceException;
+	public abstract boolean removeReply(int replyId, int commId) throws ServiceException;
 } // end interface

@@ -135,13 +135,15 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	@Transactional
 	public boolean createReply(ReplyDTO dto) throws ServiceException {
-		log.trace("removeBoard({}) invoked.", dto);
+		log.trace("createReply({}) invoked.", dto);
 		
 		try { 
 			int result1 = this.mapper.insertReply(dto);
 			int result2 = this.mapper.updateReplyGroup(dto);
 			
-			return (result1 == 1 && result2 == 1) ? true : false;
+			int result3 = this.mapper.updateReplyCount(dto.getCommId());
+			
+			return (result1 == 1 && result2 == 1 && result3 == 1) ? true : false;
 		} catch(UncategorizedSQLException e) {
 			throw e;
 		} catch(Exception e) {
@@ -154,15 +156,30 @@ public class BoardServiceImpl implements BoardService {
 	// 댓글 수정
 	@Override
 	public boolean modifyReply(ReplyDTO dto) throws ServiceException {
-		// TODO Auto-generated method stub
-		return false;
+		log.trace("modifyReply({}) invoked.", dto);
+		
+		try { return this.mapper.updateReply(dto) == 1 ? true : false; }
+		catch(DAOException e) { throw new ServiceException(e); } // try-catch
 	} // modifyReply
 
 	// 댓글 삭제
 	@Override
-	public boolean removeReply(int replyId) throws ServiceException {
-		// TODO Auto-generated method stub
-		return false;
+	@Transactional
+	public boolean removeReply(int replyId, int commId) throws ServiceException {
+		log.trace("modifyReply({}) invoked.", replyId);
+		
+		try { 
+			int result1 = this.mapper.deleteReply(replyId);
+			int result2 = this.mapper.updateReplyCount(commId);
+			
+			return (result1 == 1 && result2 == 1) ? true : false;
+		} catch(UncategorizedSQLException e) {
+			throw e;
+		} catch(Exception e) {
+			log.info("\t+ Transfer Failure.");
+			
+			throw new ServiceException(e);
+		} // try-catch
 	} // removeReply
 
 } // end class

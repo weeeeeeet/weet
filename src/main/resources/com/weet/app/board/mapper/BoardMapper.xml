@@ -74,10 +74,50 @@
 		    AND reply_delete_yn = 'N'
 		    AND reply_depth = 0
 		ORDER BY
-		    reply_id DESC
+		    reply_id ASC
 		<if test="preview == true">
 			FETCH NEXT 1 ROW ONLY
 		</if>
+	</select>
+	
+	<select 
+		id="selectReReplyList"
+		resultType="com.weet.app.board.domain.ReplyVO">
+	
+		SELECT
+		    reply_id,
+		    user_id,
+		    (
+		        SELECT
+		            user_nickname
+		        FROM
+		            t_user t
+		        WHERE
+		            t.user_id = r.reply_writer
+		    ),
+		    (
+		        SELECT
+		            user_level
+		        FROM
+		            t_user t,
+		            t_tr tr
+		        WHERE
+		            t.user_id = r.user_id
+		            AND t.user_id = tr.user_id
+		    ),
+		    reply_contents,
+		    to_char(reply_insert_ts, 'yyyy.mm.dd'),
+		    reply_selected_yn,
+		    reply_delete_yn
+		FROM
+		    t_reply r
+		WHERE
+		    comm_id = #{commId}
+		    AND reply_group = #{replyGroup}
+		    AND reply_delete_yn = 'N'
+		    AND reply_depth = 1
+		ORDER BY
+		    reply_id ASC
 	</select>
 	
 	<select 
@@ -211,6 +251,25 @@
 		)
 	</insert>
 	
+	<insert id="insertReReply">
+		INSERT INTO t_reply
+		(
+		    reply_contents,
+		    comm_id,
+		    reply_group,
+		    reply_depth,
+		    reply_writer
+		)
+		VALUES
+		(
+		    #{replyContents},
+		    #{commId},
+		    #{replyGroup},
+		    #{replyDepth},
+		    #{replyWriter}
+		)
+	</insert>
+	
 	<update id="updateBoard">
 		UPDATE t_community
 		SET comm_post_title = #{commPostTitle},
@@ -234,6 +293,7 @@
 									SELECT count(reply_id) 
 									FROM t_reply r 
 									WHERE c.comm_id = r.comm_id
+										  AND reply_delete_yn = 'N'
 								)
 		WHERE
 			comm_id = #{commId}

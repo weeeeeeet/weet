@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.weet.app.board.domain.BoardDTO;
+import com.weet.app.board.domain.ReplyDTO;
 import com.weet.app.board.service.BoardService;
 import com.weet.app.common.APIResponse;
 import com.weet.app.common.domain.Criteria;
@@ -29,7 +30,7 @@ import springfox.documentation.annotations.ApiIgnore;
 @NoArgsConstructor
 
 @RestController
-@RequestMapping("/board")
+@RequestMapping("/board/api")
 public class BoardController {
 	
 	@Setter(onMethod_= @Autowired)
@@ -78,9 +79,10 @@ public class BoardController {
 	}
 	
 	// 게시글 상세 조회
-	@GetMapping("/{bno}")
-	@ApiOperation(value = "게시글 상세 조회", notes = "게시글과 모든 댓글목록을 반환합니다.")
-	public APIResponse boardDetail(@PathVariable("bno") int commId) throws ControllerException {
+	@GetMapping("/{commId}")
+	@ApiOperation(value = "게시글 상세 조회", notes = "게시글과 모든 댓글목록을 반환합니다.(대댓글 제외)")
+	@ApiImplicitParam(name = "commId", value = "게시글 번호", paramType = "path", required = true)
+	public APIResponse boardDetail(@PathVariable("commId") int commId) throws ControllerException {
 		
 		APIResponse res = new APIResponse();
 		
@@ -113,15 +115,15 @@ public class BoardController {
 	} // boardWrite
 	
 	// 게시글 수정
-	@PutMapping("/{bno}")
+	@PutMapping("/{commId}")
 	@ApiOperation(value = "게시글 수정", notes = "게시글을 수정합니다. 성공 여부와 글 번호(PK)를 반환합니다.")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = "bno", value = "게시글 번호", paramType = "path", required = true),
+		@ApiImplicitParam(name = "commId", value = "게시글 번호", paramType = "path", required = true),
 		@ApiImplicitParam(name = "commPostTitle", value = "게시글 제목", paramType = "query", required = true),
 		@ApiImplicitParam(name = "commPostContents", value = "게시글 내용", paramType = "query", required = true),
 		@ApiImplicitParam(name = "commTempsave", value = "실제등록: 0, 임시저장: 1", paramType = "query", required = true)
 	})
-	public APIResponse boardModify(@PathVariable("bno") int commId, @ApiIgnore BoardDTO dto) throws ControllerException {
+	public APIResponse boardModify(@PathVariable("commId") int commId, @ApiIgnore BoardDTO dto) throws ControllerException {
 		log.trace("boardWrite({}, {}) invoked.", commId, dto);
 		
 		APIResponse res = new APIResponse();
@@ -136,10 +138,10 @@ public class BoardController {
 	} // boardModify
 	
 	// 게시글 삭제
-	@DeleteMapping("/{bno}")
+	@DeleteMapping("/{commId}")
 	@ApiOperation(value = "게시글 삭제", notes = "게시글을 삭제합니다. 성공 여부를 반환합니다.")
-	@ApiImplicitParam(name = "commId", value = "게시글 번호", paramType = "path")
-	public APIResponse boardDelete(@PathVariable("bno") int commId) throws ControllerException {
+	@ApiImplicitParam(name = "commId", value = "게시글 번호", paramType = "path", required = true)
+	public APIResponse boardDelete(@PathVariable("commId") int commId) throws ControllerException {
 		log.trace("boardWrite({}) invoked.", commId);
 		
 		APIResponse res = new APIResponse();
@@ -152,37 +154,72 @@ public class BoardController {
 	} // boardDelete
 	
 	// 게시글 추천
-	@PostMapping("/vote/{bno}")
+	@PostMapping("/vote/{commId}")
 	public String boardVote() {
 		return "test!";
 	}
 	
 	// 게시글 추천취소
-	@DeleteMapping("/vote/{bno}")
+	@DeleteMapping("/vote/{commId}")
 	public String boardVoteCancel() {
 		return "test!";
 	}
 	
 	// 댓글 작성
-	@PostMapping("/reply/{rno}")
-	public String replyWrite() {
-		return "test!";
-	}
+	@PostMapping("/reply/new")
+	@ApiOperation(value = "댓글 작성", notes = "댓글을 작성합니다. 성공 여부를 반환합니다.")
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "userId", value = "작성자 ID", paramType = "query", required = true),
+		@ApiImplicitParam(name = "replyContents", value = "댓글 내용", paramType = "query", required = true),
+		@ApiImplicitParam(name = "commId", value = "게시글 번호", paramType = "query", required = true),
+	})
+	public APIResponse replyWrite(@ApiIgnore ReplyDTO dto) throws ControllerException {
+		log.trace("replyWrite({}) invoked.", dto);
+		
+		APIResponse res = new APIResponse();
+		
+		try { 
+			res.add("result", this.service.createReply(dto) ? "SUCCESS" : "FAILED");
+		} catch (ServiceException e) { throw new ControllerException(e); } // try-catch
+		
+		return res;
+	} // replyWrite
 	
 	// 댓글 수정
-	@PutMapping("/reply/{rno}")
-	public String replyModify() {
-		return "test!";
-	}
+	@PutMapping("/reply/{replyId}")
+	@ApiOperation(value = "댓글 수정", notes = "댓글을 수정합니다. 성공 여부를 반환합니다.")
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "replyId", value = "댓글 번호", paramType = "path", required = true),
+		@ApiImplicitParam(name = "replyContents", value = "댓글 내용", paramType = "query", required = true),
+	})
+	public APIResponse replyModify(@ApiIgnore ReplyDTO dto) throws ControllerException {
+		log.trace("replyModify({}) invoked.", dto);
+		
+		APIResponse res = new APIResponse();
+		
+		try { 
+			res.add("result", this.service.modifyReply(dto) ? "SUCCESS" : "FAILED");
+		} catch (ServiceException e) { throw new ControllerException(e); } // try-catch
+		
+		return res;
+	} // replyModify
 	
 	// 댓글 삭제
-	@DeleteMapping("/reply/{rno}")
-	public String replyDelete() {
-		return "test!";
-	}
+	@DeleteMapping("/reply/{replyId}")
+	public APIResponse replyDelete(@PathVariable int replyId, int commId) throws ControllerException {
+		log.trace("replyDelete({}, {}) invoked.", replyId, commId);
+		
+		APIResponse res = new APIResponse();
+		
+		try { 
+			res.add("result", this.service.removeReply(replyId, commId) ? "SUCCESS" : "FAILED");
+		} catch (ServiceException e) { throw new ControllerException(e); } // try-catch
+		
+		return res;
+	} // replyDelete
 	
 	// 댓글 채택
-	@PostMapping("/reply/select/{rno}")
+	@PostMapping("/reply/select/{replyId}")
 	public String replySelect() {
 		return "test!";
 	}
