@@ -20,6 +20,9 @@
 	<view-resolvers>
 		<jsp prefix="/WEB-INF/views/" suffix=".jsp" />
 	</view-resolvers>
+	
+	<view-controller path="/board/main" 	view-name="board/commMain" 	status-code="200" />
+	<view-controller path="/board/list" 	view-name="board/commList" 	status-code="200" />
 
 
 	<!-- 1. Spring Interceptor는 아래처럼 설정파일에 Bean 으로 등록하거나 -->
@@ -29,6 +32,10 @@
 	<!-- <context:component-scan base-package="com.weet.app.*.interceptor" /> -->
 
 
+	<!-- swagger -->    
+    <beans:bean id="swagger2Config" class="com.weet.app.board.config.SwaggerConfig" />
+    <resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"/>
+    <resources location="classpath:/META-INF/resources/webjars/"  mapping="/webjars/**"/>
 
 	<context:component-scan base-package="com.weet.app.**.controller" />
 	<context:component-scan base-package="com.weet.app.**.exception" />

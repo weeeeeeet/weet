@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.weet.app.board.mapper.BoardMapper">
+
+	<select 
+		id="selectListTop10"
+		resultType="com.weet.app.board.domain.BoardVO">
+		
+		SELECT
+		    comm_id,
+		    user_id,
+		    (
+		        SELECT
+		            user_nickname
+		        FROM
+		            t_user t
+		        WHERE
+		            t.user_id = c.user_id
+		    ),
+		    comm_post_title,
+		    comm_post_contents,
+		    comm_like_num,
+		    comm_view_count,
+		    to_char(comm_post_insert_ts, 'yyyy.mm.dd'),
+		    to_char(comm_post_update_ts, 'yyyy.mm.dd'),
+		    comm_reply_count
+		FROM
+		    t_community c
+		WHERE
+		    comm_post_insert_ts between current_date - 7 AND current_date
+		ORDER BY
+		    comm_like_num DESC
+		FETCH
+		    NEXT 10 ROWS ONLY
+	</select>
+	
+	<select 
+		id="selectReplyList"
+		resultType="com.weet.app.board.domain.ReplyVO">
+		
+		SELECT
+		    reply_id,
+		    user_id,
+		    (
+		        SELECT
+		            user_nickname
+		        FROM
+		            t_user t
+		        WHERE
+		            t.user_id = r.user_id
+		    ),
+		    (
+		        SELECT
+		            user_level
+		        FROM
+		            t_user t,
+		            t_tr tr
+		        WHERE
+		            t.user_id = r.user_id
+		            AND t.user_id = tr.user_id
+		    ),
+		    reply_contents,
+		    to_char(reply_insert_ts, 'yyyy.mm.dd'),
+		    reply_selected_yn,
+		    reply_delete_yn
+		FROM
+		    t_reply r
+		WHERE
+		    comm_id = #{commId}
+		    AND reply_delete_yn = 'N'
+		    AND reply_depth = 0
+		ORDER BY
+		    reply_id ASC
+		<if test="preview == true">
+			FETCH NEXT 1 ROW ONLY
+		</if>
+	</select>
+	
+	<select 
+		id="selectReReplyList"
+		resultType="com.weet.app.board.domain.ReplyVO">
+	
+		SELECT
+		    reply_id,
+		    user_id,
+		    (
+		        SELECT
+		            user_nickname
+		        FROM
+		            t_user t
+		        WHERE
+		            t.user_id = r.reply_writer
+		    ),
+		    (
+		        SELECT
+		            user_level
+		        FROM
+		            t_user t,
+		            t_tr tr
+		        WHERE
+		            t.user_id = r.user_id
+		            AND t.user_id = tr.user_id
+		    ),
+		    reply_contents,
+		    to_char(reply_insert_ts, 'yyyy.mm.dd'),
+		    reply_selected_yn,
+		    reply_delete_yn
+		FROM
+		    t_reply r
+		WHERE
+		    comm_id = #{commId}
+		    AND reply_group = #{replyGroup}
+		    AND reply_delete_yn = 'N'
+		    AND reply_depth = 1
+		ORDER BY
+		    reply_id ASC
+	</select>
+	
+	<select 
+		id="selectAllList"
+		resultType="com.weet.app.board.domain.BoardVO">
+		
+		SELECT
+		    comm_id,
+		    user_id,
+		    (
+		        SELECT
+		            user_nickname
+		        FROM
+		            t_user t
+		        WHERE
+		            t.user_id = c.user_id
+		    ),
+		    comm_post_title,
+		    comm_post_contents,
+		    comm_like_num,
+		    comm_view_count,
+		    to_char(comm_post_insert_ts, 'yyyy.mm.dd'),
+		    to_char(comm_post_update_ts, 'yyyy.mm.dd'),
+		    comm_reply_count
+		FROM
+		    t_community c
+		WHERE
+			comm_tempsave = '0'
+			AND comm_delete_yn = 'N'
+		<include refid="search"/>
+		<include refid="sort"/>
+		OFFSET
+		    (#{cri.currPage} - 1) * #{cri.amount} ROW
+		FETCH
+		    NEXT #{cri.amount} ROWS ONLY
+	</select>
+	
+	<select 
+		id="selectListCount"
+		resultType="int">
+		SELECT
+			count(comm_id)
+		FROM
+			t_community
+		WHERE
+			comm_tempsave = '0'
+			AND comm_delete_yn = 'N'
+		<include refid="search"/>
+	</select>
+	
+	<select 
+		id="selectOneBoard"
+		resultType="com.weet.app.board.domain.BoardVO">
+		
+		SELECT
+		    comm_id,
+		    user_id,
+		    (
+		        SELECT
+		            user_nickname
+		        FROM
+		            t_user t
+		        WHERE
+		            t.user_id = c.user_id
+		    ),
+		    comm_post_title,
+		    comm_post_contents,
+		    comm_like_num,
+		    comm_view_count,
+		    to_char(comm_post_insert_ts, 'yyyy.mm.dd HH:MI'),
+		    to_char(comm_post_update_ts, 'yyyy.mm.dd HH:MI'),
+		    comm_reply_count
+		FROM
+		    t_community c
+		WHERE
+		    comm_id = #{commId}
+	</select>
+	
+	<insert id="insertBoard">
+	
+		<selectKey keyProperty="commId" order="AFTER" resultType="int">
+			SELECT "ISEQ$$_96846".currval FROM dual
+		</selectKey>
+		
+		INSERT INTO t_community
+		(
+			user_id, 
+			comm_post_title, 
+			comm_post_contents,
+			comm_tempsave
+		)
+		VALUES
+		(
+			#{userId}, 
+			#{commPostTitle}, 
+			#{commPostContents},
+			#{commTempsave}
+		)
+	</insert>
+	
+	<insert id="insertBoardLike">
+		INSERT INTO t_like_board
+		(
+			user_id,
+			comm_id
+		)
+		VALUES
+		(
+			#{userId},
+			#{commId}
+		)
+	</insert>
+	
+	<insert id="insertReply">
+	
+		<selectKey keyProperty="replyId" order="AFTER" resultType="int">
+			SELECT "ISEQ$$_96853".currval FROM dual
+		</selectKey>
+	
+		INSERT INTO t_reply
+		(
+			user_id,
+			reply_contents,
+			comm_id
+		)
+		VALUES
+		(
+			#{userId},
+			#{replyContents},
+			#{commId}
+		)
+	</insert>
+	
+	<insert id="insertReReply">
+		INSERT INTO t_reply
+		(
+		    reply_contents,
+		    comm_id,
+		    reply_group,
+		    reply_depth,
+		    reply_writer
+		)
+		VALUES
+		(
+		    #{replyContents},
+		    #{commId},
+		    #{replyGroup},
+		    #{replyDepth},
+		    #{replyWriter}
+		)
+	</insert>
+	
+	<update id="updateBoard">
+		UPDATE t_community
+		SET comm_post_title = #{commPostTitle},
+			comm_post_contents = #{commPostContents},
+			comm_post_update_ts = current_date,
+			comm_tempsave = #{commTempsave}
+		WHERE
+			comm_id = #{commId}
+	</update>
+	
+	<update id="updateViewCount">
+		UPDATE t_community
+		SET comm_view_count = comm_view_count + 1
+		WHERE
+			comm_id = #{commId}
+	</update>
+	
+	<update id="updateReplyCount">
+		UPDATE t_community c
+		SET comm_reply_count = (
+									SELECT count(reply_id) 
+									FROM t_reply r 
+									WHERE c.comm_id = r.comm_id
+										  AND reply_delete_yn = 'N'
+								)
+		WHERE
+			comm_id = #{commId}
+	</update>
+	
+	<update id="updateLikeCount">
+		UPDATE t_community c
+		SET comm_like_num = (
+								SELECT count(lb_id) 
+								FROM t_like_board l 
+								WHERE c.comm_id = l.comm_id
+							)
+		WHERE
+			comm_id = #{commId}
+	</update>
+	
+	<update id="deleteBoard">
+		UPDATE t_community
+		SET comm_delete_yn = 'Y'
+		WHERE
+			comm_id = #{commId}
+	</update>
+	
+	<update id="updateReply">
+		UPDATE t_reply
+		SET reply_contents = #{replyContents},
+			reply_update_ts = current_date
+		WHERE reply_id = #{replyId}
+	</update>
+	
+	<update id="deleteReply">
+		UPDATE t_reply
+		SET reply_delete_yn = 'Y'
+		WHERE reply_id = #{replyId}
+	</update>
+	
+	<update id="updateReplyGroup">
+	
+		UPDATE t_reply
+		SET reply_group = #{replyId}
+		WHERE reply_id = #{replyId}
+	</update>
+	
+	<delete id="deleteBoardLike">
+		DELETE FROM t_like_board
+		WHERE 
+			user_id = #{userId}
+			AND comm_id = #{commId}
+	</delete>
+	
+	<sql id="sort">
+		<if test="cri.sort == 'undefined'">
+			ORDER BY comm_id DESC
+		</if>
+		<if test="cri.sort == 'recent'">
+			ORDER BY comm_id DESC
+		</if>
+		<if test="cri.sort == 'like'">
+			ORDER BY comm_like_num DESC
+		</if>
+		<if test="cri.sort == 'reply'">
+			ORDER BY comm_reply_count DESC
+		</if>
+		<if test="cri.sort == 'view'">
+			ORDER BY comm_view_count DESC
+		</if>
+	</sql>
+	
+	<sql id="search">
+		<if test="keyword != null">
+			AND (comm_post_title LIKE '%'||#{keyword}||'%'
+			OR comm_post_contents LIKE '%'||#{keyword}||'%')
+		</if>
+	</sql>
+
+</mapper>
