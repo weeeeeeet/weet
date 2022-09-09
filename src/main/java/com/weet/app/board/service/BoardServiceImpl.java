@@ -68,8 +68,10 @@ public class BoardServiceImpl implements BoardService {
 				Map<String, Object> map = new HashMap<>();
 				List<ReplyVO> reply = this.mapper.selectReplyList(vo.getCommId(), true);
 				
+				ReplyVO replyVO = reply.size() != 0 ? reply.get(0) : null;
+				
 				map.put("board", vo);
-				map.put("reply", reply);
+				map.put("reply", replyVO);
 				
 				result.add(map);
 			} // enhanced for
