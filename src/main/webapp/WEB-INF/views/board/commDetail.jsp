@@ -29,7 +29,7 @@
         crossorigin="anonymous"></script>
 
     <!-- css -->
-    <link href="css/commDetail.css" rel="stylesheet">
+    <link href="/resources/css/board/commDetail.css" rel="stylesheet">
 
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

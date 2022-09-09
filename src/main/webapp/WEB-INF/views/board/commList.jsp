@@ -1,3 +1,5 @@
+<jsp:include page="/WEB-INF/views/include/header.jsp" />
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -53,14 +55,14 @@
 
             <ul class="board-menu-list">
                 <li class="list-item"><a href="/board/main">홈</a></li>
-                <li class="list-item"><a href="/board/list?s_sort=recent">전체</a></li>
+                <li class="list-item"><a href="/board/list">전체</a></li>
                 <li class="list-item"><a href="/board/list?selected=Y" title="채택된 답변이 달린 게시글만 보여줘요">채택</a></li>
                 <li class="list-item"><a href="/board/list?selected=N" title="작성자가 채택하지 않은 게시글만 보여줘요">미채택</a></li>
             </ul>
 
             <nav>
-                <form class="input-group board-search" method="get">
-                    <input type="text" placeholder="커뮤니티 내 검색" name="s_keyword">
+                <form class="input-group board-search" method="get" onsubmit="getBoardList(1); return false;">
+                    <input type="text" placeholder="커뮤니티 내 검색" name="keyword" id="searchInput">
                     <button type="submit"><span class="material-icons-outlined">search</span></button>
                 </form>
             </nav>
@@ -70,10 +72,10 @@
         </div>
 
         <div class="sort-menu">
-            <p>총 <span>255</span>건의 게시글</p>
-            <p><span>"프로틴 쉐이크"</span>로 검색한 결과입니다.</p>
+            <p>총 <span></span>건의 게시글</p>
+            <p class="keyword"><span></span>(으)로 검색한 결과입니다.</p>
 
-            <select class="sort-select">
+            <select class="sort-select" onchange="getBoardList(1)">
                 <option selected value="recent">최신순</option>
                 <option value="like">추천순</option>
                 <option value="reply">댓글순</option>
@@ -85,193 +87,16 @@
 
         <div class="board-contents">
 
-            <div class="board-list">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <div class="row">
-                                <div class="col-sm-1">
-                                    <img src="https://img.icons8.com/ultraviolet/30/000000/quote-left.png">
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <p class="user-nickname">새우새우</p>
-                                </div>
-
-                                <div class="col-sm-4">
-                                    <p class="post-date">22.08.15</p>
-                                </div>
-                            </div>
-
-                        </h4>
-
-                        <a href="#">
-                            <div class="template-demo">
-                                <p class="question-title">제목입니다.</p>
-
-                                <p class="question-word">Online reviews can make or break a customer's decision to make
-                                    a purchase. Read about
-                                    these customer review sites where your customers'line reviews can make or break a
-                                    customer's decision to make a purchase. Read about
-                                    these customer review sites where your customers'line reviews can make or break a
-                                    customer's decision to make a purchase. Read about
-                                    these customer review sites where your customers'line reviews can make or break a
-                                    customer's decision to make a purchase. Read about
-                                    these customer review sites where your customers'</p>
-                            </div>
-                        </a>
-
-                        <div class="row" style="margin-top: 10px;">
-
-                            <div class="col-sm-1">
-                                <i class="commhome_comment fas fa-comment-dots" style="color: #2370DF;"></i>
-                                <span class="count">2</span>
-                            </div>
-
-                            <div class="col-sm-1">
-                                <i class="commhome_heart fas fa-heart" style="color: #ff589b;"></i>
-                                <span class="count">2</span>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <div class="profile">
-                            <div class="row">
-                                <p class="no-reply">아직 등록된 답변이 없습니다.
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <div class="row">
-                                <div class="col-sm-1">
-                                    <img src="https://img.icons8.com/ultraviolet/30/000000/quote-left.png">
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <p class="user-nickname">새우새우</p>
-                                </div>
-
-                                <div class="col-sm-4">
-                                    <p class="post-date">22.08.15</p>
-                                </div>
-                            </div>
-
-                        </h4>
-
-                        <a href="#">
-                            <div class="template-demo">
-                                <p class="question-title">제목입니다.</p>
-
-                                <p class="question-word">Online reviews can make or break a customer's decision to make
-                                    a purchase. Read about
-                                    these customer review sites where your customers'line reviews can make or break a
-                                    customer's decision to make a purchase. Read about
-                                    these customer review sites where your customers'line reviews can make or break a
-                                    customer's decision to make a purchase. Read about
-                                    these customer review sites where your customers'line reviews can make or break a
-                                    customer's decision to make a purchase. Read about
-                                    these customer review sites where your customers'</p>
-                            </div>
-                        </a>
-
-                        <div class="row" style="margin-top: 10px;">
-
-                            <div class="col-sm-1">
-                                <i class="commhome_comment fas fa-comment-dots" style="color: #2370DF;"></i>
-                                <span class="count">2</span>
-                            </div>
-
-                            <div class="col-sm-1">
-                                <i class="commhome_heart fas fa-heart" style="color: #ff589b;"></i>
-                                <span class="count">2</span>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <div class="profile">
-                            <div class="row">
-                                <p class="no-reply">아직 등록된 답변이 없습니다.
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <div class="row">
-                                <div class="col-sm-1">
-                                    <img src="https://img.icons8.com/ultraviolet/30/000000/quote-left.png">
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <p class="user-nickname">새우새우</p>
-                                </div>
-
-                                <div class="col-sm-4">
-                                    <p class="post-date">22.08.15</p>
-                                </div>
-                            </div>
-
-                        </h4>
-
-                        <a href="#">
-                            <div class="template-demo">
-                                <p class="question-title">제목입니다.</p>
-
-                                <p class="question-word">Online reviews can make or break a customer's decision to make
-                                    a purchase. Read about
-                                    these customer review sites where your customers'line reviews can make or break a
-                                    customer's decision to make a purchase. Read about
-                                    these customer review sites where your customers'line reviews can make or break a
-                                    customer's decision to make a purchase. Read about
-                                    these customer review sites where your customers'line reviews can make or break a
-                                    customer's decision to make a purchase. Read about
-                                    these customer review sites where your customers'</p>
-                            </div>
-                        </a>
-
-                        <div class="row" style="margin-top: 10px;">
-
-                            <div class="col-sm-1">
-                                <i class="commhome_comment fas fa-comment-dots" style="color: #2370DF;"></i>
-                                <span class="count">2</span>
-                            </div>
-
-                            <div class="col-sm-1">
-                                <i class="commhome_heart fas fa-heart" style="color: #ff589b;"></i>
-                                <span class="count">2</span>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <div class="profile">
-                            <div class="row">
-                                <p class="no-reply">아직 등록된 답변이 없습니다.
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-
-            </div>
+            <div class="board-list"></div>
 
             <div class="chat">
 
             </div>
 
     </section>
+    
+    <script src="/resources/js/board/commList.js"></script>
 </body>
 
+<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 </html>
