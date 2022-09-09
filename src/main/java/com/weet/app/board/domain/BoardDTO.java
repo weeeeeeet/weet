@@ -7,6 +7,7 @@ public class BoardDTO {
 	
 	private Integer commId;
 	private String userId;
+	
 	private String commPostTitle;
 	private String commPostContents;
 	private Character commTempsave;

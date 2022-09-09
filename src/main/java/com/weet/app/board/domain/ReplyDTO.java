@@ -7,6 +7,7 @@ public class ReplyDTO {
 	
 	private Integer replyId;
 	private String userId;
+	private String replyWriter;
 	
 	private String replyContents;
 	private Character replySelectedYn;
