@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.weet.app.board.domain.BoardDTO;
+import com.weet.app.board.domain.ReplyDTO;
+import com.weet.app.board.domain.ReplyVO;
 import com.weet.app.common.domain.Criteria;
 import com.weet.app.exception.ServiceException;
 
@@ -29,5 +31,13 @@ public interface BoardService {
 	
 	// 게시글 삭제
 	public abstract boolean removeBoard(int commId) throws ServiceException;
-
+	
+	// 댓글 작성
+	public abstract boolean createReply(ReplyDTO dto) throws ServiceException;
+	
+	// 댓글 수정
+	public abstract boolean modifyReply(ReplyDTO dto) throws ServiceException;
+	
+	// 댓글 삭제
+	public abstract boolean removeReply(int replyId) throws ServiceException;
 } // end interface

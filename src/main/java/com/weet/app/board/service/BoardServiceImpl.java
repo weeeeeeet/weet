@@ -6,10 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.weet.app.board.domain.BoardDTO;
 import com.weet.app.board.domain.BoardVO;
+import com.weet.app.board.domain.ReplyDTO;
 import com.weet.app.board.domain.ReplyVO;
 import com.weet.app.board.mapper.BoardMapper;
 import com.weet.app.common.domain.Criteria;
@@ -127,5 +130,39 @@ public class BoardServiceImpl implements BoardService {
 		try { return this.mapper.deleteBoard(commId) == 1 ? true : false; }
 		catch(DAOException e) { throw new ServiceException(e); } // try-catch
 	} // removeBoard
+
+	// 댓글 작성
+	@Override
+	@Transactional
+	public boolean createReply(ReplyDTO dto) throws ServiceException {
+		log.trace("removeBoard({}) invoked.", dto);
+		
+		try { 
+			int result1 = this.mapper.insertReply(dto);
+			int result2 = this.mapper.updateReplyGroup(dto);
+			
+			return (result1 == 1 && result2 == 1) ? true : false;
+		} catch(UncategorizedSQLException e) {
+			throw e;
+		} catch(Exception e) {
+			log.info("\t+ Transfer Failure.");
+			
+			throw new ServiceException(e);
+		} // try-catch
+	} // createReply
+
+	// 댓글 수정
+	@Override
+	public boolean modifyReply(ReplyDTO dto) throws ServiceException {
+		// TODO Auto-generated method stub
+		return false;
+	} // modifyReply
+
+	// 댓글 삭제
+	@Override
+	public boolean removeReply(int replyId) throws ServiceException {
+		// TODO Auto-generated method stub
+		return false;
+	} // removeReply
 
 } // end class

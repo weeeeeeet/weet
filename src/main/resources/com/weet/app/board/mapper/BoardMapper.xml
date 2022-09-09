@@ -71,6 +71,8 @@
 		    t_reply r
 		WHERE
 		    comm_id = #{commId}
+		    AND reply_delete_yn = 'N'
+		    AND reply_depth = 0
 		ORDER BY
 		    reply_id DESC
 		<if test="preview == true">
@@ -190,13 +192,22 @@
 	</insert>
 	
 	<insert id="insertReply">
+	
+		<selectKey keyProperty="replyId" order="AFTER" resultType="int">
+			SELECT "ISEQ$$_96853".currval FROM dual
+		</selectKey>
+	
 		INSERT INTO t_reply
 		(
-		
+			user_id,
+			reply_contents,
+			comm_id
 		)
 		VALUES
 		(
-		
+			#{userId},
+			#{replyContents},
+			#{commId}
 		)
 	</insert>
 	
@@ -244,6 +255,26 @@
 		SET comm_delete_yn = 'Y'
 		WHERE
 			comm_id = #{commId}
+	</update>
+	
+	<update id="updateReply">
+		UPDATE t_reply
+		SET reply_contents = #{replyContents},
+			reply_update_ts = current_date
+		WHERE reply_id = #{replyId}
+	</update>
+	
+	<update id="deleteReply">
+		UPDATE t_reply
+		SET reply_delete_yn = 'Y'
+		WHERE reply_id = #{replyId}
+	</update>
+	
+	<update id="updateReplyGroup">
+	
+		UPDATE t_reply
+		SET reply_group = #{replyId}
+		WHERE reply_id = #{replyId}
 	</update>
 	
 	<delete id="deleteBoardLike">
