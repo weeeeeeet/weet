@@ -23,6 +23,7 @@
 	
 	<view-controller path="/board/main" 	view-name="board/commMain" 	status-code="200" />
 	<view-controller path="/board/list" 	view-name="board/commList" 	status-code="200" />
+	<view-controller path="/board/{commId}" 	view-name="board/commDetail" 	status-code="200" />
 
 
 	<!-- 1. Spring Interceptor는 아래처럼 설정파일에 Bean 으로 등록하거나 -->
