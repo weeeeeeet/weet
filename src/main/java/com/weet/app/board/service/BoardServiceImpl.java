@@ -184,4 +184,24 @@ public class BoardServiceImpl implements BoardService {
 		} // try-catch
 	} // removeReply
 
+	// 대댓글 작성
+	@Override
+	@Transactional
+	public boolean createReReply(ReplyDTO dto) throws ServiceException {
+		log.trace("createReReply({}) invoked.", dto);
+		
+		try { 
+			int result1 = this.mapper.insertReReply(dto);
+			int result2 = this.mapper.updateReplyCount(dto.getCommId());
+			
+			return (result1 == 1 && result2 == 1) ? true : false;
+		} catch(UncategorizedSQLException e) {
+			throw e;
+		} catch(Exception e) {
+			log.info("\t+ Transfer Failure.");
+			
+			throw new ServiceException(e);
+		} // try-catch
+	} // removeReply
+
 } // end class

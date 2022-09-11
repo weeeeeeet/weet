@@ -40,4 +40,8 @@ public interface BoardService {
 	
 	// 댓글 삭제
 	public abstract boolean removeReply(int replyId, int commId) throws ServiceException;
+	
+	// 대댓글 작성
+	public abstract boolean createReReply(ReplyDTO dto) throws ServiceException;
+	
 } // end interface
