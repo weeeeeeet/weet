@@ -29,6 +29,9 @@ public interface BoardMapper {
 	// 게시글 상세조회
 	public abstract BoardVO selectOneBoard(int commId) throws DAOException;
 	
+	// 임시저장 리스트 조회
+	public abstract List<BoardVO> selectTmpSaveList(String userId) throws DAOException;
+	
 	// 게시글 작성
 	public abstract int insertBoard(BoardDTO dto) throws DAOException;
 	

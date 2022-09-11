@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.weet.app.board.domain.BoardDTO;
+import com.weet.app.board.domain.BoardVO;
 import com.weet.app.board.domain.ReplyDTO;
-import com.weet.app.board.domain.ReplyVO;
 import com.weet.app.common.domain.Criteria;
 import com.weet.app.exception.ServiceException;
 
@@ -43,5 +43,8 @@ public interface BoardService {
 	
 	// 대댓글 작성
 	public abstract boolean createReReply(ReplyDTO dto) throws ServiceException;
+	
+	// 임시저장 목록 조회
+	public abstract List<BoardVO> getTmpSave(String userId) throws ServiceException;
 	
 } // end interface

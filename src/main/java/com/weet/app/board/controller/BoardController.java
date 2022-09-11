@@ -225,4 +225,18 @@ public class BoardController {
 		return "test!";
 	}
 	
+	// 임시저장 목록 조회
+	@GetMapping("/tmp")
+	public APIResponse tempSaveList(String userId) throws ControllerException {
+		log.trace("tempSaveList({}) invoked.", userId);
+		
+		APIResponse res = new APIResponse();
+		
+		try { 
+			res.add("result", this.service.getTmpSave(userId));
+		} catch (ServiceException e) { throw new ControllerException(e); } // try-catch
+		
+		return res;
+	} // tempSaveList
+	
 } // end class

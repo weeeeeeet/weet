@@ -204,4 +204,13 @@ public class BoardServiceImpl implements BoardService {
 		} // try-catch
 	} // removeReply
 
+	// 임시저장 목록 조회
+	@Override
+	public List<BoardVO> getTmpSave(String userId) throws ServiceException {
+		log.trace("getTmpSave({}) invoked.", userId);
+		
+		try { return this.mapper.selectTmpSaveList(userId); }
+		catch(DAOException e) { throw new ServiceException(e); } // try-catch
+	} // removeReply
+
 } // end class
