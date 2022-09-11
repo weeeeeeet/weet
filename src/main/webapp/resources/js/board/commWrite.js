@@ -34,12 +34,11 @@ const sendFile = (file, el) => {
         success: function (data) {
             console.log(data.data.fileUrl);
             $(el).summernote('insertImage', data.data.fileUrl, function ($image) {
-                $image.css('width', "25%");
+                $image.css('width', "100%");
             });
-        }
-    })
-
-}
+        } // success
+    }) // .ajax
+} // sendFile
 
 // 임시저장 등록 알림창
 const alert = (message, type) => {
@@ -54,5 +53,31 @@ const alert = (message, type) => {
     alertArea.innerHTML += str;
 
     setTimeout(() => alertArea.innerHTML = '', 2000);
-}
+} // alert
+
+const regBoard = (tmpSave) => {
+	const userId = "user2";	// 나중에 수정 필요
+	const title = document.querySelector('#title').value;
+    const content = document.querySelector('#summernote').value;   
+    
+    const params = {
+        "userId": userId,
+        "commPostTitle": title,
+        "commPostContents": content,
+        "commTempsave": tmpSave
+    } 
+
+    $.ajax({
+
+        url: "/board/api/new",
+        type: "POST",
+        data: params,
+        success: data => {
+            console.log(data);
+        }
+    })
+
+} // regBoard
+
+
 readySummernote();

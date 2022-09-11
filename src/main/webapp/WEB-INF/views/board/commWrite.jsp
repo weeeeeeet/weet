@@ -60,7 +60,7 @@
     </svg>
 
     <section id="commWrite">
-        <form id="articleForm" role="form" action="/article" method="post">
+        <form id="boardForm" role="form" action="/article" method="post">
             <br style="clear: both">
             <h3 style="margin-bottom: 10px;">커뮤니티 글 작성</h3>
             <div class="write-info">
@@ -133,7 +133,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                    <button type="button" class="btn btn-primary">네</button>
+                    <button type="button" class="btn btn-primary" onclick="regBoard(0)">네</button>
                 </div>
             </div>
         </div>
