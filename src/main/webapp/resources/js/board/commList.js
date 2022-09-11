@@ -40,6 +40,7 @@ const getBoardList = (currPage) => {
             } // if
 
             $.each(data.data.result, (i, e) => {
+				e.board.commPostContents = e.board.commPostContents.replace(/(<([^>]+)>)/ig, ""); // HTML 태그 제거
 
                 str += '<div class="card">'
                     + '<div class="card-body">'
