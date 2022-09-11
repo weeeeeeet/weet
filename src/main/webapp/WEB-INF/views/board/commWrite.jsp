@@ -60,20 +60,20 @@
     </svg>
 
     <section id="commWrite">
-        <form id="boardForm" role="form" action="/article" method="post">
+        <form id="boardForm" onsubmit="return false;">
             <br style="clear: both">
             <h3 style="margin-bottom: 10px;">커뮤니티 글 작성</h3>
             <div class="write-info">
                 <p>헬스에 관해 궁금했던 점이 있나요? 자유롭게 질문하세요!</p>
 
                 <button id="tmpsave" name="tmpsave" class="btn btn-primary" data-bs-target="#tmpsaveModal"
-                    data-bs-toggle="modal">임시저장</button>
+                    data-bs-toggle="modal" onclick="getTmpList()">임시저장</button>
             </div>
 
             <small>제목</small>
             <div class="form-group">
-                <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요."
-                    required>
+                <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요.(최대 30자)"
+                    maxLength="30" required>
             </div>
 
             <small>내용</small>
@@ -89,7 +89,7 @@
         </form>
     </section>
 
-    <div class="modal" id="tmpsaveModal" tabindex="-1">
+    <div class="modal fade" id="tmpsaveModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -117,7 +117,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                    <button type="button" class="btn btn-primary">임시저장하기</button>
+                    <button type="button" class="btn btn-primary" onclick="regBoard(1)">임시저장하기</button>
                 </div>
 
                 <div id="tmpAlert"></div>
@@ -125,7 +125,7 @@
         </div>
     </div>
 
-    <div class="modal" id="regConfirmModal" tabindex="-1">
+    <div class="modal fade" id="regConfirmModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
@@ -139,7 +139,7 @@
         </div>
     </div>
 
-    <div class="modal" id="regModal" tabindex="-1">
+    <div class="modal fade" id="regModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
