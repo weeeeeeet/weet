@@ -206,6 +206,7 @@ public class BoardController {
 	
 	// 댓글 삭제
 	@DeleteMapping("/reply/{replyId}")
+	@ApiOperation(value = "댓글 삭제", notes = "댓글을 삭제합니다.(DB삭제 X) 성공 여부를 반환합니다.")
 	public APIResponse replyDelete(@PathVariable int replyId, int commId) throws ControllerException {
 		log.trace("replyDelete({}, {}) invoked.", replyId, commId);
 		
