@@ -86,17 +86,15 @@
         </div>
 
         <div class="board-contents">
-
             <div class="board-list"></div>
+        </div>
 
-            <div class="chat">
-
-            </div>
-
+        <div class="chat"></div>
     </section>
-    
+
     <script src="/resources/js/board/commList.js"></script>
 </body>
 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
+
 </html>
