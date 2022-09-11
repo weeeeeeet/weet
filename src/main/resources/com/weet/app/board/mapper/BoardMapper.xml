@@ -202,14 +202,28 @@
 		
 		SELECT 
 			comm_id,
+		    user_id,
+		    (
+		        SELECT
+		            user_nickname
+		        FROM
+		            t_user t
+		        WHERE
+		            t.user_id = c.user_id
+		    ),
 		    comm_post_title,
-		    comm_post_insert_ts
+		    comm_post_contents,
+		    comm_like_num,
+		    comm_view_count,
+		    to_char(comm_post_insert_ts, 'yyyy.mm.dd HH:MI'),
+		    to_char(comm_post_update_ts, 'yyyy.mm.dd HH:MI'),
+		    comm_reply_count
 		FROM 
-			t_community
+			t_community c
 		WHERE 
 			user_id = #{userId}
 		    AND comm_tempsave = '1'
-		    AND comm_delete_yn = 'N';
+		    AND comm_delete_yn = 'N'
 	</select>
 	
 	<insert id="insertBoard">

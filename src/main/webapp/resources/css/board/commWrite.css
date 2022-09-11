@@ -46,8 +46,12 @@
     justify-content: space-between;
     align-items: stretch;
 }
+.tmpList small {
+	width: 130px;
+}
 .tmpList p{
     cursor: pointer;
+    width: 280px;
     overflow: hidden;
 }
 .tmpList p:hover{
@@ -64,6 +68,6 @@ svg {
     width: 14px;
     fill: #0f5132;
 }
-.alert-success {
+.alert-success, .alert-danger {
     height: 40px;
 }

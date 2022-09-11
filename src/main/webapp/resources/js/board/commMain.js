@@ -8,6 +8,7 @@ const getListTop10 = () => {
         type: "GET",
         success: data => {
             $.each(data.data.result, (i, e) => {
+				e.board.commPostContents = e.board.commPostContents.replace(/(<([^>]+)>)/ig, ""); // HTML 태그 제거
                 console.log(e.reply);
                 
                 str += '<div class="card">'

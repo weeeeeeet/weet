@@ -66,6 +66,9 @@
                     <button type="submit"><span class="material-icons-outlined">search</span></button>
                 </form>
             </nav>
+            <div class="write-btn" onclick="location.href='/board/new'">
+                <i class="fas fa-pen"></i> 글쓰기
+            </div>
         </div>
 
         <div class="board-contents">
