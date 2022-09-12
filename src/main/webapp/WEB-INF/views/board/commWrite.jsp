@@ -46,13 +46,18 @@
 <body>
     <section id="commWrite">
         <form id="boardForm" onsubmit="return false;">
+        	<input type="hidden" name="commId" value="${param.commId}">
+        	<input type="hidden" name="userId" value="${__USER__.userId}">
+        	
             <br style="clear: both">
             <h3 style="margin-bottom: 10px;">커뮤니티 글 작성</h3>
             <div class="write-info">
                 <p>헬스에 관해 궁금했던 점이 있나요? 자유롭게 질문하세요!</p>
-
-                <button id="tmpsave" name="tmpsave" class="btn btn-primary" data-bs-target="#tmpsaveModal"
-                    data-bs-toggle="offcanvas" onclick="getTmpList()">임시저장</button>
+				
+				<c:if test="${param.commId eq null}">
+	                <button id="tmpsave" name="tmpsave" class="btn btn-primary" data-bs-target="#tmpsaveModal"
+	                    data-bs-toggle="offcanvas" onclick="getTmpList()">임시저장</button>
+				</c:if>
             </div>
 
             <small>제목</small>
@@ -94,7 +99,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                    <button type="button" class="btn btn-primary" onclick="regBoard(0)">네</button>
+                    <button type="button" class="btn btn-primary" id="regConfirmBtn">네</button>
                 </div>
             </div>
         </div>
@@ -107,7 +112,7 @@
                     <p>등록이 완료되었습니다.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">확인</button>
+                    <button type="button" class="btn btn-primary" onclick="completeReg()">확인</button>
                 </div>
             </div>
         </div>
