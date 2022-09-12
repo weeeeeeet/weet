@@ -1,3 +1,4 @@
+let commId = document.querySelector('input[name=commId]').value;
 
 // 섬머노트 세팅
 const readySummernote = () => {
@@ -82,10 +83,39 @@ const regBoard = (tmpSave) => {
             } else {
                 $('#regConfirmModal').modal('hide');
                 $('#regModal').modal('show');
+                
+                commId = data.data.commId;
             } // if-else
         } // success
     }) // .ajax
 } // regBoard
+
+const modifyBoard = () => {
+    const title = document.querySelector('input[name=title]').value;
+    const content = document.querySelector('#summernote').value;
+	
+    const params = {
+        "commId": commId,
+        "commPostTitle": title,
+        "commPostContents": content,
+        "commTempsave": '0'
+    }
+    console.log(params);
+    
+    $.ajax({
+
+        url: "/board/api/" + commId,
+        type: "PUT",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(params),
+        success: data => {
+            console.log(data);
+
+            $('#regConfirmModal').modal('hide');
+            $('#regModal').modal('show');
+        } // success
+    }) // .ajax
+} // modifyBoard
 
 const getTmpList = () => {
     const params = {
@@ -111,7 +141,7 @@ const getTmpList = () => {
                 $.each(data.data.result, (i, e) => {
                     str += '<div class="tmpList">'
                         + '<small>' + e.commPostInsertTs + '</small>'
-                        + '<p>' + e.commPostTitle + '</p>'
+                        + '<p onclick="getBoard(' + e.commId + ')">' + e.commPostTitle + '</p>'
                         + '<i class="fas fa-trash" onclick="deleteTmpSave(' + e.commId + ')"></i></div>';
                 })
             } // if-else
@@ -134,4 +164,35 @@ const deleteTmpSave = (commId) => {
     }) // .ajax
 } // deleteTmpSave
 
+const getBoard = (commId) => {
+    $.ajax({
+
+        url: "/board/api/" + commId,
+        type: "GET",
+        success: data => {
+            console.log(data);
+
+            const board = data.data.result.board;
+
+            commId = board.commId;
+            document.querySelector('input[name=userId]').value = board.userId;
+            document.querySelector('input[name=title]').value = board.commPostTitle;
+            $('#summernote').summernote('code', `${board.commPostContents}`);
+        } // success
+    }) // .ajax
+} // getBoard
+
+const completeReg = () => {
+	location.href = "/board/" + commId;
+} // completeReg
+
+
+// ==============EVENT HANDLER=============== //
+
+document.querySelector('#regConfirmBtn').addEventListener('click', () => {
+    if(commId != '') modifyBoard();
+    else regBoard(0);
+}) // onclick
+
 readySummernote();
+if (commId != '') getBoard(commId);

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -123,15 +124,14 @@ public class BoardController {
 		@ApiImplicitParam(name = "commPostContents", value = "게시글 내용", paramType = "query", required = true),
 		@ApiImplicitParam(name = "commTempsave", value = "실제등록: 0, 임시저장: 1", paramType = "query", required = true)
 	})
-	public APIResponse boardModify(@PathVariable("commId") int commId, @ApiIgnore BoardDTO dto) throws ControllerException {
-		log.trace("boardWrite({}, {}) invoked.", commId, dto);
+	public APIResponse boardModify(@ApiIgnore @RequestBody BoardDTO dto) throws ControllerException {
+		log.trace("boardModify({}) invoked.", dto);
 		
 		APIResponse res = new APIResponse();
-		dto.setCommId(commId);
 		
 		try { 
 			res.add("result", this.service.modifyBoard(dto) ? "SUCCESS" : "FAILED"); 
-			res.add("commId", commId);
+			res.add("commId", dto.getCommId());
 		} catch (ServiceException e) { throw new ControllerException(e); } // try-catch
 		
 		return res;
