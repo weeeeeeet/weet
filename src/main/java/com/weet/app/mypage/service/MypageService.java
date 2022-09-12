@@ -50,4 +50,7 @@ public interface MypageService {
 	// 7. 수강종료 클래스 후기 작성
 	public abstract boolean addReview(MypageReviewDTO dto) throws ServiceException;
 	
+	// 8. 수강 예정인 클래스 조회
+	public abstract List <MypageClassVO> getListPreClass(MypageClassVO vo) throws ServiceException;
+	
 } // end interface

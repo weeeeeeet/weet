@@ -72,7 +72,7 @@ public interface MypageMapper {
 	public abstract Integer selectClassAmount(@Param("userId")String userId) throws DAOException;
 	
 	// ====================================================================
-	// 6. 수강 종료 클래스룸
+	// 6. 수강 종료 클래스룸 ( 페이지는 보입니다. )
 	// ====================================================================
 	public abstract List<MypageClassVO> selectDoneClass(Criteria cri, @Param("userId")String userId) throws DAOException;
 	
@@ -82,17 +82,19 @@ public interface MypageMapper {
 	public abstract Integer selectDoneClassAmount(@Param("userId")String userId) throws DAOException;
 	
 	// ====================================================================
-	// 7. 후기 등록하기
+	// 7. 후기 등록하기 ( 미완 : 파일업로드 관련 문제 )
 	// ====================================================================
 	public abstract Integer insertReview(MypageReviewDTO dto) throws DAOException;
 	
+	// ====================================================================
+	// 8. 시작 전 클래스
+	// ====================================================================
+	public abstract List<MypageClassVO> selectBeforeClass(@Param("userId")String userId) throws DAOException;
 	
-	
-	// 7. 시작 전 클래스
-	public abstract List<MypageClassVO> selectBeforeClass() throws DAOException;
-	
-	// 8. 찜한 클래스
-	public abstract List<MypageClassVO> selectLikeClass() throws DAOException;
+	// ====================================================================
+	// 9. 찜한 클래스
+	// ====================================================================
+	public abstract List<MypageClassVO> selectLikeClass(@Param("userId")String userId) throws DAOException;
 	
 	
 	// 10. 마이바디 - 날짜선택

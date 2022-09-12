@@ -50,8 +50,9 @@
 
             });
 
-
         });
+        
+        $("input[type=radio][name='reviewStar']").removeAttr("checked");
 
     </script>
 
@@ -162,7 +163,7 @@
                                             <label for="5-stars" class="star">&#9733;</label>
                                             <input type="radio" id="4-stars" name="reviewStar" value="4" />
                                             <label for="4-stars" class="star">&#9733;</label>
-                                            <input type="radio" id="3-stars" name="reviewStar" value="3" />
+                                            <input type="radio" id="3-stars" name="reviewStar" value="3" checked />
                                             <label for="3-stars" class="star">&#9733;</label>
                                             <input type="radio" id="2-stars" name="reviewStar" value="2" />
                                             <label for="2-stars" class="star">&#9733;</label>

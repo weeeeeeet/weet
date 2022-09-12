@@ -241,11 +241,24 @@ public class MypageServiceImpl implements MypageService, InitializingBean {
 	} // addAuto
 	
 	// ======================================================================
-	// 8 ) 좋아요 누른 클래스 조회
+	// 8 ) 시작 전인 클래스 조회
 	// ======================================================================
 	
+	@Override
+	public List<MypageClassVO> getListPreClass(MypageClassVO vo) throws ServiceException {
+		
+		log.trace("getListPreClass() invoked.");
+		
+		try {
+			return this.mapper.selectBeforeClass(vo.getUserId());
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		} // try - catch
+		
+	} // getListPreClass
+	
 	// ======================================================================
-	// 9 ) 시작 전인 클래스 조회
+	// 9 ) 좋아요 누른 클래스 조회
 	// ======================================================================
 	
 	// ======================================================================

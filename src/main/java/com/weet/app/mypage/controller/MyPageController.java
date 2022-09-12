@@ -274,10 +274,24 @@ public class MyPageController implements InitializingBean {
 	// =======================================================
 	
 	@GetMapping("/class/before")
-	public String beforeClass() {
+	public String beforeClass(MypageClassVO vo,Model model) throws ControllerException {
 		log.trace("beforeClass() invoked.");
 		
-		return "mypage/class/before";
+		try {
+			
+			//1. 게시물 출력
+			List<MypageClassVO> list = this.service.getListPreClass(vo);
+			list.forEach(log::info);
+						
+			// + value가 NULL이면 공유속성에 추가가 안되기에, NULL인지 아닌지 파악하지 않아도 OK!
+			model.addAttribute("__LIST__",list);
+			
+			return "mypage/class/before";
+			
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try - catch : ServiceException을 ControllerException으로
+		
 	} // beforeClass
 	
 	// =======================================================

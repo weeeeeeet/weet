@@ -192,5 +192,60 @@
 
     </insert>
 
+    <!-- 수강 시작 전 클래스 조회 -->
+    <select 
+        id="selectBeforeClass" 
+        resultType="com.weet.app.mypage.domain.MypageClassVO">
+
+        <![CDATA[
+
+            SELECT
+
+                /*+ INDEX_DESC(T_CLASS) */
+                
+                t.class_id,
+                ls.user_id,
+                t.class_trainer_name,
+                t.class_title,
+                t.CLASS_MAIN_IMG_URL
+                
+            FROM
+                T_CLASS t, t_class_listenr ls
+            WHERE
+                t.class_id = ls.class_id
+                AND ls.USER_ID = #{userId}
+                AND t.CLASS_RECRUIT_END_DATE > CURRENT_DATE
+
+        ]]>
+    
+    </select>
+    
+    <!-- 찜한 클래스 조회 -->
+    <select 
+        id="selectLikeClass" 
+        resultType="com.weet.app.mypage.domain.MypageClassVO">
+
+        <![CDATA[
+
+            SELECT
+
+                /*+ INDEX_DESC(T_CLASS) */
+                
+                t.class_id,
+                ls.user_id,
+                t.class_trainer_name,
+                t.class_title,
+                t.CLASS_MAIN_IMG_URL
+                
+            FROM
+                T_CLASS t, t_like_class ls
+            WHERE
+                t.class_id = ls.class_id
+                AND ls.USER_ID = #{userId}
+
+        ]]>
+    
+    </select>
+
 
 </mapper>
