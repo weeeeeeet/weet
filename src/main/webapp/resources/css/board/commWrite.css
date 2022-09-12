@@ -3,6 +3,14 @@
 * {
     font-family: 'SCoreDream';
 }
+button:active,
+button:focus,
+a:active,
+a:focus,
+input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
 
 #commWrite {
     width: 1040px;
