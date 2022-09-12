@@ -49,9 +49,6 @@ const alert = (message, type) => {
     const alertArea = document.querySelector('#tmpAlert');
 
     const str = `<div class="alert alert-${type} alert-dismissible d-flex align-items-center" role="alert">`
-        + `<svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:">`
-        + `<use xlink:href="#check-circle-fill" />`
-        + `</svg>`
         + `<div>${message}</div></div>`
 
     alertArea.innerHTML += str;
@@ -104,7 +101,7 @@ const getTmpList = () => {
         success: data => {
             console.log(data.data.result);
 
-            const listArea = document.querySelector('#tmpsaveModal .modal-body');
+            const listArea = document.querySelector('#tmpsaveModal .offcanvas-body');
             let str = '';
 
             if (data.data.result.length == 0) {
