@@ -64,7 +64,7 @@
 		            AND t.user_id = tr.user_id
 		    ),
 		    reply_contents,
-		    to_char(reply_insert_ts, 'yyyy.mm.dd'),
+		    to_char(reply_insert_ts, 'yyyy.mm.dd HH:MI'),
 		    reply_selected_yn,
 		    reply_delete_yn
 		FROM
@@ -74,6 +74,7 @@
 		    AND reply_delete_yn = 'N'
 		    AND reply_depth = 0
 		ORDER BY
+			reply_selected_yn DESC,
 		    reply_id ASC
 		<if test="preview == true">
 			FETCH NEXT 1 ROW ONLY
@@ -106,7 +107,7 @@
 		            AND t.user_id = tr.user_id
 		    ),
 		    reply_contents,
-		    to_char(reply_insert_ts, 'yyyy.mm.dd'),
+		    to_char(reply_insert_ts, 'yyyy.mm.dd HH:MI'),
 		    reply_selected_yn,
 		    reply_delete_yn
 		FROM
