@@ -164,10 +164,10 @@ const deleteTmpSave = (commId) => {
     }) // .ajax
 } // deleteTmpSave
 
-const getBoard = (commId) => {
+const getBoard = (id) => {
     $.ajax({
 
-        url: "/board/api/" + commId,
+        url: "/board/api/" + id,
         type: "GET",
         success: data => {
             console.log(data);
