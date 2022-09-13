@@ -10,12 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.weet.app.exception.ControllerException;
 import com.weet.app.mypage.domain.Criteria;
 import com.weet.app.mypage.domain.MypageBoardVO;
+import com.weet.app.mypage.domain.MypageBodyDTO;
 import com.weet.app.mypage.domain.MypageClassVO;
 import com.weet.app.mypage.domain.MypageReplyVO;
 import com.weet.app.mypage.domain.MypageReviewDTO;
@@ -299,10 +299,24 @@ public class MyPageController implements InitializingBean {
 	// =======================================================
 	
 	@GetMapping("/class/like")
-	public String likeClass() {
+	public String likeClass(MypageClassVO vo,Model model) throws ControllerException {
 		log.trace("likeClass() invoked.");
 		
-		return "mypage/class/like";
+		try {
+			
+			//1. 게시물 출력
+			List<MypageClassVO> list = this.service.getListLikeClass(vo);
+			list.forEach(log::info);
+						
+			// + value가 NULL이면 공유속성에 추가가 안되기에, NULL인지 아닌지 파악하지 않아도 OK!
+			model.addAttribute("__LIST__",list);
+			
+			return "mypage/class/like";
+			
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try - catch : ServiceException을 ControllerException으로
+		
 	} // likeClass
 	
 	// =======================================================
@@ -310,10 +324,24 @@ public class MyPageController implements InitializingBean {
 	// =======================================================
 	
 	@GetMapping("/mybody")
-	public String myBody() {
+	public String myBody(MypageBodyDTO vo,Model model) throws ControllerException {
 		log.trace("myBody() invoked.");
 		
-		return "mypage/mybody";
+		try {
+			
+			//1. 게시물 출력
+			MypageBodyDTO list = this.service.getListMybody(vo);
+			log.info(list);
+						
+			// + value가 NULL이면 공유속성에 추가가 안되기에, NULL인지 아닌지 파악하지 않아도 OK!
+			model.addAttribute("__LIST__",list);
+			
+			return "mypage/mybody";
+			
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try - catch : ServiceException을 ControllerException으로
+		
 	} // myBody
 	
 	// =======================================================

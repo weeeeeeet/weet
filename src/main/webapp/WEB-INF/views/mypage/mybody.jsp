@@ -99,19 +99,51 @@
 
                     <div class="mybody_weight on">
                         <div class="mybody_type"">체중 (kg)</div>
-                        <div class="mybody_weight_value">65.0</div>
+
+                        <c:choose>
+
+                            <c:when test = "${empty __LIST__.bodyWeight}">
+                                <div class="mybody_weight_value">0</div>
+                            </c:when>
+                   
+                            <c:otherwise>
+                                <div class="mybody_weight_value">${__LIST__.bodyWeight}</div>
+                            </c:otherwise>
+
+                        </c:choose>
+
                         <div class="mybody_weight_type">표준</div>
                     </div>
                     
                     <div class="mybody_muscle on">
                         <div  class="mybody_type">골격근량 (kg)</div>
-                        <div  class="mybody_muscle_value">28.0</div>
+                        <c:choose>
+
+                            <c:when test = "${empty __LIST__.bodyMuscle}">
+                                <div  class="mybody_muscle_value">0</div>
+                            </c:when>
+                   
+                            <c:otherwise>
+                                <div  class="mybody_muscle_value">${__LIST__.bodyMuscle}</div>
+                            </c:otherwise>
+
+                        </c:choose>
                         <div  class="mybody_muscle_type">표준</div>
                     </div>
                     
                     <div class="mybody_BMI on">
                         <div  class="mybody_type">체지방률 (%)</div>
-                        <div  class="mybody_BMI_value">10.2</div>
+                        <c:choose>
+
+                            <c:when test = "${empty __LIST__.bodyFatPct}">
+                                <div  class="mybody_BMI_value">0</div>
+                            </c:when>
+                   
+                            <c:otherwise>
+                                <div  class="mybody_BMI_value">${__LIST__.bodyFatPct}</div>
+                            </c:otherwise>
+
+                        </c:choose>
                         <div  class="mybody_BMI_type">표준</div>
                     </div>
 
@@ -147,21 +179,21 @@
                         <div class="container">
                             <canvas id="myChart"></canvas>
                         </div>
-                        <script type="text/javascript" src="/resources/js/mybody1.js"></script>
+                        <script type="text/javascript" src="/resources/js/mypage/mybody1.js"></script>
                       </div>
 
                       <div class="inner">
                         <div class="container">
                             <canvas id="myChart2"></canvas>
                         </div>
-                        <script type="text/javascript" src="/resources/js/mybody2.js"></script>
+                        <script type="text/javascript" src="/resources/js/mypage/mybody2.js"></script>
                       </div>
 
                       <div class="inner">
                         <div class="container">
                             <canvas id="myChart3"></canvas>
                         </div>
-                        <script type="text/javascript" src="/resources/js/mybody3.js"></script>
+                        <script type="text/javascript" src="/resources/js/mypage/mybody3.js"></script>
                       </div>
 
                     </div>
@@ -174,7 +206,7 @@
                 </div>
 
                 <!-- 차트 -->
-                <script type="text/javascript" src="/resources/js/mybodyChart.js"></script>
+                <script type="text/javascript" src="/resources/js/mypage/mybodyChart.js"></script>
 
             </div>
             

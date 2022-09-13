@@ -83,22 +83,15 @@
 
             <p class="content_p"> ● 클래스 클릭 시 해당 클래스의 등록 페이지로 이동합니다.</p>
 
-            <div class="class_card">
-                <img src="/resources/img/static/classcard1.jpg" class="card_img" alt="해당 클래스의 대포사진 자리">
-                <a href="#" class="card-text">[인기 클래스] 국내1위 홈트계 끝판왕 '위이티'</a>
-            </div>
+            <c:forEach var="board" items="${__LIST__}">
 
-            <div class="class_card">
-                <img src="/resources/img/static/classcard2.jpg" class="card_img" alt="해당 클래스의 대포사진 자리">
-                <a href="#" class="card-text">[신규 클래스] 국내1위 홈트계 끝판왕 '위이티'</a>
-            </div>
+                <div class="class_card">
+                    <img src="${board.classMainImgUrl}" class="card_img" alt="해당 클래스의 대포사진 자리">
+                    <a href="#" class="card-text">${board.classTitle}</a>
+                </div>
 
-            <div class="class_card">
-                <img src="/resources/img/static/classcard3.jpg" class="card_img" alt="해당 클래스의 대포사진 자리">
-                <a href="#" class="card-text">[PT] 국내1위 홈트계 끝판왕 '위이티'</a>
-            </div>
+            </c:forEach>
 
-            
         </div>
 
     </section>

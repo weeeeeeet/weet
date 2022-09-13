@@ -11,6 +11,7 @@ import com.weet.app.exception.DAOException;
 import com.weet.app.exception.ServiceException;
 import com.weet.app.mypage.domain.Criteria;
 import com.weet.app.mypage.domain.MypageBoardVO;
+import com.weet.app.mypage.domain.MypageBodyDTO;
 import com.weet.app.mypage.domain.MypageClassVO;
 import com.weet.app.mypage.domain.MypageReplyVO;
 import com.weet.app.mypage.domain.MypageReviewDTO;
@@ -260,6 +261,35 @@ public class MypageServiceImpl implements MypageService, InitializingBean {
 	// ======================================================================
 	// 9 ) 좋아요 누른 클래스 조회
 	// ======================================================================
+	
+	@Override
+	public List<MypageClassVO> getListLikeClass(MypageClassVO vo) throws ServiceException {
+		
+		log.trace("getListLikeClass() invoked.");
+		
+		try {
+			return this.mapper.selectLikeClass(vo.getUserId());
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		} // try - catch
+	
+	} // getListLikeClass
+	
+	// ======================================================================
+	// 10 ) 마이바디 페이지 조회
+	// ======================================================================
+	@Override
+	public MypageBodyDTO getListMybody(MypageBodyDTO vo) throws ServiceException {
+		
+		log.trace("getListMybody() invoked.");
+		
+		try {
+			return this.mapper.selectMyBody(vo.getUserId());
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		} // try - catch
+		
+	} // getListMybody
 	
 	// ======================================================================
 	// 10 ) 마이바디 데이터 입력

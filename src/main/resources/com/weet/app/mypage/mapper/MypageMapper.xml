@@ -246,6 +246,34 @@
         ]]>
     
     </select>
+    
+    <!-- 마이바디 조회 -->
+    <select 
+        id="selectMyBody" 
+        resultType="com.weet.app.mypage.domain.MypageBodyDTO">
+
+        <![CDATA[
+
+            SELECT
+
+                /*+ INDEX_DESC(T_BODY) */
+                
+                body_id,
+                user_id,
+                BODY_WEIGHT,
+                BODY_MUSCLE,
+                BODY_FAT_PCT,
+                BODY_DATE
+                
+            FROM
+                T_BODY
+            WHERE
+                USER_ID = #{userId}
+                AND BODY_DATE = CURRENT_DATE
+
+        ]]>
+    
+    </select>
 
 
 </mapper>

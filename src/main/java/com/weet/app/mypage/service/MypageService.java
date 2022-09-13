@@ -5,6 +5,7 @@ import java.util.List;
 import com.weet.app.exception.ServiceException;
 import com.weet.app.mypage.domain.Criteria;
 import com.weet.app.mypage.domain.MypageBoardVO;
+import com.weet.app.mypage.domain.MypageBodyDTO;
 import com.weet.app.mypage.domain.MypageClassVO;
 import com.weet.app.mypage.domain.MypageReplyVO;
 import com.weet.app.mypage.domain.MypageReviewDTO;
@@ -52,5 +53,11 @@ public interface MypageService {
 	
 	// 8. 수강 예정인 클래스 조회
 	public abstract List <MypageClassVO> getListPreClass(MypageClassVO vo) throws ServiceException;
+	
+	// 9. 좋아요 누른 클래스 조회
+	public abstract List <MypageClassVO> getListLikeClass(MypageClassVO vo) throws ServiceException;
+	
+	// 10. 마이페이지 조회
+	public abstract MypageBodyDTO getListMybody(MypageBodyDTO vo) throws ServiceException;
 	
 } // end interface

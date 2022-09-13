@@ -87,17 +87,27 @@ public interface MypageMapper {
 	public abstract Integer insertReview(MypageReviewDTO dto) throws DAOException;
 	
 	// ====================================================================
-	// 8. 시작 전 클래스
+	// 8. 시작 전 클래스 (OK)
 	// ====================================================================
 	public abstract List<MypageClassVO> selectBeforeClass(@Param("userId")String userId) throws DAOException;
 	
 	// ====================================================================
-	// 9. 찜한 클래스
+	// 9. 찜한 클래스 (OK)
 	// ====================================================================
 	public abstract List<MypageClassVO> selectLikeClass(@Param("userId")String userId) throws DAOException;
 	
+	// ====================================================================
+	// 10. 마이바디 페이지 불러오기
+	// ====================================================================
+	public abstract MypageBodyDTO selectMyBody(@Param("userId")String userId) throws DAOException;
 	
+	
+	
+	
+	
+	// ====================================================================
 	// 10. 마이바디 - 날짜선택
+	// ====================================================================
 	public abstract Date selectMyBodyDate() throws DAOException;
 	
 	// 11. 마이바디 - 인바디 입력
