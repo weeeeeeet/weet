@@ -46,6 +46,8 @@
 <body>
 
     <section id="commDetail">
+    	<input type="hidden" name="userId" value="user2">
+    	<input type="hidden" name="userType" value="T">
         <div class="board-area">
             <div class="board-title">
                 <h3>제목이에요</h3>
@@ -124,8 +126,12 @@
 
         <div class="reply-write-area">
             <p><span>2</span>개의 댓글</p>
-            <textarea id="reply-text" placeholder="댓글을 입력해 주세요."></textarea>
-            <button id="comm-reply" name="reply" class="btn btn-primary">댓글달기</button>
+            
+            <textarea id="reply-text" placeholder="댓글을 입력해 주세요." required></textarea>
+            <button id="comm-reply" name="reply" class="btn btn-primary" onclick="regReply()">댓글달기</button>
+            <c:if test="${ __USER__.userType == 'N' }">
+	            <textarea id="reply-text" placeholder="트레이너만 댓글 작성이 가능합니다." disabled></textarea>
+            </c:if>
         </div>
         <div class="reply-content-area">
 
@@ -235,6 +241,19 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary">확인</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="replyModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>댓글이 등록되었습니다.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="window.location.reload()">확인</button>
                 </div>
             </div>
         </div>
