@@ -67,8 +67,8 @@
         </div>
 
         <div class="board-controller">
-            <input type="checkbox" class="checkbox" id="heartCheck" />
-            <label for="heartCheck">
+            <input type="checkbox" class="checkbox" id="heartCheck" onclick="clickLike(); return false;"/>
+            <label for="heartCheck" onclick="clickLike(); return false;">
                 <svg id="heart-svg" viewBox="467 392 58 57" xmlns="http://www.w3.org/2000/svg">
                     <g id="Group" fill="none" fill-rule="evenodd" transform="translate(467 392)">
                         <path

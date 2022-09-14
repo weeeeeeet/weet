@@ -30,7 +30,8 @@ button:focus {
     font-size: 18px;
 }
 
-.user-profile p:last-of-type {
+.user-profile p:nth-of-type(2),
+.user-profile p:nth-of-type(3) {
     font-size: 12px;
     color: #797979;
 
@@ -38,10 +39,18 @@ button:focus {
 }
 
 .user-profile span {
+	cursor: pointer;
     font-size: 14px;
     color: #797979;
 }
-
+.user-profile span:hover {
+    color: #2370DF;
+}
+#replyContents {
+	width: 100%;
+	border: none;
+	outline: none;
+}
 .board-title {
     margin-bottom: 20px;
 }
@@ -191,6 +200,9 @@ button:focus {
 .board-controller {
     display: flex;
     justify-content: space-between;
+}
+label[for=heartCheck] {
+	cursor: pointer;
 }
 
 /*---------------------------------------
