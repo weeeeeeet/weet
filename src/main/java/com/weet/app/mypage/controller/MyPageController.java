@@ -1,5 +1,7 @@
 package com.weet.app.mypage.controller;
 
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -329,12 +331,30 @@ public class MyPageController implements InitializingBean {
 		
 		try {
 			
-			//1. 게시물 출력
-			MypageBodyDTO list = this.service.getListMybody(vo);
-			log.info(list);
-						
+			// 1. 게시물 출력
+			List<MypageBodyDTO> list = this.service.getListMybody(vo);
+			list.forEach(log::info);
+			
+			// 2. 오늘의 날짜 구하기
+			Date now = new Date();	
+			
+			// 3. 데이터 별 JS 배열 생성
+			Date [] dateArr = list.stream().map( e -> e.getBodyDate()).toArray(Date[]::new);
+			log.info("\t + >>>>>>>>>>>> dateArr : {}", Arrays.toString(dateArr));
+			
+			double [] weightArr = list.stream().mapToDouble( e -> e.getBodyWeight()).toArray();
+			log.info("\t + >>>>>>>>>>>> weightArr : {}", Arrays.toString(weightArr));
+			
+			double [] fatPctArr = list.stream().mapToDouble( e -> e.getBodyFatPct()).toArray();
+			log.info("\t + >>>>>>>>>>>> fatPctArr : {}", Arrays.toString(fatPctArr));
+			
 			// + value가 NULL이면 공유속성에 추가가 안되기에, NULL인지 아닌지 파악하지 않아도 OK!
+			model.addAttribute("__DATE__", now);
 			model.addAttribute("__LIST__",list);
+			
+			model.addAttribute("weightArr", weightArr);
+			model.addAttribute("dateArr",dateArr);
+			model.addAttribute("fatPctArr", fatPctArr);
 			
 			return "mypage/mybody";
 			

@@ -58,6 +58,6 @@ public interface MypageService {
 	public abstract List <MypageClassVO> getListLikeClass(MypageClassVO vo) throws ServiceException;
 	
 	// 10. 마이페이지 조회
-	public abstract MypageBodyDTO getListMybody(MypageBodyDTO vo) throws ServiceException;
+	public abstract List <MypageBodyDTO> getListMybody(MypageBodyDTO vo) throws ServiceException;
 	
 } // end interface

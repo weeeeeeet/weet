@@ -279,7 +279,7 @@ public class MypageServiceImpl implements MypageService, InitializingBean {
 	// 10 ) 마이바디 페이지 조회
 	// ======================================================================
 	@Override
-	public MypageBodyDTO getListMybody(MypageBodyDTO vo) throws ServiceException {
+	public List<MypageBodyDTO> getListMybody(MypageBodyDTO vo) throws ServiceException {
 		
 		log.trace("getListMybody() invoked.");
 		

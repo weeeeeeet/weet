@@ -38,6 +38,10 @@
     <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/63eb3bc178.js" crossorigin="anonymous"></script>
 
+    <script type="text/javascript" src="/resources/js/mypage/mybody1.js">
+    	chart.data = ${weightArr};
+    </script>
+
 </head>
 
 <body>
@@ -46,6 +50,9 @@
     <jsp:include page="/WEB-INF/views/include/header.jsp" />
     
     <!-- ==================CONTENT==================== -->
+
+    <jsp:useBean id="now" class="java.util.Date" />
+    <fmt:formatDate value="${now}" pattern="YY-MM-DD" var="nowDate" />
 
     <section class="content">
 
@@ -97,55 +104,67 @@
 
                 <div class="mybody">
 
-                    <div class="mybody_weight on">
-                        <div class="mybody_type"">체중 (kg)</div>
+                    <c:forEach var="board" items="${__LIST__}">
 
                         <c:choose>
 
-                            <c:when test = "${empty __LIST__.bodyWeight}">
-                                <div class="mybody_weight_value">0</div>
+                            <c:when test = "${board.bodyDate == nowDate}">
+
+                                <div class="mybody_weight on">
+                                    <div class="mybody_type"">체중 (kg)</div>
+            
+                                    <c:choose>
+            
+                                        <c:when test = "${empty board.bodyWeight}">
+                                            <div class="mybody_weight_value">0</div>
+                                        </c:when>
+                            
+                                        <c:otherwise>
+                                            <div class="mybody_weight_value">${board.bodyWeight}</div>
+                                        </c:otherwise>
+            
+                                    </c:choose>
+            
+                                    <div class="mybody_weight_type">표준</div>
+                                </div>
+                                
+                                <div class="mybody_muscle on">
+                                    <div  class="mybody_type">골격근량 (kg)</div>
+                                    <c:choose>
+            
+                                        <c:when test = "${empty board.bodyMuscle}">
+                                            <div  class="mybody_muscle_value">0</div>
+                                        </c:when>
+                            
+                                        <c:otherwise>
+                                            <div  class="mybody_muscle_value">${board.bodyMuscle}</div>
+                                        </c:otherwise>
+            
+                                    </c:choose>
+                                    <div  class="mybody_muscle_type">표준</div>
+                                </div>
+                                
+                                <div class="mybody_BMI on">
+                                    <div  class="mybody_type">체지방률 (%)</div>
+                                    <c:choose>
+            
+                                        <c:when test = "${empty board.bodyFatPct}">
+                                            <div  class="mybody_BMI_value">0</div>
+                                        </c:when>
+                            
+                                        <c:otherwise>
+                                            <div  class="mybody_BMI_value">${board.bodyFatPct}</div>
+                                        </c:otherwise>
+            
+                                    </c:choose>
+                                    <div  class="mybody_BMI_type">표준</div>
+                                </div>
+                            
                             </c:when>
-                   
-                            <c:otherwise>
-                                <div class="mybody_weight_value">${__LIST__.bodyWeight}</div>
-                            </c:otherwise>
 
                         </c:choose>
 
-                        <div class="mybody_weight_type">표준</div>
-                    </div>
-                    
-                    <div class="mybody_muscle on">
-                        <div  class="mybody_type">골격근량 (kg)</div>
-                        <c:choose>
-
-                            <c:when test = "${empty __LIST__.bodyMuscle}">
-                                <div  class="mybody_muscle_value">0</div>
-                            </c:when>
-                   
-                            <c:otherwise>
-                                <div  class="mybody_muscle_value">${__LIST__.bodyMuscle}</div>
-                            </c:otherwise>
-
-                        </c:choose>
-                        <div  class="mybody_muscle_type">표준</div>
-                    </div>
-                    
-                    <div class="mybody_BMI on">
-                        <div  class="mybody_type">체지방률 (%)</div>
-                        <c:choose>
-
-                            <c:when test = "${empty __LIST__.bodyFatPct}">
-                                <div  class="mybody_BMI_value">0</div>
-                            </c:when>
-                   
-                            <c:otherwise>
-                                <div  class="mybody_BMI_value">${__LIST__.bodyFatPct}</div>
-                            </c:otherwise>
-
-                        </c:choose>
-                        <div  class="mybody_BMI_type">표준</div>
-                    </div>
+                    </c:forEach>
 
                 </div>
                 

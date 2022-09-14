@@ -269,7 +269,7 @@
                 T_BODY
             WHERE
                 USER_ID = #{userId}
-                AND BODY_DATE = CURRENT_DATE
+            FETCH FIRST 5 ROWS ONLY
 
         ]]>
     

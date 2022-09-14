@@ -99,7 +99,7 @@ public interface MypageMapper {
 	// ====================================================================
 	// 10. 마이바디 페이지 불러오기
 	// ====================================================================
-	public abstract MypageBodyDTO selectMyBody(@Param("userId")String userId) throws DAOException;
+	public abstract List<MypageBodyDTO> selectMyBody(@Param("userId")String userId) throws DAOException;
 	
 	
 	
