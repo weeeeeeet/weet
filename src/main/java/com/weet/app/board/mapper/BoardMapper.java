@@ -2,6 +2,8 @@ package com.weet.app.board.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Select;
+
 import com.weet.app.board.domain.BoardDTO;
 import com.weet.app.board.domain.BoardVO;
 import com.weet.app.board.domain.ReplyDTO;
@@ -31,6 +33,10 @@ public interface BoardMapper {
 	
 	// 임시저장 리스트 조회
 	public abstract List<BoardVO> selectTmpSaveList(String userId) throws DAOException;
+	
+	// 게시글 추천여부 조회
+	@Select("SELECT count(lb_id) FROM t_like_board WHERE comm_id = #{commId} AND user_id = #{userId}")
+	public abstract int selectMyLike(int commId, String userId) throws DAOException;
 	
 	// 게시글 작성
 	public abstract int insertBoard(BoardDTO dto) throws DAOException;
