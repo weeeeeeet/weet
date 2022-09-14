@@ -47,4 +47,16 @@ public interface BoardService {
 	// 임시저장 목록 조회
 	public abstract List<BoardVO> getTmpSave(String userId) throws ServiceException;
 	
+	// 게시글 추천여부 체크
+	public abstract boolean checkMyLike(int commId, String userId) throws ServiceException;
+	
+	// 조와요
+	public abstract boolean boardLike(int commId, String userId) throws ServiceException;
+	
+	// 시러요
+	public abstract boolean cancelBoardLike(int commId, String userId) throws ServiceException;
+	
+	// 조회수 업데이트
+	public abstract boolean increaseView(int commId) throws ServiceException;
+	
 } // end interface

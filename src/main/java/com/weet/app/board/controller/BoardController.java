@@ -26,6 +26,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import springfox.documentation.annotations.ApiIgnore;
+import springfox.documentation.spring.web.scanners.ApiDescriptionReader;
 
 @Log4j2
 @NoArgsConstructor
@@ -153,18 +154,69 @@ public class BoardController {
 		return res;
 	} // boardDelete
 	
+	// 게시글 추천 여부 체크
+	@GetMapping("/vote/{commId}/{userId}")
+	@ApiOperation(value = "게시글 추천여부 조회", notes = "특정 유저의 게시글을 추천여부를 조회합니다. 추천했을 시 true를 반환합니다.")
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "commId", value = "게시글 번호", paramType = "path", required = true),
+		@ApiImplicitParam(name = "userId", value = "유저 아이디", paramType = "path", required = true)
+	})
+	public APIResponse checkVote(
+		@PathVariable("commId") int commId,
+		@PathVariable("userId") String userId) throws ControllerException {
+		
+		log.trace("checkVote({}, {}) invoked.", commId, userId);
+		
+		APIResponse res = new APIResponse();
+		
+		try { res.add("result", this.service.checkMyLike(commId, userId)); } 
+		catch(Exception e) { throw new ControllerException(e); } // try-catch 
+		
+		return res;
+	} // checkVote
+	
 	// 게시글 추천
-	@PostMapping("/vote/{commId}")
-	public String boardVote() {
-		return "test!";
-	}
+	@PostMapping("/vote/{commId}/{userId}")
+	@ApiOperation(value = "게시글 추천", notes = "게시글을 추천합니다. 성공 여부를 반환합니다.")
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "commId", value = "게시글 번호", paramType = "path", required = true),
+		@ApiImplicitParam(name = "userId", value = "유저 아이디", paramType = "path", required = true)
+	})
+	public APIResponse boardVote(
+		@PathVariable("commId") int commId,
+		@PathVariable("userId") String userId) throws ControllerException {
+		
+		log.trace("boardVote({}, {}) invoked.", commId, userId);
+		
+		APIResponse res = new APIResponse();
+		
+		try { res.add("result", this.service.boardLike(commId, userId) ? "SUCCESS" : "FAILED"); } 
+		catch(Exception e) { throw new ControllerException(e); } // try-catch 
+		
+		return res;
+	} // boardVote
 	
 	// 게시글 추천취소
-	@DeleteMapping("/vote/{commId}")
-	public String boardVoteCancel() {
-		return "test!";
-	}
-	
+	@DeleteMapping("/vote/{commId}/{userId}")
+	@ApiOperation(value = "게시글 추천 취소", notes = "게시글을 추천을 취소합니다. 성공 여부를 반환합니다.")
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "commId", value = "게시글 번호", paramType = "path", required = true),
+		@ApiImplicitParam(name = "userId", value = "유저 아이디", paramType = "path", required = true)
+	})
+	public APIResponse boardVoteCancel(
+		@PathVariable("commId") int commId,
+		@PathVariable("userId") String userId) throws ControllerException {
+		
+		log.trace("boardVoteCancel({}, {}) invoked.", commId, userId);
+		
+		APIResponse res = new APIResponse();
+		
+		try { res.add("result", this.service.cancelBoardLike(commId, userId) ? "SUCCESS" : "FAILED"); } 
+		catch(Exception e) { throw new ControllerException(e); } // try-catch 
+		
+		return res;
+	} // boardVoteCancel
+	 
 	// 댓글 작성
 	@PostMapping("/reply/new")
 	@ApiOperation(value = "댓글 작성", notes = "댓글을 작성합니다. 성공 여부를 반환합니다.")
@@ -238,5 +290,20 @@ public class BoardController {
 		
 		return res;
 	} // tempSaveList
+	
+	@PutMapping("/view/{commId}")
+	@ApiOperation(value = "조회수 업데이트", notes = "게시글의 조회수를 업데이트합니다. 성공여부를 반환합니다.")
+	public APIResponse increaseViewCount(
+		@PathVariable("commId") int commId) throws ControllerException {
+		
+		log.trace("increaseViewCount({}) invoked.", commId);
+		
+		APIResponse res = new APIResponse();
+		
+		try { res.add("result", this.service.increaseView(commId) ? "SUCCESS" : "FAILED"); } 
+		catch (ServiceException e) { throw new ControllerException(e); } // try-catch
+		
+		return res;
+	} // increaseViewCount
 	
 } // end class

@@ -213,4 +213,48 @@ public class BoardServiceImpl implements BoardService {
 		catch(DAOException e) { throw new ServiceException(e); } // try-catch
 	} // removeReply
 
+	// 게시글 추천여부 조회
+	@Override
+	public boolean checkMyLike(int commId, String userId) throws ServiceException {
+		
+		try { 
+			int selectedRows = this.mapper.selectMyLike(commId, userId);
+			
+			return selectedRows == 0 ? false : true;
+		} catch(DAOException e) { throw new ServiceException(e); } // try-catch
+	} // checkMyLike
+
+	// 게시글 추천
+	@Override
+	@Transactional
+	public boolean boardLike(int commId, String userId) throws ServiceException {
+		
+		try { 
+			int affectedLines1 = this.mapper.insertBoardLike(userId, commId);
+			int affectedLines2 = this.mapper.updateLikeCount(commId);
+			
+			return (affectedLines1 == 1 && affectedLines2 == 1) ? true : false;
+		} catch(DAOException e) { throw new ServiceException(e); } // try-catch
+	} // boardLike
+
+	// 게시글 추천취소
+	@Override
+	@Transactional
+	public boolean cancelBoardLike(int commId, String userId) throws ServiceException {
+		
+		try { 
+			int affectedLines1 = this.mapper.deleteBoardLike(userId, commId);
+			int affectedLines2 = this.mapper.updateLikeCount(commId);
+			
+			return (affectedLines1 == 1 && affectedLines2 == 1) ? true : false;
+		} catch(DAOException e) { throw new ServiceException(e); } // try-catch
+	} // cancelBoardLike
+
+	@Override
+	public boolean increaseView(int commId) throws ServiceException {
+		
+		try { return this.mapper.updateViewCount(commId) == 1 ? true : false; } 
+		catch(DAOException e) { throw new ServiceException(e); } // try-catch
+	} // increaseView
+
 } // end class
