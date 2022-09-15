@@ -263,7 +263,7 @@
                 BODY_WEIGHT,
                 BODY_MUSCLE,
                 BODY_FAT_PCT,
-                BODY_DATE
+                TO_CHAR(BODY_DATE, 'YY.MM.DD')
                 
             FROM
                 T_BODY
@@ -274,6 +274,14 @@
         ]]>
     
     </select>
+    
+    <!-- 마이바디 등록 -->
+    <insert id="insertMyBody">
+
+        INSERT INTO T_BODY ( BODY_ID, USER_ID, BODY_WEIGHT, BODY_MUSCLE, BODY_FAT_PCT, BODY_DATE )
+        VALUES( BODY_SEQ.NEXTVAL ,#{userId}, #{bodyWeight}, #{bodyMuscle}, #{bodyFat}, to_date(#{bodyDate},'yyyy/mm/dd') );
+
+    </insert>
 
 
 </mapper>

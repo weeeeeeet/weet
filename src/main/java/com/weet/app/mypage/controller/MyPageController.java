@@ -339,8 +339,12 @@ public class MyPageController implements InitializingBean {
 			Date now = new Date();	
 			
 			// 3. 데이터 별 JS 배열 생성
-			Date [] dateArr = list.stream().map( e -> e.getBodyDate()).toArray(Date[]::new);
+			// Date [] dateArr = list.stream().map( e -> e.getBodyDate()).toArray(Date[]::new);
+			String [] dateArr = list.stream().map( e -> e.getBodyDate() ).toArray(String[]::new);
 			log.info("\t + >>>>>>>>>>>> dateArr : {}", Arrays.toString(dateArr));
+			
+			double [] muscleArr = list.stream().mapToDouble( e -> e.getBodyMuscle()).toArray();
+			log.info("\t + >>>>>>>>>>>> fatPctArr : {}", Arrays.toString(muscleArr));
 			
 			double [] weightArr = list.stream().mapToDouble( e -> e.getBodyWeight()).toArray();
 			log.info("\t + >>>>>>>>>>>> weightArr : {}", Arrays.toString(weightArr));
@@ -352,6 +356,7 @@ public class MyPageController implements InitializingBean {
 			model.addAttribute("__DATE__", now);
 			model.addAttribute("__LIST__",list);
 			
+			model.addAttribute("muscleArr", muscleArr);
 			model.addAttribute("weightArr", weightArr);
 			model.addAttribute("dateArr",dateArr);
 			model.addAttribute("fatPctArr", fatPctArr);
@@ -363,6 +368,63 @@ public class MyPageController implements InitializingBean {
 		} // try - catch : ServiceException을 ControllerException으로
 		
 	} // myBody
+	
+	// =======================================================
+		// 9. 마이바디 값 입력 ( 이거부터 쭉 만들어야 한다. ***************** )
+	// =======================================================
+	@PostMapping("/mybody/input")
+	public String MybodyInput (MypageBodyDTO dto, RedirectAttributes rttrs) throws ControllerException {
+		
+		log.trace("\t + MybodyInput({}, {}) invoked.", dto, rttrs);
+		
+		try {
+			
+			// + 필드에 주입받은 서비스 객체의 메소드 호출 -> 핵심 메소드 호출
+			if ( this.service.addBody(dto) ) {
+				
+				rttrs.addAttribute("__RESULT__", "success");
+				
+			} else {
+				rttrs.addAttribute("__RESULT__", "failed");
+			} // if - else
+			
+			// + 업데이트 한 후에는 전체 목록 조회 페이지로 이동해야 한다. (***)
+			return "redirect:/mypage/mybody?userId=user2";
+			
+		} catch(Exception e) { 
+			throw new ControllerException (e);
+		} // try - catch
+		
+	} // MybodyInput
+	
+	// =======================================================
+		// 10. 마이바디 값 수정
+	// =======================================================
+	
+	@PostMapping("/mybody/update")
+	public String MybodyUpdate (MypageReviewDTO dto, RedirectAttributes rttrs) throws ControllerException {
+		
+		log.trace("\t + ClassReplyregister({}, {}) invoked.", dto, rttrs);
+		
+		try {
+			
+			// + 필드에 주입받은 서비스 객체의 메소드 호출 -> 핵심 메소드 호출
+			if ( this.service.addReview(dto) ) {
+				
+				rttrs.addAttribute("__RESULT__", "success");
+				
+			} else {
+				rttrs.addAttribute("__RESULT__", "failed");
+			} // if - else
+			
+			// + 업데이트 한 후에는 전체 목록 조회 페이지로 이동해야 한다. (***)
+			return "redirect:/mypage/activity/boardlist?userId=user2";
+			
+		} catch(Exception e) { 
+			throw new ControllerException (e);
+		} // try - catch
+		
+	} // MybodyUpdate
 	
 	// =======================================================
 		// 9. 일반회원 - 마이페이지 - 구매내역

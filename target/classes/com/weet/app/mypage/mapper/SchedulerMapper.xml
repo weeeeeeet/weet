@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.weet.app.mypage.mapper.SchedulerMapper">
+    
+    <!-- 1. 진행상황 업데이트 -->
+    <update id="updateProgress">
+		UPDATE t_class_listenr
+		SET progress = progress + 1
+		WHERE 
+		    class_id = #{classId}
+		    AND status = 0
+		    AND to_char(current_date - 1, 'dy') IN (
+		        SELECT
+		            cs_day
+		        FROM
+		            t_class_schedule
+		        WHERE
+		            class_id = #{classId}
+		    )
+	</update>
+
+    <!-- 2. 종료여부 업데이트 -->
+    <update id="updateStatus">
+		UPDATE t_class_listenr
+		SET status = 1
+		WHERE 
+		    class_id = #{classId}
+		    AND status = 0
+		    AND progress >= (
+		        SELECT
+		            class_count
+		        FROM
+		            t_class
+		        WHERE
+		            class_id = #{classId}
+		    )
+	</update>
+
+</mapper>

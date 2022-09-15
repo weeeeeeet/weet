@@ -57,8 +57,8 @@
         const datearr = new Array();
 
         <c:forEach var="item" items="${dateArr}">
-        	console.log(${item});
-        	datearr.push(${item});
+        
+        	datearr.push("${item}");
 
         </c:forEach>
         
@@ -77,6 +77,20 @@
         </c:forEach>
         
         console.log(fatPctarr);
+
+    </script>
+    
+    <script>
+
+        const muscleArr = new Array();
+
+        <c:forEach var="item" items="${muscleArr}">
+
+        	muscleArr.push(${item});
+
+        </c:forEach>
+        
+        console.log(muscleArr);
 
     </script>
 
@@ -142,7 +156,43 @@
 
                 <div class="mybody">
 
-                    <c:forEach var="board" items="${__LIST__}">
+                    <div class="mybody_weight on">
+                        <div class="mybody_type">체중 (kg)</div>
+
+                        <div class="mybody_weight_value">
+                            <c:forEach var="board" items="${__LIST__}" varStatus="index">
+                                <c:if test="${index.last eq true}">${board.bodyWeight}</c:if>
+                            </c:forEach>
+                        </div>
+
+                        <div class="mybody_weight_type">표준</div>
+                    </div>
+
+                    <div class="mybody_muscle on">
+                        <div  class="mybody_type">골격근량 (kg)</div>
+
+                        <div  class="mybody_muscle_value">
+                            <c:forEach var="board" items="${__LIST__}" varStatus="index">
+                                <c:if test="${index.last eq true}">${board.bodyMuscle}</c:if>
+                            </c:forEach>
+                        </div>
+
+                        <div  class="mybody_muscle_type">표준</div>
+                    </div>
+
+                    <div class="mybody_BMI on">
+                        <div  class="mybody_type">체지방률 (%)</div>
+                        
+                        <div  class="mybody_BMI_value">
+                            <c:forEach var="board" items="${__LIST__}" varStatus="index">
+                                <c:if test="${index.last eq true}">${board.bodyFatPct}</c:if>
+                            </c:forEach>
+                        </div>
+
+                        <div  class="mybody_BMI_type">표준</div>
+                    </div>
+
+                    <!-- <c:forEach var="board" items="${__LIST__}">
 
                         <c:choose>
 
@@ -202,7 +252,7 @@
 
                         </c:choose>
 
-                    </c:forEach>
+                    </c:forEach> -->
 
                 </div>
                 
@@ -283,7 +333,9 @@
                 <div class="modal-body">
 
                     <!-- 어디로 데이터를 보낼지 작성해야 한다. -->
-                    <form action="#">
+                    <form action="/mypage/mybody/input" method="post" id="bodyInputForm">
+
+                        <input type="hidden" name="userId" value="${board.userId}">
 
                         <!-- 날짜 -->
                         <div class="modal_mybody_date">
@@ -292,7 +344,7 @@
                             <!-- 데이트 피커 적용 -->
                             <input 
                                     type="date" 
-                                    name="마이바디_날짜" 
+                                    name="bodyDate" 
                                     style="width: 300px; margin-left: 93px;  border: 1px solid #D7D7D7; border-radius: 3px; height: 33px;" 
                                     id="modal_datepicker insert_mybody_date">
                             
@@ -301,19 +353,19 @@
                         <!-- 체중 -->
                         <div class="modal_mybody_weight">
                             <p>체중 (kg)</p>
-                            <input type="number" name="마이바디_체중" placeholder="체중을 입력해주세요.">
+                            <input type="number" step="0.1" name="bodyWeight" placeholder="체중을 입력해주세요." required>
                         </div>
 
                         <!-- 골격근량 -->
                         <div class="modal_mybody_muscle">
                             <p>골격근량 (kg)</p>
-                            <input type="number" name="마이바디_골격근량" placeholder="골격근량을 입력해주세요.">
+                            <input type="number" step="0.1" name="bodyMuscle" placeholder="골격근량을 입력해주세요." required>
                         </div>
 
                         <!-- 체지방률 -->
                         <div class="modal_mybody_BMI">
                             <p>체지방률 (%)</p>
-                            <input type="number" name="마이바디_체지방률" placeholder="체지방률을 입력해주세요.">
+                            <input type="number" step="0.1" name="bodyFat" placeholder="체지방률을 입력해주세요." required>
                         </div>
 
 
@@ -342,7 +394,9 @@
                     <div class="modal-body">
 
                         <!-- 어디로 데이터를 보낼지 작성해야 한다. -->
-                        <form action="#">
+                        <form action="/mypage/mybody/update" method="post" id="bodyUpdateForm">
+
+                            <input type="hidden" name="userId" value="${board.userId}">
 
                             <!-- 날짜 -->
                             <div class="modal_mybody_date">
@@ -351,7 +405,7 @@
                                 <!-- 데이트 피커 적용 -->
                                 <input 
                                     type="date" 
-                                    name="마이바디_수정_날짜" 
+                                    name="bodyDate" 
                                     style="width: 300px; margin-left: 93px;  border: 1px solid #D7D7D7; border-radius: 3px; height: 33px;" 
                                     id="modal_datepicker insert_mybody_date">
                                 
@@ -360,19 +414,19 @@
                             <!-- 체중 -->
                             <div class="modal_mybody_weight">
                                 <p>체중 (kg)</p>
-                                <input type="number" name="마이바디_수정_체중" placeholder="체중을 입력해주세요.">
+                                <input type="number" step="0.1" name="bodyWeight" placeholder="체중을 입력해주세요.">
                             </div>
 
                             <!-- 골격근량 -->
                             <div class="modal_mybody_muscle">
                                 <p>골격근량 (kg)</p>
-                                <input type="number" name="마이바디_수정_골격근량" placeholder="골격근량을 입력해주세요.">
+                                <input type="number" step="0.1" name="bodyMuscle" placeholder="골격근량을 입력해주세요.">
                             </div>
 
                             <!-- 체지방률 -->
                             <div class="modal_mybody_BMI">
                                 <p>체지방률 (%)</p>
-                                <input type="number" name="마이바디_수정_체지방률" placeholder="체지방률을 입력해주세요.">
+                                <input type="number" step="0.1"  name="bodyFat" placeholder="체지방률을 입력해주세요.">
                             </div>
 
 

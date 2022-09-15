@@ -25,6 +25,6 @@ public class MypageBodyDTO {
 	private Double bodyFatPct;
 	
 	// 6. 마이바디 날짜
-	private Date bodyDate;
+	private String bodyDate;
 	
 } // mypageBoardVO

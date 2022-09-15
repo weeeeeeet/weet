@@ -60,4 +60,10 @@ public interface MypageService {
 	// 10. 마이페이지 조회
 	public abstract List <MypageBodyDTO> getListMybody(MypageBodyDTO vo) throws ServiceException;
 	
+	// 11. 마이페이지 입력
+	public abstract boolean addBody(MypageBodyDTO dto) throws ServiceException;
+	
+	// 12. 마이페이지 수정
+	// public abstract boolean updateBody(MypageBodyDTO dto) throws ServiceException;
+	
 } // end interface

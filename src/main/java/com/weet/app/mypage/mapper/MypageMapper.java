@@ -101,17 +101,19 @@ public interface MypageMapper {
 	// ====================================================================
 	public abstract List<MypageBodyDTO> selectMyBody(@Param("userId")String userId) throws DAOException;
 	
+	// ====================================================================
+	// 11. 마이바디 입력
+	// ====================================================================
+	public abstract Integer insertMyBody(MypageBodyDTO dto) throws DAOException;
 	
 	
 	
 	
 	// ====================================================================
-	// 10. 마이바디 - 날짜선택
+	// 12. 마이바디 - 날짜선택
 	// ====================================================================
 	public abstract Date selectMyBodyDate() throws DAOException;
 	
-	// 11. 마이바디 - 인바디 입력
-	public abstract List<MypageBodyDTO> insertMyBody() throws DAOException;
 	
 	// 12. 마이바디 - 인바디 수정
 	public abstract List<MypageBodyDTO> updateMyBody() throws DAOException;

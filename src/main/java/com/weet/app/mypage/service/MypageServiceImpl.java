@@ -292,11 +292,24 @@ public class MypageServiceImpl implements MypageService, InitializingBean {
 	} // getListMybody
 	
 	// ======================================================================
-	// 10 ) 마이바디 데이터 입력
+	// 11 ) 마이바디 데이터 입력
 	// ======================================================================
 	
+	@Override
+	public boolean addBody(MypageBodyDTO dto) throws ServiceException {
+		
+		log.trace("addReview({}) invoked.", dto);
+		
+		try {
+			return this.mapper.insertMyBody(dto) == 1;
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		} // try - catch
+		
+	} // addBody
+	
 	// ======================================================================
-	// 11 ) 마이바디 데이터 수정
+	// 12 ) 마이바디 데이터 수정
 	// ======================================================================
 	
 	// ======================================================================
