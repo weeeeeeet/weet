@@ -38,8 +38,46 @@
     <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/63eb3bc178.js" crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="/resources/js/mypage/mybody1.js">
-    	chart.data = ${weightArr};
+    <script>
+
+        const weightArr = new Array();
+
+        <c:forEach var="item" items="${weightArr}">
+
+        	weightArr.push(${item});
+
+        </c:forEach>
+        
+        console.log(weightArr);
+
+    </script>
+    
+    <script>
+
+        const datearr = new Array();
+
+        <c:forEach var="item" items="${dateArr}">
+        	console.log(${item});
+        	datearr.push(${item});
+
+        </c:forEach>
+        
+        console.log(datearr);
+
+    </script>
+    
+    <script>
+
+        const fatPctarr = new Array();
+
+        <c:forEach var="item" items="${fatPctArr}">
+
+        	fatPctarr.push(${item});
+
+        </c:forEach>
+        
+        console.log(fatPctarr);
+
     </script>
 
 </head>

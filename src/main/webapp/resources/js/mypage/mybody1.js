@@ -6,14 +6,15 @@ var chart = new Chart(ctx, {
 
   // 챠트를 그릴 데이타
   data: {
-    labels: ['22.05.30', '22.06.05', '22.06.15', '22.06.24', '22.06.30'],
+    labels: datearr,
     datasets: [{
       label: '체중',
       backgroundColor: 'transparent',
       borderColor: '#14E302',
-      data: [63.5 , 65.3 , 64.7 , 63.2 , 62.9 ]
+      data: weightArr
     }]
   },
+  
   // 옵션
   options: {
     legend: {

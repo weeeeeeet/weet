@@ -256,7 +256,7 @@
 
             SELECT
 
-                /*+ INDEX_DESC(T_BODY) */
+                /*+ INDEX_ASC(T_BODY) */
                 
                 body_id,
                 user_id,

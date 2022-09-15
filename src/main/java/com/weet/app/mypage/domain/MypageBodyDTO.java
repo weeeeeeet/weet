@@ -16,10 +16,10 @@ public class MypageBodyDTO {
 	private String userId;
 	
 	// 3. 마이바디 몸무게
-	private Integer bodyWeight;
+	private Double bodyWeight;
 	
 	// 4. 마이바디 골격근량
-	private Integer bodyMuscle;
+	private Double bodyMuscle;
 	
 	// 5. 마이바디 체지방량
 	private Double bodyFatPct;
