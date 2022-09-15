@@ -26,10 +26,10 @@
     <!-- 2. 종료여부 업데이트 -->
     <update id="updateStatus">
 		UPDATE t_class_listenr
-		SET status = 1
+		SET status = '1'
 		WHERE 
 		    class_id = #{classId}
-		    AND status = 0
+		    AND status = '0'
 		    AND progress >= (
 		        SELECT
 		            class_count

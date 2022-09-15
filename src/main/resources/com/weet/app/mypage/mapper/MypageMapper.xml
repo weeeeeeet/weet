@@ -127,6 +127,7 @@
         WHERE
             t.class_id = ls.class_id
         	AND ls.USER_ID = #{userId}
+        	AND ls.STATUS = '0'
 
         OFFSET (#{cri.currPage} - 1) * #{cri.amount} ROWS
         FETCH NEXT #{cri.amount} ROWS ONLY
@@ -155,7 +156,7 @@
             WHERE
                 t.class_id = ls.class_id
                 AND ls.USER_ID = #{userId}
-                AND t.CLASS_RECRUIT_END_DATE < CURRENT_DATE
+                AND ls.STATUS = '1'
 
             OFFSET (#{cri.currPage} - 1) * #{cri.amount} ROWS
             FETCH NEXT #{cri.amount} ROWS ONLY
@@ -178,7 +179,7 @@
             WHERE
                 t.class_id = ls.class_id
                 AND ls.USER_ID = #{userId}
-                AND t.CLASS_RECRUIT_END_DATE < CURRENT_DATE
+                AND ls.STATUS = '1'
 
         ]]>
     
@@ -214,7 +215,7 @@
             WHERE
                 t.class_id = ls.class_id
                 AND ls.USER_ID = #{userId}
-                AND t.CLASS_RECRUIT_END_DATE > CURRENT_DATE
+                AND ls.PROGRESS = 0
 
         ]]>
     
