@@ -6,6 +6,7 @@ import java.util.Map;
 import com.weet.app.board.domain.BoardDTO;
 import com.weet.app.board.domain.BoardVO;
 import com.weet.app.board.domain.ReplyDTO;
+import com.weet.app.board.domain.ReplyVO;
 import com.weet.app.common.domain.Criteria;
 import com.weet.app.exception.ServiceException;
 
@@ -22,6 +23,9 @@ public interface BoardService {
 	
 	// 게시글 상세 조회
 	public abstract Map<String, Object> getOneBoard(int commId) throws ServiceException;
+	
+	// 대댓글 목록 조회
+	public abstract List<ReplyVO> getReReplyList(int commId, int replyGroup) throws ServiceException;
 	
 	// 게시글 작성
 	public abstract boolean createBoard(BoardDTO dto) throws ServiceException;

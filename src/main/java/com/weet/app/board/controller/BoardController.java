@@ -65,7 +65,7 @@ public class BoardController {
 	// 추천 TOP10 게시글 조회
 	@GetMapping("/list/top")
 	@ApiOperation(value = "인기글 조회", notes = "최근 7일간 인기글 10개를 조회합니다. 가장 최근 댓글 1개를 같이 반환")
-	public APIResponse boardBestList() throws ControllerException{
+	public APIResponse boardBestList() throws ControllerException {
 		
 		APIResponse res = new APIResponse();
 		try { res.add("result", this.service.getListTop10()); } 
@@ -79,6 +79,25 @@ public class BoardController {
 	public String boardRecentList() {
 		return "test!";
 	}
+	
+	// 답글 목록 조회
+	@GetMapping("/list/re/reply/{commId}/{replyGroup}")
+	@ApiOperation(value = "답글 목록 조회", notes = "특정 게시글의 특정 댓글에 대한 답글목록을 반환합니다.")
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "commId", value = "게시글 번호", paramType = "path", required = true),
+		@ApiImplicitParam(name = "replyGroup", value = "댓글 번호(replyId)", paramType = "path", required = true)
+	})
+	public APIResponse reReplyList(
+		@PathVariable("commId") int commId, 
+		@PathVariable("replyGroup") int replyGroup) throws ControllerException {
+		
+		APIResponse res = new APIResponse();
+		
+		try { res.add("result", this.service.getReReplyList(commId, replyGroup)); } 
+		catch (ServiceException e) { throw new ControllerException(e); } // try-catch
+		
+		return res;
+	} // reReplyList
 	
 	// 게시글 상세 조회
 	@GetMapping("/{commId}")
@@ -244,7 +263,7 @@ public class BoardController {
 		@ApiImplicitParam(name = "replyId", value = "댓글 번호", paramType = "path", required = true),
 		@ApiImplicitParam(name = "replyContents", value = "댓글 내용", paramType = "query", required = true),
 	})
-	public APIResponse replyModify(@ApiIgnore ReplyDTO dto) throws ControllerException {
+	public APIResponse replyModify(@ApiIgnore @RequestBody ReplyDTO dto) throws ControllerException {
 		log.trace("replyModify({}) invoked.", dto);
 		
 		APIResponse res = new APIResponse();

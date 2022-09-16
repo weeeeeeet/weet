@@ -257,4 +257,11 @@ public class BoardServiceImpl implements BoardService {
 		catch(DAOException e) { throw new ServiceException(e); } // try-catch
 	} // increaseView
 
+	@Override
+	public List<ReplyVO> getReReplyList(int commId, int replyGroup) throws ServiceException {
+		
+		try { return this.mapper.selectReReplyList(commId, replyGroup); } 
+		catch(DAOException e) { throw new ServiceException(e); } // try-catch
+	} // increaseView
+	
 } // end class
