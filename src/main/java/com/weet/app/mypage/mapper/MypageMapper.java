@@ -106,18 +106,17 @@ public interface MypageMapper {
 	// ====================================================================
 	public abstract Integer insertMyBody(MypageBodyDTO dto) throws DAOException;
 	
-	
-	
+	// ====================================================================
+	// 12. 마이바디 수정
+	// ====================================================================
+	public abstract List<MypageBodyDTO> updateMyBody() throws DAOException;
 	
 	// ====================================================================
 	// 12. 마이바디 - 날짜선택
 	// ====================================================================
 	public abstract Date selectMyBodyDate() throws DAOException;
 	
-	
-	// 12. 마이바디 - 인바디 수정
-	public abstract List<MypageBodyDTO> updateMyBody() throws DAOException;
-	
+		
 	// 13. 구매내역 - 전체 내역
 	
 	// 14. 구매내역 - 상세 내역

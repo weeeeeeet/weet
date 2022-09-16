@@ -365,7 +365,7 @@
                         <!-- 체지방률 -->
                         <div class="modal_mybody_BMI">
                             <p>체지방률 (%)</p>
-                            <input type="number" step="0.1" name="bodyFat" placeholder="체지방률을 입력해주세요." required>
+                            <input type="number" step="0.1" name="bodyFatPct" placeholder="체지방률을 입력해주세요." required>
                         </div>
 
 
@@ -426,7 +426,7 @@
                             <!-- 체지방률 -->
                             <div class="modal_mybody_BMI">
                                 <p>체지방률 (%)</p>
-                                <input type="number" step="0.1"  name="bodyFat" placeholder="체지방률을 입력해주세요.">
+                                <input type="number" step="0.1"  name="bodyFatPct" placeholder="체지방률을 입력해주세요.">
                             </div>
 
 

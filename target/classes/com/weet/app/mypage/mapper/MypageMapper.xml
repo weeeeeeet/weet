@@ -280,9 +280,15 @@
     <insert id="insertMyBody">
 
         INSERT INTO T_BODY ( BODY_ID, USER_ID, BODY_WEIGHT, BODY_MUSCLE, BODY_FAT_PCT, BODY_DATE )
-        VALUES( BODY_SEQ.NEXTVAL ,#{userId}, #{bodyWeight}, #{bodyMuscle}, #{bodyFat}, to_date(#{bodyDate},'yyyy/mm/dd') );
+        VALUES( BODY_SEQ.NEXTVAL ,#{userId}, #{bodyWeight}, #{bodyMuscle}, #{bodyFatPct}, to_date(#{bodyDate},'yyyy/mm/dd') )
 
     </insert>
-
+    
+    <!-- 마이바디 수정 -->
+    <update id="updateMyBody">
+        UPDATE T_BODY
+        SET BODY_WEIGHT = #{bodyWeight}, BODY_MUSCLE = #{bodyMuscle}, BODY_FAT_PCT = #{bodyFatPct}
+        WHERE BODY_DATE = to_date(#{bodyDate},'yyyy/mm/dd') AND USER_ID = #{userId}
+    </update>
 
 </mapper>
