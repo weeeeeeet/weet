@@ -29,7 +29,11 @@ const getBoard = () => {
             document.querySelector('.heartCount').innerHTML = "좋아요 " + boardData.commLikeNum;   // 좋아요 수
             document.querySelector('.reply-write-area>p>span').innerHTML = boardData.commReplyCount;    // 댓글 수
 
-            if( replyData.length === 0 ) return;
+            if( replyData.length === 0 ) {
+                document.querySelector('.reply-content-area').innerHTML = str;
+
+                return;
+            } // if
 
             console.log(replyData);
 
@@ -43,15 +47,17 @@ const getBoard = () => {
 
                 // 작성아이디와 로그인아이디 같으면 수정 / 삭제 버튼 노출
                 if( e.trainerId == 'tr3' ) {
-                    str += '<p><span>수정</span> | <span>삭제</span></p>';
+                    str += '<p><span onclick="replyEdit(' + '\'replyContents\', ' + e.replyId + ')">수정</span> | <span onclick="deleteReply(' + e.replyId + ')">삭제</span></p>';
                 } // if
 
                 str += '</div><div class="reply-select">'
                     + '<small>채택</small>'
                     + '<i class="fas fa-circle-check"></i></div></div>'
-                    + '<input type="text" id="replyContents" value="' + e.replyContents + '" readonly>'
+                    + '<textarea name="replyContents" id="replyContents' + e.replyId + '" wrap="on" oninput="resize(event)" readonly>' + e.replyContents + '</textarea>'
+                    + '<div class="modify-btn-area"><button class="reply-modify-cancel-btn" onclick="getBoard()">취소</button>'
+                    + '<button class="reply-modify-btn" onclick="modifyReply(' + e.replyId + ')">등록</button></div>'
                     + '<div class="re-reply-controller">'
-                    + '<p class="more-reply">답글 보기</p></div></div>'
+                    + '<p class="more-reply">답글 보기</p></div></div>';
             }) // .each
             
             document.querySelector('.reply-content-area').innerHTML = str;
@@ -67,12 +73,31 @@ const getBoard = () => {
                 const replyControllerArea = document.querySelectorAll('.reply-select');
                 replyControllerArea.forEach((e) => {
                     e.innerHTML = '';
-                }) //.forEach
+                }); //.forEach
             } // if
+            
+            // textarea 높이 수정
+            document.querySelectorAll('textarea').forEach(e => {
+				e.setAttribute("style", "height:" + (e.scrollHeight) + "px; overflow-y:hidden;");
+			}); // .forEach
         } // success
 
     }) // .ajax
 } // getBoard
+
+const getReReply = () => {
+	
+}
+
+const replyEdit = (id, idx) => {
+    const textarea = document.querySelector(`#${id}${idx}`);
+
+    textarea.removeAttribute("readonly");
+    textarea.classList.add('edit-enabled');
+    textarea.focus();
+    
+	$(textarea).next('.modify-btn-area').css("display", "flex");
+} // replyEdit
 
 const regReply = () => {
     const userId = 'tr3';
@@ -108,12 +133,39 @@ const regReReply = () => {
 
 } // regReReply
 
-const modifyReply = () => {
+const modifyReply = (replyId) => {
+	const contents = document.querySelector(`#replyContents${replyId}`).value;
+	
+	const params = {
+		"replyId": replyId,
+		"replyContents": contents
+	}
+	
+	$.ajax({
+
+        url: "/board/api/reply/" + replyId,
+        type: "PUT",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(params),
+        success: () => {
+			getBoard();
+        } // success
+    }) // .ajax
 
 } // modifyReply
 
-const deleteReply = () => {
+const deleteReply = (replyId) => {
+	
+	$.ajax({
 
+        url: "/board/api/reply/" + replyId + "?commId=" + commId,
+        type: "DELETE",
+        success: () => {
+			alert('댓글이 삭제되었습니다.');
+		
+			getBoard();
+        } // success
+    }) // .ajax
 } // deleteReply
 
 const maskingId = (userId) => {
@@ -196,7 +248,7 @@ const increaseViewCount = () => {
             if(data.data.result === "SUCCESS") {
                 getBoard();
                 voteCheck();
-
+                
                 return;
             } // if
 
@@ -205,6 +257,12 @@ const increaseViewCount = () => {
 
     }) // .ajax
 } // increaseViewCount
+
+// textarea 자동 크기조절
+const resize = (e) => {
+    e.currentTarget.style.height = '1px';
+    e.currentTarget.style.height = (12 + e.currentTarget.scrollHeight) + 'px';
+} // resize
 
 
 // ================ 이벤트 리스너 ========================== //
@@ -218,3 +276,5 @@ const clickLike = () => {
 }; // onclick
 
 increaseViewCount();
+
+

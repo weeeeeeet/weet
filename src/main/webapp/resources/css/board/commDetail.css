@@ -9,7 +9,42 @@ button:focus {
     outline: none !important;
     box-shadow: none !important;
 }
-
+textarea {
+	resize: none;
+	width: 100%;
+	border: none;
+	outline: none;
+}
+.edit-enabled {
+	border: 1px solid lightgray;
+	border-radius: 10px;
+	
+	max-height: 200px;
+}
+.edit-enabled:focus {
+	border-color: #2370DF;
+}
+.modify-btn-area {
+	display: none;
+    justify-content: flex-end;
+}
+.modify-btn-area button {
+	margin-left: 5px;
+	font-size: 13px;
+	
+	height: 30px;
+	border-radius: 5px;
+}
+.reply-modify-cancel-btn {
+	background-color: #fff;
+	border: 1px solid lightgray;
+	color: #777777;
+}
+.reply-modify-btn {
+	background-color: #2370DF;
+	border: 1px solid #2370DF;
+	color: #fff;
+}
 #commDetail {
     width: 1040px;
     margin: 0 auto;
@@ -17,7 +52,6 @@ button:focus {
     margin-top: 50px;
     margin-bottom: 150px;
 }
-
 .board-header {
     display: flex;
     justify-content: space-between;
@@ -45,11 +79,6 @@ button:focus {
 }
 .user-profile span:hover {
     color: #2370DF;
-}
-#replyContents {
-	width: 100%;
-	border: none;
-	outline: none;
 }
 .board-title {
     margin-bottom: 20px;
@@ -81,10 +110,13 @@ button:focus {
     width: 100%;
     height: 6.25em;
     resize: none;
-
-    outline: none;
+	
+	border: 1px solid lightgray;
 
     border-radius: 10px;
+}
+#reply-text:focus {
+	border-color: #2370DF;
 }
 
 #comm-reply {
