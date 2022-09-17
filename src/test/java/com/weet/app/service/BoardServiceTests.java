@@ -124,5 +124,5 @@ public class BoardServiceTests {
 		
 		assertTrue(this.service.removeReply(254, 8));
 	} // 댓글삭제
-
+	
 } // end class

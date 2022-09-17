@@ -87,7 +87,7 @@
 	
 		SELECT
 		    reply_id,
-		    user_id,
+		    reply_writer,
 		    (
 		        SELECT
 		            user_nickname
@@ -296,7 +296,7 @@
 		    #{replyContents},
 		    #{commId},
 		    #{replyGroup},
-		    #{replyDepth},
+		    1,
 		    #{replyWriter}
 		)
 	</insert>

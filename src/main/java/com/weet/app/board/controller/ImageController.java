@@ -33,7 +33,7 @@ public class ImageController {
 	private ImageService service;
 	
 	@Setter(onMethod_= @Autowired)
-	ResourceLoader resourceLoader;
+	private ResourceLoader resourceLoader;
 	
 	// 파일 업로드
 	@PostMapping("/new")

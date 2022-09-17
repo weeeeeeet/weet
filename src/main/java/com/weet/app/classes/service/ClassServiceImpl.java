@@ -76,6 +76,7 @@ public class ClassServiceImpl implements ClassService {
 		} catch(DAOException e) { throw new ServiceException(e); } // try-catch
 	} // checkMyLike
 
+	// 싫어요~!
 	@Override
 	public boolean cancelClassLike(String classId, String userId) throws ServiceException {
 
