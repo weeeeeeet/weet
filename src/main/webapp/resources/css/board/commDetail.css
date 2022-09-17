@@ -24,6 +24,19 @@ textarea {
 .edit-enabled:focus {
 	border-color: #2370DF;
 }
+.re-reply-text {
+	border: 1px solid lightgray;
+	border-radius: 10px;
+	line-height: 30px;
+	
+	height: 40px;
+	background-color: #e0edff;
+}
+.item-reply:after {
+    content: "";
+    display: block;
+    clear: both;
+}
 .modify-btn-area {
 	display: none;
     justify-content: flex-end;
@@ -177,23 +190,21 @@ textarea {
 }
 
 .item-reply {
-    border-left: 2px solid #c8c8c8;
-    padding-top: 10px;
-    padding-left: 40px;
+	display: none;
+	
+    padding-top: 5px;
+    border-left: 1px solid lightgray;
+    padding-left: 20px;
+    
+    margin-bottom: 50px;
 }
 
 .re-reply-area {
     font-size: .8em;
-}
-
-.re-reply-controller {
-    display: flex;
-    justify-content: flex-start;
+    margin-bottom: 0 !important;
 }
 
 .re-reply-controller p {
-    margin-right: 30px;
-    margin-top: 30px;
     font-size: 13px;
     cursor: pointer;
 }

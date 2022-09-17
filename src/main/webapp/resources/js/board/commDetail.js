@@ -56,8 +56,9 @@ const getBoard = () => {
                     + '<textarea name="replyContents" id="replyContents' + e.replyId + '" wrap="on" oninput="resize(event)" readonly>' + e.replyContents + '</textarea>'
                     + '<div class="modify-btn-area"><button class="reply-modify-cancel-btn" onclick="getBoard()">취소</button>'
                     + '<button class="reply-modify-btn" onclick="modifyReply(' + e.replyId + ')">등록</button></div>'
-                    + '<div class="re-reply-controller">'
-                    + '<p class="more-reply">답글 보기</p></div></div>';
+                    + '<div class="re-reply-controller controller-no-' + e.replyId + '">'
+                    + '<p class="more-reply" onclick="getReReply(' + e.replyId + ')">▼ 답글 보기</p></div></div>'
+                    + '<div class="item-reply re-reply-area-' + e.replyId + '"></div>';
             }) // .each
             
             document.querySelector('.reply-content-area').innerHTML = str;
@@ -85,9 +86,43 @@ const getBoard = () => {
     }) // .ajax
 } // getBoard
 
-const getReReply = () => {
+const getReReply = (replyId) => {
 	
-}
+	$.ajax({
+		
+		url: "/board/api/list/re/reply/" + commId + "/" + replyId,
+        type: "GET",
+        success: data => {
+			console.log(data); 
+			
+			document.querySelector(`.re-reply-area-${replyId}`).style.display = "block";
+			closeReReply(replyId);
+
+            const replyData = data.data.result;
+			let str = ''
+			
+            if(replyData.length > 0) {
+	
+	            $.each(replyData, (i, e) => {
+	                str += '<div class="item re-reply-area">'
+	                    + '<div class="reply-header">'
+	                    + '<div class="user-profile">'
+	                    + '<p>' + e.trainerNickname + ' <span>' + maskingId(e.trainerId) + '</span></p>'
+	                    + '<p>' + e.replyInsertTs + '</p></div></div>'
+	                    + '<p>' + e.replyContents + '</p></div><hr>';
+	
+	            }) // .each
+			} // if
+            
+            str += '<textarea class="re-reply-text" id="re-reply-text-' + replyId + '" placeholder="댓글을 입력해 주세요." oninput="resize(event)" required></textarea>'
+            	+ '<button id="comm-reply" name="reply" class="btn btn-primary" onclick="regReReply(' + replyId + ')">등록</button>'
+			
+            document.querySelector(`.re-reply-area-${replyId}`).innerHTML = str;
+        } // success
+	}) // .ajax
+	
+} // getReReply
+
 
 const replyEdit = (id, idx) => {
     const textarea = document.querySelector(`#${id}${idx}`);
@@ -129,7 +164,26 @@ const regReply = () => {
 
 } // regReply
 
-const regReReply = () => {
+const regReReply = (replyId) => {
+    const contents = document.querySelector(`#re-reply-text-${replyId}`).value;
+
+    const params = {
+        "replyContents": contents,
+        "commId": commId,
+        "replyGroup": replyId,
+        "replyWriter": loginUserId
+    }
+
+    $.ajax({
+
+        url: "/board/api/re/reply/new",
+        type: "POST",
+        data: params,
+        success: () => {
+
+            getReReply(replyId);
+        } // success
+    }) // .ajax
 
 } // regReReply
 
@@ -167,6 +221,26 @@ const deleteReply = (replyId) => {
         } // success
     }) // .ajax
 } // deleteReply
+
+// 답글접기 노출
+const closeReReply = (replyId) => {
+	const controller = document.querySelector(`.controller-no-${replyId}`);
+	const str = '<p class="hide-reply" onclick="clearReReply(' + replyId + ')">▲ 답글 접기</p>'
+	
+	controller.innerHTML = str;
+} // closeReReply
+
+// 답글영역 clear
+const clearReReply = (replyId) => {
+	document.querySelector(`.re-reply-area-${replyId}`).style.display = "none";
+	document.querySelector(`.re-reply-area-${replyId}`).innerHTML = '';
+	
+	const controller = document.querySelector(`.controller-no-${replyId}`);
+	const str = '<p class="more-reply" onclick="getReReply(' + replyId + ')">▼ 답글 보기</p>';
+	
+	controller.innerHTML = str;
+	
+}
 
 const maskingId = (userId) => {
 	if( userId == undefined || userId === '' ) return '';
