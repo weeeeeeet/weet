@@ -123,7 +123,7 @@
             t.CLASS_MAIN_IMG_URL
             
         FROM
-            T_CLASS t, t_class_listenr ls
+            T_CLASS t, t_class_listener ls
         WHERE
             t.class_id = ls.class_id
         	AND ls.USER_ID = #{userId}
@@ -152,7 +152,7 @@
                 t.CLASS_MAIN_IMG_URL
                 
             FROM
-                T_CLASS t, t_class_listenr ls
+                T_CLASS t, t_class_listener ls
             WHERE
                 t.class_id = ls.class_id
                 AND ls.USER_ID = #{userId}
@@ -175,7 +175,7 @@
             SELECT
                 count(CLASS_LISTENER)
             FROM
-                T_CLASS t, t_class_listenr ls
+                T_CLASS t, t_class_listener ls
             WHERE
                 t.class_id = ls.class_id
                 AND ls.USER_ID = #{userId}
@@ -211,7 +211,7 @@
                 t.CLASS_MAIN_IMG_URL
                 
             FROM
-                T_CLASS t, t_class_listenr ls
+                T_CLASS t, t_class_listener ls
             WHERE
                 t.class_id = ls.class_id
                 AND ls.USER_ID = #{userId}

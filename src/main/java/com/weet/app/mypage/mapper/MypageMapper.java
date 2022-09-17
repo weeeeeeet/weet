@@ -68,7 +68,7 @@ public interface MypageMapper {
 	// ====================================================================
 	// + 페이징 처리에 필요한 총 수강 중 클래스의 수 반환 (OK)
 	// ====================================================================
-	@Select("SELECT count(CLASS_LISTENER) FROM t_class_listenr WHERE USER_ID = #{userId}")
+	@Select("SELECT count(CLASS_LISTENER) FROM t_class_listener WHERE USER_ID = #{userId}")
 	public abstract Integer selectClassAmount(@Param("userId")String userId) throws DAOException;
 	
 	// ====================================================================

@@ -8,7 +8,7 @@
     
     <!-- 1. 진행상황 업데이트 -->
     <update id="updateProgress">
-		UPDATE t_class_listenr
+		UPDATE t_class_listener
 		SET progress = progress + 1
 		WHERE 
 		    class_id = #{classId}
@@ -25,7 +25,7 @@
 
     <!-- 2. 종료여부 업데이트 -->
     <update id="updateStatus">
-		UPDATE t_class_listenr
+		UPDATE t_class_listener
 		SET status = '1'
 		WHERE 
 		    class_id = #{classId}
