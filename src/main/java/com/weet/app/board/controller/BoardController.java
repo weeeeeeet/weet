@@ -80,7 +80,7 @@ public class BoardController {
 		return "test!";
 	}
 	
-	// 답글 목록 조회
+	// 대댓글 목록 조회
 	@GetMapping("/list/re/reply/{commId}/{replyGroup}")
 	@ApiOperation(value = "답글 목록 조회", notes = "특정 게시글의 특정 댓글에 대한 답글목록을 반환합니다.")
 	@ApiImplicitParams({
@@ -295,6 +295,27 @@ public class BoardController {
 	public String replySelect() {
 		return "test!";
 	}
+	
+	// 대댓글 작성
+	@PostMapping("/re/reply/new")
+	@ApiOperation(value = "대댓글 작성", notes = "대댓글을 작성합니다. 성공 여부를 반환합니다.")
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "replyContents", value = "대댓글 내용", paramType = "query", required = true),
+		@ApiImplicitParam(name = "commId", value = "글번호", paramType = "query", required = true),
+		@ApiImplicitParam(name = "replyGroup", value = "댓글 그룹(상위 댓글의 ID)", paramType = "query", required = true),
+		@ApiImplicitParam(name = "replyWriter", value = "댓글 작성자 ID", paramType = "query", required = true)
+	})
+	public APIResponse reReplyWrite(@ApiIgnore ReplyDTO dto) throws ControllerException {
+		log.trace("replyWrite({}) invoked.", dto);
+		
+		APIResponse res = new APIResponse();
+		
+		try { 
+			res.add("result", this.service.createReReply(dto) ? "SUCCESS" : "FAILED");
+		} catch (ServiceException e) { throw new ControllerException(e); } // try-catch
+		
+		return res;
+	} // reReplyWrite
 	
 	// 임시저장 목록 조회
 	@GetMapping("/tmp")
