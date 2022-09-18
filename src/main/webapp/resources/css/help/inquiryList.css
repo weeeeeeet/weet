@@ -1,0 +1,193 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'SCoreDream';
+    box-sizing: border-box;
+}
+
+
+.contents {
+    margin: 0 auto;
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 30px;
+    width: 750px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* ------------------------------------------------ */
+
+.select_category {								/* 카테고리 버튼 */
+    margin-top: 10px
+}
+
+.select_category button:nth-of-type(1) {		/* 자주 묻는 질문 버튼 */
+    width: 180px;
+    padding: 8px;
+    border-radius: 20px;
+    font-size: 15px;
+    color: white;
+    border: none;
+    background-color: #999999;
+}
+
+.select_category button:nth-of-type(2) {		/* 1대 1 문의 버튼 */
+    margin-left: 5px;
+    width: 180px;
+    padding: 8px;
+    border: none;
+    border-radius: 20px;
+    font-size: 15px;
+    color: white;
+    background-color: #2370DF;
+}
+
+
+.inner {
+    margin-top: 95px;
+}
+
+/* ------------------------------------------------ */
+
+.inquiry_title {								/* 1대 1 문의 */
+    font-size: 20px;
+    margin-top: 30px;
+    font-weight: 600;
+}
+.inquiry_box1 {									/* 1대 1 문의 박스 */
+	padding-top: 40px;
+    margin-top: 30px;
+    width: 750px;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 1px 13px 1px #c0bcbc;
+    margin-bottom: 50px;
+    box-sizing: content-box;
+    padding-bottom: 40px;'
+}
+
+.inquiry_box2 {									/* 1대 1 문의 내부 회색 박스 */
+    width: 670px;
+    margin: 0 auto;
+    background-color: #eaeaea;
+    border-radius: 10px;
+    padding: 50px 50px;
+    text-align: left;
+}
+.card-text {									/* 회색 백스 안쪽 텍스트 */
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 45px;
+}
+
+.inquiry_wee {
+    color: #2370DF;
+    font-size: 20px;
+    font-weight: bold;
+}
+.inquiry_ {
+    color: #85EC1D;
+    font-size: 20px;
+    font-weight: bold;
+}
+.inquiry_t {
+    color: #FF730E;
+    font-size: 20px;
+    font-weight: bold;
+}
+.inquiry_box2 button:nth-of-type(1){			/* 문의하기 버튼 */
+    width: 150px;
+    margin-top: 50px;
+    margin-left: 210px;
+    border: 0;
+    border-radius: 20px;
+    font-size: 18px;
+    color: white;
+    background-color: #2370DF;
+}
+
+/* ------------------------------------------------ */
+
+.inquiry_confirmation_hi {						/* 각 문의 */
+	margin-left:40px;
+    height: 110px;
+    border-bottom: 0.1px solid gray;
+    width: 670px;
+    margin: 0 auto;
+}
+
+.inquiry_confirmation_hi i:nth-of-type(1) {		/* Q 아이콘 */
+    margin-top: 30px;
+    color: #18A0FB;
+    display: inline-flex;
+    float: left;
+}
+
+.single_inquery_title {							/* 문의 제목 & 날짜 */
+    margin-top: 26px;
+    float:left;
+    clear:right;
+    width: 200px;
+}
+
+.single_inquery_title a:nth-of-type(1){			/* 문의 제목 */
+    margin-left: 20px;
+    margin-top: 10px;
+    color: black;
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    outline: none;
+    width: 400px;
+    text-align: left;
+    float: left;
+}
+
+
+.Inquiry_confirmation_date {					/* 문의 날짜 */
+    float: left;
+    margin-top : 5px;
+    /* margin-bottom: 100px; */
+    color: #C4C4C4;
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 20px;
+}
+
+.Inquiry_confirmation_answer1 {					/* 답변 대기 상태 */
+    margin-top: 35px;
+    width: 150px;
+    height: 43px;
+    padding-top: 8px;
+    border-radius: 50px;
+    background-color: #999999;
+    color: white;
+    font-size: 18px;
+    float: right;
+    font-weight: 400;
+}
+
+
+.Inquiry_confirmation_answer2 {					/* 답변 완료 상태 */
+    margin-top: 35px;
+    width: 150px;
+    height: 43px;
+    padding-top: 8px;
+    border-radius: 50px;
+    background-color: #2370DF;
+    color: white;
+    font-size: 18px;
+    float: right;
+    font-weight: 400;
+}
+
+
