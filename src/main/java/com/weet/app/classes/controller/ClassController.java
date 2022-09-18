@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +16,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.weet.app.classes.domain.ClassDetailVO;
 import com.weet.app.classes.domain.ClassVO;
+import com.weet.app.classes.domain.Criteria2;
+import com.weet.app.classes.domain.PageMakerDTO;
 import com.weet.app.classes.domain.ReviewVO;
 import com.weet.app.classes.domain.TotalReviewVO;
 import com.weet.app.classes.service.ClassService;
@@ -37,21 +44,184 @@ public class ClassController {
 	@Setter(onMethod_= @Autowired)
 	private ClassService service;
 	
-	// 클래스 검색
+//	클래스 목록 페이지 (페이징처리 / 검색처리) --------------------------------
 	@GetMapping("/search")
-	public String searchClass() {
+	public String searchClass(Model model, Criteria2 cri) throws ControllerException {
 		log.trace("searchClass() invoked.");
+		
+		try {
+			model.addAttribute("_LIST_ALL_", service.getClassPaging(cri));
+			
+			int total = service.getTotal(cri);
+			
+			// 페이징 처리
+			PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+			model.addAttribute("pageMaker", pageMake);
+			
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} //try-catch
 		
 		return "/class/classSearch";
 	} // searchClass
 
+	
+// ================================================================================== //
+	
+//	메인페이지-> +더보기(추천 클래스) --------------------------------
+	@GetMapping("/search/recommend")
+	public String searchClassRecommend(Model model, Criteria2 cri) throws ControllerException {
+		log.trace("searchClassRecommend() invoked.");
+		
+		try {
+			List<ClassVO> listAll = this.service.getListRecommendAll();
+			model.addAttribute("_LIST_ALL_", listAll);
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} //try-catch
+		
+		return "/class/classSearch";
+	} // searchClass
+	
+//	메인페이지-> +더보기(마감임박 클래스) --------------------------------
+	@GetMapping("/search/end")
+	public String searchClassEnd(Model model, Criteria2 cri) throws ControllerException {
+		log.trace("searchClassEnd() invoked.");
+		
+		try {
+			List<ClassVO> listAll = this.service.getListEndAll();
+			model.addAttribute("_LIST_ALL_", listAll);
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} //try-catch
+		
+		return "/class/classSearch";
+	} // searchClass
+	
+//	메인페이지-> +더보기(신규 클래스) --------------------------------
+	@GetMapping("/search/new")
+	public String searchClassNew(Model model, Criteria2 cri) throws ControllerException {
+		log.trace("searchClassNew() invoked.");
+		
+		try {
+			List<ClassVO> listAll = this.service.getListNewAll();
+			model.addAttribute("_LIST_ALL_", listAll);
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} //try-catch
+		
+		return "/class/classSearch";
+	} // searchClass
+	
+
+// ======================================================================= // 
+// 	클래스 등록 
+// ======================================================================= // 
+	
+//	클래스 등록 시작 페이지 ---------------------------
+	@GetMapping("/reg")
+	public String classRegPage() {
+		log.trace("classRegPage() invoked.");
+		
+		return "/class/reg";
+	} // classRegPage
+	
+
+//	---------------------------------------------------
+	@GetMapping("/reg/1")
+	public String classReg1Page() {
+		log.trace("classReg1Page() invoked.");
+		
+		return "/class/reg1";
+	} // classReg1Page
+	
+	@PostMapping("/reg/1")
+	public String classReg1(@RequestParam("classType") String classType, 
+			@RequestParam("classTitle") String classTitle,
+			@RequestParam("classIntro") String classIntro,
+			@RequestParam("classVideoUrl") String classVideoUrl,
+			HttpServletRequest request) {
+		log.trace("classReg1() invoked.");
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("classType", classType);
+		session.setAttribute("classTitle", classTitle);
+		session.setAttribute("classIntro", classIntro);
+		session.setAttribute("classVideoUrl", classVideoUrl);
+		
+		return "redirect:/class/reg/2";
+	} // classReg1
+	
+	
+//	---------------------------------------------------
+	@GetMapping("/reg/2")
+	public String classReg2Page() {
+		log.trace("classReg2Page() invoked.");
+		
+		return "/class/reg2";
+	} // classReg2Page
+	
+	@PostMapping("/reg/2")
+	public String classReg2() {
+		log.trace("classReg2() invoked.");
+		
+		return "/class/reg2";
+	} // classReg2
+	
+	
+//	---------------------------------------------------
+	@GetMapping("/reg/3")
+	public String classReg3Page() {
+		log.trace("classReg3Page() invoked.");
+		
+		return "/class/reg3";
+	} // classReg3Page
+	
+	@PostMapping("/reg/3")
+	public String classReg3() {
+		log.trace("classReg3() invoked.");
+		
+		return "/class/reg3";
+	} // classReg3
+	
+	
+//	---------------------------------------------------
+	@GetMapping("/reg/4")
+	public String classReg4Page() {
+		log.trace("classReg4Page() invoked.");
+		
+		return "/class/reg4";
+	} // classReg4Page
+	
+	@PostMapping("/reg/4")
+	public String classReg4() {
+		log.trace("classReg4() invoked.");
+		
+		return "/class/reg5";
+	} // classReg4
+	
+	
+//	클래스 등록 완료 페이지 ---------------------------
+	@GetMapping("/reg/fin")
+	public String classRegFin() {
+		log.trace("classRegFin() invoked.");
+		
+		return "/class/regFin";
+	} // classRegFin
+
+	
+	
+// ======================================================================= // 
+// 	클래스 상세페이지 
+// ======================================================================= // 	
+	
 	// 클래스 상세페이지 조회
 	@GetMapping("/detail/{id}")
 	public String classDetail(@PathVariable("id") String classId, Model model) throws ControllerException {
 		log.trace("classDetail() invoked.");
 		
 		try {
-			ClassVO vo = this.service.getDetail(classId);
+			ClassDetailVO vo = this.service.getDetail(classId);
 			TotalReviewVO review = this.service.getreviewInfo(classId);
 			
 			model.addAttribute("__CLASS__", vo);
@@ -63,13 +233,6 @@ public class ClassController {
 		return "/class/classDetail";
 	} // classDetail
 	
-	// 클래스 등록 창 GET
-	@GetMapping("/reg")
-	public String classRegPage() {
-		log.trace("classDetail() invoked.");
-		
-		return "/class/reg1";
-	} // classDetail
 	
 	// 리뷰조회
 	@ResponseBody

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+   
+    
+<mapper namespace="com.weet.app.help.mapper.FileUploadMapper">
+	
+	<insert id = "insert">
+		INSERT INTO t_file (filename, originname, path, filesize, type, upload_ts, file_id, extension)
+		VALUES (#{filename}, #{originname}, #{path}, #{filesize}, #{type}, #{uploadTs}, #{fileId}, #{extension})
+	</insert>
+  	
+	<delete id = "delete">
+		DELETE FROM t_file WHERE filename = #{filename}
+	</delete>
+	
+	<select id = "findByFileId" resultType = "com.weet.app.help.domain.FileUploadDTO">
+		SELECT * FROM t_cs WHERE file_id = #{fileId}
+	</select>
+</mapper>
+

@@ -6,29 +6,29 @@ import lombok.Value;
 
 @Value
 public class ClassVO {
-	
-	private String classId;
+
+	private String classId; 
 	private String userId;
-	private String trainerName;
-	
-	private Character classType;
+	private String classType;
 	private String classTitle;
 	private String classTrainerName;
 	private String classMainImgUrl;
 	private String classIntro;
-	private String classVideoUrl;
+	private String video_url;
 	private Date classRecruitStartDate;
 	private Date classRecruitEndDate;
 	private Integer classRecruitMaxNum;
-	private Integer classFee;
+	private Long classFee;
 	private String classTag1;
 	private String classTag2;
 	private String classTag3;
-	private Integer classAvgStar;
+	private String classPhotoUrl;
+	private Float classAvgStar;
+	private String classRegisterStatus;
 	private Integer classRunningTime;
 	private Integer classCount;
-	private String classAderess;
+	private String classAddress;
 	private Integer classHeartCnt;
 	
-	private Integer currentRegCnt;
+
 } // end class

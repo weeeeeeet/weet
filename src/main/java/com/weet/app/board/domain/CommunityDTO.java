@@ -3,7 +3,7 @@ package com.weet.app.board.domain;
 import lombok.Data;
 
 @Data
-public class BoardDTO {
+public class CommunityDTO {
 	
 	private Integer commId;
 	private String userId;

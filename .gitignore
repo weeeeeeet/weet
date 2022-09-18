@@ -1,12 +1,9 @@
+
 # Created by https://www.toptal.com/developers/gitignore/api/java,eclipse,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,eclipse,windows
 
 ### Eclipse ###
 .metadata
-<<<<<<< Updated upstream
-target/
-=======
->>>>>>> Stashed changes
 bin/
 tmp/
 *.tmp
@@ -17,6 +14,9 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+target/*
+META-INF/*
+.springBeans
 
 # External tool builders
 .externalToolBuilders/
@@ -123,10 +123,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-<<<<<<< Updated upstream
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse,windows
-*.properties
-=======
-# End of https://www.toptal.com/developers/gitignore/api/java,eclipse,windows
->>>>>>> Stashed changes
-/.classpath

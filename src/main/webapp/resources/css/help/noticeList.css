@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'SCoreDream';
+    box-sizing: border-box;
+}
+
+body {
+    /* padding-top: 100px; */
+}
+
+.contents {
+    font-size: 14px;
+    margin: 100px auto;
+    height: auto;
+    min-height: 100%;
+    width: 750px;
+    text-decoration: none;
+}
+
+
+/* ------------------------------------------------ */
+
+.titleNotice {
+	font-size: 25px;
+	font-weight: 500;
+}
+
+.table {
+    margin-top: 40px;
+}
+.categories {
+	width: 15%;
+	font-size: 14px;
+    color: #2370DF;
+}
+.title a{
+    text-decoration: none;
+    font-size: 14px;
+    color: black;
+}
+
+.write_time {
+	width: 30%;
+	margin-left: 100px;
+}
+
+.table .categories {
+	height: 50px;
+}
+/* ==================== CLASS PAGING ============== */
+
+.pageInfo_wrap {
+	display: block;
+	margin: 50px auto;
+	text-align: center;
+}
+
+.pageInfo{
+    list-style : none;
+    display: inline-block;
+    margin: 0 auto;
+    align:center;
+}
+.pageInfo li{
+    float: left;
+    font-size: 14px;
+    margin-left: 18px;
+    padding: 7px;
+    font-weight: 500;
+}
+a:link {color:black; text-decoration: none;}
+a:visited {color:black; text-decoration: none;}
+a:hover {color:black; text-decoration: underline;}
+
+.pageInfo_wrap .active{
+      background-color: #cdd5ec;
+  }

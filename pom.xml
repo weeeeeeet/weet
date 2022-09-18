@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <project
 	xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -298,7 +297,13 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>${io.springfox.swagger-version}</version>
 		</dependency>
-	    
+
+		<!-- ================ File-Upload ================= -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.4</version>
+		</dependency>
 	    
 	</dependencies>
 

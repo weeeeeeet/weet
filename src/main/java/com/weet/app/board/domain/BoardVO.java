@@ -1,20 +1,23 @@
 package com.weet.app.board.domain;
 
+import java.util.Date;
+
 import lombok.Value;
 
+// 커뮤니티(게시판)
 @Value
 public class BoardVO {
 	
-	private Integer commId;
-	
-	private String userId;		// 작성자 아이디
-	private String userNickname; // 작성자 닉네임
-	
+	private String userId;
 	private String commPostTitle;
 	private String commPostContents;
 	private Integer commLikeNum;
 	private Integer commViewCount;
-	private String commPostInsertTs;
-	private String commPostUpdateTs;
+	private Date commPostInsertTs;
+	private Date commPostUpdateTs;
+	private String commDeleteYn;
 	private Integer commReplyCount;
+	private String commReplyYn;
+	private String commId;
+	
 } // end class

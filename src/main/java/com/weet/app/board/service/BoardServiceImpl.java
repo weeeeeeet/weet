@@ -10,8 +10,9 @@ import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.weet.app.board.domain.BoardDTO;
 import com.weet.app.board.domain.BoardVO;
+import com.weet.app.board.domain.CommunityDTO;
+import com.weet.app.board.domain.CommunityVO;
 import com.weet.app.board.domain.ReplyDTO;
 import com.weet.app.board.domain.ReplyVO;
 import com.weet.app.board.mapper.BoardMapper;
@@ -36,9 +37,9 @@ public class BoardServiceImpl implements BoardService {
 		List<Object> result = new ArrayList<>();
 		
 		try {
-			List<BoardVO> list = this.mapper.selectListTop10();
+			List<CommunityVO> list = this.mapper.selectListTop10();
 			
-			for(BoardVO vo : list) {
+			for(CommunityVO vo : list) {
 				Map<String, Object> map = new HashMap<>();
 				List<ReplyVO> reply = this.mapper.selectReplyList(vo.getCommId(), true);
 				
@@ -62,14 +63,16 @@ public class BoardServiceImpl implements BoardService {
 		List<Object> result = new ArrayList<>();
 		
 		try {
-			List<BoardVO> list = this.mapper.selectAllList(keyword, cri);
+			List<CommunityVO> list = this.mapper.selectAllList(keyword, cri);
 			
-			for(BoardVO vo : list) {
+			for(CommunityVO vo : list) {
 				Map<String, Object> map = new HashMap<>();
 				List<ReplyVO> reply = this.mapper.selectReplyList(vo.getCommId(), true);
 				
+				ReplyVO replyVO = reply.size() != 0 ? reply.get(0) : null;
+				
 				map.put("board", vo);
-				map.put("reply", reply);
+				map.put("reply", replyVO);
 				
 				result.add(map);
 			} // enhanced for
@@ -94,7 +97,7 @@ public class BoardServiceImpl implements BoardService {
 		try { 
 			Map<String, Object> map = new HashMap<>();
 			
-			BoardVO vo = this.mapper.selectOneBoard(commId);
+			CommunityVO vo = this.mapper.selectOneBoard(commId);
 			List<ReplyVO> reply = this.mapper.selectReplyList(commId, false);
 			
 			map.put("board", vo);
@@ -106,7 +109,7 @@ public class BoardServiceImpl implements BoardService {
 
 	// 게시글 작성
 	@Override
-	public boolean createBoard(BoardDTO dto) throws ServiceException {
+	public boolean createBoard(CommunityDTO dto) throws ServiceException {
 		log.trace("CreateBoard({}) invoked.", dto);
 		
 		try { return this.mapper.insertBoard(dto) == 1 ? true : false; }
@@ -115,7 +118,7 @@ public class BoardServiceImpl implements BoardService {
 
 	// 게시글 수정
 	@Override
-	public boolean modifyBoard(BoardDTO dto) throws ServiceException {
+	public boolean modifyBoard(CommunityDTO dto) throws ServiceException {
 		log.trace("ModifyBoard({}) invoked.", dto);
 		
 		try { return this.mapper.updateBoard(dto) == 1 ? true : false; }
@@ -182,4 +185,95 @@ public class BoardServiceImpl implements BoardService {
 		} // try-catch
 	} // removeReply
 
+	// 대댓글 작성
+	@Override
+	@Transactional
+	public boolean createReReply(ReplyDTO dto) throws ServiceException {
+		log.trace("createReReply({}) invoked.", dto);
+		
+		try { 
+			int result1 = this.mapper.insertReReply(dto);
+			int result2 = this.mapper.updateReplyCount(dto.getCommId());
+			
+			return (result1 == 1 && result2 == 1) ? true : false;
+		} catch(UncategorizedSQLException e) {
+			throw e;
+		} catch(Exception e) {
+			log.info("\t+ Transfer Failure.");
+			
+			throw new ServiceException(e);
+		} // try-catch
+	} // removeReply
+
+	// 임시저장 목록 조회
+	@Override
+	public List<CommunityVO> getTmpSave(String userId) throws ServiceException {
+		log.trace("getTmpSave({}) invoked.", userId);
+		
+		try { return this.mapper.selectTmpSaveList(userId); }
+		catch(DAOException e) { throw new ServiceException(e); } // try-catch
+	} // removeReply
+
+	// 게시글 추천여부 조회
+	@Override
+	public boolean checkMyLike(int commId, String userId) throws ServiceException {
+		
+		try { 
+			int selectedRows = this.mapper.selectMyLike(commId, userId);
+			
+			return selectedRows == 0 ? false : true;
+		} catch(DAOException e) { throw new ServiceException(e); } // try-catch
+	} // checkMyLike
+
+	// 게시글 추천
+	@Override
+	@Transactional
+	public boolean boardLike(int commId, String userId) throws ServiceException {
+		
+		try { 
+			int affectedLines1 = this.mapper.insertBoardLike(userId, commId);
+			int affectedLines2 = this.mapper.updateLikeCount(commId);
+			
+			return (affectedLines1 == 1 && affectedLines2 == 1) ? true : false;
+		} catch(DAOException e) { throw new ServiceException(e); } // try-catch
+	} // boardLike
+
+	// 게시글 추천취소
+	@Override
+	@Transactional
+	public boolean cancelBoardLike(int commId, String userId) throws ServiceException {
+		
+		try { 
+			int affectedLines1 = this.mapper.deleteBoardLike(userId, commId);
+			int affectedLines2 = this.mapper.updateLikeCount(commId);
+			
+			return (affectedLines1 == 1 && affectedLines2 == 1) ? true : false;
+		} catch(DAOException e) { throw new ServiceException(e); } // try-catch
+	} // cancelBoardLike
+
+	@Override
+	public boolean increaseView(int commId) throws ServiceException {
+		
+		try { return this.mapper.updateViewCount(commId) == 1 ? true : false; } 
+		catch(DAOException e) { throw new ServiceException(e); } // try-catch
+	} // increaseView
+
+	@Override
+	public List<ReplyVO> getReReplyList(int commId, int replyGroup) throws ServiceException {
+		
+		try { return this.mapper.selectReReplyList(commId, replyGroup); } 
+		catch(DAOException e) { throw new ServiceException(e); } // try-catch
+	} // increaseView
+	
+	// 메인 페이지의 커뮤니티 인기글
+	@Override
+	public List<BoardVO> getBoardMain() throws ServiceException {
+		log.trace("getBoardMain() invoked");
+		
+		try {
+			return this.mapper.selectBoardMain();
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+	} // getBoardMain
 } // end class

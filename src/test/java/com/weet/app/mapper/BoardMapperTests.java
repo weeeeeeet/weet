@@ -19,8 +19,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.weet.app.board.domain.BoardDTO;
-import com.weet.app.board.domain.BoardVO;
+import com.weet.app.board.domain.CommunityDTO;
+import com.weet.app.board.domain.CommunityVO;
 import com.weet.app.board.domain.ReplyDTO;
 import com.weet.app.board.domain.ReplyVO;
 import com.weet.app.board.mapper.BoardMapper;
@@ -52,7 +52,7 @@ public class BoardMapperTests {
 	@Timeout(value = 3, unit = TimeUnit.SECONDS)
 	void 인기글조회() throws DAOException {
 		
-		List<BoardVO> vo = this.mapper.selectListTop10();
+		List<CommunityVO> vo = this.mapper.selectListTop10();
 		vo.forEach(log::info);
 	} // 인기글조회
 	
@@ -76,7 +76,7 @@ public class BoardMapperTests {
 	@Timeout(value = 3, unit = TimeUnit.SECONDS)
 	void 글작성() throws DAOException {
 		
-		BoardDTO dto = new BoardDTO();
+		CommunityDTO dto = new CommunityDTO();
 		dto.setUserId("user4");
 		dto.setCommPostTitle("하루 1분 스트레칭법!!");
 		dto.setCommPostContents("의자에 앉아서 고개를 이렇게저렇게 돌리면 거북목예방에 도움이 된대요!!");
