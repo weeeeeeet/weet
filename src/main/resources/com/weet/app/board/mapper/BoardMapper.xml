@@ -400,4 +400,16 @@
 		</if>
 	</sql>
 
+	<!-- 메인화면 커뮤니티 인기글 -->
+   	<select id="selectBoardMain" resultType="com.weet.app.board.domain.BoardVO">
+		SELECT 
+		    *
+		FROM
+		    t_community
+		WHERE
+			comm_post_insert_ts >= TO_CHAR(sysdate-7, 'YYYYMMDD')
+		ORDER BY comm_like_num DESC
+		FETCH NEXT 3 ROWS ONLY
+    </select>
+	
 </mapper>
