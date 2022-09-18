@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
 
+import com.weet.app.board.domain.BoardVO;
 import com.weet.app.board.domain.CommunityDTO;
 import com.weet.app.board.domain.CommunityVO;
 import com.weet.app.board.domain.ReplyDTO;
@@ -76,5 +77,9 @@ public interface BoardMapper {
 	
 	// 게시글 추천삭제
 	public abstract int deleteBoardLike(String userId, int commId) throws DAOException;
+	
+	// =========================================================================
+	// 메인페이지의 '커뮤니티 인기글'
+	public abstract List<BoardVO> selectBoardMain() throws DAOException;
 	
 } // end interface
