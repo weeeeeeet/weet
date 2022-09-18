@@ -149,7 +149,7 @@
 			comm_tempsave = '0'
 			AND comm_delete_yn = 'N'
 		<include refid="search"/>
-		<include refid="sort"/>
+		<include refid="boardSort"/>
 		OFFSET
 		    (#{cri.currPage} - 1) * #{cri.amount} ROW
 		FETCH
@@ -375,7 +375,7 @@
 			AND comm_id = #{commId}
 	</delete>
 	
-	<sql id="sort">
+	<sql id="boardSort">
 		<if test="cri.sort == 'undefined'">
 			ORDER BY comm_id DESC
 		</if>

@@ -67,14 +67,14 @@
 		WHERE
 		    r.user_id = u.user_id
 		    AND r.class_id = #{classId}
-		<include refid="sort"/>
+		<include refid="reviewSort"/>
 		OFFSET
 		    (#{cri.currPage} - 1) * #{cri.amount} ROW
 		FETCH
 		    NEXT #{cri.amount} ROWS ONLY
 	</select>
 	
-	<sql id="sort">
+	<sql id="reviewSort">
 		<if test="cri.sort == 'undefined'">
 			ORDER BY review_id DESC
 		</if>
@@ -191,7 +191,7 @@
     
     <!-- 클래스 검색 페이지: 모든 클래스 -->
   	<select id="selectAllClass" resultType="com.weet.app.classes.domain.ClassVO" 
-  	parameterType="com.weet.app.classes.domain.Criteria">
+  	parameterType="com.weet.app.classes.domain.Criteria2">
 		SELECT 
         	*
 		FROM
@@ -252,7 +252,7 @@
     </select>
     
     <!-- 클래스 검색 페이지 정렬 -->
-    <sql id="sort">
+    <sql id="classSort">
 		<if test="classSort == null">
 		ORDER BY class_recruit_start_date DESC
 		</if>
