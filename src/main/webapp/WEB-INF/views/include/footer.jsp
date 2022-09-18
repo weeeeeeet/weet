@@ -40,7 +40,7 @@
 						<div class="single-footer-widget tp_widgets">
 							<h4 class="footer_title">바로가기</h4>
 							<ul class="list">
-								<li><a href="/notice/list">공지사항</a></li>
+								<li><a href="/notice">공지사항</a></li>
 								<li><a href="/help/inquiry">고객센터</a></li>
 							</ul>
 

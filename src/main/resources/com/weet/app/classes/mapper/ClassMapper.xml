@@ -6,7 +6,7 @@
 
 <mapper namespace="com.weet.app.classes.mapper.ClassMapper">
 
-	<select id="selectDetail" resultType="com.weet.app.classes.domain.ClassVO">
+	<select id="selectDetail" resultType="com.weet.app.classes.domain.ClassDetailVO">
 		SELECT
 		    class_id,
 		    user_id,
@@ -191,7 +191,7 @@
     
     <!-- 클래스 검색 페이지: 모든 클래스 -->
   	<select id="selectAllClass" resultType="com.weet.app.classes.domain.ClassVO" 
-  	parameterType="com.weet.app.classes.domain.Criteria">
+  	parameterType="com.weet.app.classes.domain.Criteria2">
 		SELECT 
         	*
 		FROM
@@ -227,7 +227,7 @@
 			OR class_tag2 LIKE '%' ||#{keyword}||'%'
 			OR class_tag3 LIKE '%' ||#{keyword}||'%')
 		</if>
-		<include refid="sort" />
+		<include refid="classSort" />
 		OFFSET (#{pageNum} - 1) * #{amount} ROWS
 		FETCH NEXT #{amount} ROWS ONLY
     </select>
@@ -252,17 +252,17 @@
     </select>
     
     <!-- 클래스 검색 페이지 정렬 -->
-    <sql id="sort">
-		<if test="sort == null">
+    <sql id="classSort">
+		<if test="classSort == null">
 		ORDER BY class_recruit_start_date DESC
 		</if>
-		<if test="sort == 'star'">
+		<if test="classSort == 'star'">
 		ORDER BY class_avg_star DESC
 		</if>
-		<if test="sort == 'newest'">
+		<if test="classSort == 'newest'">
 		ORDER BY class_recruit_start_date DESC
 		</if>
-		<if test="sort == 'end'">
+		<if test="classSort == 'end'">
 		ORDER BY class_recruit_end_date ASC
 		</if>
 	</sql>
