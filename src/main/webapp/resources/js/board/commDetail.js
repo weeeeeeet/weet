@@ -42,8 +42,22 @@ const getBoard = () => {
                 str += '<div class="item">'
                     + '<div class="reply-header">'
                     + '<div class="user-profile">'
-                    + '<p>' + e.trainerNickname + '</p>'
-                    + '<p>' + e.replyInsertTs + '</p>';
+                    + '<div class="flexbox"><p>' + e.trainerNickname + '</p>';
+                    
+                    // 트레이너 레벨 구분
+                    switch(e.trainerLevel) {
+                        case 1 :
+                            str += '<div class="trainer-level level-1">lv.1</div></div>';
+                            break;
+                        case 2 :
+                            str += '<div class="trainer-level level-2">lv.2</div></div>';
+                            break;
+                        case 3 :
+                            str += '<div class="trainer-level level-3">lv.3</div></div>';
+                            break;
+                    } // switch
+                    
+                str += '<p>' + e.replyInsertTs + '</p>';
 
                 // 작성아이디와 로그인아이디 같으면 수정 / 삭제 버튼 노출
                 if( e.trainerId == 'tr3' ) {
