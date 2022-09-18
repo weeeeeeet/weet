@@ -103,7 +103,7 @@
 	</footer>
 	<!--================ End footer Area  =================-->
 
-  <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
-  <script src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
+  <script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
+  <script src="/resources/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 </body>
 </html>

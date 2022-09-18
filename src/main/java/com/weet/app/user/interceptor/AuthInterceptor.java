@@ -1,4 +1,4 @@
-package com.weet.app.user.controller;
+package com.weet.app.user.interceptor;
 
 import java.util.Objects;
 
@@ -13,7 +13,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
-import com.weet.app.user.domain.UserVO;
+import com.weet.app.user.domain.TrainerVO;
 import com.weet.app.user.service.UserService;
 
 import lombok.NoArgsConstructor;
@@ -48,9 +48,9 @@ public class AuthInterceptor implements HandlerInterceptor {
 		
 		// 현재 이 요청을 보낸 브라우저가 인증된 상태인지 체크 수행.
 		HttpSession session = req.getSession();
-		UserVO user = (UserVO) session.getAttribute(loginKey);
+		TrainerVO trainer = (TrainerVO) session.getAttribute(loginKey);
 		
-		if(user == null) {	// NOT logged in.
+		if(trainer == null) {	// NOT logged in.
 			log.info("& Current browser is ** NOT ** authenticated...");
 
 			//----------------------------------------------------------//
@@ -72,11 +72,11 @@ public class AuthInterceptor implements HandlerInterceptor {
 				String rememberMe = rememberMeCookie.getValue();
 				log.info("\t+ rememberMe: " + rememberMe);
 				
-				user = this.service.findUserByRememberMe(rememberMe);
-				log.info("\t+ user: " + user);
+				trainer = this.service.findUserByRememberMe(rememberMe);
+				log.info("\t+ trainer: " + trainer);
 				
-				if(user != null) {
-					session.setAttribute(loginKey, user);
+				if(trainer != null) {
+					session.setAttribute(loginKey, trainer);
 					
 					return true;
 				} // inner-if
@@ -85,15 +85,15 @@ public class AuthInterceptor implements HandlerInterceptor {
 			//----------------------------------------------------------//
 			// 3. To redirect to login form (/user/login).
 			//----------------------------------------------------------//
-			res.sendRedirect("/user/login");
-			log.info("\t+ Move to /user/login");
+			res.sendRedirect("/user/tr/login");
+			log.info("\t+ Move to /user/tr/login");
 			
 			return false;		// *** //
 		} // if - NOT logged in.
 
 		// If logged In.
 		log.info("& Current browser ** ALREADY ** authenticated...");
-		log.info("\t+ user: " + user);
+		log.info("\t+ trainer: " + trainer);
 		
 		return true;
 	} // preHandle

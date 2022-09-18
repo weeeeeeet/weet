@@ -40,7 +40,7 @@
 	<context:component-scan base-package="com.weet.app.**.controller" />
 	<context:component-scan base-package="com.weet.app.**.exception" />
 	<context:component-scan base-package="com.weet.app.exception" />
-	<context:component-scan base-package="com.weet.app.interceptor" />
+	<context:component-scan base-package="com.weet.app.user.interceptor" />
 	
 	
 </beans:beans>

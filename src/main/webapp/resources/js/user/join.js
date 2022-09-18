@@ -12,13 +12,15 @@ function joinform_check() {
     let pweCheck = document.getElementById("pweCheck");
     let userEmail = document.getElementById("user_email");
     let userPhone = document.getElementById("user_phone");
+    let phoneDoubleChk = document.getElementById("phoneDoubleChk");
     let uname = document.getElementById("user_name");
     let female = document.getElementById("female");
     let male = document.getElementById("male");
     let trIntro = document.getElementById("user_intro");
-    let bNo = document.getElementById("bNo");
-    let pNm = document.getElementById("pNm");
+    let bNo = document.getElementById("b_no");
+    let pNm = document.getElementById("p_nm");
     let startDt = document.getElementById("start_dt");
+    let bizDoubleChk = document.getElementById("bizDoubleChk");
     let SvcUse = document.getElementById("SvcUse");
     let SvcPcy = document.getElementById("SvcPcy");
 
@@ -59,8 +61,13 @@ function joinform_check() {
     };
 
 	// 이메일 입력 및 형식 확인
-    if(!regExpTest(/^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/, email, "이메일 형식에 어긋납니다."))
-      return false;
+    let regEmail = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+      
+    if(!regEmail.test(userEmail.value)){
+	  alert("이메일 형식에 어긋납니다.");
+      userEmail.focus();
+	  return false;
+	}
     
     if (userEmail.value == "") {
       alert("이메일 주소를 입력하세요.");
@@ -77,8 +84,13 @@ function joinform_check() {
       return false;
     }
     
+    if(phoneDoubleChk.value != "true"){
+	  $(".successPhoneChk").text("휴대폰 인증을 완료해주세요 :)");
+	  $(".successPhoneChk").css("color", "red");	    	
+	  return false;	
+	}
+
   	 // 이름입력 및 형식 확인
- 
      if(uname.value=""){
       alert("이름을 입력하세요.");
       uname.focus();
@@ -90,43 +102,51 @@ function joinform_check() {
     if(!female.checked && !male.checked){
       alert('성별을 선택하세요');
       female.focus();
-      return;
+      return false;
     }
 
 
 	// 트레이너 소개 입력 확인
 	if (trIntro.value == "") {
       alert("트레이너 소개를 입력하세요");
-      userEmail.focus();
+      trIntro.focus();
       return false;
     }
     
 	// 사업자 번호 입력 확인
     if (bNo.value == "") {
       alert("사업자 번호를 입력하세요.");
-      userEmail.focus();
+      bNo.focus();
       return false;
     }
     
 	// 사업자 개업일자 입력 확인
     if (pNm.value == "") {
       alert("사업자 개업일자를 입력하세요.");
-      userEmail.focus();
+      pNm.focus();
       return false;
     }
     
 	// 대표자 성명 입력 확인
     if (startDt.value == "") {
       alert("대표자 성명을 입력하세요.");
-      userEmail.focus();
+      startDt.focus();
       return false;
     }
 
+	// 사업자 정보 확인
+    if (bizDoubleChk == false) {
+	  alert("사업자 정보를 확인할 수 없습니다.");
+      bNo.focus();
+      return false;
+    }
+    
     if (!SvcUse.checked) { //체크박스 미체크시
       alert("이용 약관 동의를 체크하세요.");
       SvcUse.focus();
       return false;
     }
+    
     if (!SvcPcy.checked) { //체크박스 미체크시
       alert("개인정보 약관 동의를 체크하세요.");
       SvcPcy.focus();
@@ -174,13 +194,13 @@ function checkId() {
 $(document).ready(function(){
   // 전체 체크박스 클릭 시
   $("#agreeAll").click(function() {
-if($("#agreeAll").is(":checked")) $("input[name=agreechk]").prop("checked", true);
-else $("input[name=agreechk]").prop("checked", false);
+if($("#agreeAll").is(":checked")) $("input[class=agree_check]").prop("checked", true);
+else $("input[class=agree_check]").prop("checked", false);
 });
 
-$("input[name=agreechk]").click(function() {
-const total = $("input[name=agreechk]").length;
-const checked = $("input[name=agreechk]:checked").length;
+$("input[class=agreechk]").click(function() {
+const total = $("input[class=agree_check]").length;
+const checked = $("input[class=agree_check]:checked").length;
 
 if(total != checked) $("#agreeAll").prop("checked", false);
 else $("#agreeAll").prop("checked", true); 

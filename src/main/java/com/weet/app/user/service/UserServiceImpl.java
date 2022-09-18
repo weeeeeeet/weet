@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.UncategorizedSQLException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,7 @@ import com.weet.app.exception.DAOException;
 import com.weet.app.exception.ServiceException;
 import com.weet.app.user.domain.LoginDTO;
 import com.weet.app.user.domain.TrainerDTO;
+import com.weet.app.user.domain.TrainerVO;
 import com.weet.app.user.domain.UserDTO;
 import com.weet.app.user.domain.UserVO;
 import com.weet.app.user.mapper.UserMapper;
@@ -31,14 +33,19 @@ public class UserServiceImpl implements UserService {
 	@Setter(onMethod_= @Autowired)
 	private UserMapper mapper;
 	
-	
-	@Transactional
+
 	@Override
+	@Transactional
 	public boolean trJoin(UserDTO userDTO, TrainerDTO trainerDTO) throws ServiceException {
 		log.trace("trJoin({},{}) invoked.", userDTO, trainerDTO );
 				
 		try {		
+
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			// dto.getpwd -> 암호화 -> dto.setpwd
+			String encPassword = encoder.encode(trainerDTO.getUserPwd());	// get으로 받아온 pwd -> encoding
+			trainerDTO.setUserId(encPassword);								// encoded pwd -> set으로 넣어주기
+			log.info("\t+ encPassword:{}" , encPassword);
 			
 			// 아래 2개의 DML 작업은 1개의 트랜잭션으로 처리되어야 함(*****)			
 			int result1= this.mapper.insertUser(userDTO);				// 가정1: user 테이블에 가입정보 저장
@@ -62,7 +69,7 @@ public class UserServiceImpl implements UserService {
 	
 	
 	@Override
-	public UserVO login(LoginDTO dto) throws Exception {
+	public TrainerVO login(LoginDTO dto) throws Exception {
 		log.debug("login(dto) invoked.");
 		
 		log.info("\t+ dto: " + dto);
@@ -70,28 +77,28 @@ public class UserServiceImpl implements UserService {
 		Objects.requireNonNull(this.mapper.selectUser(dto));
 		log.info("\t+ selectUser: " + this.mapper.selectUser(dto));
 		
-		UserVO user = this.mapper.selectUser(dto);
+		TrainerVO trainer = this.mapper.selectUser(dto);
 
-		log.info("\t+ user: " + user);
+		log.info("\t+ trainer: " + trainer);
 		
-		return user;
+		return trainer;
 	} // login
 
 
 
 	@Override
-	public UserVO findUserByRememberMe(String rememberMe) throws Exception {
+	public TrainerVO findUserByRememberMe(String rememberMe) throws Exception {
 		log.debug("findUserByRememberMe(rememberMe) invoked.");
 		
 		log.info("\t+ rememberMe: " + rememberMe);
 		
 		Objects.requireNonNull(this.mapper);
-		log.info("\t+ userDAO: " + this.mapper);
+		log.info("\t+ userMapper: " + this.mapper);
 		
-		UserVO user = this.mapper.selectUserWithRememberMe(rememberMe);
-		log.info("\t+ user: " + user);
+		TrainerVO trainer = this.mapper.selectUserWithRememberMe(rememberMe);
+		log.info("\t+ user: " + trainer);
 		
-		return user;
+		return trainer;
 	} // findUserByRememberMe
 
 

@@ -8,17 +8,15 @@
     <link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <h1>/WEB-INF/views/user/loginPost.jsp</h1>
-    <hr>
 
-<<<<<<< Updated upstream
-    setTimeout(function () {
-            self.location = "/index";
-        }, 3000);
-=======
-    <% response.sendRedirect("/index"); %>
->>>>>>> Stashed changes
-
+	<script>
+		setTimeout(function () {
+	        self.location = "/";
+	    }, 3000);
+		
+		<% response.sendRedirect("/"); %>
+	        
+    </script>
 
 </body>
 </html>

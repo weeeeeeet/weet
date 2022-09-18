@@ -11,10 +11,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,6 +28,7 @@ import com.weet.app.exception.ControllerException;
 import com.weet.app.exception.ServiceException;
 import com.weet.app.user.domain.LoginDTO;
 import com.weet.app.user.domain.TrainerDTO;
+import com.weet.app.user.domain.TrainerVO;
 import com.weet.app.user.domain.UserDTO;
 import com.weet.app.user.domain.UserVO;
 import com.weet.app.user.service.UserService;
@@ -54,7 +57,7 @@ public class UserController {
 	public String loginPage() {
 		log.trace("loginPage() invoked.");
 		
-		return "/login";
+		return "/user/login";
 	} // loginPage
 
 	// 2. TR 로그인화면
@@ -67,7 +70,7 @@ public class UserController {
 
 	
 	// 3. TR 로그인처리
-	@PostMapping("/loginPost")
+	@PostMapping("/tr/loginPost")
 	public void loginPost(
 			/* @ModelAttribute("loginDTO") */ LoginDTO dto,
 			Model model,
@@ -83,11 +86,11 @@ public class UserController {
 		//-------------------------------------------------------------//
 		// 1. To check the user.
 		//-------------------------------------------------------------//
-		UserVO user = this.service.login(dto);		// To check the user.
+		TrainerVO trainer = this.service.login(dto);		// To check the user.
 		
-		if(user != null) {	// if the check succeeded.
+		if(trainer != null) {	// if the check succeeded.
 			
-			model.addAttribute(loginKey, user);		// To bind login attribute to the request scope.
+			model.addAttribute(loginKey, trainer);		// To bind login attribute to the request scope.
 			
 			//-------------------------------------------------------------//
 			// 2. If rememberMe on, process Remember-Me option.
@@ -95,7 +98,7 @@ public class UserController {
 			if(dto.isRememberMe()) {
 				int timeAmount = 1000 * 60 * 60 * 24 * 7;	// 7 days.
 				
-				String userId = dto.getUserid();
+				String userId = dto.getUserId();
 				String rememberMe = session.getId();
 				Date rememberAge = new Date(System.currentTimeMillis() + timeAmount);
 				
@@ -127,14 +130,6 @@ public class UserController {
 		
 		log.trace("trainerLogin({},{}) invoked.",userDTO, trainerDTO);
 		
-//		String userPwd = "1q2w3e4r!!" + "__SALT__";					// Plain Text
-//				
-//		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//		String cipherText = encoder.encode(password);					// Cipher Text
-//		
-//		Objects.requireNonNull(cipherText);
-//		log.info("\t+ cipherText - length :{}, value:{}", cipherText.length(), cipherText);
-		
 		try {
 			if(this.service.trJoin(userDTO, trainerDTO)) {
 				rttrs.addFlashAttribute("_RESULT_", "SUCCEED");	
@@ -145,6 +140,7 @@ public class UserController {
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		}
+		
 	} // trainerLogin
 	
 	

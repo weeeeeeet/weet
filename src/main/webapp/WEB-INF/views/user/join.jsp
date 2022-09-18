@@ -26,48 +26,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
-    <!-- iamport : 핸드폰 본인인증 -->   
-    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-{SDK-최신버전}.js"></script>
-        
-    
-    <!-- css -->
+       <!-- css -->
     <link href="/resources/css/user/join.css" rel="stylesheet" />
-
-    <script>
-  
-        const checkBusinessMan = () => {
-
-            // input value 수집
-            const b_no = document.querySelector('input[name="b_no"]').value;
-            const p_nm = document.querySelector('input[name="p_nm"]').value;
-            const start_dt = document.querySelector('input[name="start_dt"]').value;
-
-            // 보낼 데이터 가공(api에서 요구하는 데이터 이름에 맞추어서)
-            const businesses = {
-                "b_no": b_no,
-                "p_nm": p_nm,
-                "start_dt": start_dt
-            };
-
-            // api 호출
-            $.ajax({
-           	 // https://api.odcloud.kr/api/nts-businessman/v1/validate = Request URL
-                url: "https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=YV6Lu58%2B3GhH6YSCp7nNw03F21B%2B7VnovsaIj%2BFpiMfYfP8ObytznJPyAvEdwcBdylUYhOlq43lBAEc3OQqhbw%3D%3D",  // serviceKey 값을 xxxxxx에 입력
-                type: "POST",
-                data: JSON.stringify(businesses), // json 을 string으로 변환하여 전송
-                dataType: "JSON",
-                contentType: "application/json",
-                accept: "application/json",
-                success: function (result) {
-                    console.log(result);
-                    // 성공했을 시 로직을 작성하는 곳
-                },
-                error: function (result) {
-                    console.log(result.responseText); //responseText의 에러메세지 확인
-                    // 실패했을 떄
-                }
-            }); // .ajax
-        } // checkBusinessMan
+    
     </script>
 </head>
 <body>
@@ -82,40 +43,46 @@
             
             <section class="join-contain sig">
                 <h2>회원 가입</h2>
+	            <input type="hidden" id="userType" name="userType" value="T"/>
+                
 
                 <div class="userid-box">
                     <label for="user_id" class="form-label">아이디</label>
                     <div class="boxing">
-                        <input type="text" class="form-control-sm" name="user_id" id="user_id" minlength="8" maxlength="15"
-                            placeholder="8-15자의 영문 소문자, 숫자만 가능합니다." value="${USER.userId}" required>
+                        <input type="text" class="form-control-sm" name="userId" id="user_id" minlength="8" maxlength="15"
+                            placeholder="8-15자의 영문 소문자, 숫자만 가능합니다."required>
                         <button type="button" id="checkIdBtn" onclick="checkId()">중복확인</button>
                     </div>
                     <span class="checkment id_ok">사용 가능한 아이디입니다.</span>
 					<span class="checkment id_already">사용 중인 아이디입니다.</span>
-					<script>
-                         
-                    </script>
-                    
+                </div>
+                
+                <div class="usernick-box">
+                 	<label for="user_nickname" class="form-label">닉네임</label>
+					<div class="boxing">
+                        <input type="text" class="form-control-sm" name="userNickname" id="user_nickname" minlength="8" maxlength="14"
+                            placeholder="닉네임을 입력해주세요" required>
+                    </div>
                 </div>
                 <div class="userpw-box">
                     <label for="user_pwd" class="form-label">비밀번호</label>
                     <div class="boxing">
-                        <input type="password" class="form-control-sm" name="user_pwd" id="user_pwd" minlength="8" maxlength="14"
-                            placeholder="영문자,숫자,특수문자 최소 1개이상 조합하여 8개이상 15자리 미만" onchange="check_pw()" autocomplete="off" required>
+                        <input type="password" class="form-control-sm" name="userPwd" id="user_pwd" minlength="8" maxlength="14"
+                            placeholder="영문자,숫자,특수문자 최소 1개이상 조합하여 8개이상 15자리 미만" autocomplete="off" required>
                     </div>
                 </div>
                 <div class="userpw2-box">
                     <label for="user_pwd2" class="form-label">비밀번호 확인</label>
                     <div class="boxing">
                         <input type="password" class="form-control-sm" name="user_pwd2" id="user_pwd2" minlength="8"
-                            maxlength="14" placeholder="비밀번호를 한번 더 입력해주세요" onchange="check_pw()" autocomplete="off" required>
+                            maxlength="14" placeholder="비밀번호를 한번 더 입력해주세요" autocomplete="off" required>
                     </div>
                     <span class="checkment" id="pweCheck"></span>
                 </div>
                 <div class="email-box">
                     <label for="user_email" class="form-label"> 이메일 </label>
                     <div class="boxing">
-                        <input type="email" class="form-control-sm" name="user_email" id="user_email"
+                        <input type="email" class="form-control-sm" name="userEmail" id="user_email"
                             placeholder="example1234@gmail.com" pattern="^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}"
                             required>
                     </div>
@@ -123,11 +90,21 @@
                 <div class="phone-box">
                     <label for="user_phone" class="form-label"> 핸드폰번호 </label>
                     <div class="boxing">
-                        <input type="tel" class="form-control-sm" name="user_phone" id="user_phone" class="int"
-                            placeholder=" ' - ' 제외하고 입력해주세요" pattern="\d*" minlength="10" maxlength="11"
+                        <input type="text" class="form-control-sm" name="userPhone" id="user_phone"
+                            placeholder=" ' - ' 제외하고 입력해주세요" pattern="\d*" minlength="10" maxlength="13"
                             required>
-                        <button type="button" onclick="phone_check();">인증요청</button>
+                        <button type="button" id="phoneChk">코드전송</button>
                     </div>
+                    
+                    <p class="checkment successPhoneChk">휴대폰 번호 입력후 코드전송 버튼을 누르세요</p>
+                    
+                    <div class="boxing">
+	                    <input class="form-control-sm" id="user_phone2" type="text" name="user_phone2" title="인증번호 입력" disabled required/>
+	                   	<button type="button" id="phoneChk2">인증하기</button>
+	                   	<input type="hidden" id="phoneDoubleChk"/>
+                    </div>
+                    
+                    <p class="checkment">최초 가입 시에만 사용하고 있습니다. 따로 저장되지 않습니다. </p>
                 </div>
 
             </section>
@@ -141,39 +118,34 @@
 
                 <div class="box1">
                     <div class="tr-prof">
-                        <img src="https://picsum.photos/id/684/150/150" alt="">
+                        <img src="https://picsum.photos/id/684/150/150"  alt="">
+                        <input type="hidden" id="userProfile" name="userProfile" value="test" >
                     </div>
                     <div class="info ng">
                         <div class="info name">
                             <ul>
                                 <li><label for="user_name" class="form-label">이름</label><span>*</span></li>
-                                <li><input type="text" class="form-control-sm" name="user_name" id="user_name" minlength="2" maxlength="15"
+                                <li><input type="text" class="form-control-sm" name="userName" id="user_name" minlength="2" maxlength="15"
                                         placeholder="김영희" required></li>
                             </ul>
                         </div>
                         <div class="info gender">
                             <ul>
                                 <li><label for="user_gender" class="form-label">성별</label><span>*</span></li>
-                                <li><input type="radio" value="F" name="user_gender" id="female" required> 여 &nbsp
-                                    <input type="radio" value="M" name="user_gender" id="male" required> 남
+                                <li><input type="radio" value="W" name="userGender" id="female" required> 여 &nbsp
+                                    <input type="radio" value="M" name="userGender" id="male" required> 남
                                 </li>
                             </ul>
-                        </div>
+                        </div>                                  
                     </div>
                 </div>
 
                 <div class="info intro">
                     <ul>
                         <li><label for="user_career" class="form-label">경력사항 및 수료사항</label></li>
-<<<<<<< Updated upstream
-                        <li><input type="text" class="form-control-sm" id="user_career" maxlength="100" required></li>
+                        <li><input type="text" class="form-control-sm" name="userCareer" id="user_career" maxlength="100" required></li>
                         <li><label for="user_intro" class="form-label">트레이너 소개</label><span>*</span></li>
-                        <li><input type="text" class="form-control-sm" id="user_intro" maxlength="100" required></li>
-=======
-                        <li><input type="text" class="form-control-sm" id="user_career" maxlength="100"></li>
-                        <li><label for="user_intro" class="form-label">트레이너 소개</label><span>*</span></li>
-                        <li><input type="text" class="form-control-sm" id="user_intro" maxlength="100" ></li>
->>>>>>> Stashed changes
+                        <li><input type="text" class="form-control-sm" name="userIntro" id="user_intro" maxlength="100" required></li>
                     </ul>
                 </div>
             </section>
@@ -187,15 +159,19 @@
                     <div class="info biz">
                         <ul>
                             <li><label for="user_biz" class="form-label">사업자 번호 <span>*</span></label></li>
-                            <li><input type="tel" name="b_no" class="form-control-sm" id="user_biz" length="10"
+                            <li><input type="tel" name="userBiz" class="form-control-sm" id="b_no" length="10"
                                     placeholder=" ' - ' 제외하고 입력해주세요" required>
                                 <p>사업자번호를 도용하여 가입시, 형사처벌 대상에 해당됩니다</p>
                             </li>
-                            <li><label for="tel" class="form-label"> 개업일자 <span>*</span></label></li>
-                            <li><input type="date" name="start_dt" id="start_dt" class="form-control-sm" required></li>
-                            <li><label for="openDate" class="form-label"> 대표자 성명<span>*</span> </label></li>
-                            <li><input type="text" name="p_nm" class="form-control-sm" id="ceoName" length="15" required></li>
+                            <li><label for="start_dt" class="form-label"> 개업일자 <span>*</span></label></li>
+                            <li><input type="number" name="startDt" id="start_dt" class="form-control-sm" placeholder=" ' - ' 제외하고 입력해주세요" pattern="\d*" minlength="10" maxlength="13"
+                            required></li>
+                            <li><label for="p_nm" class="form-label"> 대표자 성명<span>*</span> </label></li>
+                            <li><input type="text" name="pNm" class="form-control-sm" id="p_nm" length="15" required></li>
                         </ul>
+                        
+	                   	 <input type="hidden" id="bizDoubleChk" value="false"/>
+           				 <button type="button" onclick="checkBusinessMan()">인증하기</button>
                     </div>
 
             </section>
@@ -219,11 +195,7 @@
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseTwo" aria-expanded="false"
                                 aria-controls="flush-collapseTwo">
-<<<<<<< Updated upstream
-                                (필수) 이용약관 동의<input class="agree_check" type="checkbox" id="SvcUse" value="SvcUse" name="agreechk" required>
-=======
-                                (필수) 이용약관 동의<input class="agree_check" type="checkbox" id="SvcUse" value="SvcUse" name="agreechk">
->>>>>>> Stashed changes
+                                (필수) 이용약관 동의<input class="agree_check" type="checkbox" name="userSvcUseAgmtYN" id="SvcUse" value="Y" name="agreechk" required>
                             </button>
                         </h5>
                         <div id="flush-collapseTwo" class="accordion-collapse collapse"
@@ -586,13 +558,8 @@
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseThree" aria-expanded="false"
                                 aria-controls="flush-collapseThree">
-<<<<<<< Updated upstream
-                                (필수) 개인정보취급방침 동의<input class="agree_check" type="checkbox" id="SvcPcy" value="SvcPcy"
+                                (필수) 개인정보취급방침 동의<input class="agree_check" type="checkbox" name="userSvcPCYAgmtYN" id="SvcPcy" value="Y"
                                     name="agreechk" required>
-=======
-                                (필수) 개인정보취급방침 동의<input class="agree_check" type="checkbox" id="SvcPCY" value="SvcPCY"
-                                    name="agreechk">
->>>>>>> Stashed changes
                             </button>
                         </h5>
                         <div id="flush-collapseThree" class="accordion-collapse collapse"
@@ -780,7 +747,7 @@
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseFour" aria-expanded="false"
                                 aria-controls="flush-collapseFour">
-                                (선택) 이벤트 및 할인 소식 알림 동의 : SMS<input class="agree_check" type="checkbox" value="agree3"
+                                (선택) 이벤트 및 할인 소식 알림 동의 : SMS<input class="agree_check" type="checkbox" name="userReceiveEmailAgmtYN" value="Y"
                                     name="agreechk">
                             </button>
                         </h5>
@@ -794,7 +761,7 @@
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseFive" aria-expanded="false"
                                 aria-controls="flush-headingFive">
-                                (선택) 이벤트 및 할인 소식 알림 동의 : E-MAIL<input class="agree_check" type="checkbox" value="agree4"
+                                (선택) 이벤트 및 할인 소식 알림 동의 : E-MAIL<input class="agree_check" type="checkbox" name="userReceiveSMSAgmtYN" value="Y"
                                     name="agreechk">
                             </button>
                         </h5>
@@ -804,11 +771,7 @@
                         </div>
                     </div>
                 </div>
-<<<<<<< Updated upstream
                 <button type="button" class="loginbtn" id="btn_login_trhome" onclick="joinform_check()">가입하기</button>
-=======
-                <button class="loginbtn" id="btn_login_trhome" onclick="joinform_check()">가입하기</button>
->>>>>>> Stashed changes
                 <div>
                 </div>
             
@@ -825,8 +788,8 @@
     
     <!-- js -->
     <script src="/resources/js/user/join.js"></script>
-    <script src="/resources/js/user/biz.js"></script>
     <script src="/resources/js/user/phone.js"></script>
+    <script src="/resources/js/user/biz.js"></script>
 </body>
 
 </html>

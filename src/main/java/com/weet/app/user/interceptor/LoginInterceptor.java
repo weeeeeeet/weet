@@ -1,4 +1,4 @@
-package com.weet.app.interceptor;
+package com.weet.app.user.interceptor;
 
 
 import javax.servlet.http.Cookie;
@@ -11,7 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.weet.app.user.domain.UserVO;
+import com.weet.app.user.domain.TrainerVO;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -43,13 +43,13 @@ public class LoginInterceptor implements HandlerInterceptor {
 		log.debug("1. preHandle(req, res, handler) invoked.");
 		log.debug("=============================================================");
 		
-		// 이전에 정상 로그인으로 인해서, Session Scope에 공유했었던 로그인 속성(여기서는 UserVO객체) 제거.
+		// 이전에 정상 로그인으로 인해서, Session Scope에 공유했었던 로그인 속성(여기서는 TrainerVO객체) 제거.
 		HttpSession session = req.getSession();
 		
-		UserVO user = (UserVO) session.getAttribute(loginKey);
-		log.info("\t+ user: " + user);
+		TrainerVO trainer = (TrainerVO) session.getAttribute(loginKey);
+		log.info("\t+ user: " + trainer);
 		
-		if(user != null) {
+		if(trainer != null) {
 			session.removeAttribute(loginKey);
 			
 			log.info("\t+ ** Removed The Previous Login Key **");
@@ -71,16 +71,16 @@ public class LoginInterceptor implements HandlerInterceptor {
 		HttpSession session = req.getSession();
 		
 		ModelMap modelMap = modelAndView.getModelMap();
-		UserVO user = (UserVO) modelMap.get(loginKey);
+		TrainerVO trainer = (TrainerVO) modelMap.get(loginKey);
 		
-		if(user != null) {	// If login succeeded, ...
+		if(trainer != null) {	// If login succeeded, ...
 			log.info("** 로그인에 성공하였다면 ...");
 			
 			//-----------------------------------------------------//
 			// 1. Session Scope 에 로그인한 정보로 UserVO 객체를 속성 바인딩
 			//-----------------------------------------------------//
-			session.setAttribute(loginKey, user);
-			log.info("\t1. Session Scope에 로그인 정보(UserVO) 속성 바인딩 완료.");
+			session.setAttribute(loginKey, trainer);
+			log.info("\t1. Session Scope에 로그인 정보(TrainerVO) 속성 바인딩 완료.");
 
 			//-----------------------------------------------------//
 			// 2. Remember-Me 처리
@@ -108,7 +108,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			//-----------------------------------------------------//
 			
 			// 3-1. 원래의 요청 URI가 있었다면, 그 URI로 이동시킴.
-			// 3-2. 원래의 요청 URI가 없었다면, /sboard/list로 이동시킴
+			// 3-2. 원래의 요청 URI가 없었다면, /메인페이지로 이동시킴
 			
 			String originalRequestURI = (String) session.getAttribute(requestURIKey);
 			String originalQueryString = (String) session.getAttribute(queryStringKey);
@@ -121,7 +121,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 				
 				log.info("\t3. 원래의 요청 URI로 이동시킴.");
 			} else {
-				res.sendRedirect("/index");		// Redirect to / main page.
+				res.sendRedirect("/");		// Redirect to / main page.
 				
 				log.info("\t4. /index 로 이동시킴.");
 			} // if-else

@@ -70,7 +70,7 @@ public class UserServiceTests {
 		
 		// 1. UserTr 객체 생성 => SQL의 바인드변수들에 넘겨줄 파라미터
 		UserDTO userDTO = new UserDTO("testId3", "testName3",'T',"testNick3","01098225432","test3@test.com","testProfile3",'W','Y','Y','Y','Y');
-		TrainerDTO trainerDTO = new TrainerDTO("testId3","testPwd!3","testCareer3","testIntro3", 1876543211);
+		TrainerDTO trainerDTO = new TrainerDTO("testId3","testPwd!3","testCareer3","testIntro3", "1876543211");
 		
 		
 		this.service.trJoin(userDTO, trainerDTO);
