@@ -15,7 +15,6 @@ import com.weet.app.user.domain.LoginDTO;
 import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.TrainerVO;
 import com.weet.app.user.domain.UserDTO;
-import com.weet.app.user.domain.UserVO;
 import com.weet.app.user.mapper.UserMapper;
 
 import lombok.NoArgsConstructor;
