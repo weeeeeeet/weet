@@ -148,14 +148,14 @@ a {
     display: inline;
 }
 
-.sort {
+.classSort {
     width: 100%;
     float: left;
     margin-right: 20px;
     margin-bottom: 50px;
     padding-bottom: 20px;
 }
-.sort #type {
+.classSort #type {
     width: 130px;
     height: 40px;
     border: 2px solid #2370DF;
@@ -164,14 +164,14 @@ a {
     margin-right: 10px;
     padding-left: 20px;
 }
-.sort button {
+.classSort button {
 	background-color: white;
 	border: none;
 	margin-right: 10px;
 	margin-left: 8px;
 	font-size: 14px;
 }
-.sort button:hover {
+.classSort button:hover {
 	color: #2370DF;
 }
 

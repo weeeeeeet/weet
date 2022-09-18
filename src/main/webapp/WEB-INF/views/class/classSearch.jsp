@@ -9,7 +9,7 @@
 	<title>Weet</title>
 	
 	<!-- css -->
-	<link rel="stylesheet" href="${path}/resources/css/classes/classSearch.css" />
+	<link rel="stylesheet" href="${path}/resources/css/class/classSearch.css" />
 	
 	<!-- font -->
 	<link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
