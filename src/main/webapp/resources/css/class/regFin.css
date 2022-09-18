@@ -1,0 +1,144 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'SCoreDream';
+    box-sizing: border-box;
+}
+
+
+/* CONTENTS ================================ */
+.contents{
+    width: 1040px;
+    margin: 0 auto;
+    /* border: 10px solid red; */
+    padding-top: 35px;
+    margin-top: 100px;
+}
+.contents h3{
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-left: px;
+    margin-bottom: 20px;
+}
+.txt {
+    float: left;
+    min-width : 2500px;
+}
+.txt div {
+    display: inline;
+    width: 100%;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+.c1 li:nth-of-type(11){
+    color: #2370DF;
+}
+
+.c1 li{
+    /* color: #2370DF; */
+    list-style: none;
+    display: inline-block;
+    margin-bottom: 5px;
+    margin-right: 37px;
+}
+.bar progress{
+    display: inline;
+    width: 100%;
+    height: 5px;
+}
+/* ---- */
+.ct{
+    text-align: center;
+    margin-top: 280px;
+    margin-bottom: 280px;
+}
+
+.btn btn-primary{
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 10px;
+    width: 80px;
+}
+.mark{
+    display: inline-block;
+    position: relative;
+}
+.mark p{
+    display: flex;
+}
+
+
+
+
+
+
+
+
+/* Footer ================================ */
+
+.footer {
+    height: 280px;
+    width: 100%;
+    background-color: white;
+    /* position: fixed;   */
+    bottom: 0;
+    left: 0;
+}
+.footer img {                                   /* footer로고 */
+    width: 120px;
+    margin-top: 25px;
+    margin-left: 80px;
+    display: inline;
+    float: left;
+}
+.footer .notice_service {                      /* 공지사항, 고객센터 */
+    float: right;
+    margin-top: 20px;
+    margin-right: 80px;
+}
+.footer .notice_service button {
+    border-radius: 5px;
+    font-weight: bold;
+    width: 160px;
+    height: 33px;
+    border: 2px solid #6C6C6C;
+    background-color: white;
+    cursor:pointer;                             /* 커서 올렸을 때 손모양으로 */
+}
+.footer ul.time {                               /* 운영시간 */
+    margin-top: 10px;
+    list-style: none;
+    font-size: 12px;
+    color: #6C6C6C;
+    margin-bottom: 25px;
+}
+.footer .underline2 {
+    clear: both;
+    border: 0;
+    height: 1.5px;
+    background: rgb(236, 236, 236);
+}
+.footer .terms {                                 /* 이용약관, 개인정보처리방침 */
+    height: 40px;                         
+    list-style: none;
+    margin-left: 80px;
+    margin-top: 20px;
+}
+.footer a {
+    float: left;
+    font-size: 15px;
+    padding-right: 30px;
+    text-decoration: none;
+    color: black;
+}
+.footer .address {
+    margin-top: 20px;
+    margin-left: 80px;
+    line-height: 18px;
+}
+.footer p {
+    font-size: 15px;
+}

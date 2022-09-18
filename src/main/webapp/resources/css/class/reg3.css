@@ -1,0 +1,261 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'SCoreDream';
+    box-sizing: border-box;
+}
+
+
+/* CONTENTS ================================ */
+
+.contents{
+    width: 1040px;
+    margin: 0 auto;
+    /* border: 10px solid red; */
+    padding-top: 35px;
+    margin-top: 100px;
+}
+.contents h3{
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-left: px;
+    margin-bottom: 20px;
+}
+.txt {
+    float: left;
+    min-width : 2500px;
+}
+.txt div {
+    display: inline;
+    width: 100%;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+.c1 li:nth-of-type(7){
+    color: #2370DF;
+}
+.c1 li:nth-of-type(8){
+    color: #2370DF;
+}
+.c1 li{
+    /* color: #2370DF; */
+    list-style: none;
+    display: inline-block;
+    margin-bottom: 5px;
+    margin-right: 37px;
+}
+.bar progress{
+    display: inline;
+    width: 100%;
+    height: 5px;
+}
+
+/* ----------- */
+.con .class_curriculum {
+    width: 100%;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    min-width: 1200px;
+}
+.qmark {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-left: 15px;
+    position: absolute;
+    margin-top: 5px;
+    border-radius: 50%;
+    background-color: rgb(147, 147, 147);
+}
+.qmark > a {
+    color: white;
+    font-size: 11px;
+    position: absolute;
+    bottom: 1%;
+    text-decoration: none;
+    left: 30%;
+}
+span {
+    font-size: 5px;
+    color: #ff9100;
+    margin-left: 3px;
+    margin-top: 2px;
+    position: absolute;
+}
+
+/* ===============커리큘럼=============== */
+
+.step {
+    margin-top: 20px;
+    width: 100%;
+    height: 150px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    position: relative;
+}
+.step > .step1 {
+    margin-left: 15px;
+    margin-top: 15px;
+    border: none;
+    background-color: #2370DF;
+    border-radius: 20px;
+    width: 70px;
+    height: 25px;
+    float: left;
+}
+.step > .step1 > p{
+    text-align: center;
+    line-height: 25px;
+    color: white;
+    font-size: 12px;
+}
+.step > h1 {
+    float: left;
+    display: inline;
+    margin-left: 15px;
+    margin-top: 18px;
+    font-size: 14px;
+}
+.step > p {
+    clear: both;
+    font-size: 14px;
+    display: inline;
+    position: relative;
+    bottom: -50px;
+    left: -125px;
+}
+.step > button.edit {
+    margin-right: 30px;
+    margin-top: 40px;
+    border: none;
+    background-color: #b8b8b8;
+    border-radius: 20px;
+    width: 70px;
+    height: 25px;
+    float: left;
+    color: white;
+    font-size: 12px;
+    float: right;
+}
+.step > button.delete {
+    clear: both;
+    margin-right: 30px;
+    margin-top: 20px;
+    border: none;
+    background-color: #838383;
+    border-radius: 20px;
+    width: 70px;
+    height: 25px;
+    float: left;
+    color: white;
+    font-size: 12px;
+    float: right;
+}
+.curri_write {
+    margin-top: 20px;
+    width: 100%;
+    height: 310px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+}
+.curri_write > p {
+    font-size: 20px;
+    margin-top: 15px;
+    margin-left: 28px;
+    float: left;
+    width: 900px;
+}
+.curri_write > input:nth-of-type(1) {
+    clear: both;
+    border: 2px solid #2370DF;
+    border-radius: 10px;
+    width: 980px;
+    height: 40px;
+    padding-left: 10px;
+    margin-left: 28px;
+    font-size: 14px;
+}
+.curri_write > input:nth-of-type(2) {
+    clear: both;
+    border: 2px solid #2370DF;
+    border-radius: 10px;
+    width: 980px;
+    height: 120px;
+    padding-left: 10px;
+    margin-left: 28px;
+    font-size: 14px;
+}
+.curri_write i {
+    color: #2370DF;
+    font-size: 20px;
+    position: relative;
+    right: -80px;
+    top: 10px;
+}
+
+/* =========================== */
+.page_button{
+    margin-top: 180px;
+    display: block;
+    text-align: center;
+    margin-bottom: 180px;
+}
+.back{
+    /* float: left; */
+    /* margin-left: 500px; */
+    width: 70px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #919191;
+    font-size: 14px;
+    color: white;;
+    border: none;
+}
+.next{
+    /* float: left; */
+    /* margin-left: 20px; */
+    width: 70px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #2370DF;
+    font-size: 14px;
+    color: white;;
+    border: none;
+}
+
+
+
+/* --------------------------------------------------------- */
+
+.class_curriculum > .qmark > a > p { /* 물음표 */
+    color: white;
+    font-size: 11px;
+    position: absolute;
+    bottom: -15.5px;
+    text-decoration: none;
+}
+.class_curriculum a > .curriculum_explain {
+    width: 330px;
+    box-shadow: 5px 5px 10px 0.5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background-color: white;
+    padding-top: 15px;
+    padding-right: 25px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+    position: relative;
+    top: -30px;
+    display: none;
+}
+.class_curriculum a > .curriculum_explain > ul {
+    color: black;
+    font-weight: 400;
+    font-size: 12px;
+}
+.class_curriculum a:hover .curriculum_explain {
+    display: block;
+}

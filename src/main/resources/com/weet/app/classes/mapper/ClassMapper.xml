@@ -124,4 +124,147 @@
     		AND user_id = #{userId}
     </delete>
     
+    
+    <!-- ============================================================================== -->
+    <!-- 메인페이지: 추천 클래스 -->
+   	<select id="selectClassRecommend" resultType="com.weet.app.classes.domain.ClassVO">
+		SELECT 
+		    *
+		FROM
+		    t_class
+		ORDER BY class_avg_star DESC
+		FETCH NEXT 3 ROWS ONLY
+    </select>
+    
+    <!-- 메인페이지: 마감임박 클래스 -->
+    <select id="selectClassEnd" resultType="com.weet.app.classes.domain.ClassVO">
+		SELECT 
+	        *
+	    FROM
+	        t_class
+	    ORDER BY class_recruit_end_date ASC
+	    FETCH NEXT 3 ROWS ONLY
+    </select>
+    
+  	<!-- 메인페이지: 신규 클래스 -->
+  	<select id="selectClassNew" resultType="com.weet.app.classes.domain.ClassVO">
+		SELECT 
+        	*
+		FROM
+   			t_class
+		ORDER BY class_recruit_start_date DESC
+		FETCH NEXT 3 ROWS ONLY
+    </select>
+    
+    <!-- =================================================================================== -->
+  	
+  	<!-- 메인페이지: 신규 클래스 더보기 -->
+  	<select id="selectClassNewAll" resultType="com.weet.app.classes.domain.ClassVO">
+		SELECT 
+        	*
+		FROM
+   			t_class
+		ORDER BY class_recruit_start_date DESC
+    </select>
+    
+    
+    <!-- 메인페이지: 추천 클래스 더보기 -->
+   	<select id="selectClassRecommendAll" resultType="com.weet.app.classes.domain.ClassVO">
+		SELECT 
+		    *
+		FROM
+		    t_class
+		ORDER BY class_avg_star DESC
+    </select>
+    
+    <!-- 메인페이지: 마감임박 클래스 더보기 -->
+    <select id="selectClassEndAll" resultType="com.weet.app.classes.domain.ClassVO">
+		SELECT 
+	        *
+	    FROM
+	        t_class
+	    ORDER BY class_recruit_end_date ASC
+    </select>
+  	
+    
+    <!-- =================================================================================== -->
+    
+    <!-- 클래스 검색 페이지: 모든 클래스 -->
+  	<select id="selectAllClass" resultType="com.weet.app.classes.domain.ClassVO" 
+  	parameterType="com.weet.app.classes.domain.Criteria">
+		SELECT 
+        	*
+		FROM
+   			t_class
+   		ORDER BY class_recruit_start_date DESC
+    </select> 
+    
+	    
+    <!-- 클래스 검색 페이지: 페이징 -->
+    <select id="selectClassPaging" resultType="com.weet.app.classes.domain.ClassVO">
+
+		SELECT 
+		    /*+ index_desc(t_class)*/	*
+		FROM
+		    t_class
+		<if test="type == 'personalandgroup'">
+		<!-- WHERE class_type = '1' OR class_type = '2' -->
+		<!-- 구문오류로 수정 -->
+		where class_fee LIKE '%'||0||'%'
+		</if>
+		<if test="type == 'personal'">
+		WHERE class_type = '1'
+		</if>
+		<if test="type == 'group'">
+		WHERE class_type = '2'
+		</if>
+		<if test="keyword != null">
+			AND (class_title LIKE '%' || #{keyword} || '%'
+			OR class_trainer_name LIKE '%' || #{keyword} || '%'
+			OR class_intro LIKE '%' ||#{keyword}||'%'
+			OR class_trainer_name LIKE '%' ||#{keyword}||'%'
+			OR class_tag1 LIKE '%' ||#{keyword}||'%'
+			OR class_tag2 LIKE '%' ||#{keyword}||'%'
+			OR class_tag3 LIKE '%' ||#{keyword}||'%')
+		</if>
+		<include refid="classSort" />
+		OFFSET (#{pageNum} - 1) * #{amount} ROWS
+		FETCH NEXT #{amount} ROWS ONLY
+    </select>
+    
+    <select id="getTotal" resultType="int">
+		SELECT 
+		    COUNT(*)
+		FROM
+		    t_class
+		<if test="keyword != null">
+            where class_title like '%'||#{keyword}||'%'
+        </if>
+    </select>
+    
+
+    <select id="selectByStar" resultType="com.weet.app.classes.domain.ClassVO">
+		SELECT 
+		    *
+		FROM
+		    t_class
+		ORDER BY class_avg_star DESC
+    </select>
+    
+    <!-- 클래스 검색 페이지 정렬 -->
+    <sql id="sort">
+		<if test="classSort == null">
+		ORDER BY class_recruit_start_date DESC
+		</if>
+		<if test="classSort == 'star'">
+		ORDER BY class_avg_star DESC
+		</if>
+		<if test="classSort == 'newest'">
+		ORDER BY class_recruit_start_date DESC
+		</if>
+		<if test="classSort == 'end'">
+		ORDER BY class_recruit_end_date ASC
+		</if>
+	</sql>
+    
 </mapper>

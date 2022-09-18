@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'SCoreDream';
+    box-sizing: border-box;
+}
+
+
+.contents {
+    margin: 0 auto;
+    margin-top: 100px;
+    min-height: 100%;
+    padding-bottom: 280px;
+    width: 750px;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.titleNotice {							/* 공지사항 */
+	font-size: 25px;
+	font-weight: 500;
+}
+
+.noticeContent {						/* 공지사항 */
+	width: 100%;
+	margin-top: 40px;
+	box-sizing: content-box;
+	padding: 30px;
+	background-color: #eaeaea;
+    border-radius: 10px;
+    min-height: 300px;
+}
+
+.noticeTitle .notice_type {				/* 공지사항 유형 + 제목 */
+	float:left;
+	display: inline;
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.noticeTitle span {						/* 공지사항 유형 */
+	color: #2370DF;
+}
+
+.notice_list {							/* 공지사항 목록 */
+    float: right;
+    margin-top: 5px;
+    right: 150px;
+    color:#18A0FB;
+}
+.notice_list_text {						/* 공지사항 '목록' */
+    text-decoration: none;
+    color: black;
+    margin-left: 5px;
+    font-weight: 500;
+    display: inline;
+}
+
+.cs_ts {								/* 공지사항 작성 시간 */
+	clear:both;	
+}
+/* ------------------------------------------------ */
+
+.notice_content {						/* 공지사항 내용 */
+	clear: both;
+	border-top: 0.1px solid gray;
+	padding-top: 50px;
+}
