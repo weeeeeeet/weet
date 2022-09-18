@@ -252,6 +252,7 @@
     </select>
     
     <!-- 클래스 검색 페이지 정렬 -->
+
     <sql id="classSort">
 		<if test="classSort == null">
 		ORDER BY class_recruit_start_date DESC
