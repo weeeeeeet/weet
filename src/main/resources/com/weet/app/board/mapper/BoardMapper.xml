@@ -64,7 +64,7 @@
 		            AND t.user_id = tr.user_id
 		    ),
 		    reply_contents,
-		    to_char(reply_insert_ts, 'yyyy.mm.dd'),
+		    to_char(reply_insert_ts, 'yyyy.mm.dd HH:MI'),
 		    reply_selected_yn,
 		    reply_delete_yn
 		FROM
@@ -74,6 +74,7 @@
 		    AND reply_delete_yn = 'N'
 		    AND reply_depth = 0
 		ORDER BY
+			reply_selected_yn DESC,
 		    reply_id ASC
 		<if test="preview == true">
 			FETCH NEXT 1 ROW ONLY
@@ -86,7 +87,7 @@
 	
 		SELECT
 		    reply_id,
-		    user_id,
+		    reply_writer,
 		    (
 		        SELECT
 		            user_nickname
@@ -106,7 +107,7 @@
 		            AND t.user_id = tr.user_id
 		    ),
 		    reply_contents,
-		    to_char(reply_insert_ts, 'yyyy.mm.dd'),
+		    to_char(reply_insert_ts, 'yyyy.mm.dd HH:MI'),
 		    reply_selected_yn,
 		    reply_delete_yn
 		FROM
@@ -196,6 +197,36 @@
 		    comm_id = #{commId}
 	</select>
 	
+	<select 
+		id="selectTmpSaveList"
+		resultType="com.weet.app.board.domain.BoardVO">
+		
+		SELECT 
+			comm_id,
+		    user_id,
+		    (
+		        SELECT
+		            user_nickname
+		        FROM
+		            t_user t
+		        WHERE
+		            t.user_id = c.user_id
+		    ),
+		    comm_post_title,
+		    comm_post_contents,
+		    comm_like_num,
+		    comm_view_count,
+		    to_char(comm_post_insert_ts, 'yyyy.mm.dd HH:MI'),
+		    to_char(comm_post_update_ts, 'yyyy.mm.dd HH:MI'),
+		    comm_reply_count
+		FROM 
+			t_community c
+		WHERE 
+			user_id = #{userId}
+		    AND comm_tempsave = '1'
+		    AND comm_delete_yn = 'N'
+	</select>
+	
 	<insert id="insertBoard">
 	
 		<selectKey keyProperty="commId" order="AFTER" resultType="int">
@@ -265,7 +296,7 @@
 		    #{replyContents},
 		    #{commId},
 		    #{replyGroup},
-		    #{replyDepth},
+		    1,
 		    #{replyWriter}
 		)
 	</insert>

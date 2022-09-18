@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import com.weet.app.classes.domain.ClassVO;
+import com.weet.app.classes.domain.ClassDetailVO;
 import com.weet.app.classes.domain.ReviewVO;
 import com.weet.app.classes.domain.TotalReviewVO;
 import com.weet.app.common.domain.Criteria;
@@ -14,7 +14,7 @@ import com.weet.app.exception.DAOException;
 public interface ClassMapper {
 	
 	// 클래스 상세보기
-	public abstract ClassVO selectDetail(String classId) throws DAOException;
+	public abstract ClassDetailVO selectDetail(String classId) throws DAOException;
 	
 	// 리뷰 보기
 	public abstract List<ReviewVO> selectReviews(@Param("classId") String classId, @Param("cri") Criteria cri) throws DAOException;

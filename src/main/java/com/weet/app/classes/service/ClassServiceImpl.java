@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.weet.app.classes.domain.ClassVO;
+import com.weet.app.classes.domain.ClassDetailVO;
 import com.weet.app.classes.domain.ReviewVO;
 import com.weet.app.classes.domain.TotalReviewVO;
 import com.weet.app.classes.mapper.ClassMapper;
@@ -25,7 +25,7 @@ public class ClassServiceImpl implements ClassService {
 	
 	// 클래스 상세조회
 	@Override
-	public ClassVO getDetail(String classId) throws ServiceException {
+	public ClassDetailVO getDetail(String classId) throws ServiceException {
 		
 		try { return this.mapper.selectDetail(classId); }
 		catch(DAOException e) { throw new ServiceException(e); } // try-catch
@@ -76,6 +76,7 @@ public class ClassServiceImpl implements ClassService {
 		} catch(DAOException e) { throw new ServiceException(e); } // try-catch
 	} // checkMyLike
 
+	// 싫어요~!
 	@Override
 	public boolean cancelClassLike(String classId, String userId) throws ServiceException {
 

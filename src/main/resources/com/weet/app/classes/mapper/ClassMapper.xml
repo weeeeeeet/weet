@@ -41,7 +41,7 @@
 		    	SELECT
 		    		count(user_id) AS current_reg_cnt
 		    	FROM
-		    		t_class_listenr
+		    		t_class_listener
 		    	WHERE
 		    		class_id = #{classId}
 		    )
