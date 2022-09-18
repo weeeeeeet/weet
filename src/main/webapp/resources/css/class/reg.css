@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'SCoreDream';
+    box-sizing: border-box;
+}
+
+
+/* CONTENTS ================================ */
+.contents{
+    width: 1040px;
+    margin: 0 auto;
+    padding-top: 35px;
+    margin-top: 100px;
+    height: 800px;
+}
+.contents h3{
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-left: px;
+    margin-bottom: 20px;
+}
+.txt {
+    float: left;
+    min-width : 2500px;
+}
+.txt div {
+    display: inline;
+    width: 100%;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+.c1 li:nth-of-type(1){
+    color: #2370DF;
+}
+.c1 li:nth-of-type(2){
+    color: #2370DF;
+}
+.c1 li{
+    /* color: #2370DF; */
+    list-style: none;
+    display: inline-block;
+    margin-bottom: 5px;
+    margin-right: 37px;
+}
+
+.bar progress{
+    display: inline;
+    width: 100%;
+    height: 5px;
+}
+/* ---- */
+.ct{
+    text-align: center;
+    margin-top: 260px;
+}
+.wee{
+    font-style: oblique;
+    font-weight: bold;
+    color: #2370DF;
+}
+.dot{
+    font-style: oblique;
+    font-weight: bold;
+    color: #c8ff12;
+}
+.tt{
+    font-style: oblique;
+    font-weight: bold;
+    color: #df7b23;
+}
+.ctc{
+    color: #2370DF;
+}
+.btn btn-primary{
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 10px;
+    width: 80px;
+}
+.mark{
+    display: inline-block;
+    position: relative;
+}
+.mark p{
+    display: flex;
+}
+

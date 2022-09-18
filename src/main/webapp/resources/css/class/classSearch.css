@@ -1,0 +1,282 @@
+@charset "UTF-8";
+
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: 'SCoreDream';
+}
+
+body {
+    line-height: 24px;
+    font-size: 14px;
+    font-family: 'SCoreDream';
+    font-weight: normal;
+    color: #797979
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'SCoreDream';
+    color: #2a2a2a;
+    font-weight: 500
+}
+
+
+
+del {
+    color: #797979;
+    font-size: 14px;
+    font-weight: 300;
+    font-family: 'SCoreDream';
+}
+
+.list {
+    list-style: none;
+    margin: 0px;
+    padding: 0px
+}
+
+a {
+    text-decoration: none;
+
+}
+
+
+.mt-40 {
+    margin-top: 40px
+}
+
+.mb-20 {
+    margin-bottom: 20px
+}
+
+.mb-40 {
+    margin-bottom: 40px
+}
+
+.feature_product_area {
+    width: 1040px;
+    margin: 0 auto;
+}
+
+.container {
+    margin-top: 80px;
+}
+
+.section_gap {
+    padding: 120px 0px;
+}
+
+@media (max-width: 991px) {
+    .section_gap {
+        padding: 80px 0px
+    }
+}
+
+.section_gap_bottom_custom {
+    padding-bottom: 70px
+}
+
+@media (max-width: 991px) {
+    .section_gap_bottom_custom {
+        padding-bottom: 30px
+    }
+}
+
+.section_gap_top {
+    padding-top: 120px
+}
+
+@media (max-width: 1224px) {
+    .section_gap_top {
+        padding-top: 80px
+    }
+}
+
+
+.banner {
+    background-color: rgb(177, 198, 234);
+    height: 270px;
+}
+.banner .banner_search {
+    width: 815px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 0px;
+    position: relative;
+}
+.banner .banner_search input {
+    margin-left: 50px;
+    float: left;
+    width: 700px;
+    height: 70px;
+    font-size: 20px;
+    border-radius: 50px;
+    border: 1px solid white;
+    margin-top: 100px;
+    padding-left: 162px;
+    box-shadow: 5px 5px 10px 0.5px rgba(0, 0, 0, 0.2);
+}
+.banner .banner_search a {
+    display: inline-block;
+    padding-top: 115px;
+    right: 12%;
+    text-decoration: none;
+    color: #fe8902;
+    font-size: 40px;
+    position: absolute;
+}
+
+.banner_search button {
+	position: relative;
+	top: 117px;
+	right: 88px;
+	width: 40px;
+	height: 40px;
+	z-index: 100;
+	border: none;
+    color: rgba(255, 255, 255, 0);
+    background-color: rgba(255, 255, 255, 0);
+}
+
+/* ==================== CLASS SORT ============== */
+.select_category {								/* 카테고리 버튼 */
+    display: inline;
+}
+
+.sort {
+    width: 100%;
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 50px;
+    padding-bottom: 20px;
+}
+.sort #type {
+    width: 130px;
+    height: 40px;
+    border: 2px solid #2370DF;
+    border-radius: 10px;
+    font-size: 14px;
+    margin-right: 10px;
+    padding-left: 20px;
+}
+.sort button {
+	background-color: white;
+	border: none;
+	margin-right: 10px;
+	margin-left: 8px;
+	font-size: 14px;
+}
+.sort button:hover {
+	color: #2370DF;
+}
+
+/* ==================== CLASS LIST ============== */
+
+.contents {
+    width: 1040px;
+    margin: 0 auto;
+}
+
+.main {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.single-product {							/* 각 클래스 */
+    width: 315px;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.single-product .product-img {
+    position: relative;
+    overflow: hidden;
+    height: 170px;
+}
+
+.single-product img {						/* 클래스 대표 이미지 */
+    height: 170px;
+}
+
+.single-product .product-btm {
+    padding: 22px 25px 0px;
+    border: 1px solid #f0f2f1;
+    text-align: left;
+}
+
+.single-product .product-btm h4 {			/* 클래스 이름 */
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    font-weight: 600;
+}
+
+.single-product .product-btm h5 {			/* 트레이너 이름 */
+    font-size: 14px;
+    color: black!important;
+    text-decoration: none;
+}
+
+.product-btm a {					
+    text-decoration: none;
+}
+
+
+.product-btm h1 {							/* 클래스분류, 위치 */
+    font-size: 13px;
+    font-weight: 300;
+    margin-bottom: 5px;
+    text-decoration: none;
+    color: black;
+}
+
+.product-btm i {                           	/* 별 */
+    font-size: 18px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    color: rgb(255, 217, 0);
+}
+
+.product-btm h2 {							/* 회차, 가격 */
+    font-size: 14px;
+}
+
+
+/* ==================== CLASS PAGING ============== */
+.pageInfo_wrap {
+	display: block;
+	margin-top: 30px;
+	margin-bottom: 100px;
+	text-align: center;
+}
+
+.pageInfo{
+    list-style : none;
+    display: inline-block;
+    margin: 0 auto;
+    align:center;
+}
+.pageInfo li{
+    float: left;
+    font-size: 15px;
+    margin-left: 18px;
+    padding: 7px;
+    font-weight: 500;
+}
+a:link {color:black; text-decoration: none;}
+a:visited {color:black; text-decoration: none;}
+a:hover {color:black; text-decoration: underline;}
+
+.pageInfo_wrap .active{						/* 현재 페이지 스타일 적용 */
+      background-color: #cdd5ec;
+  }
+
+.starBtn:active {
+	color: #2370DF;
+} 
