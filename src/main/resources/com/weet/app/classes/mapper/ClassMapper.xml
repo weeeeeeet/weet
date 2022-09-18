@@ -6,7 +6,7 @@
 
 <mapper namespace="com.weet.app.classes.mapper.ClassMapper">
 
-	<select id="selectDetail" resultType="com.weet.app.classes.domain.ClassVO">
+	<select id="selectDetail" resultType="com.weet.app.classes.domain.ClassDetailVO">
 		SELECT
 		    class_id,
 		    user_id,
