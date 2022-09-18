@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 
 import com.weet.app.classes.domain.ClassDetailVO;
 import com.weet.app.classes.domain.ClassVO;
+import com.weet.app.classes.domain.Criteria2;
 import com.weet.app.classes.domain.ReviewVO;
 import com.weet.app.classes.domain.TotalReviewVO;
 import com.weet.app.common.domain.Criteria;
@@ -32,10 +33,10 @@ public interface ClassMapper {
 	public abstract List<ClassVO> selectAllClass() throws DAOException;
 	
 	// 페이징을 적용한 클래스 목록
-	public abstract List<ClassVO> selectClassPaging(Criteria cri) throws DAOException;
+	public abstract List<ClassVO> selectClassPaging(Criteria2 cri) throws DAOException;
 	
 	// 총 개수
-	public int getTotal(Criteria cri);
+	public int getTotal(Criteria2 cri);
 	
 	
 //	클래스 상세보기 =====================================================================

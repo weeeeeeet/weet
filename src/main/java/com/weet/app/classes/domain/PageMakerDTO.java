@@ -18,9 +18,9 @@ public class PageMakerDTO {
 	private int total;
 	
 	// 현재 페이지, 페이지당 게시물 표시 수
-	private Criteria cri;
+	private Criteria2 cri;
 	
-	public PageMakerDTO(Criteria cri, int total) {
+	public PageMakerDTO(Criteria2 cri, int total) {
 		
 		this.cri = cri;
 		this.total = total;

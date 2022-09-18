@@ -21,13 +21,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.weet.app.classes.domain.ClassDetailVO;
 import com.weet.app.classes.domain.ClassVO;
+import com.weet.app.classes.domain.Criteria2;
+import com.weet.app.classes.domain.PageMakerDTO;
 import com.weet.app.classes.domain.ReviewVO;
 import com.weet.app.classes.domain.TotalReviewVO;
 import com.weet.app.classes.service.ClassService;
 import com.weet.app.common.domain.Criteria;
 import com.weet.app.common.domain.PageDTO;
 import com.weet.app.exception.ControllerException;
-import com.weet.app.help.domain.PageMakerDTO;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -45,13 +46,13 @@ public class ClassController {
 	
 //	클래스 목록 페이지 (페이징처리 / 검색처리) --------------------------------
 	@GetMapping("/search")
-	public String searchClass(Model model, Criteria cri) throws ControllerException {
+	public String searchClass(Model model, Criteria2 cri) throws ControllerException {
 		log.trace("searchClass() invoked.");
 		
 		try {
-			model.addAttribute("_LIST_ALL_", classService.getClassPaging(cri));
+			model.addAttribute("_LIST_ALL_", service.getClassPaging(cri));
 			
-			int total = classService.getTotal(cri);
+			int total = service.getTotal(cri);
 			
 			// 페이징 처리
 			PageMakerDTO pageMake = new PageMakerDTO(cri, total);
@@ -69,11 +70,11 @@ public class ClassController {
 	
 //	메인페이지-> +더보기(추천 클래스) --------------------------------
 	@GetMapping("/search/recommend")
-	public String searchClassRecommend(Model model, Criteria cri) throws ControllerException {
+	public String searchClassRecommend(Model model, Criteria2 cri) throws ControllerException {
 		log.trace("searchClassRecommend() invoked.");
 		
 		try {
-			List<ClassVO> listAll = this.classService.getListRecommendAll();
+			List<ClassVO> listAll = this.service.getListRecommendAll();
 			model.addAttribute("_LIST_ALL_", listAll);
 		} catch(Exception e) {
 			throw new ControllerException(e);
@@ -84,11 +85,11 @@ public class ClassController {
 	
 //	메인페이지-> +더보기(마감임박 클래스) --------------------------------
 	@GetMapping("/search/end")
-	public String searchClassEnd(Model model, Criteria cri) throws ControllerException {
+	public String searchClassEnd(Model model, Criteria2 cri) throws ControllerException {
 		log.trace("searchClassEnd() invoked.");
 		
 		try {
-			List<ClassVO> listAll = this.classService.getListEndAll();
+			List<ClassVO> listAll = this.service.getListEndAll();
 			model.addAttribute("_LIST_ALL_", listAll);
 		} catch(Exception e) {
 			throw new ControllerException(e);
@@ -99,11 +100,11 @@ public class ClassController {
 	
 //	메인페이지-> +더보기(신규 클래스) --------------------------------
 	@GetMapping("/search/new")
-	public String searchClassNew(Model model, Criteria cri) throws ControllerException {
+	public String searchClassNew(Model model, Criteria2 cri) throws ControllerException {
 		log.trace("searchClassNew() invoked.");
 		
 		try {
-			List<ClassVO> listAll = this.classService.getListNewAll();
+			List<ClassVO> listAll = this.service.getListNewAll();
 			model.addAttribute("_LIST_ALL_", listAll);
 		} catch(Exception e) {
 			throw new ControllerException(e);
@@ -112,8 +113,10 @@ public class ClassController {
 		return "/class/classSearch";
 	} // searchClass
 	
-	
-// 클래스 등록 ================================================================================== //	
+
+// ======================================================================= // 
+// 	클래스 등록 
+// ======================================================================= // 
 	
 //	클래스 등록 시작 페이지 ---------------------------
 	@GetMapping("/reg")
@@ -206,6 +209,12 @@ public class ClassController {
 		return "/class/regFin";
 	} // classRegFin
 
+	
+	
+// ======================================================================= // 
+// 	클래스 상세페이지 
+// ======================================================================= // 	
+	
 	// 클래스 상세페이지 조회
 	@GetMapping("/detail/{id}")
 	public String classDetail(@PathVariable("id") String classId, Model model) throws ControllerException {
@@ -224,13 +233,6 @@ public class ClassController {
 		return "/class/classDetail";
 	} // classDetail
 	
-	// 클래스 등록 창 GET
-	@GetMapping("/reg")
-	public String classRegPage() {
-		log.trace("classDetail() invoked.");
-		
-		return "/class/reg1";
-	} // classDetail
 	
 	// 리뷰조회
 	@ResponseBody

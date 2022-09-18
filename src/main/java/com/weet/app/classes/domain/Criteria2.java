@@ -5,7 +5,7 @@ import lombok.Data;
 // 페이징 처리를 위한 두가지 기준 정보를 가지는 클래스
 // Criteria: 기준
 @Data
-public class Criteria {
+public class Criteria2 {
 
 	// ======== 페이징 ==========
 	// 현재 페이지
@@ -26,12 +26,12 @@ public class Criteria {
 	// ----------------------------------------------------------------------------
 	
 	// 기본 생성자 -> 기본 세팅: pageNum = 1, amount = 10
-	public Criteria() {
+	public Criteria2() {
 		this(1,21);
 	}
 
 	// 원하는 페이지 Num, 원하는 amount
-	public Criteria(int pageNum, int amount) {
+	public Criteria2(int pageNum, int amount) {
 		this.pageNum = pageNum;
 		this.amount = amount;
 	} 

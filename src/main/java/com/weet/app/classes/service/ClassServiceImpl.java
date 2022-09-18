@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.weet.app.classes.domain.ClassDetailVO;
 import com.weet.app.classes.domain.ClassVO;
+import com.weet.app.classes.domain.Criteria2;
 import com.weet.app.classes.domain.ReviewVO;
 import com.weet.app.classes.domain.TotalReviewVO;
 import com.weet.app.classes.mapper.ClassMapper;
@@ -116,7 +117,7 @@ public class ClassServiceImpl implements ClassService {
 
 	// 페이징 처리 된 클래스 목록
 	@Override
-	public List<ClassVO> getClassPaging(Criteria cri) throws ServiceException {
+	public List<ClassVO> getClassPaging(Criteria2 cri) throws ServiceException {
 		try {
 			return mapper.selectClassPaging(cri);
 		} catch(DAOException e) {
@@ -126,7 +127,7 @@ public class ClassServiceImpl implements ClassService {
 
 	// 클래스 총 갯수
 	@Override
-	public int getTotal(Criteria cri) {
+	public int getTotal(Criteria2 cri) {
 		return mapper.getTotal(cri);
 	} // getTotal
 	

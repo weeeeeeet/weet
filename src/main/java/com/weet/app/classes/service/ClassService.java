@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.weet.app.classes.domain.ClassDetailVO;
 import com.weet.app.classes.domain.ClassVO;
+import com.weet.app.classes.domain.Criteria2;
 import com.weet.app.classes.domain.ReviewVO;
 import com.weet.app.classes.domain.TotalReviewVO;
 import com.weet.app.common.domain.Criteria;
@@ -30,9 +31,9 @@ public interface ClassService {
 	public abstract List<ClassVO> getListAll() throws ServiceException;
 	
 	// 페이징 처리 된 전체 클래스 목록
-	public List<ClassVO> getClassPaging(Criteria cri) throws ServiceException;
+	public List<ClassVO> getClassPaging(Criteria2 cri) throws ServiceException;
 	
-	public abstract int getTotal(Criteria cri);
+	public abstract int getTotal(Criteria2 cri);
 	
 	
 //	클래스 상세 =====================================================================		
