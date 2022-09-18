@@ -191,7 +191,7 @@
     
     <!-- 클래스 검색 페이지: 모든 클래스 -->
   	<select id="selectAllClass" resultType="com.weet.app.classes.domain.ClassVO" 
-  	parameterType="com.weet.app.classes.domain.Criteria">
+  	parameterType="com.weet.app.classes.domain.Criteria2">
 		SELECT 
         	*
 		FROM
@@ -252,7 +252,8 @@
     </select>
     
     <!-- 클래스 검색 페이지 정렬 -->
-    <sql id="sort">
+
+    <sql id="classSort">
 		<if test="classSort == null">
 		ORDER BY class_recruit_start_date DESC
 		</if>
