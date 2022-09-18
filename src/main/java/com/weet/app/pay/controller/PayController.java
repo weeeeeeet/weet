@@ -22,7 +22,7 @@ import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.request.CancelData;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
-import com.weet.app.classes.domain.ClassVO;
+import com.weet.app.classes.domain.ClassDetailVO;
 import com.weet.app.classes.service.ClassService;
 import com.weet.app.exception.ControllerException;
 import com.weet.app.pay.domain.CouponVO;
@@ -55,7 +55,7 @@ public class PayController {
 		log.trace("paymentPage() invoked.");
 		
 		try {
-			ClassVO vo = this.service.getDetail(classId);
+			ClassDetailVO vo = this.service.getDetail(classId);
 			
 			Objects.requireNonNull(vo);
 			model.addAttribute("__CLASS__", vo);

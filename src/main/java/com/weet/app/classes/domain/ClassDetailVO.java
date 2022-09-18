@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Value;
 
 @Value
-public class ClassVO {
+public class ClassDetailVO {
 	
 	private String classId;
 	private String userId;

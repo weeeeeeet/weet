@@ -3,7 +3,7 @@ package com.weet.app.board.domain;
 import lombok.Value;
 
 @Value
-public class BoardVO {
+public class CommunityVO {
 	
 	private Integer commId;
 	
