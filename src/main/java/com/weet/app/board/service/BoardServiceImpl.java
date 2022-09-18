@@ -10,8 +10,8 @@ import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.weet.app.board.domain.BoardDTO;
-import com.weet.app.board.domain.BoardVO;
+import com.weet.app.board.domain.CommunityDTO;
+import com.weet.app.board.domain.CommunityVO;
 import com.weet.app.board.domain.ReplyDTO;
 import com.weet.app.board.domain.ReplyVO;
 import com.weet.app.board.mapper.BoardMapper;
@@ -36,9 +36,9 @@ public class BoardServiceImpl implements BoardService {
 		List<Object> result = new ArrayList<>();
 		
 		try {
-			List<BoardVO> list = this.mapper.selectListTop10();
+			List<CommunityVO> list = this.mapper.selectListTop10();
 			
-			for(BoardVO vo : list) {
+			for(CommunityVO vo : list) {
 				Map<String, Object> map = new HashMap<>();
 				List<ReplyVO> reply = this.mapper.selectReplyList(vo.getCommId(), true);
 				
@@ -62,9 +62,9 @@ public class BoardServiceImpl implements BoardService {
 		List<Object> result = new ArrayList<>();
 		
 		try {
-			List<BoardVO> list = this.mapper.selectAllList(keyword, cri);
+			List<CommunityVO> list = this.mapper.selectAllList(keyword, cri);
 			
-			for(BoardVO vo : list) {
+			for(CommunityVO vo : list) {
 				Map<String, Object> map = new HashMap<>();
 				List<ReplyVO> reply = this.mapper.selectReplyList(vo.getCommId(), true);
 				
@@ -96,7 +96,7 @@ public class BoardServiceImpl implements BoardService {
 		try { 
 			Map<String, Object> map = new HashMap<>();
 			
-			BoardVO vo = this.mapper.selectOneBoard(commId);
+			CommunityVO vo = this.mapper.selectOneBoard(commId);
 			List<ReplyVO> reply = this.mapper.selectReplyList(commId, false);
 			
 			map.put("board", vo);
@@ -108,7 +108,7 @@ public class BoardServiceImpl implements BoardService {
 
 	// 게시글 작성
 	@Override
-	public boolean createBoard(BoardDTO dto) throws ServiceException {
+	public boolean createBoard(CommunityDTO dto) throws ServiceException {
 		log.trace("CreateBoard({}) invoked.", dto);
 		
 		try { return this.mapper.insertBoard(dto) == 1 ? true : false; }
@@ -117,7 +117,7 @@ public class BoardServiceImpl implements BoardService {
 
 	// 게시글 수정
 	@Override
-	public boolean modifyBoard(BoardDTO dto) throws ServiceException {
+	public boolean modifyBoard(CommunityDTO dto) throws ServiceException {
 		log.trace("ModifyBoard({}) invoked.", dto);
 		
 		try { return this.mapper.updateBoard(dto) == 1 ? true : false; }
@@ -206,7 +206,7 @@ public class BoardServiceImpl implements BoardService {
 
 	// 임시저장 목록 조회
 	@Override
-	public List<BoardVO> getTmpSave(String userId) throws ServiceException {
+	public List<CommunityVO> getTmpSave(String userId) throws ServiceException {
 		log.trace("getTmpSave({}) invoked.", userId);
 		
 		try { return this.mapper.selectTmpSaveList(userId); }

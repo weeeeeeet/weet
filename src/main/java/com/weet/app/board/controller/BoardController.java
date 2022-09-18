@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.weet.app.board.domain.BoardDTO;
+import com.weet.app.board.domain.CommunityDTO;
 import com.weet.app.board.domain.ReplyDTO;
 import com.weet.app.board.service.BoardService;
 import com.weet.app.common.APIResponse;
@@ -122,7 +122,7 @@ public class BoardController {
 		@ApiImplicitParam(name = "commPostContents", value = "게시글 내용", paramType = "query", required = true),
 		@ApiImplicitParam(name = "commTempsave", value = "실제등록: 0, 임시저장: 1", paramType = "query", required = true)
 	})
-	public APIResponse boardWrite(@ApiIgnore BoardDTO dto) throws ControllerException {
+	public APIResponse boardWrite(@ApiIgnore CommunityDTO dto) throws ControllerException {
 		log.trace("boardWrite({}) invoked.", dto);
 		
 		APIResponse res = new APIResponse();
@@ -144,7 +144,7 @@ public class BoardController {
 		@ApiImplicitParam(name = "commPostContents", value = "게시글 내용", paramType = "query", required = true),
 		@ApiImplicitParam(name = "commTempsave", value = "실제등록: 0, 임시저장: 1", paramType = "query", required = true)
 	})
-	public APIResponse boardModify(@ApiIgnore @RequestBody BoardDTO dto) throws ControllerException {
+	public APIResponse boardModify(@ApiIgnore @RequestBody CommunityDTO dto) throws ControllerException {
 		log.trace("boardModify({}) invoked.", dto);
 		
 		APIResponse res = new APIResponse();

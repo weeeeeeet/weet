@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.weet.app.classes.domain.ClassVO;
+import com.weet.app.classes.domain.ClassDetailVO;
 import com.weet.app.classes.domain.ReviewVO;
 import com.weet.app.classes.domain.TotalReviewVO;
 import com.weet.app.common.domain.Criteria;
@@ -13,7 +13,7 @@ import com.weet.app.exception.ServiceException;
 public interface ClassService {
 	
 	// 클래스 상세조회
-	public abstract ClassVO getDetail(String classId) throws ServiceException;
+	public abstract ClassDetailVO getDetail(String classId) throws ServiceException;
 	
 	// 리뷰보기
 	public abstract List<ReviewVO> getReviews(@Param("classId") String classId, @Param("cri") Criteria cri) throws ServiceException;

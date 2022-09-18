@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.weet.app.classes.domain.ClassVO;
+import com.weet.app.classes.domain.ClassDetailVO;
 import com.weet.app.classes.domain.ReviewVO;
 import com.weet.app.classes.domain.TotalReviewVO;
 import com.weet.app.classes.service.ClassService;
@@ -51,7 +51,7 @@ public class ClassController {
 		log.trace("classDetail() invoked.");
 		
 		try {
-			ClassVO vo = this.service.getDetail(classId);
+			ClassDetailVO vo = this.service.getDetail(classId);
 			TotalReviewVO review = this.service.getreviewInfo(classId);
 			
 			model.addAttribute("__CLASS__", vo);

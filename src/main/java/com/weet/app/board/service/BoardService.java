@@ -3,8 +3,8 @@ package com.weet.app.board.service;
 import java.util.List;
 import java.util.Map;
 
-import com.weet.app.board.domain.BoardDTO;
-import com.weet.app.board.domain.BoardVO;
+import com.weet.app.board.domain.CommunityDTO;
+import com.weet.app.board.domain.CommunityVO;
 import com.weet.app.board.domain.ReplyDTO;
 import com.weet.app.board.domain.ReplyVO;
 import com.weet.app.common.domain.Criteria;
@@ -28,10 +28,10 @@ public interface BoardService {
 	public abstract List<ReplyVO> getReReplyList(int commId, int replyGroup) throws ServiceException;
 	
 	// 게시글 작성
-	public abstract boolean createBoard(BoardDTO dto) throws ServiceException;
+	public abstract boolean createBoard(CommunityDTO dto) throws ServiceException;
 	
 	// 게시글 수정
-	public abstract boolean modifyBoard(BoardDTO dto) throws ServiceException;
+	public abstract boolean modifyBoard(CommunityDTO dto) throws ServiceException;
 	
 	// 게시글 삭제
 	public abstract boolean removeBoard(int commId) throws ServiceException;
@@ -49,7 +49,7 @@ public interface BoardService {
 	public abstract boolean createReReply(ReplyDTO dto) throws ServiceException;
 	
 	// 임시저장 목록 조회
-	public abstract List<BoardVO> getTmpSave(String userId) throws ServiceException;
+	public abstract List<CommunityVO> getTmpSave(String userId) throws ServiceException;
 	
 	// 게시글 추천여부 체크
 	public abstract boolean checkMyLike(int commId, String userId) throws ServiceException;
