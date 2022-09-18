@@ -17,6 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.weet.app.exception.DAOException;
 import com.weet.app.help.domain.HelpDTO;
+import com.weet.app.help.mapper.HelpMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
