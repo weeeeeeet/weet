@@ -81,7 +81,7 @@ const getReviews = (classId, sort, currPage) => {
             paginationArea.innerHTML = paging;
         } // success
     }) // .ajax
-
+	
 } // getReviews
 
 const goCouponBook = () => {

@@ -1,5 +1,6 @@
 const getBoardList = (currPage) => {
 
+    window.scrollTo(0, 0);
     const keyword = document.querySelector("#searchInput").value;
     const sort = document.querySelector(".sort-select").value;
     let str = '';
@@ -16,12 +17,16 @@ const getBoardList = (currPage) => {
         type: "GET",
         data: params,
         success: data => {
-            document.querySelector('.keyword').style.display = 'block';
+	
             console.log(data);
+            document.querySelector('.keyword').style.display = 'block';
+            const paginationArea = document.querySelector('#pagination-area');
+            let pageStr = '<ul class="pagination d-flex justify-content-center flex-wrap pagination-rounded-flat pagination-success">';
+            const pageData = data.data.paging;
 
-            document.querySelector('.sort-menu>p>span').innerHTML = data.data.paging.totalAmount;
-            if(data.data.paging.cri.keyword != "") {
-                document.querySelector('.keyword>span').innerHTML = '"' + data.data.paging.cri.keyword + '"';
+            document.querySelector('.sort-menu>p>span').innerHTML = pageData.totalAmount;
+            if(pageData.cri.keyword != "") {
+                document.querySelector('.keyword>span').innerHTML = '"' + pageData.cri.keyword + '"';
             } else {
                 document.querySelector('.keyword').style.display = 'none';
             }
@@ -31,7 +36,7 @@ const getBoardList = (currPage) => {
                     + '<div class="text">'
                     + '<span class="material-icons-outlined md-96">search_off</span>'
                     + '<span>요청하신 키워드</span>'
-                    + '<span id="user-keyword">"' + data.data.paging.cri.keyword + '"</span>'
+                    + '<span id="user-keyword">"' + pageData.cri.keyword + '"</span>'
                     + '<span>에 대한 검색결과가 없습니다.</span></div>'
                     + '<a href="/board/main"><input type="button" value="커뮤니티로 이동"></a></div>';
 
@@ -92,10 +97,37 @@ const getBoardList = (currPage) => {
                     str += '<p class="reply-word">' + e.reply.replyContents + '</p></div></div></div>';
                 } // if-else
             }) // .each
+            
+            // 페이징처리
+            if (pageData.prev) {
+                pageStr += '<li class="page-item"><a class="page-link" href="#" data-abc="true" onclick="getBoardList(' + (pageData.startPage - 1) + '); return false;">'
+                    + '<i class="fa fa-angle-left"></i></a></li>';
+            } // if
+
+            for (let i = pageData.startPage; i <= pageData.endPage; i++) {
+
+                pageStr += '<li class="page-item';
+
+                if( i == pageData.cri.currPage) pageStr += ' active'; // 현재 페이지에 active속성 추가
+
+                // 각 페이지를 클릭하면 해당 함수 재호출(currPage값만 변경, 나머지 매개변수 동일)
+                pageStr += '"><a class="page-link" href="#" data-abc="true" onclick="getBoardList(' + i + '); return false;">' + i + '</a></li>';
+            } // for
+
+            console.log("next 클릭!");
+            if (pageData.next) {
+                pageStr += '<li class="page-item"><a class="page-link" href="#" data-abc="true" onclick="getBoardList(' + (pageData.endPage + 1) + '); return false;">'
+                    + '<i class="fa fa-angle-right"></i></a></li>';
+            } // if
+            pageStr += '</ul>';
 
             document.querySelector(".board-list").innerHTML = str;
+            paginationArea.innerHTML = pageStr;
         } // success
     }) // .ajax
+    
+
+    
 } // getBoardList
 
 getBoardList(1);
