@@ -1,0 +1,300 @@
+@import url("https://fonts.googleapis.com/css?family=Heebo:300,400,500,700|Roboto:300,400,500");
+
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: 'SCoreDream';
+}
+
+body {
+    line-height: 24px;
+    font-size: 14px;
+    font-family: 'SCoreDream';
+    font-weight: normal;
+    color: #797979
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'SCoreDream';
+    color: #2a2a2a;
+    font-weight: 500
+}
+
+
+
+del {
+    color: #797979;
+    font-size: 14px;
+    font-weight: 300;
+    font-family: 'SCoreDream';
+}
+
+.list {
+    list-style: none;
+    margin: 0px;
+    padding: 0px
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.feature_product_area {
+    width: 1040px;
+    margin: 0 auto;
+}
+
+.container {
+    margin-top: 80px;
+}
+
+
+.main_title {
+    text-align: left;
+    margin-bottom: 75px
+}
+
+.main_title h2 {
+    font-size: 27px;
+    color: #2a2a2a;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.main_title  a {
+    float: right;
+    text-decoration: none;
+    font-size: 14px;
+    color: #6C6C6C;
+    display: inline;
+    font-family: 'SCoreDream';
+}
+
+.main_title h2 span {
+    position: relative;
+    display: inline-block
+}
+
+.main_title h2 span:after {
+    content: '';
+    position: absolute;
+    left: 0px;
+    bottom: -15px;
+    width: 100%;
+    height: 1px;
+    background: #ebedee
+}
+
+.main_title p {
+    font-size: 14px;
+    font-family: 'SCoreDream';
+    font-weight: normal;
+    line-height: 24px;
+    color: #797979;
+    margin-bottom: 0px
+}
+
+
+.single-product {
+    width: 315px;
+    text-align: center;
+}
+
+.single-product .product-img {
+    position: relative;
+    overflow: hidden;
+    height: 170px;
+}
+
+.single-product img {
+    height: 170px;
+}
+
+.single-product .product-btm {
+    padding: 22px 25px 0px;
+    border: 1px solid #f0f2f1;
+    text-align: left;
+}
+
+.single-product .product-btm h4 {
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    font-weight: 600;
+}
+
+.single-product .product-btm h5 {
+    font-size: 14px;
+    color: black!important;
+    text-decoration: none;
+}
+
+.product-btm a {
+    text-decoration: none;
+}
+
+
+.product-btm h1 {
+    font-size: 13px;
+    font-weight: 300;
+    margin-bottom: 5px;
+    color: black;
+    text-decoration: none;
+}
+
+.product-btm h4 {
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    font-weight: 600;
+}
+
+.product-btm i {                           /* 별 */
+    font-size: 14px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    color: rgb(255, 217, 0);
+}
+
+.product-btm h2 {
+    font-size: 14px;
+}
+
+
+.blog-area {
+	margin-top: 40px;
+    background-color: #ebebeb;
+
+    padding-top: 2px;
+
+}
+.blog-area .container {
+    width: 1040px;
+    bottom: 100px;
+}
+
+@media (max-width: 991px) {
+    .blog-area {
+        padding-bottom: 50px
+    }
+}
+
+.blog-area .blog_title span {
+	font-size: 27px;
+	margin-bottom: 30px;
+}
+
+.blog_title p {
+    font-size: 14px;
+    font-family: 'SCoreDream';
+    font-weight: normal;
+    line-height: 24px;
+    color: #797979;
+    margin-bottom: 30px
+}
+
+.single-blog {
+    margin-bottom: 50px;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #ebebeb;
+    padding: 20px;
+    width: 320px;
+}
+
+.single-blog a {
+    text-decoration: none;
+    color: black;
+
+}
+.single-blog .short_details {
+    padding: 0 0px 37px;
+    transition: all 300ms linear 0s
+}
+
+.single-blog .meta-top a {
+    display: inline-block;
+    color: #797979;
+    margin-right: 30px;
+    font-weight: 300;
+    transition: all 300ms linear 0s
+}
+
+.single-blog .meta-top a i {
+    margin-right: 10px;
+    position: relative;
+    top: 2px
+}
+
+.single-blog .meta-top a:hover {
+    color: #2370DF
+}
+
+.single-blog h4 {
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    line-height: 30px;
+    transition: all 300ms linear 0s
+}
+
+.single-blog h4 a {
+    color: #2a2a2a
+}
+
+.single-blog .text-wrap {
+    margin-bottom: 22px;
+    height: 50px;
+    overflow: hidden;
+    white-space:nowrap; 
+    text-overflow:ellipsis; 
+}
+
+.single-blog .text-wrap p {
+    font-size: 15px
+}
+
+.single-blog .blog_btn {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #2a2a2a
+}
+
+.single-blog:hover h4 {
+    color: #2370DF
+}
+
+.single-blog:hover .blog_btn {
+    color: #2370DF
+}
+
+
+ a:link {    
+ 	text-decoration: none; 
+ 	color: black;
+ }
+	
+a:link {    
+	text-decoration: none;
+}a:visited {    
+	text-decoration: none;
+}a:hover {    
+	text-decoration: none;
+}a:active {    
+	text-decoration: none;
+}
+
+
+hr {
+	border: none;
+	height: 1px;
+	background-color: gray;
+}
+  
