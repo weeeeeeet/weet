@@ -10,6 +10,7 @@ import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.weet.app.board.domain.BoardVO;
 import com.weet.app.board.domain.CommunityDTO;
 import com.weet.app.board.domain.CommunityVO;
 import com.weet.app.board.domain.ReplyDTO;
@@ -264,4 +265,15 @@ public class BoardServiceImpl implements BoardService {
 		catch(DAOException e) { throw new ServiceException(e); } // try-catch
 	} // increaseView
 	
+	// 메인 페이지의 커뮤니티 인기글
+	@Override
+	public List<BoardVO> getBoardMain() throws ServiceException {
+		log.trace("getBoardMain() invoked");
+		
+		try {
+			return this.mapper.selectBoardMain();
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+	} // getBoardMain
 } // end class
