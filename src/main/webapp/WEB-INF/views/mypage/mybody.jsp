@@ -17,10 +17,6 @@
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
 
-    <!-- 차트.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
     <!-- 데이트 피커 -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
@@ -37,6 +33,10 @@
     <link href="/resources/css/mypage/mypageMyBody.css" rel="stylesheet" />
     <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/63eb3bc178.js" crossorigin="anonymous"></script>
+
+    <!-- 차트.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
     <script>
 
@@ -192,68 +192,6 @@
                         <div  class="mybody_BMI_type">표준</div>
                     </div>
 
-                    <!-- <c:forEach var="board" items="${__LIST__}">
-
-                        <c:choose>
-
-                            <c:when test = "${board.bodyDate == nowDate}">
-
-                                <div class="mybody_weight on">
-                                    <div class="mybody_type"">체중 (kg)</div>
-            
-                                    <c:choose>
-            
-                                        <c:when test = "${empty board.bodyWeight}">
-                                            <div class="mybody_weight_value">0</div>
-                                        </c:when>
-                            
-                                        <c:otherwise>
-                                            <div class="mybody_weight_value">${board.bodyWeight}</div>
-                                        </c:otherwise>
-            
-                                    </c:choose>
-            
-                                    <div class="mybody_weight_type">표준</div>
-                                </div>
-                                
-                                <div class="mybody_muscle on">
-                                    <div  class="mybody_type">골격근량 (kg)</div>
-                                    <c:choose>
-            
-                                        <c:when test = "${empty board.bodyMuscle}">
-                                            <div  class="mybody_muscle_value">0</div>
-                                        </c:when>
-                            
-                                        <c:otherwise>
-                                            <div  class="mybody_muscle_value">${board.bodyMuscle}</div>
-                                        </c:otherwise>
-            
-                                    </c:choose>
-                                    <div  class="mybody_muscle_type">표준</div>
-                                </div>
-                                
-                                <div class="mybody_BMI on">
-                                    <div  class="mybody_type">체지방률 (%)</div>
-                                    <c:choose>
-            
-                                        <c:when test = "${empty board.bodyFatPct}">
-                                            <div  class="mybody_BMI_value">0</div>
-                                        </c:when>
-                            
-                                        <c:otherwise>
-                                            <div  class="mybody_BMI_value">${board.bodyFatPct}</div>
-                                        </c:otherwise>
-            
-                                    </c:choose>
-                                    <div  class="mybody_BMI_type">표준</div>
-                                </div>
-                            
-                            </c:when>
-
-                        </c:choose>
-
-                    </c:forEach> -->
-
                 </div>
                 
                 <!-- 인바디 입력창 모달 -->
@@ -285,8 +223,8 @@
                       <div class="inner">
                         <div class="container">
                             <canvas id="myChart"></canvas>
+                            <script type="text/javascript" src="/resources/js/mypage/mybody1.js"></script>
                         </div>
-                        <script type="text/javascript" src="/resources/js/mypage/mybody1.js"></script>
                       </div>
 
                       <div class="inner">
@@ -335,7 +273,7 @@
                     <!-- 어디로 데이터를 보낼지 작성해야 한다. -->
                     <form action="/mypage/mybody/input" method="post" id="bodyInputForm">
 
-                        <input type="hidden" name="userId" value="${board.userId}">
+                        <input type="hidden" name="userId" value="user2">
 
                         <!-- 날짜 -->
                         <div class="modal_mybody_date">
@@ -396,7 +334,7 @@
                         <!-- 어디로 데이터를 보낼지 작성해야 한다. -->
                         <form action="/mypage/mybody/update" method="post" id="bodyUpdateForm">
 
-                            <input type="hidden" name="userId" value="${board.userId}">
+                            <input type="hidden" name="userId" value="user2">
 
                             <!-- 날짜 -->
                             <div class="modal_mybody_date">
@@ -457,13 +395,15 @@
                         <!-- 어디로 데이터를 보낼지 작성해야 한다. -->
                         <form action="#">
 
+                            <input type="hidden" name="userId" value="user2">
+                            
                             <!-- 날짜 -->
                             <div class="modal_mybody_date">
                                 <p>날짜</p>
                                 
                                 <input 
                                     type="date" 
-                                    name="마이바디_날짜선택"
+                                    name="bodyDate"
                                     style="width: 230px; margin-left: 93px;  border: 1px solid #D7D7D7; border-radius: 3px; height: 33px;" 
                                     id="modal_datepicker insert_mybody_date">
                                 <input type="submit" class="modal_mybody_date_btn" data-bs-dismiss="modal" value="선택">

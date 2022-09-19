@@ -64,6 +64,9 @@ public interface MypageService {
 	public abstract boolean addBody(MypageBodyDTO dto) throws ServiceException;
 	
 	// 12. 마이페이지 수정
-	// public abstract boolean updateBody(MypageBodyDTO dto) throws ServiceException;
+	public abstract boolean updateBody(MypageBodyDTO dto) throws ServiceException;
+	
+	// 13. 마이페이지 날짜 지정
+	public abstract List <MypageBodyDTO> getDateMybody(MypageBodyDTO vo) throws ServiceException;
 	
 } // end interface

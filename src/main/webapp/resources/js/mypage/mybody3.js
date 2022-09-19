@@ -1,6 +1,6 @@
-var ctx = document.getElementById('myChart3').getContext('2d');
+var ctx3 = document.getElementById('myChart3').getContext('2d');
 
-var chart = new Chart(ctx, {
+var chart3 = new Chart(ctx3, {
   // 챠트 종류를 선택
   type: 'line',
 

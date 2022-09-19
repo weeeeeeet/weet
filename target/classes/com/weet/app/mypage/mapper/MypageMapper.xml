@@ -291,4 +291,33 @@
         WHERE BODY_DATE = to_date(#{bodyDate},'yyyy/mm/dd') AND USER_ID = #{userId}
     </update>
 
+    <!-- 마이바디 날짜선택 조회 -->
+    <select 
+        id="selectMyBodyDate" 
+        resultType="com.weet.app.mypage.domain.MypageBodyDTO">
+
+        <![CDATA[
+
+            SELECT
+
+                /*+ INDEX_ASC(T_BODY) */
+                
+                body_id,
+                user_id,
+                BODY_WEIGHT,
+                BODY_MUSCLE,
+                BODY_FAT_PCT,
+                TO_CHAR(BODY_DATE, 'YY.MM.DD')
+                
+            FROM
+                T_BODY
+            WHERE
+                USER_ID = #{userId}
+                AND TO_CHAR(BODY_DATE, 'YY.MM.DD') <= #{bodyDate}
+            FETCH FIRST 5 ROWS ONLY
+
+        ]]>
+    
+    </select>
+
 </mapper>

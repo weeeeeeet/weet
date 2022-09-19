@@ -312,9 +312,35 @@ public class MypageServiceImpl implements MypageService, InitializingBean {
 	// 12 ) 마이바디 데이터 수정
 	// ======================================================================
 	
+	@Override
+	public boolean updateBody(MypageBodyDTO dto) throws ServiceException {
+		
+		log.trace("updateBody() invoked.");
+		
+		try {
+			return this.mapper.updateMyBody(dto) == 1;
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		} // try - catch
+		
+	} // updateBody
+	
 	// ======================================================================
-	// 12 ) 마이바디 데이터 조회
+	// 12 ) 마이바디 데이터 날짜 조회
 	// ======================================================================
+	
+	@Override
+	public List<MypageBodyDTO> getDateMybody(MypageBodyDTO vo) throws ServiceException {
+		
+		log.trace("getDateMybody() invoked.");
+		
+		try {
+			return this.mapper.selectMyBodyDate(vo);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		} // try - catch
+		
+	} // getDateMybody
 	
 	// ======================================================================
 	// 13 ) 구매 내역

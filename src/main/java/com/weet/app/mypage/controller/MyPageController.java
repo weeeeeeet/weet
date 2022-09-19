@@ -402,14 +402,14 @@ public class MyPageController implements InitializingBean {
 	// =======================================================
 	
 	@PostMapping("/mybody/update")
-	public String MybodyUpdate (MypageReviewDTO dto, RedirectAttributes rttrs) throws ControllerException {
+	public String MybodyUpdate (MypageBodyDTO dto, RedirectAttributes rttrs) throws ControllerException {
 		
 		log.trace("\t + ClassReplyregister({}, {}) invoked.", dto, rttrs);
 		
 		try {
 			
 			// + 필드에 주입받은 서비스 객체의 메소드 호출 -> 핵심 메소드 호출
-			if ( this.service.addReview(dto) ) {
+			if ( this.service.updateBody(dto) ) {
 				
 				rttrs.addAttribute("__RESULT__", "success");
 				
