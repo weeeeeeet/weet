@@ -233,7 +233,7 @@
 										<h1>그룹클래스
 									</c:if>
 									/ 서울시 강남구</h1><a href="/class/detail/${voNew.classId}"><h4>${voNew.classTitle}</h4></a>
-									<h5>곽두팔</h5>
+									<h5>${voNew.classTrainerName}</h5>
 									<div class="star">
 										<i class="fa-solid fa-star"></i> ${voNew.classAvgStar}
 									</div>
@@ -271,15 +271,15 @@
 								<div class="meta-top d-flex">
 									<a href="#">${board.userId}</a> <a href="#"><i
 										class="fas fa-comment"></i>${board.commReplyCount}</a> <a href="#"><i
-										class="fas fa-thumbs-up"></i>${board.commLikeNum}</a>
+										class="fas fa-heart"></i>${board.commLikeNum}</a>
 								</div>
-								<a class="d-block" href="single-blog.html">
+								<a class="d-block" href="/board/${board.commId}">
 									<h4>${board.commPostTitle}</h4>
 								</a>
 								<div class="text-wrap">
 									<p>${board.commPostContents}</p>
 								</div>
-								<a href="#" class="blog_btn">+ 더보기 <span
+								<a href="/board/${board.commId}" class="blog_btn">+ 더보기 <span
 									class="ml-2 ti-arrow-right"></span></a>
 							</div>
 						</div>

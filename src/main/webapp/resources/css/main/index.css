@@ -167,7 +167,9 @@ a {
 }
 
 
-.blog-area {
+/* 커뮤니티 인기글 ------------------- */
+
+.blog-area {					
 	margin-top: 40px;
     background-color: #ebebeb;
 
@@ -232,6 +234,13 @@ a {
     top: 2px
 }
 
+.fa-comment {
+	color: #2370DF;
+}
+.fa-heart {
+	color: #E2264D;
+}
+
 .single-blog .meta-top a:hover {
     color: #2370DF
 }
@@ -276,7 +285,7 @@ a {
 }
 
 
- a:link {    
+a:link {    
  	text-decoration: none; 
  	color: black;
  }
