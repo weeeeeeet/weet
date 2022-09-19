@@ -8,6 +8,7 @@ import com.siot.IamportRestClient.response.Payment;
 import com.weet.app.exception.DAOException;
 import com.weet.app.exception.ServiceException;
 import com.weet.app.pay.domain.PaymentDTO;
+import com.weet.app.pay.domain.PaymentVO;
 import com.weet.app.pay.mapper.CouponMapper;
 import com.weet.app.pay.mapper.PayMapper;
 
@@ -61,6 +62,13 @@ public class PayServiceImpl implements PayService {
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		} // try-catch
+	} // savePayment
+
+	@Override
+	public PaymentVO getPayInfo(String orderNum) throws ServiceException {
+		
+		try { return this.payMapper.selectPayInfo(orderNum); }
+		catch(DAOException e) { throw new ServiceException(e); }
 	} // goPayment
 
 } // end class

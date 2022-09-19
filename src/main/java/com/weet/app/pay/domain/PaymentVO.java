@@ -6,9 +6,14 @@ import lombok.Value;
 public class PaymentVO {
 	
 	private String payNum;
-	private String payAmount;
+	private String classTitle;
+	private Character classType;
+	private String classTrainerName;
+	private String classMainImgUrl;
+	private Integer classFee;
+	private String classAderess;
+	private Integer payAmount;
 	private String payTs;
 	private String payMethod;
-	private String payBankName;
 	private String payCardName;
 } // end class

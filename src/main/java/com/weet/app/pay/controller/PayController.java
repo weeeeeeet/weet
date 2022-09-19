@@ -72,17 +72,6 @@ public class PayController {
 		return "/pay/payment";
 	} // paymentPage
 	
-	// 구매
-	@PostMapping("/payment")
-	@ResponseBody
-	public String payment(Payment payment, String classId, String userId) {
-		log.trace("payment() invoked.");
-		
-		log.info("\t+ ***** payment: {} *****", payment.toString());
-		
-		return null;
-	} // payment
-	
 	// 결제 검증
 	@ResponseBody
 	@PostMapping("/verify/{imp_uid}")
@@ -134,19 +123,23 @@ public class PayController {
 	@ResponseBody
 	@PostMapping("/refund/{ imp_uid }")
 	public IamportResponse<Payment> cancelPaymentByImpUid(
-			@PathVariable(value = "imp_uid") String imp_uid,
-			CancelData cancelData
-		) {
+		@PathVariable(value = "imp_uid") String imp_uid,
+		CancelData cancelData) throws ControllerException {
 		log.trace("cancelPaymentByImpUid({}, {}) invoked.", imp_uid, cancelData);
 		
 		return null;
 	} // cancelPaymentByImpUid
 	
 	// 구매완료 창 GET
-	@GetMapping("/succeeded")
-	public String paySucceeded() {
+	@GetMapping("/succeeded/{uid}")
+	public String paySucceeded(
+		@PathVariable("uid") String orderNum,
+		Model model) throws ControllerException {
 		log.trace("paySucceeded() invoked.");
 		 
+		try { model.addAttribute("__PAYINFO__", this.payService.getPayInfo(orderNum)); } 
+		catch(ServiceException e) { throw new ControllerException(e); }
+		
 		return "/pay/paymentSucceeded";
 	} // paySucceeded
 
