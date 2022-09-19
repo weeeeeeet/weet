@@ -393,7 +393,7 @@
                     <div class="modal-body">
 
                         <!-- 어디로 데이터를 보낼지 작성해야 한다. -->
-                        <form action="#">
+                        <form action="/mypage/mybody/dateselect" method="post" id="bodydateselectForm">
 
                             <input type="hidden" name="userId" value="user2">
                             

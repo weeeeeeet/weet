@@ -313,7 +313,7 @@
                 T_BODY
             WHERE
                 USER_ID = #{userId}
-                AND TO_CHAR(BODY_DATE, 'YY.MM.DD') <= #{bodyDate}
+                AND TO_Date(TO_CHAR(BODY_DATE, 'YY.MM.DD'), 'YY.MM.DD') <= TO_Date(#{bodyDate}, 'YY.MM.DD')
             FETCH FIRST 5 ROWS ONLY
 
         ]]>

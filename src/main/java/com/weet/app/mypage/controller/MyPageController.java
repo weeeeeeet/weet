@@ -404,7 +404,7 @@ public class MyPageController implements InitializingBean {
 	@PostMapping("/mybody/update")
 	public String MybodyUpdate (MypageBodyDTO dto, RedirectAttributes rttrs) throws ControllerException {
 		
-		log.trace("\t + ClassReplyregister({}, {}) invoked.", dto, rttrs);
+		log.trace("\t + MybodyUpdate({}, {}) invoked.", dto, rttrs);
 		
 		try {
 			
@@ -418,11 +418,57 @@ public class MyPageController implements InitializingBean {
 			} // if - else
 			
 			// + 업데이트 한 후에는 전체 목록 조회 페이지로 이동해야 한다. (***)
-			return "redirect:/mypage/activity/boardlist?userId=user2";
+			return "redirect:/mypage/mybody?userId=user2";
 			
 		} catch(Exception e) { 
 			throw new ControllerException (e);
 		} // try - catch
+		
+	} // MybodyUpdate
+	
+	// =======================================================
+		// 11. 마이바디 날짜 선택
+	// =======================================================
+	
+	@PostMapping("/mybody/dateselect")
+	public String MybodyDateSelect (MypageBodyDTO vo,Model model) throws ControllerException {
+		
+		try {
+			
+			// 1. 게시물 출력
+			List<MypageBodyDTO> list = this.service.getDateMybody(vo);
+			list.forEach(log::info);
+			
+			// 2. 오늘의 날짜 구하기
+			Date now = new Date();	
+			
+			// 3. 데이터 별 JS 배열 생성
+			String [] dateArr = list.stream().map( e -> e.getBodyDate() ).toArray(String[]::new);
+			log.info("\t + >>>>>>>>>>>> dateArr : {}", Arrays.toString(dateArr));
+			
+			double [] muscleArr = list.stream().mapToDouble( e -> e.getBodyMuscle()).toArray();
+			log.info("\t + >>>>>>>>>>>> fatPctArr : {}", Arrays.toString(muscleArr));
+			
+			double [] weightArr = list.stream().mapToDouble( e -> e.getBodyWeight()).toArray();
+			log.info("\t + >>>>>>>>>>>> weightArr : {}", Arrays.toString(weightArr));
+			
+			double [] fatPctArr = list.stream().mapToDouble( e -> e.getBodyFatPct()).toArray();
+			log.info("\t + >>>>>>>>>>>> fatPctArr : {}", Arrays.toString(fatPctArr));
+			
+			// + value가 NULL이면 공유속성에 추가가 안되기에, NULL인지 아닌지 파악하지 않아도 OK!
+			model.addAttribute("__DATE__", now);
+			model.addAttribute("__LIST__",list);
+			
+			model.addAttribute("muscleArr", muscleArr);
+			model.addAttribute("weightArr", weightArr);
+			model.addAttribute("dateArr",dateArr);
+			model.addAttribute("fatPctArr", fatPctArr);
+			
+			return "mypage/mybody?userId=user2";
+			
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try - catch : ServiceException을 ControllerException으로
 		
 	} // MybodyUpdate
 	
