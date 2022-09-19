@@ -24,9 +24,12 @@ import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 import com.weet.app.classes.domain.ClassDetailVO;
 import com.weet.app.classes.service.ClassService;
+import com.weet.app.common.APIResponse;
 import com.weet.app.exception.ControllerException;
+import com.weet.app.exception.ServiceException;
 import com.weet.app.pay.domain.CouponVO;
 import com.weet.app.pay.domain.PaymentDTO;
+import com.weet.app.pay.service.PayService;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -41,7 +44,10 @@ public class PayController {
 	private IamportClient api;
 	
 	@Setter(onMethod_= @Autowired)
-	private ClassService service;
+	private ClassService classService;
+	
+	@Setter(onMethod_= @Autowired)
+	private PayService payService;
 	
 	public PayController() {
 		this.api = new IamportClient("3192791213481602", "e87a637193d097e320a3503f09f4d9c234296d309785ebdccd7091ef346b401f57d47682f395e9c1");
@@ -55,7 +61,7 @@ public class PayController {
 		log.trace("paymentPage() invoked.");
 		
 		try {
-			ClassDetailVO vo = this.service.getDetail(classId);
+			ClassDetailVO vo = this.classService.getDetail(classId);
 			
 			Objects.requireNonNull(vo);
 			model.addAttribute("__CLASS__", vo);
@@ -69,26 +75,51 @@ public class PayController {
 	// 구매
 	@PostMapping("/payment")
 	@ResponseBody
-	public String payment(PaymentDTO dto) {
+	public String payment(Payment payment, String classId, String userId) {
 		log.trace("payment() invoked.");
 		
-		log.info("\t+ dto: {}", dto);
-		return "GOOD";
+		log.info("\t+ ***** payment: {} *****", payment.toString());
+		
+		return null;
 	} // payment
 	
 	// 결제 검증
 	@ResponseBody
 	@PostMapping("/verify/{imp_uid}")
-	public IamportResponse<Payment> paymentByImpUid(
-			Model model,
-			Locale locale,
-			@PathVariable(value = "imp_uid") String imp_uid
-		) throws IamportResponseException, IOException {
+	public APIResponse paymentByImpUid(
+			@PathVariable(value = "imp_uid") String imp_uid,
+			String classId,
+			String userId,
+			String couponId
+		) throws IamportResponseException, IOException, ControllerException {
 		
-		log.trace("paymentByImpUid({}) invoked.", imp_uid);
+		log.trace("paymentByImpUid({}, {}, {}, {}) invoked.", imp_uid, classId, userId, couponId);
 		
-		// 필드 추가 필요
-		return this.api.paymentByImpUid(imp_uid);
+		
+		APIResponse res = new APIResponse();
+		String result = "";
+		Payment payment = this.api.paymentByImpUid(imp_uid).getResponse(); // 검증처리
+		
+		// 리턴받은 payment의 status가 결제완료이면 DB조작 메소드 실행
+		try {
+			switch(payment.getStatus()) {
+				case "paid" : 
+					result = this.payService.savePayment(payment, classId, userId, couponId);
+					
+					break;
+				case "failed" :
+					result = "FAIL:04";
+					
+					break;
+			} // switch
+			
+			res.add("result", result);
+			res.add("orderNum", payment.getMerchantUid());
+		} catch (ServiceException e) {
+			throw new ControllerException(e);
+		} // try-catch
+		
+		return res;
 	} // paymentByImpUid
 	
 	// 환불 요청(사용자 요청)
