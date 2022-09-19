@@ -31,6 +31,7 @@
 		    class_tag1,
 		    class_tag2,
 		    class_tag3,
+		    class_photo_url,
 		    class_avg_star,
 		    class_running_time,
 		    class_count,
