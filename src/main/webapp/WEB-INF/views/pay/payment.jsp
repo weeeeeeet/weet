@@ -67,7 +67,7 @@
                 <div class="card mb-3">
                     <div class="row g-0">
                         <div class="col-md-4 embed-responsive embed-responsive-4by3">
-                            <img src="${__CLASS__.classMainImgUrl}"
+                            <img src="/${__CLASS__.classMainImgUrl}"
                                 class="card-img-top img-fluid rounded-start rounded-end embed-responsive-item"
                                 alt="...">
                         </div>
@@ -75,7 +75,10 @@
                             <div class="card-body">
                                 <div class="row">
                                     <p class="card-title class-title">${__CLASS__.classTitle}</p>
-                                    <p class="card-text class-info"><small class="text-muted">${__CLASS__.trainerName}/${__CLASS__.classType}클래스/${__CLASS__.classAderess}</small></p>
+                                    <p class="card-text class-info"><small class="text-muted">${__CLASS__.trainerName}/
+                                    <c:if test="${ __CLASS__.classType == '1'.charAt(0) }">개인</c:if>
+                            		<c:if test="${ __CLASS__.classType == '2'.charAt(0) }">그룹</c:if>
+                                    클래스/${__CLASS__.classAderess}</small></p>
                                     <p class="card-text class-amount">
                                         <fmt:formatNumber type="currency" currencySymbol="￦" value="${__CLASS__.classFee}" />원</p>
                                 </div>
