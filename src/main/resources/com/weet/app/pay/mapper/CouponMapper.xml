@@ -56,7 +56,9 @@
     
     <update id="updateCouponUsage">
     	UPDATE t_coupon_usage
-    	SET coupon_used = 'Y'
+    	SET 
+    		coupon_used = 'Y',
+    		coupon_apply_ts = current_date
     	WHERE 
     		coupon_id = #{couponId}
     		AND user_id = #{userId}
