@@ -1,15 +1,19 @@
+// 공통변수
+const classId = document.querySelector("input[name=class-id]").value;
+const userId = document.querySelector("input[name=user-id]").value;
+
 // 모달창에 사용가능한 쿠폰조회
 const getCouponList = () => {
     $('.wrapper>.box').empty();
 
     // 전송파라미터
-    const userId = { "userId": "user1" };
+    const params = { "userId": userId };
     
 
     $.ajax({
         url: "/coupons/my",
         type: "GET",
-        data: userId,
+        data: params,
         dataType: "JSON",
         success: data => {
             
@@ -20,8 +24,8 @@ const getCouponList = () => {
 				e.couponEndTs = e.couponEndTs === null ? '' : ('~' + e.couponEndTs);
 
                 let str = '<input type="radio" class="coupon-select" name="select" id="coupon-' + i + '" value="'
-                    + e.couponDcPct + '"/>'
-                    + '<label for="coupon-' + i + '" class="coupon-select">'
+                    + e.couponId + '"/>'
+                    + '<label for="coupon-' + i + '" class="coupon-select" id="' + e.couponId + '">'
                     + '<div class="select-dots"></div>'
                     + '<div class="row">'
                     + '<div class="col-2 text-dc-pct">' + e.couponDcPct + '%</div>'
@@ -40,6 +44,10 @@ const getCouponList = () => {
 // 쿠폰 적용
 const applyCoupon = (selectValue) => {
     event.preventDefault();
+    
+    let dcPct = document.querySelector(`#${selectValue} .text-dc-pct`).innerText;
+    dcPct = dcPct.substring(0, dcPct.lastIndexOf("%"));
+    console.log(dcPct);
 
     // 클래스 정가
     let originAmount = document.querySelector("#original-amount>p").innerText;
@@ -47,13 +55,14 @@ const applyCoupon = (selectValue) => {
     originAmount = Number(originAmount.substring(0, originAmount.lastIndexOf("원")));
 
     // 할인금액
-    const discountAmount = originAmount * (Number(selectValue) * 0.01);
+    const discountAmount = originAmount * (Number(dcPct) * 0.01);
     document.querySelector("#coupon-modal>a").innerText = discountAmount.toLocaleString() + "원";
 
     // 최종 결제 금액
     document.querySelector("#total-amount>p").innerText = (originAmount - discountAmount).toLocaleString() + "원";
 } // applyCoupon
 
+// 아임포트 결제
 const goPayment = () => {
     console.clear();
     console.log('goPayment() invoked.');
@@ -88,38 +97,48 @@ const goPayment = () => {
         function (rsp) {
             console.log(rsp);
 
-            // 결제검증
-            $.ajax({
-                type: "POST",
-                url: "/pay/verify/" + rsp.imp_uid
+            if(rsp.success) {
+                
+                verifyAndSavePayInfo(rsp.imp_uid);
 
-            }).done((data) => {
-                console.log(data);
+            } else {
+                alert('처리 중 오류가 발생하였습니다. 다시 시도해 주세요');
+                
+            } // if-else
 
-                // rsp.paid_amount와 data.response.amount를 비교(import 서버검증)
-                if (rsp.paid_amount == data.response.amount) {
-                    alert('결제 및 결제검증 완료');
+        } // function(rsp)
 
-                    console.log(data.response);
-                    $.ajax({
-                        type: "POST",
-                        url: "/pay/payment",
-                        data: data.response,
-                        statusCode: {
-                            200: () => {
-                            },
-
-                        }
-                    })
-                } else {
-                    alert('결제 실패');
-                }
-            })
-
-        }
-
-    );
+    ); // .request_pay
 } // goPayment
+
+// 결제검증 후 DB업데이트
+const verifyAndSavePayInfo = (imp_uid) => {
+    const couponId = document.querySelector("input[name=select]:checked").value;
+
+    const params = {
+        "classId": classId,
+        "userId": userId,
+        "couponId": couponId
+    }
+
+    $.ajax({
+
+        type: "POST",
+        url: "/pay/verify/" + imp_uid,
+        data: params,
+        success: data => {
+            console.log(data);
+
+            if(data.data.result === "SUCCESS") {
+                location.href = "/pay/succeeded?order=" + data.data.orderNum;
+            } else {
+                alert('처리 중 오류가 발생하였습니다. 다시 시도해 주세요');
+            } // if-else
+        } // success
+
+    }) // .ajax
+
+} // savePayInfo
 
 // 체크박스 전체선택
 const selectAll = (selectAll) => {

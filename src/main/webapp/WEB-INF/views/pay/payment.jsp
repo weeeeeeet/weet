@@ -56,15 +56,18 @@
 
 <body>
     <section class="contents">
+		<input type="hidden" name="class-id" value="${__CLASS__.classId}" />
+		<input type="hidden" name="user-id" value="user1" />
+		
         <form class="was-validated" name="payForm" onsubmit="goPayment()">
 
             <fieldset>
                 <legend>상품 정보</legend>
-
+				
                 <div class="card mb-3">
                     <div class="row g-0">
                         <div class="col-md-4 embed-responsive embed-responsive-4by3">
-                            <img src="${__class__.classMainImgUrl}"
+                            <img src="${__CLASS__.classMainImgUrl}"
                                 class="card-img-top img-fluid rounded-start rounded-end embed-responsive-item"
                                 alt="...">
                         </div>
