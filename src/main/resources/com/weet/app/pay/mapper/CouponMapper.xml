@@ -53,4 +53,12 @@
     		#{ userId }
     	)
     </insert>
+    
+    <update id="updateCouponUsage">
+    	UPDATE t_coupon_usage
+    	SET coupon_used = 'Y'
+    	WHERE 
+    		coupon_id = #{couponId}
+    		AND user_id = #{userId}
+    </update>
 </mapper>
