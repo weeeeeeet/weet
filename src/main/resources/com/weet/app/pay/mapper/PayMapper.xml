@@ -6,5 +6,50 @@
 
 <mapper namespace="com.weet.app.pay.mapper.PayMapper">
 
+	<insert id="insertClassListener">
+		INSERT INTO t_class_listener
+		(
+			class_listener,
+			class_id,
+			user_id
+		)
+		VALUES
+		(
+			class_listener_seq.nextval,
+			#{classId},
+			#{userId}
+		)
+	</insert>
+	
+	<insert id="insertPayInfo">
+		INSERT INTO t_pay
+		(
+			pay_num,
+			class_id,
+			user_id,
+			pay_uid,
+			pay_amount,
+			pay_email,
+			pay_method,
+			pay_agmt_yn,
+			pay_card_name
+		)
+		VALUES
+		(
+			#{payNum},
+			#{classId},
+			#{userId},
+			#{payUid},
+			#{payAmount},
+			#{payEmail},
+			#{payMethod},
+			#{payAgmtYn},
+			#{payCardName}
+		)
+	</insert>
+	
+	<select id="selectPayInfo">
+	
+	</select>
     
 </mapper>
