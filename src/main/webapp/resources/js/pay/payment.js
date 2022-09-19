@@ -130,7 +130,7 @@ const verifyAndSavePayInfo = (imp_uid) => {
             console.log(data);
 
             if(data.data.result === "SUCCESS") {
-                location.href = "/pay/succeeded?order=" + data.data.orderNum;
+                location.href = "/pay/succeeded/" + data.data.orderNum;
             } else {
                 alert('처리 중 오류가 발생하였습니다. 다시 시도해 주세요');
             } // if-else

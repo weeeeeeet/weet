@@ -23,36 +23,41 @@ const getReviews = (classId, sort, currPage) => {
             let content = '';
             let paging = '<ul class="pagination d-flex justify-content-center flex-wrap pagination-rounded-flat pagination-success">';
 
-            // 리뷰 컨텐츠 영역 추가
-            $.each(data.reviews, (i, e) => {
-                content += '<div class="row d-flex">'
-                    + '<div class="row d-flex review-header">'
-                    + '<div class="col-4">'
-                    + '<h3 class="mt-2 mb-0">' + e.userNickname + '</h3>'
-                    + '</div>'
-                    + '<div class="col-4">'
-                    + '<p class="text-left"><span class="text-muted">' + e.reviewStar + '</span>';
-
-                for (let i = 1; i <= 5; i++) {
-                    if (i <= e.reviewStar) {
-                        content += '<span class="fa fa-star star-active"></span>';
-                    } else {
-                        content += '<span class="fa fa-star star-inactive"></span>';
-                    } // if-else
-                } // for
-
-                content += '</p></div>'
-                    + '<div class="col-4 date">'
-                    + '<p class="text-muted pt-5 pt-sm-3">' + e.reviewDatetime + '</p>'
-                    + '</div>'
-                    + '</div>'
-                    + '<div class="row text-left">'
-                    + '<p class="content">' + e.reviewContents + '</p>'
-                    + '</div>'
-                    + '<div class="row text-left"></div></div><hr>';
-
-            }) // .each
-
+			// 리뷰영역
+			if(data.reviews.length == 0) {
+				content += '<p style="text-align: center; color: #777;">이 클래스에 등록된 후기가 없어요!</p>';
+			} else {
+				
+	            $.each(data.reviews, (i, e) => {
+	                content += '<div class="row d-flex">'
+	                    + '<div class="row d-flex review-header">'
+	                    + '<div class="col-4">'
+	                    + '<h3 class="mt-2 mb-0">' + e.userNickname + '</h3>'
+	                    + '</div>'
+	                    + '<div class="col-4">'
+	                    + '<p class="text-left"><span class="text-muted">' + e.reviewStar + '</span>';
+	
+	                for (let i = 1; i <= 5; i++) {
+	                    if (i <= e.reviewStar) {
+	                        content += '<span class="fa fa-star star-active"></span>';
+	                    } else {
+	                        content += '<span class="fa fa-star star-inactive"></span>';
+	                    } // if-else
+	                } // for
+	
+	                content += '</p></div>'
+	                    + '<div class="col-4 date">'
+	                    + '<p class="text-muted pt-5 pt-sm-3">' + e.reviewDatetime + '</p>'
+	                    + '</div>'
+	                    + '</div>'
+	                    + '<div class="row text-left">'
+	                    + '<p class="content">' + e.reviewContents + '</p>'
+	                    + '</div>'
+	                    + '<div class="row text-left"></div></div><hr>';
+	
+	            }) // .each
+			} // if-else
+            
             // 페이징처리
             if (data.paging.prev) {
                 paging += '<li class="page-item"><a class="page-link" href="#" data-abc="true" onclick="getReviews(\'' + classId + '\', \'' + sort + '\', ' + (data.paging.startPage - 1) + '); return false;">'
@@ -177,10 +182,12 @@ const clickLike = () => {
 // ================ 이벤트 리스너 ========================== //
 
 // 상세조회 페이지 로딩시 같이 출력되어야할 정보를 담은 함수호출(default 정렬 최신순)
-window.onload = () => {
-    
-    getReviews(classId, 'recent', 1);
-    getTotalLikes(classId);
-    likeCheck(classId, 'user1');
-} // .onload
+
+getReviews(classId, 'recent', 1);
+getTotalLikes(classId);
+likeCheck(classId, 'user1');
+
+const mainImg = (document.querySelector('.main-img-url').src);
+document.querySelector('.hero').style.backgroundImage 
+	= "linear-gradient(to bottom, rgba(117, 43, 0, 0.5), rgba(0, 0, 3, 0.9), rgba(0, 0, 3, 0.9)), url('" + mainImg + "')"
 
