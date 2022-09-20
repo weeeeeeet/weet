@@ -227,6 +227,19 @@
 		    AND comm_delete_yn = 'N'
 	</select>
 	
+	<select 
+		id="selectSelectedReplyCountOfTrainer"
+		resultType="int">
+		
+		SELECT
+		    count(reply_id)
+		FROM
+		    t_reply
+		WHERE
+		    user_id = #{userId}
+		    AND reply_selected_yn = 'Y'
+	</select>
+	
 	<insert id="insertBoard">
 	
 		<selectKey keyProperty="commId" order="AFTER" resultType="int">
@@ -362,10 +375,21 @@
 	</update>
 	
 	<update id="updateReplyGroup">
-	
 		UPDATE t_reply
 		SET reply_group = #{replyId}
 		WHERE reply_id = #{replyId}
+	</update>
+	
+	<update id="updateReplySelected">
+		UPDATE t_reply
+		SET reply_selected_yn = 'Y'
+		WHERE reply_id = #{replyId}
+	</update>
+	
+	<update id="updateTrainerLevel">
+		UPDATE t_tr
+		SET user_level = user_level + 1
+		WHERE user_id = #{userId}
 	</update>
 	
 	<delete id="deleteBoardLike">
