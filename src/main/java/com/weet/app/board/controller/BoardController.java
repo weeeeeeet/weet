@@ -291,10 +291,18 @@ public class BoardController {
 	} // replyDelete
 	
 	// 댓글 채택
-	@PostMapping("/reply/select/{replyId}")
-	public String replySelect() {
-		return "test!";
-	}
+	@PutMapping("/reply/select/{replyId}")
+	public APIResponse replySelect(@PathVariable int replyId, String userId) throws ControllerException {
+		log.trace("replyDelete({}) invoked.", userId);
+		
+		APIResponse res = new APIResponse();
+		
+		try { 
+			res.add("result", this.service.replySelect(replyId, userId) ? "SUCCESS" : "FAILED");
+		} catch (ServiceException e) { throw new ControllerException(e); } // try-catch
+		
+		return res;
+	} // replySelect
 	
 	// 대댓글 작성
 	@PostMapping("/re/reply/new")

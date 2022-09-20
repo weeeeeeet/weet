@@ -235,7 +235,13 @@ public class BoardServiceImpl implements BoardService {
 			int affectedLines2 = this.mapper.updateLikeCount(commId);
 			
 			return (affectedLines1 == 1 && affectedLines2 == 1) ? true : false;
-		} catch(DAOException e) { throw new ServiceException(e); } // try-catch
+		} catch(UncategorizedSQLException e) {
+			throw e;
+		} catch(Exception e) {
+			log.info("\t+ Transfer Failure.");
+			
+			throw new ServiceException(e);
+		} // try-catch
 	} // boardLike
 
 	// 게시글 추천취소
@@ -248,9 +254,16 @@ public class BoardServiceImpl implements BoardService {
 			int affectedLines2 = this.mapper.updateLikeCount(commId);
 			
 			return (affectedLines1 == 1 && affectedLines2 == 1) ? true : false;
-		} catch(DAOException e) { throw new ServiceException(e); } // try-catch
+		} catch(UncategorizedSQLException e) {
+			throw e;
+		} catch(Exception e) {
+			log.info("\t+ Transfer Failure.");
+			
+			throw new ServiceException(e);
+		} // try-catch
 	} // cancelBoardLike
 
+	// 조회수 업데이트
 	@Override
 	public boolean increaseView(int commId) throws ServiceException {
 		
@@ -258,12 +271,40 @@ public class BoardServiceImpl implements BoardService {
 		catch(DAOException e) { throw new ServiceException(e); } // try-catch
 	} // increaseView
 
+	// 대댓글목록 조회
 	@Override
 	public List<ReplyVO> getReReplyList(int commId, int replyGroup) throws ServiceException {
 		
 		try { return this.mapper.selectReReplyList(commId, replyGroup); } 
 		catch(DAOException e) { throw new ServiceException(e); } // try-catch
 	} // increaseView
+	
+	// 댓글 채택
+	@Override
+	@Transactional
+	public boolean replySelect(int replyId, String userId) throws ServiceException {
+
+		try { 
+			if( this.mapper.updateReplySelected(replyId) == 1 ) {
+				int replyCnt = this.mapper.selectSelectedReplyCountOfTrainer(userId);
+				
+				if( BoardService.contains(BoardService.LEVEL_TRIGGER, replyCnt) ) {
+					this.mapper.updateTrainerLevel(userId);
+				} // if
+				
+				return true;
+			} else {
+				
+				return false;
+			} // if-else
+		} catch(UncategorizedSQLException e) {
+			throw e;
+		} catch(Exception e) {
+			log.info("\t+ Transfer Failure.");
+			
+			throw new ServiceException(e);
+		} // try-catch
+	} // getBoardMain
 	
 	// 메인 페이지의 커뮤니티 인기글
 	@Override
@@ -276,4 +317,6 @@ public class BoardServiceImpl implements BoardService {
 			throw new ServiceException(e);
 		} // try-catch
 	} // getBoardMain
+	
+
 } // end class
