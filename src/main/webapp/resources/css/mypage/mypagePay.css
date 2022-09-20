@@ -1,0 +1,253 @@
+@charset "UTF-8";
+
+/* content ================================ */
+
+/* 컨텐츠 영역에 양쪽 200px씩 여백주기 ( 수정 !! ) */
+.content{
+    margin: 20px 200px 0px;
+    width: 1040px;
+
+    height: 600px;
+
+    width :calc(100% - 400px);
+}
+
+/* 컨텐츠 영역의 왼쪽 가로 길이 잡아주기 */
+.content .content_left {
+    width: 259px;
+
+    margin: 20px 0px;
+    /* border: 1px solid red; */
+
+    float: left;
+}
+
+/* 컨텐츠 영역의 왼쪽상단의 프로필 전제 높이 잡아주기 */
+.content .content_left .profile {
+    height: 90px;
+
+    /* border: 1px solid palegreen; */
+}
+
+/* 컨텐츠 영역의 왼쪽상단의 프로필의 사진 전제 크기 잡아주기 */
+.content .content_left .profile_photo{
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+
+    float: left;
+
+    background-color: gainsboro;
+}
+
+/* 컨텐츠 영역의 왼쪽상단의 프로필의 닉네임 위치 및 크기 잡아주기 */
+.content .content_left .profile_id{
+    font-weight: bold;
+    font-size: 20px;
+    padding: 8px 9px 0px 20px;
+
+    float: left;
+}
+
+/* 컨텐츠 영역의 왼쪽상단의 프로필의 소설 로그인 종류*/
+.content .content_left .profile_social{
+    width: 18px;
+    height: 18px;
+
+    margin-top: 13px;
+}
+
+/* 컨텐츠 영역의 왼쪽상단의 프로필의 소설 로그인 아이디 위치 및 크기 잡아주기 */
+.content .content_left .profile_email{
+    padding-left: 20px;
+    font-size: 12px;
+    color: #595959;
+}
+
+/* 컨켄츠 영역의 왼쪽 목록 */
+.content .mypage_list{
+    clear: both;
+}
+
+/* 컨텐츠 영역의 왼쪽 목록에 프로필과의 사이 공백 주기 */
+.content .content_left .mypage_list ul li{
+    margin-top: 18px;
+}
+
+/* 컨텐츠 영역의 왼쪽 목록의 li태그들의 css속성 지정 ( 수정!! ) */
+.content .content_left .mypage_list ul a {
+    font-weight: bold;
+    font-size: 14px;
+    color: #000000;
+}
+
+/* 현재 페이지는 클래스 이름으로 on을 주어 색을 변하게 한다. */
+.content .content_left .mypage_list ul a.on {
+    color: #2370DF;
+}
+
+/* 컨텐츠 영역의 왼쪽 목록의 마지막 li인 경우 밑에도 여백을 주어 밑의 목록과 구분해줘야 한다. */
+.content .content_left .mypage_list ul :last-of-type{
+    margin-bottom: 18px;
+}
+
+/* 목록1 위에 보더로 선 생성 */
+.content .content_left .mypage_list .mypage_list_top{
+    border-top: 1px solid black;
+}
+
+/* 목록2 위에 보더로 선 생성 */
+.content .content_left .mypage_list .mypage_list_bottom{
+    border-top: 1px solid black;
+}
+
+/* 컨텐츠 영역의 오른쪽 부분 정리 ( 수정!! ) */
+.content .content_right {
+    margin: 50px 20px 0px 310px;
+    padding-left: 50px;
+    /* border: 1px solid blue; */
+
+    /* float: right; */
+}
+
+/* 컨텐츠 영역의 오른쪽 영역의 위 목록을 감싸는 div css속성 지정 */
+.content .content_right .mypage_top{
+    width: 900px;
+    height: 50px;
+
+    margin-right: 200px;
+    margin-bottom: 20px;
+
+    border: 1px solid #D9D9D9;
+    border-radius: 8px;
+}
+
+/* 컨텐츠 영역 - 오른쪽 영역 - 구매내역 ul */
+.content .content_right .mypage_toplist{
+    margin-top: 15px;
+}
+
+/* 컨텐츠 영역 - 오른쪽 영역 - 구매내역 ul - li */
+.content .content_right .mypage_toplist li {
+    margin-left: 70px;
+    float: left;
+}
+
+/* 컨텐츠 영역 - 오른쪽 영역 - 구매내역 ul - li - a */
+.content .content_right .mypage_toplist a {
+    font-weight: 450;
+    font-size: 14px;
+    color: #6A6A6A;
+}
+
+/* 현재 탭의 경우에는 밑줄이 그어지고, 글씨가 두껍게 바뀐다. */
+.content .content_right .mypage_toplist a.on {
+    font-weight: bold;
+    color: black;
+    padding-bottom: 10px;
+
+    border-bottom: 2px solid black;
+}
+
+/* 클래스 클릭 시 해당 클래스의 대시보드로 이동합니다 */
+.content_right .content_p {
+    font-size: 14px;
+    color: #6B6B6B;
+
+    margin-left: 10px;
+}
+
+/* 구매내역 ================================ */
+
+/* 클래스 카드 위치 및 크기 지정 */
+.content_right .class_card{
+    margin-left: 20px;
+    margin-right: 20px;
+    float: left;
+
+    width: 890px;
+}
+
+/* 클래스 카드 이미지 */
+.content_right .class_card .card_img{
+    width: 280px;
+    height: 150px;
+
+    float: left;
+}
+
+/* 클래스 카드 - 클래스 제목 */
+.content_right .class_card .card-text{
+    display: inline-block;
+    margin-top: 10px;
+    height: 50px;
+
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
+}
+
+/* 클래스 카드 - 클래스 제목 + 클래스 주문번호 + 가격 + 번호 ( 오른쪽 부분 )  */
+.content_right .class_card_content{
+    width: 580px;
+
+    margin-left: 20px;
+    float: left;
+}
+
+/* 클래스 카드 - 클래스 주문번호 + 가격 자리 */
+.content_right .class_card_purchase {
+    border-radius: 3px;
+    display: inline-block;
+    margin-top: 50px;
+    padding-left: 10px;
+    padding-right: 15px;
+
+    width: 400px;
+    height: 35px;
+    background-color: #EEEEEE;
+}
+
+/* 클래스 카드 - 클래스 주문번호 */
+.content_right .class_card_purchase .class_card_purchase_number{
+    color: #000000;
+    font-size: 15px;
+    font-weight: bold;
+
+    padding-top: 5px;
+    display: inline-block;
+}
+
+/* 클래스 카드 - 클래스 가격 */
+.content_right .class_card_purchase .class_card_purchase_money{
+
+    color: #2370DF;
+    font-size: 17px;
+    font-weight: bold;
+
+    padding-top: 5px;
+    float: right;
+
+}
+
+/* 클래스 카드 - 구매 상세 내역 버튼 */
+.class_card_btn{
+    width: 104px;
+    height: 31px;
+    margin-top: 50px;
+    margin-right: 50px;
+
+    line-height: 31px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    float: right;
+
+    background-color: #2370DF;
+}
+
+
+
+

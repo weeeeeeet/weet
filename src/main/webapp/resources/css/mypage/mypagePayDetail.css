@@ -1,0 +1,488 @@
+@charset "UTF-8";
+
+/* content ================================ */
+
+/* 컨텐츠 영역에 양쪽 200px씩 여백주기 ( 수정!! ) */
+.content{
+    margin: 20px 200px 0px;
+    width: 1040px;
+
+    height: 1000px;
+
+    width :calc(100% - 400px);
+}
+
+/* 컨텐츠 영역의 왼쪽 가로 길이 잡아주기 */
+.content .content_left {
+    width: 259px;
+
+    margin: 20px 0px;
+    /* border: 1px solid red; */
+
+    float: left;
+}
+
+/* 컨텐츠 영역의 왼쪽상단의 프로필 전제 높이 잡아주기 */
+.content .content_left .profile {
+    height: 90px;
+
+    /* border: 1px solid palegreen; */
+}
+
+/* 컨텐츠 영역의 왼쪽상단의 프로필의 사진 전제 크기 잡아주기 */
+.content .content_left .profile_photo{
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+
+    float: left;
+
+    background-color: gainsboro;
+}
+
+/* 컨텐츠 영역의 왼쪽상단의 프로필의 닉네임 위치 및 크기 잡아주기 */
+.content .content_left .profile_id{
+    font-weight: bold;
+    font-size: 20px;
+    padding: 8px 9px 0px 20px;
+
+    float: left;
+}
+
+/* 컨텐츠 영역의 왼쪽상단의 프로필의 소설 로그인 종류*/
+.content .content_left .profile_social{
+    width: 18px;
+    height: 18px;
+
+    margin-top: 13px;
+}
+
+/* 컨텐츠 영역의 왼쪽상단의 프로필의 소설 로그인 아이디 위치 및 크기 잡아주기 */
+.content .content_left .profile_email{
+    padding-left: 20px;
+    font-size: 12px;
+    color: #595959;
+}
+
+/* 컨켄츠 영역의 왼쪽 목록 */
+.content .mypage_list{
+    clear: both;
+}
+
+/* 컨텐츠 영역의 왼쪽 목록에 프로필과의 사이 공백 주기 */
+.content .content_left .mypage_list ul li{
+    margin-top: 18px;
+}
+
+/* 컨텐츠 영역의 왼쪽 목록의 li태그들의 css속성 지정 ( 수정!! ) */
+.content .content_left .mypage_list ul a {
+    font-weight: bold;
+    font-size: 14px;
+    color: #000000;
+}
+
+/* 현재 페이지는 클래스 이름으로 on을 주어 색을 변하게 한다. */
+.content .content_left .mypage_list ul a.on {
+    color: #2370DF;
+}
+
+/* 컨텐츠 영역의 왼쪽 목록의 마지막 li인 경우 밑에도 여백을 주어 밑의 목록과 구분해줘야 한다. */
+.content .content_left .mypage_list ul :last-of-type{
+    margin-bottom: 18px;
+}
+
+/* 목록1 위에 보더로 선 생성 */
+.content .content_left .mypage_list .mypage_list_top{
+    border-top: 1px solid black;
+}
+
+/* 목록2 위에 보더로 선 생성 */
+.content .content_left .mypage_list .mypage_list_bottom{
+    border-top: 1px solid black;
+}
+
+/* 컨텐츠 영역의 오른쪽 부분 정리 ( 수정!! ) */
+.content .content_right {
+     margin: 50px 20px 0px 310px;
+    padding-left: 50px;
+    /* border: 1px solid blue; */
+
+    /* float: right; */
+}
+
+/* 컨텐츠 영역의 오른쪽 영역의 위 목록을 감싸는 div css속성 지정 */
+.content .content_right .mypage_top{
+    width: 900px;
+    height: 50px;
+
+    margin-right: 200px;
+    margin-bottom: 20px;
+
+    border: 1px solid #D9D9D9;
+    border-radius: 8px;
+}
+
+/* 컨텐츠 영역 - 오른쪽 영역 - 구매내역 ul */
+.content .content_right .mypage_toplist{
+    margin-top: 15px;
+}
+
+/* 컨텐츠 영역 - 오른쪽 영역 - 구매내역 ul - li */
+.content .content_right .mypage_toplist li {
+    margin-left: 70px;
+    float: left;
+}
+
+/* 컨텐츠 영역 - 오른쪽 영역 - 구매내역 ul - li - a */
+.content .content_right .mypage_toplist a {
+    font-weight: 450;
+    font-size: 14px;
+    color: #6A6A6A;
+}
+
+/* 현재 탭의 경우에는 밑줄이 그어지고, 글씨가 두껍게 바뀐다. */
+.content .content_right .mypage_toplist a.on {
+    font-weight: bold;
+    color: black;
+    padding-bottom: 10px;
+
+    border-bottom: 2px solid black;
+}
+
+/* 클래스 클릭 시 해당 클래스의 대시보드로 이동합니다 */
+.content_right .content_p {
+    font-size: 14px;
+    color: #6B6B6B;
+
+    margin-left: 10px;
+}
+
+/* 구매내역 ================================ */
+
+/* 구매내역 전체적인 틀 잡기 */
+.class_card_purchase_detail{
+    margin-left: 55px;
+    width: 780px;
+}
+
+/* 구매상세내역 ================================ */
+
+/* 구매상세내역 제목 */
+.class_card_purchase_detail_num>p{
+    color: #000000;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* 구매상세내역 - 본문 */
+.content_right .class_card_purchase {
+    border-radius: 3px;
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 12px;
+
+    width: 100%;
+    height: 35px;
+    background-color: #EEEEEE;
+}
+
+/* 구매상세내역 - 클래스 주문번호 */
+.content_right .class_card_purchase .class_card_purchase_number{
+    color: #000000;
+    font-size: 12px;
+    font-weight: bold;
+
+    padding-top: 5px;
+    display: inline-block;
+}
+
+/* 구매상세내역 - 클래스 가격 */
+.content_right .class_card_purchase .class_card_purchase_money{
+
+    color: #2370DF;
+    font-size: 12px;
+    font-weight: bold;
+
+    padding-top: 5px;
+    float: right;
+
+}
+
+/* 주문정보 ================================ */
+
+/* 주문정보 전체적인 틀 잡기 ( 수정!!! ) */
+.class_card_purchase_detail_info_content{
+    background-color: #EEEEEE;
+    width: 100%;
+
+    padding-left: 10px;
+    padding-right: 12px;
+}
+
+/* 주문정보 제목 */
+.class_card_purchase_detail_info>p{
+    color: #000000;
+    font-size: 14px;
+    font-weight: bold;
+
+    margin-top: 20px;
+}
+
+/* 주문정보 - 결제 수단 */
+.class_card_purchase_detail_info_type .purchase_type{
+    padding-top: 10px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    float: left;
+}
+
+/* 주문정보 - 결제 수단 - 값 */
+.class_card_purchase_detail_info_type .purchase_type_value{
+    padding-top: 10px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    float: right;
+}
+
+/* 주문정보 - 카드사 */
+.class_card_purchase_detail_info_type .purchase_card{
+    clear: both;
+    float: left;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* 주문정보 - 카드사 - 값 */
+.class_card_purchase_detail_info_type .purchase_card_value{
+    float: right;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    padding-bottom: 10px;
+}
+
+/* 주문정보 - 상품금액 전체적인 틀 잡기  */
+.class_card_purchase_detail_dc{
+    clear: both;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    border-top: 1px solid #aca9a9 ;
+}
+
+/* 주문상품 - 총 상품금액 */
+.class_card_purchase_detail_orginalmoney{
+    font-size: 12px;
+    font-weight: bold;
+
+    float: left;
+}
+
+/* 주문상품 - 총 상품금액 - 값 */
+.class_card_purchase_detail_orginalmoney_value{
+    font-size: 12px;
+    font-weight: bold;
+
+    float: right;
+}
+
+/* 주문상품 - 쿠폰 */
+.class_card_purchase_detail_cupon{
+    clear: both;
+    float: left;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* 주문상품 - 쿠폰 - 값 */
+.class_card_purchase_detail_cupon_value{
+    float: right;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    padding-bottom: 10px;
+}
+
+/* 주문상품 - 총 결제 금액 */
+.class_card_purchase_detail_total{
+    clear: both;
+
+    padding-top: 10px;
+    margin-bottom: 20px;
+    border-top: 2px solid black ;
+}
+
+.class_card_purchase_detail_total_money{
+    font-size: 20px;
+    font-weight: bold;
+
+    padding-bottom: 20px;
+
+    display: inline-block;
+}
+
+/* 주문상품 - 총 결제 금액 - 값 */
+.class_card_purchase_detail_total_money_value{
+    font-size: 20px;
+    font-weight: bold;
+
+    float: right;
+}
+
+.class_card_purchase_detail_total::after{
+    clear: both;
+}
+
+/* 구매상품 ================================ */
+.class_card_purchase_detail_target::before{
+    clear: both;
+}
+
+/* 구매상품 제목 */
+.class_card_purchase_detail_target>p{
+    color: #000000;
+    font-size: 14px;
+    font-weight: bold;
+
+    margin-top: 20px;
+}
+
+/* 구매상품 - 클래스 카드 - 이미지 */
+.class_card_purchase_detail_target .card_img{
+    float: left;
+
+    width: 230px;
+    height: 125px;
+}
+
+/* 구매상품 - 오른쪽 클래스 이름 */
+.class_card_purchase_detail_target_right .class_card_target_text{
+    float: left;
+    padding-left: 20px;
+
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* 구매상품 - 버튼 */
+.class_card_purchase_detail_target_right > button {
+    clear: both;
+
+    margin-top: 87px;
+}
+
+/* 구매상품 - 구매취소 버튼 */
+.class_card_btn_delete{
+    margin-left: 170px;
+
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #EEEEEE;
+
+    border: none;
+}
+
+/* 구매상품 - ? 버튼 */
+.class_card_btn_info{
+    margin-left: 5px;
+    text-align: center;
+
+    width: 25px;
+    height: 25px;
+
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #8C8C8C;
+
+    border: none;
+    border-radius: 50%;
+}
+
+/* 모달창 1 - 주문취소 ================================ */
+
+/* 모달창 - 전체를 감싸는 보더 설정 */
+.modal_class_content{
+    width: 100%;
+
+    margin-bottom: 10px;
+}
+
+/* 모달창 - 헤드 - 제목 */
+.modal-title{
+    width: 100%;
+
+    color: #666666;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* 모달창 - 클래스 제목 */
+.modal_class_title{
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* 모달창 - 클래스 제목 */
+.modal_class_title_value{
+    color: #000000;
+    font-size: 14px;
+
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+}
+
+/* 모달창 - 환불사유 제목 */
+.modal_class_content{
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+}
+
+/* 모달창 - 이메일 입력 제목 */
+.refund_email{
+    display: inline-block;
+}
+
+.email_input{
+    width: 250px;
+    margin-left: 30px;
+}
+
+/* 모달창 - 주문취소 버튼 */
+.btn_submit{
+    background-color: #2370DF;
+    border: none;
+    border-radius: 8px;
+
+    color: white;
+    font-size: 14px;
+
+    width: 70px;
+    height: 38px;
+}
+
+/* 모달창 2 - ? ================================ */
+
+/* Footer 고정용 ================================ */
+.tttoooo{
+    width: 100%;
+    height: 750px;
+}
+
+
+
+
+
