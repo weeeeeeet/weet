@@ -8,6 +8,7 @@ const heart = document.querySelector('#heartCheck');						// 게시글 추천 �
 
 // ================ 함수 영역 ========================== //
 
+// 게시글 상세조회 + 댓글목록 출력
 const getBoard = () => {
 	
     $.ajax({
@@ -64,7 +65,7 @@ const getBoard = () => {
                     str += '<p><span onclick="replyEdit(' + '\'replyContents\', ' + e.replyId + ')">수정</span> | <span onclick="deleteReply(' + e.replyId + ')">삭제</span></p>';
                 } // if
 
-                str += '</div><div class="reply-select">'
+                str += '</div><div class="reply-select" onclick="selectReply(' + e.replyId + ', \'' + e.trainerId + '\')">'
                     + '<small>채택</small>'
                     + '<i class="fas fa-circle-check"></i></div></div>'
                     + '<textarea name="replyContents" id="replyContents' + e.replyId + '" wrap="on" oninput="resize(event)" readonly>' + e.replyContents + '</textarea>'
@@ -77,14 +78,18 @@ const getBoard = () => {
             
             document.querySelector('.reply-content-area').innerHTML = str;
 
-			// 채택된 답변이 있을 시 스타일 변경
+			// 채택된 답변이 있을 시 스타일 변경 & 클릭이벤트 삭제
 			if ( replyData[0].replySelectedYn == 'Y' ) {
+                
+                const replySelectEl = document.querySelector('.reply-select');
+                
 				document.querySelector('.item').classList.add('item-selected');
-				document.querySelector('.reply-select').className = 'reply-selected';
+                replySelectEl.removeAttribute("onclick");
+				replySelectEl.className = 'reply-selected';
 			} // if
             
-            // 현재 로그인 아이디와 작성자 아이디가 다르면 채택버튼 노출 X
-            if ( boardData.userId != loginUserId ) {
+            // 현재 로그인 아이디와 작성자 아이디가 다르거나 채택된 답변이 있을 시 채택버튼 노출 X (채택은 글 당 하나만 가능)
+            if ( (boardData.userId != loginUserId) || (replyData[0].replySelectedYn == 'Y') ) {
                 const replyControllerArea = document.querySelectorAll('.reply-select');
                 replyControllerArea.forEach((e) => {
                     e.innerHTML = '';
@@ -100,6 +105,7 @@ const getBoard = () => {
     }) // .ajax
 } // getBoard
 
+// 대댓글목록 조회
 const getReReply = (replyId) => {
 	
 	$.ajax({
@@ -137,7 +143,7 @@ const getReReply = (replyId) => {
 	
 } // getReReply
 
-
+// 댓글수정(텍스트 편집)
 const replyEdit = (id, idx) => {
     const textarea = document.querySelector(`#${id}${idx}`);
 
@@ -148,6 +154,7 @@ const replyEdit = (id, idx) => {
 	$(textarea).next('.modify-btn-area').css("display", "flex");
 } // replyEdit
 
+// 댓글등록
 const regReply = () => {
     const userId = 'tr3';
     const content = document.querySelector('#reply-text').value;
@@ -178,6 +185,7 @@ const regReply = () => {
 
 } // regReply
 
+// 대댓글등록
 const regReReply = (replyId) => {
     const contents = document.querySelector(`#re-reply-text-${replyId}`).value;
 
@@ -201,6 +209,7 @@ const regReReply = (replyId) => {
 
 } // regReReply
 
+// 댓글수정
 const modifyReply = (replyId) => {
 	const contents = document.querySelector(`#replyContents${replyId}`).value;
 	
@@ -222,6 +231,7 @@ const modifyReply = (replyId) => {
 
 } // modifyReply
 
+// 댓글삭제
 const deleteReply = (replyId) => {
 	
 	$.ajax({
@@ -236,7 +246,7 @@ const deleteReply = (replyId) => {
     }) // .ajax
 } // deleteReply
 
-// 답글접기 노출
+// 대댓글접기 노출
 const closeReReply = (replyId) => {
 	const controller = document.querySelector(`.controller-no-${replyId}`);
 	const str = '<p class="hide-reply" onclick="clearReReply(' + replyId + ')">▲ 답글 접기</p>'
@@ -244,7 +254,7 @@ const closeReReply = (replyId) => {
 	controller.innerHTML = str;
 } // closeReReply
 
-// 답글영역 clear
+// 대댓글영역 clear
 const clearReReply = (replyId) => {
 	document.querySelector(`.re-reply-area-${replyId}`).style.display = "none";
 	document.querySelector(`.re-reply-area-${replyId}`).innerHTML = '';
@@ -254,8 +264,9 @@ const clearReReply = (replyId) => {
 	
 	controller.innerHTML = str;
 	
-}
+} // clearReReply
 
+// 아이디 마스킹
 const maskingId = (userId) => {
 	if( userId == undefined || userId === '' ) return '';
 	
@@ -263,9 +274,34 @@ const maskingId = (userId) => {
 	return userId.replace(pattern, "***");
 } // maskingId
 
+// 글 작성 페이지로 이동
 const goModify = () => {
     location.href = "/board/new?commId=" + commId;
 } // goModify
+
+// 게시글 삭제
+const deleteBoard = () => {
+
+}
+
+// 댓글 채택
+const selectReply = (replyId, userId) => {
+
+    $.ajax({
+        url: "/board/api/reply/select/" + replyId + "?userId=" + userId,
+        type: "PUT",
+        success: data => {
+            if(data.data.result == "SUCCESS") {
+                alert('댓글을 채택하였습니다.');
+                getBoard();
+
+                return;
+            } // if
+
+            alert('처리 중 오류가 발생하였습니다. 다시 시도해 주세요');
+        } // success
+    }); // .ajax
+} // voteReply
 
 // 추천 여부 체크
 const voteCheck = () => {
