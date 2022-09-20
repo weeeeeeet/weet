@@ -17,9 +17,9 @@
 	<select
         id="selectUser"
         resultType="com.weet.app.user.domain.TrainerVO">        
-        SELECT user_id, user_pwd, user_level
+        SELECT *
         FROM t_tr
-        WHERE user_id = #{userId} AND user_pwd = #{userPwd}
+        WHERE user_id = #{userId}
     </select>
     
 

@@ -57,7 +57,7 @@
             <div class="inner_box">
                 <div class="login-main-text"> 트레이너 로그인 </div>
 
-                    <form action="/user/tr/loginPost" method="post" class="member-login">
+                    <form action="/user/loginPost" method="post" class="member-login">
                         <div class="linput_list">
                             <div class="inner-list">
                                 <div class="la_input">

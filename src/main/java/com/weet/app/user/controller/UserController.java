@@ -70,7 +70,7 @@ public class UserController {
 
 	
 	// 3. TR 로그인처리
-	@PostMapping("/tr/loginPost")
+	@PostMapping("/loginPost")
 	public void loginPost(
 			/* @ModelAttribute("loginDTO") */ LoginDTO dto,
 			Model model,
@@ -83,18 +83,13 @@ public class UserController {
 		Objects.requireNonNull(this.service);
 		log.info("\t+ service: " + this.service);
 		
-		//-------------------------------------------------------------//
 		// 1. To check the user.
-		//-------------------------------------------------------------//
-		TrainerVO trainer = this.service.login(dto);		// To check the user.
+		TrainerVO trainer = this.service.login(dto);	// To check the user.
 		
-		if(trainer != null) {	// if the check succeeded.
-			
+		if(trainer != null) {							// if the check succeeded.
 			model.addAttribute(loginKey, trainer);		// To bind login attribute to the request scope.
 			
-			//-------------------------------------------------------------//
 			// 2. If rememberMe on, process Remember-Me option.
-			//-------------------------------------------------------------//
 			if(dto.isRememberMe()) {
 				int timeAmount = 1000 * 60 * 60 * 24 * 7;	// 7 days.
 				
@@ -190,21 +185,15 @@ public class UserController {
 	public String logout(HttpServletRequest req, HttpServletResponse res, HttpSession session) throws Exception {
 		log.debug("logout(req, res, session) invoked.");
 		
-		//-------------------------------------------------------------//
 		// 1. To get login info from http session.
-		//-------------------------------------------------------------//
 		UserVO user = (UserVO) session.getAttribute(loginKey);
 		log.info("\t+ user: " + user);
 		
-		//-------------------------------------------------------------//
 		// 2. To destroy current http session.
-		//-------------------------------------------------------------//
 		session.invalidate();
 		log.info("\t+ session destroyed("+session.getId()+")");
 		
-		//-------------------------------------------------------------//
 		// 3. To destroy Remember-Me cookie.
-		//-------------------------------------------------------------//
 		Cookie destroyRememberMeCookie = WebUtils.getCookie(req, rememberMeKey);
 			if(destroyRememberMeCookie != null) {
 			destroyRememberMeCookie.setPath("/");
@@ -213,18 +202,14 @@ public class UserController {
 			res.addCookie(destroyRememberMeCookie);
 		} // if
 		
-		//-------------------------------------------------------------//
 		// 4. To update tbl_user.
-		//-------------------------------------------------------------//
 		if(user != null) {
 			String userId = user.getUserId();
 			
 			this.service.modifyUserWithRememberMe(userId, null, null);
 		} // if
 		
-		//-------------------------------------------------------------//
 		// 5. To redirect into the login form.
-		//-------------------------------------------------------------//
 		return "redirect:/user/login";
 	} // logout
 

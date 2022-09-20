@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <title>loginPost</title>
 
-    <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/resources/ico/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/ico/favicon.ico" type="image/x-icon">
 </head>
 <body>
 
 	<script>
 		setTimeout(function () {
-	        self.location = "/";
+	        self.location = "/coupons/book";
 	    }, 3000);
 		
-		<% response.sendRedirect("/"); %>
 	        
     </script>
 

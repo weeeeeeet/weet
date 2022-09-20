@@ -1,11 +1,5 @@
 package com.weet.app.user.controller;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.weet.app.exception.ServiceException;
 import com.weet.app.user.service.AuthService;
 
-import lombok.Cleanup;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;

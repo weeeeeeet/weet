@@ -13,6 +13,4 @@ public class TrainerVO {		// T_TR
 	private String userIntro;		// 소개
 	private Integer userBiz;		// 사업자정보 
 	
-	private UserVO userVO;			// userVO join
-	
 } // EmployeeVO
