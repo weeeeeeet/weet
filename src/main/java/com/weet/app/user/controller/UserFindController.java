@@ -16,7 +16,7 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/user/find")
 @Controller
 public class UserFindController {
-
+	
 	// 1. 아이디 찾기 창
 	@GetMapping("/id")
 	public String findIdPage() {

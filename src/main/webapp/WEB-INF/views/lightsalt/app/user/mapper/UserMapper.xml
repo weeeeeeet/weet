@@ -6,7 +6,7 @@
 
 <mapper namespace="com.weet.app.user.mapper.UserMapper">
 
-	<!-- ================ 아이디 중복 체크 ================ -->
+	<!-- 아이디 중복 체크 -->
 	<select id="selectId" parameterType="com.weet.app.user.domain.TrainerVO" resultType="java.lang.Integer">
 		SELECT COUNT(user_id) FROM t_tr WHERE user_id= #{user_id}
 	</select>
@@ -16,29 +16,29 @@
 	
 	<select
         id="selectUser"
-        resultType="com.weet.app.user.domain.TrainerVO">        
+        resultType="com.weet.app.user.domain.UserVO">        
         SELECT *
-        FROM t_tr
-        WHERE user_id = #{userId}
+        FROM tbl_user
+        WHERE userId = #{user_id} AND userPwd = #{user_pwd}
     </select>
     
 
     <select 
         id="selectUserWithRememberMe"
-        resultType="com.weet.app.user.domain.TrainerVO"> 
-        SELECT * 
-        FROM t_tr
+        resultType="com.weet.app.user.domain.UserVO"> 
+        SELECT userId, userPwd
+        FROM tbl_user
         WHERE rememberme = #{rememberme} AND rememberage > current_date
     </select>
 
 
     <update id="updateUserWithRememberMe">
-        UPDATE t_tr
+        UPDATE tbl_user
         SET
             rememberme = #{rememberMe, jdbcType=VARCHAR},
             rememberage = #{rememberAge, jdbcType=DATE}
         WHERE
-            user_id = #{userId}
+            userId = #{user_id}
     </update>
 	
 	
