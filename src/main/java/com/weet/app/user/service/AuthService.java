@@ -13,4 +13,6 @@ public interface AuthService {
 	
 	// 카카오 사용자 로그인 처리
 	public HashMap<String, Object> getUserInfo(String accessToken);
+	
+	
 }

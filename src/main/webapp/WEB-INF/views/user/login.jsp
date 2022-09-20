@@ -200,6 +200,9 @@
             </div>
         </div>
     </div>
+    
+    <!-- js -->
+    <script src="/resources/js/user/kakaoAuth.js"></script>
 
 </body>
 

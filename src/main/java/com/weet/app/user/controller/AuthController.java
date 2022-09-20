@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.weet.app.exception.ControllerException;
 import com.weet.app.exception.ServiceException;
 import com.weet.app.user.service.AuthService;
 
@@ -40,18 +41,20 @@ public class AuthController {
 		}
 		
 		return Integer.toString(randomNumber);
-	}
+	} // sendSMS
 
-	// 2. 사업자 인증
-	@PostMapping("/business")
-	public String business() {
-		log.trace("business() invoked.");
 
-		return "redirect:..api/";
+	// 2. 카카오 로그인 - 인가코드받기
+	@ResponseBody
+	@GetMapping("/kakao")
+	public String  kakaoCallback(@RequestParam String code) throws ControllerException {
+
+        String access_Token = service.getKaKaoAccessToken(code);
+		log.info("\t + access_Token:{}",access_Token);
 		
-	} // business
+		return "redirect:/user/tr/joindone";
 
-	// 3. 카카오 로그인
+	} // kakaoCallback
 //	@ResponseBody
 //	@GetMapping("/kakao")
 //	public BaseResponse<PostLoginRes> kakaoLogin(@RequestParam(required = false) String code) {

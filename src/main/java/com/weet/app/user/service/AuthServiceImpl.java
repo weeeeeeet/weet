@@ -80,7 +80,7 @@ public class AuthServiceImpl implements AuthService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=e633a1a319cc541dac0ec78d1f28cfa4"); // TODO REST_API_KEY 입력
-            sb.append("&redirect_uri=http://localhost:8080/user/login"); // TODO 인가코드 받은 redirect_uri 입력
+            sb.append("&redirect_uri=http://localhost:8080/auth/kakao"); // TODO 인가코드 받은 redirect_uri 입력
             sb.append("&code=" + code);
             bw.write(sb.toString());
             bw.flush();
@@ -88,6 +88,7 @@ public class AuthServiceImpl implements AuthService {
             //결과 코드가 200이라면 성공
             int responseCode = conn.getResponseCode();
             System.out.println("responseCode : " + responseCode);
+            
             //요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line = "";
@@ -96,16 +97,17 @@ public class AuthServiceImpl implements AuthService {
             while ((line = br.readLine()) != null) {
                 result += line;
             }
-            System.out.println("response body : " + result);
+            log.info("\t+ response body : {}" + result);
 
             //Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
-            JsonElement element = JsonParser.parseString(result.toString());
+            JsonElement element = JsonParser.parseString(result);
+            JsonObject object = element.getAsJsonObject();
 
-            access_Token = element.getAsJsonObject().get("access_token").getAsString();
-            refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
+            access_Token = object.get("access_token").getAsString();
+            refresh_Token = object.get("refresh_token").getAsString();
 
-            System.out.println("access_token : " + access_Token);
-            System.out.println("refresh_token : " + refresh_Token);
+            log.info("\t+ access_Token: {}", access_Token);
+            log.info("\t+ refresh_token : {}", refresh_Token);
 
             br.close();
             bw.close();
