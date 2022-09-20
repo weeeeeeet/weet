@@ -65,32 +65,32 @@ const getBoardList = (currPage) => {
                     + '<p class="question-title">'+ e.board.commPostTitle + '</p>'
                     + '<p class="question-word">' + e.board.commPostContents + '</p>'
                     + '</div></a>'
-                    + '<div class="row" style="margin-top: 10px;">'
-                    + '<div class="col-sm-1">'
+                    + '<div class="count-area" style="margin-top: 10px;">'
+                    + '<div class="reply-count">'
                     + '<i class="commhome_comment fas fa-comment-dots" style="color: #2370DF;"></i>'
                     + '<span class="count"> ' + e.board.commReplyCount + '</span></div>'
-                    + '<div class="col-sm-1">'
+                    + '<div class="like-count">'
                     + '<i class="commhome_heart fas fa-heart" style="color: #ff589b;"></i>'
-                    + '<span class="count"> ' + e.board.commLikeNum + '</span></div></div><hr>'
-                    + '<div class="profile">'
-                    + '<div class="row">';
+                    + '<span class="count"> ' + e.board.commLikeNum + '</span></div>'
+                    + '<div class="view-count">'
+                    + '<i class="commhome_heart fas fa-eye" style="color: #777;"></i>'
+                    + '<span class="count"> ' + e.board.commViewCount + '</span></div></div><hr>'
+                    + '<div class="profile">';
 
                 if(e.reply == null) {
-                    str += '<p class="no-reply">아직 등록된 답변이 없습니다.</p></div></div></div></div>';
+                    str += '<p class="no-reply">아직 등록된 답변이 없습니다.</p></div></div></div>';
                 } else {
-                    str += '<div class="col-sm-2">'
-                        + '<p class="trainer-name">' + e.reply.trainerNickname + '</p></div>'
-                        + '<div class="col-sm-1">';
+                    str += '<p class="trainer-name">' + e.reply.trainerNickname + '</p>';
                     
                     switch(e.reply.trainerLevel) {
                         case 1 :
-                            str += '<div class="trainer-level level-1">lv.1</div></div></div>';
+                            str += '<div class="trainer-level level-1">lv.1</div></div>';
                             break;
                         case 2 :
-                            str += '<div class="trainer-level level-2">lv.2</div></div></div>';
+                            str += '<div class="trainer-level level-2">lv.2</div></div>';
                             break;
                         case 3 :
-                            str += '<div class="trainer-level level-3">lv.3</div></div></div>';
+                            str += '<div class="trainer-level level-3">lv.3</div></div>';
                             break;
                     } // switch
 

@@ -57,6 +57,7 @@ const alert = (message, type) => {
     setTimeout(() => alertArea.innerHTML = '', 2000);
 } // alert
 
+// 게시글 등록
 const regBoard = (tmpSave) => {
     const userId = "user2";	// 나중에 수정 필요
     const title = document.querySelector('#title').value;
@@ -90,6 +91,7 @@ const regBoard = (tmpSave) => {
     }) // .ajax
 } // regBoard
 
+// 게시글 수정
 const modifyBoard = () => {
     const title = document.querySelector('input[name=title]').value;
     const content = document.querySelector('#summernote').value;
@@ -117,6 +119,7 @@ const modifyBoard = () => {
     }) // .ajax
 } // modifyBoard
 
+// 임시저장목록 조회
 const getTmpList = () => {
     const params = {
         "userId": "user2"
@@ -151,6 +154,7 @@ const getTmpList = () => {
     }) // .ajax
 } // getTmpList
 
+// 임시저장 삭제
 const deleteTmpSave = (commId) => {
 
     $.ajax({
@@ -164,6 +168,7 @@ const deleteTmpSave = (commId) => {
     }) // .ajax
 } // deleteTmpSave
 
+// 게시글 상세조회
 const getBoard = (id) => {
     $.ajax({
 
@@ -182,6 +187,7 @@ const getBoard = (id) => {
     }) // .ajax
 } // getBoard
 
+// 등록완료시 게시글상세조회 페이지로 넘어감
 const completeReg = () => {
 	location.href = "/board/" + commId;
 } // completeReg

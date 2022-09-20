@@ -95,13 +95,18 @@ textarea {
 .flexbox {
 	display: flex;
 	justify-content: flex-start;
-	align-items: baseline;
+	align-items: center;
 	
+	margin-bottom: 18px;
+	
+}
+.flexbox p {
+	margin: 0;
 }
 .trainer-level {
     width: 30px;
     height: 15px;
-    margin-left: 5px;
+    margin-left: 10px;
 
     font-size: 10px;
     text-align: center;
@@ -225,7 +230,6 @@ textarea {
 	display: none;
 	
     padding-top: 5px;
-    border-left: 1px solid lightgray;
     padding-left: 20px;
     
     margin-bottom: 50px;
@@ -235,7 +239,6 @@ textarea {
     font-size: .8em;
     margin-bottom: 0 !important;
 }
-
 .re-reply-controller p {
     font-size: 13px;
     cursor: pointer;
@@ -248,7 +251,6 @@ textarea {
 #comm-modify {
     background-color: #fff;
     color: #797979;
-    ;
     border: none;
     font-weight: 500;
     border-radius: 50px;

@@ -78,16 +78,19 @@
                 <div class="items"></div>
                     
             </div>
-
+			
+			<div class="recent-board-and-more">
+	            <h3 class="board-popular-title">최근 게시물</h3>
+				<a href="/board/list">+ 더보기</a>
+			</div>
             <div class="board-list">
-                <h3 class="board-popular-title">최근 게시물</h3>
                 <a href="#">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">
                                 <div class="row">
                                     <div class="col-sm-1">
-                                        <img src="https://img.icons8.com/ultraviolet/30/000000/quote-left.png">
+                                        <img src="https://img.icons8.com/ultraviolet/30/000000/quote-left.png" />
                                     </div>
 
                                     <div class="col-sm-6">
@@ -98,7 +101,6 @@
                                         <p class="post-date">22.08.15</p>
                                     </div>
                                 </div>
-
                             </h4>
 
                             <div class="template-demo">
@@ -132,8 +134,7 @@
 
                             <div class="profile">
                                 <div class="row">
-                                    <p class="no-reply">아직 등록된 답변이 없습니다.
-                                    </p>
+                                    <p class="no-reply">아직 등록된 답변이 없습니다.</p>
                                 </div>
                             </div>
 

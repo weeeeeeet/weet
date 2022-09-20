@@ -247,6 +247,7 @@
                         <div class="modal-footer">
                             <button class="btn btn-primary" id="coupon-submit">적용</button>
                         </div>
+                   </div>
                 </form>
             </div>
         </div>
