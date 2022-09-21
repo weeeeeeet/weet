@@ -19,7 +19,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.weet.app.exception.DAOException;
-import com.weet.app.user.domain.JoinDTO;
 import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.UserDTO;
 
@@ -94,7 +93,7 @@ public class UserMapperTests {
 		
 
 		// 1. UserTr 객체 생성 => SQL의 바인드변수들에 넘겨줄 파라미터
-		TrainerDTO trainerDTO = new TrainerDTO("testId111","testPwd!","testCareer","testIntro",1234567890);
+		TrainerDTO trainerDTO = new TrainerDTO("testId111","testPwd!","testCareer","testIntro","1234567890");
 		log.info("\t+ 1-1. trainerDTO: {}", trainerDTO);
 	
 		// 2. Mapper Interface 의 추상메소드 호출 with BoardVO 파라미터 전달
