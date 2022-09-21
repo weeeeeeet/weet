@@ -57,7 +57,7 @@ public class AuthServiceImpl implements AuthService {
 	        log.trace(e.getCode());
 	      }
 	    
-	}
+	} // certifiedPhoneNumber
 
 	
 	// 카카오 로그인
@@ -87,7 +87,7 @@ public class AuthServiceImpl implements AuthService {
 
             //결과 코드가 200이라면 성공
             int responseCode = conn.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
+            log.info("responseCode : {}", responseCode);
             
             //요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -116,47 +116,58 @@ public class AuthServiceImpl implements AuthService {
         }
 
         return access_Token;
-    }
-	
-	
-	public HashMap<String, Object> getUserInfo(String accessToken) {
-	    HashMap<String, Object> userInfo = new HashMap<>();
-	    String postURL = "https://kapi.kakao.com/v2/user/me";
+    } // getKaKaoAccessToken
 
-	    try {
-	        URL url = new URL(postURL);
-	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-	        conn.setRequestMethod("POST");
 
-	        conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+	@Override
+	public void createKakaoUser(String token) throws ServiceException {
+		String reqURL = "https://kapi.kakao.com/v2/user/me";
 
-	        int responseCode = conn.getResponseCode();
-	        System.out.println("responseCode : " + responseCode);
+        //access_token을 이용하여 사용자 정보 조회
+        try {
+            URL url = new URL(reqURL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-	        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-	        String line = "";
-	        StringBuilder result = new StringBuilder();
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true);
+            conn.setRequestProperty("Authorization", "Bearer " + token); // 전송할 header 작성, access_token전송
+            														     // (*주의*) :Bearer {ACCESS_TOKEN}에서 Bearer 바로 뒤는 공백
 
-	        while ((line = br.readLine()) != null) {
-	            result.append(line);
-	        }
-	        System.out.println("response body : " + result);
+            //결과 코드가 200이라면 성공
+            int responseCode = conn.getResponseCode();
+            log.info("responseCode : {}", responseCode);
 
-	        JsonElement element = JsonParser.parseString(result.toString());
-	        JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
-	        JsonObject kakaoAccount = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
+            //요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = "";
+            String result = "";
 
-	        String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-	        String email = kakaoAccount.getAsJsonObject().get("email").getAsString();
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+            log.info("response body : {} " , result);
 
-	        userInfo.put("nickname", nickname);
-	        userInfo.put("email", email);
+            //Gson 라이브러리로 JSON파싱
+            JsonElement element = JsonParser.parseString(result);
+            JsonObject object = element.getAsJsonObject();
 
-	    } catch (IOException exception) {
-	        exception.printStackTrace();
-	    }
+            int id = object.get("id").getAsInt();
+            boolean hasEmail = object.get("kakao_account").getAsJsonObject().get("has_email").getAsBoolean();
+            String email = "";
+            if(hasEmail){
+                email = object.get("kakao_account").getAsJsonObject().get("email").getAsString();
+            }
+            log.info("id : {} ", id);
+            log.info("email : {} ", email);
 
-	    return userInfo;
+            br.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		
 	}
+	
+	
 }
 

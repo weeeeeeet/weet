@@ -30,7 +30,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
     <!-- kakao js -->
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
  	<!-- google id -->
 	<meta name ="google-signin-client_id" content="9667579877-f1vqr5748vk9uuv5bm6nel4gbpr8mi7a.apps.googleusercontent.com">
      <!-- #### style ####-->
@@ -53,23 +53,11 @@
             <div class="lgn-btn">
 
                 <div class="btn">
-                    <a id="kakao-login-btn" href="javascript:loginWithKakao()" class="btn btn-primary kakao"
+                    <a href="https://kauth.kakao.com/oauth/authorize?client_id=e633a1a319cc541dac0ec78d1f28cfa4&redirect_uri=http://localhost:8080/auth/kakao&response_type=code" class="btn btn-primary kakao"
                         role="button" aria-disabled="true">
                         <div class="button-box">
                             <div class="login-icon kakao" width="90%"><img src="/resources/img/static/icon-kakao-medium.svg" alt="카카오 로그인 버튼"></div>
                             <div class="login-text kakao">카카오로 시작하기</div>
-                            <script type="text/javascript">
-                                function loginWithKakao() {
-                                    Kakao.Auth.login({
-                                        success: function (authObj) {
-                                            alert(JSON.stringify(authObj))
-                                        },
-                                        fail: function (err) {
-                                            alert(JSON.stringify(err))
-                                        },
-                                    })
-                                }
-                            </script>
                         </div>
                     </a>
                 </div>
@@ -202,7 +190,7 @@
     </div>
     
     <!-- js -->
-    <script src="/resources/js/user/kakaoAuth.js"></script>
+    <!-- <script src="/resources/js/user/kakaoAuth.js"></script> -->
 
 </body>
 

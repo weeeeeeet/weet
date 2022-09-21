@@ -1,5 +1,8 @@
 package com.weet.app.user.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +18,7 @@ import com.weet.app.user.service.AuthService;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
+import okhttp3.Request;
 
 @Log4j2
 @NoArgsConstructor
@@ -47,14 +51,15 @@ public class AuthController {
 	// 2. 카카오 로그인 - 인가코드받기
 	@ResponseBody
 	@GetMapping("/kakao")
-	public String  kakaoCallback(@RequestParam String code) throws ControllerException {
-
+	public void kakaoCallback(@RequestParam String code, HttpServletRequest req) throws ControllerException {
+		
+//		HttpSession session = Request.getSession();
+		
         String access_Token = service.getKaKaoAccessToken(code);
 		log.info("\t + access_Token:{}",access_Token);
-		
-		return "redirect:/user/tr/joindone";
 
 	} // kakaoCallback
+	
 //	@ResponseBody
 //	@GetMapping("/kakao")
 //	public BaseResponse<PostLoginRes> kakaoLogin(@RequestParam(required = false) String code) {

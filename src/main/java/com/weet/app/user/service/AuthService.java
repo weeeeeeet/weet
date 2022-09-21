@@ -1,7 +1,5 @@
 package com.weet.app.user.service;
 
-import java.util.HashMap;
-
 import com.weet.app.exception.ServiceException;
 
 public interface AuthService {
@@ -12,7 +10,7 @@ public interface AuthService {
 	public String getKaKaoAccessToken(String code);
 	
 	// 카카오 사용자 로그인 처리
-	public HashMap<String, Object> getUserInfo(String accessToken);
+	public void createKakaoUser(String token) throws ServiceException;
 	
 	
 }
