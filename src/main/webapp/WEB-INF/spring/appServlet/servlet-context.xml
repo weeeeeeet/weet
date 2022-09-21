@@ -20,6 +20,11 @@
 	<view-resolvers>
 		<jsp prefix="/WEB-INF/views/" suffix=".jsp" />
 	</view-resolvers>
+	
+	<view-controller path="/board/main" 	view-name="board/commMain" 	status-code="200" />
+	<view-controller path="/board/list" 	view-name="board/commList" 	status-code="200" />
+	<view-controller path="/board/{commId}" 	view-name="board/commDetail" 	status-code="200" />
+	<view-controller path="/board/new" 	view-name="board/commWrite" 	status-code="200" />
 
 
 	<!-- 1. Spring Interceptor는 아래처럼 설정파일에 Bean 으로 등록하거나 -->
@@ -29,11 +34,28 @@
 	<!-- <context:component-scan base-package="com.weet.app.*.interceptor" /> -->
 
 
+	<!-- swagger -->    
+    <beans:bean id="swagger2Config" class="com.weet.app.board.config.SwaggerConfig" />
+    <resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"/>
+    <resources location="classpath:/META-INF/resources/webjars/"  mapping="/webjars/**"/>
+
+	<!-- 파일업로드 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="defaultEncoding" value="utf8"/>
+		<!-- 10,485,760 = 10mb ( 1024 * 1024(1mb) * 10 ) -->
+		<beans:property name="maxInMemorySize" value="10485760"/>
+		<beans:property name="maxUploadSize" value="10485760"/>
+		<!-- 2,097,152 = 2mb -->
+		<beans:property name="maxUploadSizePerFile" value="2097152"/>
+		<beans:property name="preserveFilename" value="true"/>
+		<!-- 임시폴더의 경로만 지정(타겟폴더 경로는 직접 지정해야함) -->
+		<beans:property name="uploadTempDir" value="file:///C:/temp/"/>
+	</beans:bean>
 
 	<context:component-scan base-package="com.weet.app.**.controller" />
 	<context:component-scan base-package="com.weet.app.**.exception" />
 	<context:component-scan base-package="com.weet.app.exception" />
-	<context:component-scan base-package="com.weet.app.interceptor" />
+	<context:component-scan base-package="com.weet.app.user.interceptor" />
 	
 	
 </beans:beans>

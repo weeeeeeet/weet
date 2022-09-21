@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.weet.app.pay.mapper.CouponMapper">
+
+    <select id="selectCouponList" resultType="com.weet.app.pay.domain.CouponVO">
+        SELECT
+        	coupon_id,
+    		coupon_name,
+    		coupon_dc_pct,
+    		to_char(coupon_start_ts, 'YYYY-MM-DD'),
+    		to_char(coupon_end_ts, 'YYYY-MM-DD'),
+    		coupon_explan
+		FROM
+   		 	t_coupon
+        WHERE
+            coupon_visible = '0'
+            AND coupon_end_ts > current_date
+            OR coupon_end_ts IS NULL
+    </select>
+
+    <select id="selectMyCouponList" resultType="com.weet.app.pay.domain.CouponVO">
+        SELECT
+        	c.coupon_id,
+            coupon_name,
+            coupon_dc_pct,
+            to_char(coupon_start_ts, 'YYYY-MM-DD'),
+            to_char(coupon_end_ts, 'YYYY-MM-DD'),
+            coupon_explan
+        FROM
+            t_coupon c,
+            t_coupon_usage t
+        WHERE
+            c.coupon_id = t.coupon_id
+            AND user_id = #{ userId }
+            AND (coupon_end_ts > current_date
+            OR coupon_end_ts IS NULL)
+            AND coupon_used = 'N'
+    </select>
+    
+    <insert id="insertMyCoupon">
+    	INSERT INTO t_coupon_usage
+    	(
+    		coupon_id,
+    		user_id
+    	)
+    	VALUES
+    	(
+    		#{ couponId },
+    		#{ userId }
+    	)
+    </insert>
+</mapper>

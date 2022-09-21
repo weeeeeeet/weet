@@ -1,0 +1,373 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'SCoreDream';
+    box-sizing: border-box;
+}
+
+
+/* CONTENTS ================================ */
+.contents{
+    width: 1040px;
+    margin: 0 auto;
+    /* border: 10px solid red; */
+    padding-top: 35px;
+    margin-top: 100px;
+}
+.contents h3{
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-left: px;
+    margin-bottom: 20px;
+}
+.txt {
+    float: left;
+    min-width : 2500px;
+}
+.txt div {
+    display: inline;
+    width: 100%;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+.c1 li:nth-of-type(3){
+    color: #2370DF;
+}
+.c1 li:nth-of-type(4){
+    color: #2370DF;
+}
+.c1 li{
+    list-style: none;
+    display: inline-block;
+    margin-bottom: 5px;
+    margin-right: 37px;
+}
+
+.bar progress{
+    display: inline;
+    width: 100%;
+    height: 5px;
+}
+/* ----- */
+.cla1{
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.tag{
+    margin-top: 10px;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    color: #2370DF;
+    border-radius: 10px;
+    border: 2px solid #2370DF;
+    font-size: 14px;
+}
+.cla2{
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.cla2 span{
+    font-size: 5px;
+    color: #ff9100;
+    margin-bottom: 25px;
+}
+.simg{
+    clear: left;
+    margin-top: 10px;
+    display:inline-block;
+    background-color: rgb(236, 235, 235);
+    width: 400px;
+    height: 180px;
+}
+.button {
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+}
+label {
+    cursor: pointer;
+    font-size: 1em;
+}
+.img_ex{
+    float: right;
+    margin-right: 260px;
+    margin-top: 10px;
+    margin-bottom: 100px;
+    font-size: 12px;
+    
+}
+.g li {
+    font-size: 14px;
+}
+#preview-image {
+    border: 1px solid rgb(181, 181, 181);
+}
+.image-select-btn {
+    font-size: 14px;
+}
+/* 못생긴 기존 input 숨기기 */
+#chooseFile {
+    visibility: hidden;
+}
+
+.simg > .button > i{
+    background-color: #2370DF;
+    margin-top: 50px;
+    font-size: 50px;
+    vertical-align: center;
+}
+.sum{
+    font-size: 12px;
+    margin-top: 5px;
+}
+.ct_input{
+    width: 100%;
+    font-size: 14px;
+    height: 45px;
+    border-radius: 10px;
+    border: 2px solid #2370DF;
+    margin-top: 10px;
+    padding-left: 5px;
+}
+.cla3{
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.cla3 span{
+    font-size: 5px;
+    color: #ff9100;
+    margin-left: 3px;
+    margin-bottom: 25px;
+}
+.form-control{
+    width: 100%;
+    font-size: 14px;
+    border-radius: 10px;
+    border: 2px solid #2370DF;
+    margin-top: 10px;
+    padding-left: 5px;
+    margin-bottom: 30px;
+}
+.qmark {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-left: 15px;
+    position: absolute;
+    margin-top: 5px;
+    border-radius: 50%;
+    background-color: rgb(147, 147, 147);
+}
+.qmark > a {
+    color: white;
+    font-size: 11px;
+    position: absolute;
+    bottom: 0.5%;
+    text-decoration: none;
+    left: 30%;
+}
+
+.cla4{
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.cla4 span{
+    font-size: 5px;
+    color: #ff9100;
+    margin-left: 3px;
+    margin-bottom: 25px;
+}
+.cla4 input {
+    margin-bottom: 30px;
+}
+
+.ct_int placeholder{
+    text-align: left;
+}
+.cla5{
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    display: inline;
+}
+.ct_video{
+    width: 100%;
+    font-size: 14px;
+    height: 45px;
+    border-radius: 10px;
+    border: 2px solid #2370DF;
+    margin-top: 10px;
+    padding-left: 5px;
+}
+.page_button{
+    margin-top: 180px;
+    display: block;
+    text-align: center;
+    margin-bottom: 180px;
+}
+.back{
+    /* float: left; */
+    /* margin-left: 500px; */
+    width: 70px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #919191;
+    font-size: 14px;
+    color: white;;
+    border: none;
+}
+.next{
+    /* float: left; */
+    /* margin-left: 20px; */
+    width: 70px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #2370DF;
+    font-size: 14px;
+    color: white;;
+    border: none;
+}
+
+
+/* ==================== 호버링 설명 ===================== */
+
+.cla2 > .qmark > a > p { /* 물음표 */
+    color: white;
+    font-size: 11px;
+    position: absolute;
+    bottom: -15.5px;
+    text-decoration: none;
+}
+.cla2 .photo_explain {
+    width: 330px;
+    box-shadow: 5px 5px 10px 0.5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background-color: white;
+   	padding-top: 15px;
+    padding-right: 25px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+    position: relative;
+    top: -25px;
+    display: none;
+    font-size: 12px;
+}
+.cla2 .photo_explain ul li {
+    color: black;
+    font-weight: 400;
+    font-size: 12px;
+}
+.cla2 a:hover .photo_explain {
+    display: block;
+}
+.cla2 a:hover .photo_explain:before
+
+/* ----------------------------------------------------- */
+
+.cla3 {
+    border: 2px solid;
+}
+
+.cla3 > .qmark > a > p { /* 물음표 */
+    color: white;
+    font-size: 11px;
+    position: absolute;
+    bottom: -15.5px;
+    text-decoration: none;
+}
+.cla3 .title_explain {
+    width: 330px;
+    box-shadow: 5px 5px 10px 0.5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background-color: white;
+    padding-top: 15px;
+    padding-right: 25px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+    position: relative;
+    top: -25px;
+    display: none
+}
+.cla3 .title_explain ul li {
+    color: black;
+    font-weight: 400;
+    font-size: 12px;
+}
+.cla3 a:hover .title_explain {
+    display: block;
+}
+
+
+/* ----------------------------------------------------- */
+
+
+.cla4 > .qmark > a > p { /* 물음표 */
+    color: white;
+    font-size: 11px;
+    position: absolute;
+    bottom: -15.5px;
+    text-decoration: none;
+}
+.cla4 a > .introduce_explain {
+    width: 330px;
+    box-shadow: 5px 5px 10px 0.5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background-color: white;
+    padding-top: 15px;
+    padding-right: 25px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+    position: relative;
+    top: -25px;
+    display: none
+}
+.cla4 .introduce_explain ul li {
+    color: black;
+    font-weight: 400;
+    font-size: 12px;
+}
+.cla4 a:hover .introduce_explain {
+    display: block;
+}
+
+/* ----------------------------------------------------- */
+
+
+.cla5 > .qmark > a > p { /* 물음표 */
+    color: white;
+    font-size: 11px;
+    position: absolute;
+    bottom: -15.5px;
+    text-decoration: none;
+}
+.cla5 a > .video_explain {
+    width: 330px;
+    box-shadow: 5px 5px 10px 0.5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background-color: white;
+   	padding-top: 15px;
+    padding-right: 25px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+    position: relative;
+    top: -25px;
+    display: none
+}
+.cla5 .video_explain ul li {
+    color: black;
+    font-weight: 400;
+    font-size: 12px;
+}
+.cla5 a:hover .video_explain {
+    display: block;
+}
+
+

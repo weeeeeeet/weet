@@ -13,5 +13,4 @@ public class JoinDTO {		// Join form
 
 	private TrainerDTO trainerDTO;
 	private UserDTO userDTO;
-	
-} // EmployeeVO
+} // JoinDTO

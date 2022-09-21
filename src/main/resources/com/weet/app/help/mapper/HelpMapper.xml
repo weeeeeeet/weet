@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+   
+    
+<mapper namespace="com.weet.app.help.mapper.HelpMapper">
+	
+	<!--  ======================== 1대 1 문의 ========================= -->
+	<!-- 문의사항 리스트 -->
+  	<select id="selectInquiryList" resultType="com.weet.app.help.domain.HelpVO">
+		SELECT *
+		FROM t_cs
+		WHERE cs_type = '3'
+		ORDER BY cs_ts DESC
+    </select>
+    
+    <!--  문의사항 작성 -->
+    <insert id="insertInquiry">
+        INSERT INTO t_cs(cs_type, cs_title, cs_content, inquiry_type, inquiry_phone)
+        VALUES( '3', #{csTitle}, #{csContent}, #{inquiryType}, #{inquiryPhone})
+    </insert>
+    
+    <!-- 문의사항 수정 -->
+    <update id="updateInquiry">
+        UPDATE t_cs
+        SET
+            cs_title = #{csTitle},
+            cs_content = #{csContent},
+            inquiry_type = #{inquiryType},
+            inquiry_phone = #{inquiryPhone}
+        WHERE service_no = #{serviceNo}
+    </update>
+    
+    <!--  ========================자주 묻는 질문 ========================= -->
+    <select id="selectQnaList" resultType="com.weet.app.help.domain.HelpVO">
+		SELECT *
+		FROM t_cs
+		WHERE cs_type = '2'
+		<if test="type == 'all'">
+		AND qna_type = '1' OR  qna_type = '2' OR  qna_type = '3' OR  qna_type = '4'
+		</if>
+		<if test="type == 'class'">
+		AND qna_type = '1'
+		</if>
+		<if test="type == 'payment'">
+		AND qna_type = '2'
+		</if>
+		<if test="type == 'guide'">
+		AND qna_type = '3'
+		</if>
+		<if test="type == 'account'">
+		AND qna_type = '4'
+		</if>
+		<if test="keyword != null"> 
+			AND (cs_title LIKE '%' || #{keyword} || '%'
+			OR cs_content LIKE '%' || #{keyword} || '%')
+		</if>
+		OFFSET (#{pageNum} - 1) * #{amount} ROWS
+		FETCH NEXT #{amount} ROWS ONLY
+    </select>
+    
+    <!-- 자주묻는 질문 개수 -->
+	<select id="getTotal" resultType="int">
+		SELECT 
+		    COUNT(*)
+		FROM
+		    t_cs
+		WHERE 
+			cs_type = '2'
+		<if test="keyword != null">
+            AND where cs_title like '%' || #{keyword} || '%'
+        </if>
+    </select>
+    
+    
+     <!--  ======================== 공지사항 ========================= -->
+    <select id="selectNoticeList" resultType="com.weet.app.help.domain.HelpVO">
+		SELECT *
+		FROM t_cs
+		WHERE cs_type = '1'
+		<if test="type == 'all'">
+		AND qna_type = '1' OR  qna_type = '2' OR  qna_type = '3' OR  qna_type = '4'
+		</if>
+		<if test="type == 'newNotice'">
+		AND qna_type = '1'
+		</if>
+		<if test="type == 'updateNotice'">
+		AND qna_type = '2'
+		</if>
+		<if test="type == 'serviceError'">
+		AND qna_type = '3'
+		</if>
+		<if test="type == 'serviceHalt'">
+		AND qna_type = '4'
+		</if>
+		OFFSET (#{pageNum} - 1) * #{amount} ROWS
+		FETCH NEXT #{amount} ROWS ONLY
+    </select>
+
+	
+    <!-- 공지사항 갯수 -->
+    <select id="getTotalNotice" resultType="int">
+		SELECT 
+		    COUNT(*)
+		FROM
+		    t_cs
+		WHERE 
+			cs_type = '1'
+    </select>
+</mapper>
+

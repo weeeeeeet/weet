@@ -57,11 +57,11 @@
             <div class="inner_box">
                 <div class="login-main-text"> 트레이너 로그인 </div>
 
-                    <form action="/user/loginPost" class="member-login">
+                    <form action="/user/loginPost" method="post" class="member-login">
                         <div class="linput_list">
                             <div class="inner-list">
                                 <div class="la_input">
-                                    <label for="userid" class="form-label">아이디</label>
+                                    <label for="userId" class="form-label">아이디</label>
                                     <div class="input_group">
                                         <input type="text" class="form-control-sm ipg" id="userId" name="userId" placeholder="example1234"
                                             autocomplete="off">
@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="inner-list">
                                     <div class="la_input">
-                                        <label for="pwd" class="form-label">비밀번호</label>
+                                        <label for="userPwd" class="form-label">비밀번호</label>
                                         <div class="input_group">
                                             <input type="password" class="form-control-sm" id="userPwd" name="userPwd" >
                                         </div>
