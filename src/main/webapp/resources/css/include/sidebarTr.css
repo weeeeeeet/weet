@@ -1,0 +1,144 @@
+@charset "UTF-8";
+
+/* WEB FONTS 적용 ----------------- */
+@import url(https://webfontworld.github.io/SCoreDream/SCoreDream.css);
+
+/* 기본적 css 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'SCoreDream';
+    box-sizing: border-box;
+}
+
+/* 가이드라인 */
+/* .g{
+    border: 1px solid rgb(191, 0, 255);
+} */
+
+
+/* 배경 스타일 작업 ================================================== */
+body {
+    /* background-color: rgb(227, 227, 227); */
+    background-color: rgb(241, 241, 241) !important;
+    z-index: 1;
+    
+}
+section.wrap {
+    display: flex;
+}
+
+/* 사이드바 스타일 작업================================================== */
+section div.sidebar{
+
+    display: inline-block;
+    width: 350px;
+    background: white;
+    background-position: center;
+    background-size: cover;
+    /* position: fixed; */
+    
+
+    /* border: 2px solid red; */
+}
+
+/* 프로필 스타일 작업================================================== */
+section div.profile {
+    position: absolute;
+    width: 270px;
+    height: 230px;
+    margin: 40px;
+    margin-top: 100px;
+    border-radius: 18px;
+    text-align: center;
+ 
+    background:
+        linear-gradient(127deg, #d2d9ff, rgba(0, 255, 0, 0) 70.71%),
+        linear-gradient(336deg, #fcd9c2, rgba(0, 0, 255, 0) 70.71%);
+
+    /* border: 2px solid red; */
+}
+section div.profile img { /* 프로필 사진 */
+   
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-top: 40px;
+    margin-bottom: 30px;
+
+    /* border: 2px solid red; */
+}
+section div.name-level { /* 이름 & 레벨 */
+    display: inline-flex;
+    font-weight: bold;
+    font-size: 14px;
+
+}
+section div.profile h1 { /* 이름 */
+    width: 140px;
+    padding: 2px;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1;
+    color: rgb(0, 0, 0);
+
+    margin-bottom: 40px;
+
+    /* border: 2px solid red; */
+}
+section div.profile h2 { /* 트레이너 표시 */
+    width: 20px;
+    margin-right: 6px;  /* 레벨과 간격 */
+    padding: 2px;           
+    font-weight: bold;
+    font-size: 12px;
+    color: #ffffff;
+    background-color: #FF730E;
+    border-radius: 4px;
+
+    /* border: 2px solid red; */
+}
+section div.profile h3 { /* 트레이너 레벨 */
+    width: 40px;
+    padding: 2px;
+    font-weight: bold;
+    font-size: 12px;
+    color: #ffffff;
+    background-color: #FF6565;
+    border-radius: 4px;
+
+    /* border: 2px solid red; */
+}
+
+/* 메뉴 스타일 작업 ==================================================*/
+section div.menu{
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 가로 - 중앙으로 */
+   justify-content: flex-start;   /*세로 - 상단으로 */
+    margin-top: 375px;
+    margin-left: 40px;
+    width: 270px;
+    height: 550px;      /* 사이드바 메뉴 높이*/
+    clear: both;
+
+    /* border: 2px solid red; */
+}
+section div.menu i{
+    margin: 5px;
+}
+section div.menu-list{
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: white;
+    color: #878787;
+    margin-top: 30px;
+
+    /* border: 2px solid red; */
+}
+section div.menu a{
+    
+   text-decoration: none; /* 밑줄 없애기 */
+   color: black;
+}

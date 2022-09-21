@@ -1,0 +1,105 @@
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    // calendar element 취득
+    const calendarEl = document.getElementById('calendar');
+
+    // full-calendar 생성하기
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+        height: '700px', // calendar 높이 설정
+        expandRows: true, // 화면에 맞게 높이 재설정
+        slotMinTime: '08:00', // Day 캘린더에서 시작 시간
+        slotMaxTime: '20:00', // Day 캘린더에서 종료 시간
+
+        headerToolbar: {
+            left: 'prev,next today', // 이전, 다음, 오늘
+            center: 'title',
+            right: 'dayGridMonth,dayGridWeek,dayGridDay' // 월, 주, 일
+        },
+
+        // initialDate: '2022-07-28', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.)
+        navLinks: true,  // 날짜를 선택하면 Day 캘린더나 Week 캘린더로 링크
+        editable: false, // 일정 수정 가능
+        dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
+        nowIndicator: true, // 현재 시간 마크
+        locale: 'ko', // 한국어 설정
+        
+        // 각 날짜에 대한 이벤트를 통해 처리할 내용
+        select: function(arg) {
+            console.log(arg);
+
+            const title = prompt('입력할 일정:');
+            // title 값이 있을때, 화면에 calendat.addEvent() json 형식으로 일정을 추가
+            if (title) {
+                calendar.addEvent({
+	               title: title,
+		           start: arg.start,
+		           end: arg.end,
+		           allDay: arg.allDay,
+		           backgroundColor:"yellow",
+		           textColor:"blue"
+
+                })
+            } // if
+            calendar.unselect()
+        }, // select
+
+        eventClick: function(arg) {
+            // 있는 일정 클릭시,
+            console.log("#등록된 일정 클릭#");
+            console.log(arg.event);
+            
+          if (confirm('Are you sure you want to delete this event?')) {
+            arg.event.remove()
+          }
+        },
+        
+        editable: true,
+        dayMaxEvents: true, // allow "more" link when too many events
+
+        //================ ajax데이터 불러올 부분 =====================//
+
+        events:  /*json데이터*/ [ 
+            {
+                groupId: 999,
+                title: '이벤트1', // 캘린더에 표시되는 일정의 이름
+                start: '2022-08-01T16:00:00', //  캘린더에 표시되는 일정 시작 일
+                end: '2022-08-03T19:00:00'  // 캘린더에 표시되는 일정 마지막 일
+            },
+            {
+                groupId: 999,
+                title: '이벤트2',
+                start: '2022-08-10T16:00:00'
+            },
+            {
+                title: '이벤트3',
+                start: '2022-08-13',
+                allDay: false // 일정이 하루 전체인지 여부(True, false)
+            },
+            {
+                title: '이벤트4',
+                start: '2022-08-16T10:30:00',
+                end: '2022-08-19T12:30:00'
+            },
+            {
+                title: '이벤트5',
+                start: '2022-08-21T14:30:00',
+                end: '2022-08-22T18:30:00'
+            },
+            {
+                title: '이벤트6',
+                start: '2022-08-31T14:30:00',
+                // end: '2022-07-07T18:30:00'
+                allDay: false // 일정이 하루 전체인지 여부(True, false)
+            }
+
+            //   { 
+            //     title: 'Click for Google',
+            //     url: 'http://google.com/', //구글로 이동함
+            //     start: '2020-09-28'
+            //   }
+        ]
+    });
+
+    calendar.render();
+});

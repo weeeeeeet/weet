@@ -6,7 +6,7 @@
     <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/63eb3bc178.js" crossorigin="anonymous"></script>
 
-    <link href="/resources/css/headerLogout.css" rel="stylesheet">
+    <link href="/resources/css/include/headerLogout.css" rel="stylesheet">
 
  <!-- ==================HEADER==================== -->
 
