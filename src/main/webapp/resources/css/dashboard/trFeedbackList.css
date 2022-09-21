@@ -1,0 +1,165 @@
+@charset "UTF-8";
+
+/* WEB FONTS 적용 ----------------- */
+@import url(https://webfontworld.github.io/SCoreDream/SCoreDream.css);
+
+/* 기본적 css 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'SCoreDream';
+    box-sizing: border-box;
+}
+
+/* 가이드라인 */
+/* .g {
+    border: 1px solid rgb(191, 0, 255);
+} */
+
+/* 배경 스타일 작업 ================================================== */
+body {
+  	background-color: rgb(233, 233, 233) !important;
+
+}
+
+section.wrap {
+    display: flex;
+}
+
+/* 대시보드 스타일 작업 ==================================================*/
+section div.dash {
+    display: inline-block;
+    text-align: left;
+    width: 1200px;
+    /*대시보드 컨텐츠 틀 크기 (너비) */
+    height: 925px;
+    /*대시보드 컨텐츠 틀 크기 (높이) */
+
+    padding: 30px;
+    margin: auto;  /*대시보드 위치 창 크기에 따라 */
+
+    /* height: 300px; */
+}
+
+section div.dash h1 {
+    /*트레이너 대시보드 타이틀*/
+    font-size: 25px;
+    font-weight: bold;
+    color: #e6be96;
+    padding: 10px;
+}
+
+/* 회원목록 대시보드 박스----------------------------------*/
+section div.user-list {
+    background-color: rgb(255, 255, 255);
+    /* 회원목록 대시보드 색깔*/
+    border-radius: 18px;
+    height: 800px;
+    /* 회원목록 대시보드 크기 (높이) */
+}
+
+section div.user-list h2 {
+    /*회원목록 타이틀 텍스트*/
+    font-size: 20px;
+    font-weight: bold;
+    color: #FF730E;
+
+    padding-left: 45px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    /* padding-bottom: 15px; */
+    margin: 10px;
+}
+
+section div.user-list h3 {
+    /*회원목록 하단 문구*/
+    width: 1000px;
+    font-size: 14px;
+    margin-left: 55px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: solid #e7e7e7;  /*테이블 구분선*/
+    
+}
+
+/* 회원목록 테이블----------------------------------*/
+section div.user-table-box { /*회원목록 스크롤 만들 박스*/
+    overflow-y: auto;
+    /* overflow: auto; */
+    overflow-x: hidden;
+    width: 900px;
+    height: 600px;
+    margin: auto;
+    text-align: center;
+}
+section div.user-table-box::-webkit-scrollbar { /*회원목록 스크롤 너비*/
+    width: 12px;
+}
+section div.user-table-box::-webkit-scrollbar-thumb { /*회원목록 스크롤 막대*/
+    background-color: #ffcba6;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+section div.user-table-box::-webkit-scrollbar-track { /*회원목록 스크롤여백*/
+    background-color: rgb(224, 224, 224);
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+section div.theader tr {  /*테이블 타이틀 박스*/
+  font-size: 100px;
+    /* border-bottom: solid #e7e7e7;   /*테이블 구분선*/
+}
+section div.user-list th {
+   font-size: 14px;
+}
+
+section div.user-list th {
+    /*테이블 타이틀*/
+    font-size: 20px;
+}
+
+section div.user-list td {
+    /*테이블 내부 리스트 텍스트*/
+    font-size: 14px;
+}
+section div.name a { /* 이름 스타일 없앰*/
+    text-decoration: none;
+    color: black;
+}
+.food-management {
+    display: inline-block;
+}
+section div.write-icon {  /* 식단관리 버튼 배경 */
+    height: 28px;
+    width: 100px;
+    background-color: #ffe3d0;
+    border-radius: 3px;
+}
+section div.food-bt-box { /* 식단관리 버튼 링크 범위*/
+    width: 101px;
+}
+section div.food-bt-box a { /* 식단관리 버튼 스타일 없앰*/
+    text-decoration: none;
+}
+section div.food-bt-box i { /* 식단관리 버튼 아이콘*/
+    color: #FF730E;
+    border-radius: 7px;
+    text-align: center;
+    margin-left: 10px;
+}
+section div.food-bt-box h4 { /* 식단관리 버튼 글씨*/
+    display: inline-flex;
+    font-size: 13px;
+    font-weight: bold;
+    color: #FF730E;
+    margin-top:5px;
+    margin-right: 8px;
+}
+.list-title {
+    border-radius: 18px;
+}
+.user-info-list td { /* 회원 정보 */
+  margin-top: 15px;
+  margin-bottom: 15px;
+}

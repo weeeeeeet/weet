@@ -1,0 +1,142 @@
+@charset "UTF-8";
+
+/* WEB FONTS 적용 ----------------- */
+@import url(https://webfontworld.github.io/SCoreDream/SCoreDream.css);
+
+/* 기본적 css 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'SCoreDream';
+    box-sizing: border-box;
+}
+
+/* 가이드라인 */
+/* .g {
+    border: 1px solid rgb(191, 0, 255);
+} */
+
+
+/* 배경 스타일 작업 ================================================== */
+body {
+    background-color: rgb(233, 233, 233) !important;
+
+}
+
+section.wrap {
+    display: flex;
+}
+
+/* 대시보드 스타일 작업 ==================================================*/
+section div.dash {
+    display: inline-block;
+    text-align: left;
+    width: 1200px;   /*대시보드 컨텐츠 틀 크기 (너비) */
+    height: 925px; /*대시보드 컨텐츠 틀 크기 (높이) */
+    margin: auto;  /*대시보드 위치 창 크기에 따라 */
+    padding: 30px;
+
+    margin: auto;  /*대시보드 위치 창 크기에 따라 */
+
+    /* height: 300px; */
+}
+
+section div.dash h1 {
+    /*회원 대시보드 타이틀*/
+    font-size: 25px;
+    font-weight: bold;
+    color: #e6be96;
+    padding: 10px;
+}
+
+/* 오늘의 식단 올리기 대시보드----------------------------------*/
+section div.today-food {
+    background-color: rgb(255, 255, 255); /* 오늘의 식단 대시보드 색깔*/
+    border-radius: 18px;
+    height: 800px;/* 오늘의 식단 대시보드 크기 (높이) */
+}
+
+section div.today-food h2 {   /*스케쥴 확인 타이틀*/
+    font-size: 20px;
+    font-weight: bold;
+    color: #FF730E;
+    /* border-bottom: solid #e7e7e7; */
+
+    padding-left: 45px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    margin: 10px;
+}
+
+section div.today-food p {/*스케쥴 확인 문구*/
+    
+    padding-left: 45px;
+
+    padding-bottom: 15px;
+
+    border-bottom: solid #e7e7e7;
+}
+
+
+/* 캘린더 ================================== */
+
+.container-fluid {
+    height: 620px;
+    width: 1050px;
+}
+/* .table td {
+    padding: 3px;
+    position: relative;
+    height: 60px;
+} */
+
+.scheduler {
+    overflow: auto;
+    /* overflow-x: hidden; */
+    clear: both;
+    height: 620px;
+}
+.scheduler h2 {     /* 날짜 텍스트 */
+    float: right;
+    font-size: 25px;
+    color: #FF730E;
+    width: 290px;
+}
+.scheduler i {
+    float: right;
+    padding: 5px;
+    color: #FF730E;
+    margin-top: 40px;
+    margin-right: 20px;
+}
+section div.scheduler::-webkit-scrollbar { /* 스케쥴 스크롤 너비*/
+    width: 12px;
+}
+section div.scheduler::-webkit-scrollbar-thumb {  /*스케쥴 스크롤 막대*/
+    background-color: #ffcba6;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+section div.scheduler::-webkit-scrollbar-track { /*스케쥴 스크롤 여백*/
+    background-color: rgb(224, 224, 224);
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+#calendar { /*캘린더*/
+    overflow: hidden;
+    width: 1000px;
+}
+#calendar button{
+   background-color: #FF730E;
+}
+.fc-event-title-container { /*이벤트 박스*/
+
+}
+.fc-event-time { /*이벤트 시간*/
+
+}
+#calendar .fc-button {
+    border-color: #b84d00;
+
+}
