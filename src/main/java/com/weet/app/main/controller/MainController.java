@@ -27,7 +27,7 @@ public class MainController {
 	
 	@Setter(onMethod_= @Autowired)
 	private ClassService classService;
-	
+
 	@Setter(onMethod_= @Autowired)
 	private BoardService boardService;
 	

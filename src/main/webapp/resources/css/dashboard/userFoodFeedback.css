@@ -1,0 +1,170 @@
+    
+@charset "UTF-8";
+
+/* WEB FONTS 적용 ----------------- */
+@import url(https://webfontworld.github.io/SCoreDream/SCoreDream.css);
+
+/* 기본적 css 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'SCoreDream';
+    box-sizing: border-box;
+}
+
+/* 가이드라인 */
+/* .g{
+    border: 1px solid rgb(191, 0, 255);
+    z-index: 2;
+}*/
+
+/* 배경 스타일 작업 ================================================== */
+body {
+    background-color: rgb(233, 233, 233) !important;
+    z-index: 1;
+    
+}
+section.wrap {
+    display: flex;
+}
+
+/* 대시보드 스타일 작업 ==================================================*/
+section div.dash { 
+    display: inline-block;
+    text-align: left;
+    width: 1160px;  /*대시보드 컨텐츠 틀 크기 (너비) */
+    height: 925px;  /*대시보드 컨텐츠 틀 크기 (높이) */
+
+    padding: 30px;
+    margin: auto;  /*대시보드 위치 창 크기에 따라 */
+
+    /* height: 300px; */
+}
+section div.dash h1{ /*회원 대시보드 타이틀*/
+    font-size: 25px;
+    font-weight: bold;
+    color: #95B4E0;
+    padding: 10px;
+}
+
+/* 오늘의 식단 올리기 대시보드----------------------------------*/
+section div.today-food {
+    background-color: rgb(255, 255, 255); /* 오늘의 식단 대시보드 색깔*/
+    border-radius: 18px;
+    height: 800px;  /* 오늘의 식단 대시보드 크기 (높이) */
+    z-index: 2;
+}
+section div.todayFoodTitle h2 { /*오늘의 식단 올리기 타이틀*/
+    font-size: 20px;
+    font-weight: bold;
+    color: #2370DF;
+    border-bottom: solid #e7e7e7;
+
+    padding-left: 45px;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    margin: 10px;   
+}
+/* 사진&텍스트 박스-------------------------------------------- */
+section div.picAndText { /* 사진 첨부파일 & 텍스트 틀 박스 */
+    display: inline-flex;
+    margin-left: 50px;
+}
+.foodForm {
+    clear: both;
+    display: inline-flex;
+    width: 1050px;
+    height: 200px !important;
+}
+.message { /* 안내 메세지 */
+    margin-left: 50px;
+    margin-top: 10px;
+}
+section div.image-container { /* 사진 첨부파일 박스 */
+    display: inline-flex;
+    width: 700px;
+    height:200px;
+}
+section div.image-container .message{ /* 사진 첨부파일 박스 */
+    width: 800px;
+    height: 50px;
+}
+section div.image-container img { /* 파일선택 버튼 & 프리뷰 박스*/
+    border-radius: 18px;
+    border: solid #e3e3e3;  /* 프리뷰 박스 테두리*/
+}
+.image-select-btn{ /* 파일선택 버튼*/
+    float: right !important;
+}
+section div.text-container { /* 텍스트 입력 박스 */
+   float: right !important;
+    width: 500px;  
+}
+section div.text-container.text-box { /* 텍스트 입력 => 안됨 */
+    height: 300px; 
+    color: #2370DF;
+}
+/* 내 식단 박스-------------------------------------------- */
+section div.myFood h2{ /*내 식단 타이틀 텍스트*/
+    font-size: 20px;
+    font-weight: bold;
+    color: #2370DF;
+    border-bottom: solid #e7e7e7;
+
+    padding-left: 45px;
+    padding-bottom: 15px;
+    margin: 10px;
+}
+section div.pic-list { /*식단 카드 리스트*/
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: inline-flex;
+    width: 1060px;
+    height: 300px;
+    margin-left: 17px;
+    margin-top: 15px;
+}
+section div.pic-list::-webkit-scrollbar { /*식단 카드 스크롤 너비*/
+    width: 12px;
+}
+section div.pic-list::-webkit-scrollbar-thumb { /*식단 카드 스크롤 막대*/
+    background-color: #77a2ff;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+section div.pic-list::-webkit-scrollbar-track { /*식단 카드 스크롤 여백*/
+    background-color: rgb(224, 224, 224);
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+section div.col { /*카드 col 너비*/ 
+    display: inline-flex;
+    height: 170px;
+    margin-left: 10px;
+}
+section div.card { /*식단 카드*/
+    width: 150px;
+    height: 150px;
+    margin-right: 20px;
+    margin-top: 10px;
+    border-radius: 15px;
+}
+section div.card a{ /*식단 카드 스타일 없애기*/
+    text-decoration: none;
+ }
+section div.card img {
+    height: 90px;
+    border-top-right-radius: 14px;
+    border-top-left-radius: 14px;
+}
+section div.card h5{ /*식단 카드 날짜*/
+    font-size: 15px;
+    width: 100px;
+    margin: 20px;
+    color: rgb(0, 0, 0);
+    text-align: center;
+ }
+
+
+
