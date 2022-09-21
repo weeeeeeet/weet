@@ -148,6 +148,7 @@ const getBoardList = () => {
 } // getBoardList
 
 const boardSlider = () => {
+	$.noConflict();
 
     $('.items').slick({
       dots: false,
@@ -184,7 +185,7 @@ const boardSlider = () => {
   
       ]
     });
-  }
+} // boardSlider
 
 getListTop10();
 getBoardList();

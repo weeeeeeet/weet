@@ -61,7 +61,7 @@ const getBoard = () => {
                 str += '<p>' + e.replyInsertTs + '</p>';
 
                 // 작성아이디와 로그인아이디 같으면 수정 / 삭제 버튼 노출
-                if( e.trainerId == 'tr3' ) {
+                if( e.trainerId == loginUserId ) {
                     str += '<p><span onclick="replyEdit(' + '\'replyContents\', ' + e.replyId + ')">수정</span> | <span onclick="deleteReply(' + e.replyId + ')">삭제</span></p>';
                 } // if
 
@@ -156,7 +156,7 @@ const replyEdit = (id, idx) => {
 
 // 댓글등록
 const regReply = () => {
-    const userId = 'tr3';
+    const userId = loginUserId;
     const content = document.querySelector('#reply-text').value;
     
     if( content == '' ) {

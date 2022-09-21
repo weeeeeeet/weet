@@ -46,7 +46,7 @@
 <body>
 
     <section id="commDetail">
-    	<input type="hidden" name="userId" value="user2">
+    	<input type="hidden" name="userId" value="${ __LOGIN__.userId }">
     	<input type="hidden" name="userType" value="T">
         <div class="board-area">
             <div class="board-title">

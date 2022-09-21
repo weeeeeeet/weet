@@ -35,10 +35,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
     
-    <!-- javascript -->
-    <script src="/resources/js/pay/coupon.js"></script>
-
-
 </head>
 
 <body>
@@ -118,6 +114,7 @@
             </div>
 
             <!-- 내 쿠폰 -->
+            <input type="hidden" name="userId" value="${__LOGIN__.userId }">
             <div class="tab-pane fade" id="mycoupon" role="tabpanel" aria-labelledby="mycoupon-tab">
                 <div class="row caption">
                     <div class="col-md-8">
@@ -163,6 +160,7 @@
         </div>
     </div>
 
+	<script src="/resources/js/pay/coupon.js"></script>
 </body>
 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" />

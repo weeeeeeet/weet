@@ -97,8 +97,6 @@
                                 <strong>
                                     <fmt:formatDate value="${__CLASS__.classRecruitEndDate}" pattern="yyyy-MM-dd" />
                                 </strong></span>
-                            <span><span class="material-icons">calendar_month</span> 개강일
-                                <strong>2022-06-15</strong></span>
                         </div>
                         <div class="row text-white tag-area">
                             #
@@ -519,18 +517,21 @@
                             </div>
 
                             <div class="container mt-5">
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi explicabo ratione
-                                    vitae repudiandae minima enim, praesentium quasi! Similique odio assumenda maxime
-                                    amet cum saepe eligendi dolorem dolorum vero eveniet nesciunt ipsam quaerat eum
-                                    aliquam enim, nulla aut hic magnam! Vitae cum consectetur eum molestiae ea quaerat
-                                    eveniet et nihil aperiam quam, modi ab itaque assumenda neque deleniti recusandae.
-                                    Nesciunt ipsam error ullam iste deleniti natus at eum sit quidem quae, incidunt
-                                    facilis distinctio aperiam dolor ipsa. Iure tempore eos deleniti similique, unde
-                                    perspiciatis. Obcaecati maiores nobis doloribus odit blanditiis aspernatur, esse
-                                    voluptatibus quisquam distinctio nam magni harum beatae quis fugit?
-                                    환불규정아오오.....
-                                </p>
+                                <div class="page page-7" id="page-7">
+                                    <div class="refund">
+                                        <h2>환불규정 안내</h2>
+                                        
+                                        <h2>개강전</h2>
+                                        <p>· 수강료 전액 환불</p>
+                    
+                                        <h2>개강 이후</h2>
+                                        <p>· 단순 변심으로 인한 환불 요청 시 잔여 수업 금액의 10%를(위약금) 제외 후 나머지 금액을 환불 받게 됩니다.</p>
+                                        <p>· 시설 이용 및 강습 등에 관한 내용이 계약 내용 또는
+                                            광고 내용과 나른 경우 잔여 수업 금액의 100%를 환불 받게 됩니다.</p>
+                                        <p>· 이전, 휴업, 폐업, 시설 고장 등으로 시설물을 이용할 수
+                                            없는 경우 잔여 수업 금액의 100%를 환불 받게 됩니다.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
