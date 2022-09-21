@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <project
 	xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -8,7 +7,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.zerock</groupId>
+	<groupId>com.weet</groupId>
 	<artifactId>weet</artifactId>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 
@@ -16,7 +15,7 @@
 
 	<name>weet</name>
 	<url>http://weet.com</url>
-	<description>Spring MVC project</description>
+	<description>Weet project</description>
 
 
 	<properties>
@@ -41,12 +40,11 @@
 	<dependencies>
 
 		<!-- =============== 1. Logging =============== -->
-
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>${org.apache.logging.log4j-version}</version>
-		</dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${org.apache.logging.log4j-version}</version>
+        </dependency>
 
 		<!-- For Spring framework, HikariCP, DriverSpy logging -->
 		<dependency>
@@ -127,7 +125,12 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
-
+	    <dependency>
+	      <groupId>org.springframework.security</groupId>
+	      <artifactId>spring-security-core</artifactId>
+	      <version>5.7.3</version>
+	    </dependency>
+		
 		<!-- =============== 5. JDBC =============== -->
 
 		<dependency>
@@ -273,6 +276,13 @@
 			<groupId>com.github.iamport</groupId>
 			<artifactId>iamport-rest-client-java</artifactId>
 			<version>0.2.22</version>
+		</dependency>
+		
+	    <!-- ================ coolsms 연동 모듈 ================= -->
+		<dependency>
+			<groupId>net.nurigo</groupId>
+		    <artifactId>javaSDK</artifactId>
+		    <version>2.2</version>
 		</dependency>
 		
 		<!-- ================ Swagger ================= -->

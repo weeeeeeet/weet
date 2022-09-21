@@ -746,8 +746,7 @@
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseFour" aria-expanded="false"
                                 aria-controls="flush-collapseFour">
-                                (선택) 이벤트 및 할인 소식 알림 동의 : SMS<input class="agree_check" type="checkbox" name="userReceiveEmailAgmtYN" value="Y"
-                                    name="agreechk">
+                                (선택) 이벤트 및 할인 소식 알림 동의 : SMS<input class="agree_check" type="checkbox" name="userReceiveEmailAgmtYN" value="Y">
                             </button>
                         </h5>
                         <div id="flush-collapseFour" class="accordion-collapse collapse"
@@ -760,8 +759,7 @@
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseFive" aria-expanded="false"
                                 aria-controls="flush-headingFive">
-                                (선택) 이벤트 및 할인 소식 알림 동의 : E-MAIL<input class="agree_check" type="checkbox" name="userReceiveSMSAgmtYN" value="Y"
-                                    name="agreechk">
+                                (선택) 이벤트 및 할인 소식 알림 동의 : E-MAIL<input class="agree_check" type="checkbox" name="userReceiveSMSAgmtYN" value="Y">
                             </button>
                         </h5>
                         <div id="flush-collapseFive" class="accordion-collapse collapse"

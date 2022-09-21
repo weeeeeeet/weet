@@ -53,8 +53,8 @@
                             <col style="width: 10%;">
                         </colgroup>
                         <tr>
-                            <td><span>138908239048920</span> / <span>2022-03-12 09:26:25</span></td>
-                            <td>370,000</td>
+                            <td><span>${ __PAYINFO__.payNum }</span> / <span>${ __PAYINFO__.payTs }</span></td>
+                            <td><fmt:formatNumber type="currency" currencySymbol="￦" value="${ __PAYINFO__.payAmount }" /></td>
                             <td>원</td>
                         </tr>
                     </table>
@@ -70,11 +70,11 @@
                         </colgroup>
                         <tr>
                             <td>결제수단</td>
-                            <td colspan="2">신용카드</td>
+                            <td colspan="2">${ __PAYINFO__.payMethod }</td>
                         </tr>
                         <tr>
                             <td>카드사</td>
-                            <td colspan="2">신한카드</td>
+                            <td colspan="2">${ __PAYINFO__.payCardName }</td>
                         </tr>
                         <tr>
                             <td><hr></td>
@@ -82,13 +82,13 @@
                             <td><hr></td>
                         </tr>
                         <tr>
-                            <td>총 상품금액</td>
-                            <td>400,000</td>
+                            <td>상품 정가</td>
+                            <td><fmt:formatNumber type="currency" currencySymbol="￦" value="${ __PAYINFO__.classFee }" /></td>
                             <td>원</td>
                         </tr>
                         <tr>
                             <td>쿠폰 할인금액</td>
-                            <td>30,000</td>
+                            <td><fmt:formatNumber type="currency" currencySymbol="￦" value="${ __PAYINFO__.classFee - __PAYINFO__.payAmount }" /></td>
                             <td>원</td>
                         </tr>
                         <tr>
@@ -97,8 +97,8 @@
                             <td><hr></td>
                         </tr>
                         <tr>
-                            <td>총 결제금액</td>
-                            <td>370,000</td>
+                            <td>최종 결제금액</td>
+                            <td><fmt:formatNumber type="currency" currencySymbol="￦" value="${ __PAYINFO__.payAmount }" /></td>
                             <td>원</td>
                         </tr>
                     </table>
@@ -107,21 +107,26 @@
                 <div class="buy-product">
                     <p>구매상품</p>
                     <table>
-                        <colgroup>
-                            <col style="width: 30%;">
-                            <col style="width: 70%;">
-                        </colgroup>
                         <tr>
-                            <td><img src="https://picsum.photos/id/477/200/100" alt=""></td>
-                            <td>클래스 이름 어쩌고저쩌고</td>
+                            <td rowspan="3"><img src="/${ __PAYINFO__.classMainImgUrl }" alt=""></td>
+                            <td style="padding-left: 30px; font-weight: 500;">${ __PAYINFO__.classTitle }</td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 30px; font-size: 15px;">${ __PAYINFO__.classTrainerName } / 
+                            	<c:if test="${ __PAYINFO__.classType == '1'.charAt(0) }">개인</c:if>
+                            	<c:if test="${ __PAYINFO__.classType == '2'.charAt(0) }">그룹</c:if>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 30px; font-size: 13px; color: #777">경기 남양주시 와부읍 덕소로 214 5층 SM휘트니스&필라테스</td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
 
-        <a href="/pay/payment" class="button-link">
-            <div class="/mypage/pay/detail">구매내역 확인하기</div>
+        <a href="/mypage/pay/detail" class="button-link">
+            <div class="pay-button">구매내역 확인하기</div>
         </a>
     </section>
 

@@ -37,10 +37,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
 
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css" />
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 </head>
 
 <body>
@@ -72,81 +71,23 @@
         </div>
 
         <div class="board-contents">
-            <h3 class="board-popular-title">금주 인기 게시물 TOP10</h3>
+            <h3 class="board-popular-title">커뮤니티 인기 게시물 TOP10</h3>
             <div class="board-popular">
-
+	
+				<!-- 인기게시물 영역 -->
                 <div class="items"></div>
                     
             </div>
+			
+			<div class="recent-board-and-more">
+	            <h3 class="board-popular-title">최근 게시물</h3>
+				<a href="/board/list">+ 더보기</a>
+			</div>
+			
+			<!-- 최근게시물 영역 -->
+            <div class="board-list"></div>
 
-            <div class="board-list">
-                <h3 class="board-popular-title">최근 게시물</h3>
-                <a href="#">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <div class="row">
-                                    <div class="col-sm-1">
-                                        <img src="https://img.icons8.com/ultraviolet/30/000000/quote-left.png">
-                                    </div>
-
-                                    <div class="col-sm-6">
-                                        <p class="user-nickname">새우새우</p>
-                                    </div>
-
-                                    <div class="col-sm-4">
-                                        <p class="post-date">22.08.15</p>
-                                    </div>
-                                </div>
-
-                            </h4>
-
-                            <div class="template-demo">
-                                <p class="question-title">제목입니다.</p>
-
-                                <p class="question-word">Online reviews can make or break a customer's decision to make
-                                    a purchase. Read about
-                                    these customer review sites where your customers'line reviews can make or break a
-                                    customer's decision to make a purchase. Read about
-                                    these customer review sites where your customers'line reviews can make or break a
-                                    customer's decision to make a purchase. Read about
-                                    these customer review sites where your customers'line reviews can make or break a
-                                    customer's decision to make a purchase. Read about
-                                    these customer review sites where your customers'</p>
-                            </div>
-
-                            <div class="row" style="margin-top: 10px;">
-
-                                <div class="col-sm-1">
-                                    <i class="commhome_comment fas fa-comment-dots" style="color: #2370DF;"></i>
-                                    <span class="count">2</span>
-                                </div>
-
-                                <div class="col-sm-1">
-                                    <i class="commhome_heart fas fa-heart" style="color: #ff589b;"></i>
-                                    <span class="count">2</span>
-                                </div>
-                            </div>
-
-                            <hr>
-
-                            <div class="profile">
-                                <div class="row">
-                                    <p class="no-reply">아직 등록된 답변이 없습니다.
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </a>
-
-
-            </div>
-
-            <div class="chat">
-
-            </div>
+            <div class="chat"></div>
 
     </section>
 

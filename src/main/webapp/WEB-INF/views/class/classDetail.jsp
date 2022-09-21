@@ -1,3 +1,5 @@
+<%@page import="com.weet.app.classes.domain.TotalReviewVO"%>
+<%@page import="com.weet.app.classes.domain.ReviewVO"%>
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
 <!doctype html>
@@ -45,7 +47,7 @@
         <section class="hero" id="hero">
             <div class="row justify-content-center">
                 <div class="col-md-5">
-                    <img src="${__CLASS__.classMainImgUrl}" alt="">
+                    <img class="main-img-url" src="/${__CLASS__.classMainImgUrl}" alt="">
                 </div>
                 <div class="col-md-5 hero-text">
                     <div class="card bg-transparent border-0 p-0">
@@ -57,13 +59,26 @@
                             <c:if test="${__CLASS__.classType == '2'.charAt(0)}">
                                 <span class="badge-group">그룹</span>
                             </c:if>
-
-                            <span class="fa fa-star star-active"></span>
-                            <span class="fa fa-star star-active"></span>
-                            <span class="fa fa-star star-active"></span>
-                            <span class="fa fa-star star-active"></span>
-                            <span class="fa fa-star star-inactive"></span>
-                            <span class="reviews">(31 개의 후기)</span>
+							
+							<% 
+								TotalReviewVO vo = (TotalReviewVO) request.getAttribute("__REVIEW__"); 
+								double avgStar = 0;
+								if(vo.getAvgStar() != null) { avgStar = vo.getAvgStar(); }
+							%>
+							<% 
+								for(int i=1; i<=5; i++) { 
+									if (i <= avgStar) {
+							%>
+			                        	<span class="fa fa-star star-active"></span>
+			                <%
+			                    	} else {
+			                %>
+			                        	<span class="fa fa-star star-inactive"></span>
+			                <%
+			                    	} // if-else
+								}
+			                %>
+                            <span class="reviews">(${ __REVIEW__.totalReview } 개의 후기)</span>
                         </div>
                         <div class="row text-white">
                             <h1>${__CLASS__.classTitle}</h1>
@@ -82,14 +97,12 @@
                                 <strong>
                                     <fmt:formatDate value="${__CLASS__.classRecruitEndDate}" pattern="yyyy-MM-dd" />
                                 </strong></span>
-                            <span><span class="material-icons">calendar_month</span> 개강일
-                                <strong>2022-06-15</strong></span>
                         </div>
-                        <div class="row text-white">
+                        <div class="row text-white tag-area">
                             #
-                            <span>${__CLASS__.classTag1}</span>
-                            <span>${__CLASS__.classTag2}</span>
-                            <span>${__CLASS__.classTag3}</span>
+                            <c:if test="${ not empty __CLASS__.classTag1}"><span><a class="tag-search-link" href="/class/search?type=personalandgroup&classSort=newest&keyword=${__CLASS__.classTag1}">${__CLASS__.classTag1}</a></span></c:if>
+                            <c:if test="${ not empty __CLASS__.classTag2}"><span><a class="tag-search-link" href="/class/search?type=personalandgroup&classSort=newest&keyword=${__CLASS__.classTag2}">${__CLASS__.classTag2}</a></span></c:if>
+                            <c:if test="${ not empty __CLASS__.classTag3}"><span><a class="tag-search-link" href="/class/search?type=personalandgroup&classSort=newest&keyword=${__CLASS__.classTag3}">${__CLASS__.classTag3}</a></span></c:if>
                         </div>
                     </div>
                 </div>
@@ -277,7 +290,7 @@
                                     </div>
                                     <div class="carousel-inner">
                                         <div class="carousel-item active" data-bs-interval="3000">
-                                            <img src="/resources/img/static/eximg.jpg" class="d-block w-100"
+                                            <img src="/${ __CLASS__.classPhotoUrl }" class="d-block w-100"
                                                 alt="클래스 사진">
                                         </div>
                                         <div class="carousel-item" data-bs-interval="3000">
@@ -316,8 +329,11 @@
                                     <div class="row no-gutters">
                                         <div class="col-md-4 border-right">
                                             <div class="ratings text-center p-4 py-5">
-                                                <span class="badge">${__REVIEW__.avgStar} <i
-                                                        class="fa fa-star-o"></i></span>
+                                                <span class="badge">
+                                                	<c:if test="${empty __REVIEW__.avgStar}">0 </c:if>
+	                                                ${__REVIEW__.avgStar} 
+	                                                <i class="fa fa-star-o"></i>
+                                                </span>
 
                                                 <c:choose>
 
@@ -336,8 +352,11 @@
                                                     <c:when test="${__REVIEW__.avgStar > 2.5}">
                                                         <span class="d-block about-rating">그저그래요</span>
                                                     </c:when>
-                                                    <c:otherwise>
+                                                    <c:when test="${__REVIEW__.avgStar > 0}">
                                                         <span class="d-block about-rating">별로에요</span>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <span class="d-block about-rating"></span>
                                                     </c:otherwise>
                                                 </c:choose>
                                                 <span class="d-block total-ratings">${__REVIEW__.totalReview} 개의
@@ -360,9 +379,11 @@
                                                     </div>
                                                     <span class="percent">
                                                         <span>
-                                                            <fmt:formatNumber
-                                                                value="${__REVIEW__.star5 / __REVIEW__.totalReview}"
-                                                                type="percent" />
+                                                        	<c:if test="${ __REVIEW__.totalReview != 0 }">
+	                                                            <fmt:formatNumber
+	                                                                value="${__REVIEW__.star5 / __REVIEW__.totalReview}"
+	                                                                type="percent" />
+                                                        	</c:if>
                                                         </span>
                                                     </span>
                                                 </div>
@@ -381,9 +402,11 @@
                                                     </div>
                                                     <span class="percent">
                                                         <span>
-                                                            <fmt:formatNumber
-                                                                value="${__REVIEW__.star4 / __REVIEW__.totalReview}"
-                                                                type="percent" />
+                                                        	<c:if test="${ __REVIEW__.totalReview != 0 }">
+	                                                            <fmt:formatNumber
+	                                                                value="${__REVIEW__.star4 / __REVIEW__.totalReview}"
+	                                                                type="percent" />
+                                                        	</c:if>
                                                         </span>
                                                     </span>
                                                 </div>
@@ -402,9 +425,12 @@
                                                     </div>
                                                     <span class="percent">
                                                         <span>
-                                                            <fmt:formatNumber
-                                                                value="${__REVIEW__.star3 / __REVIEW__.totalReview}"
-                                                                type="percent" />
+	                                                        <c:if test="${ __REVIEW__.totalReview != 0 }">
+	                                                            <fmt:formatNumber
+	                                                                value="${__REVIEW__.star3 / __REVIEW__.totalReview}"
+	                                                                type="percent" />
+	                                                        
+	                                                        </c:if>
                                                         </span>
                                                     </span>
                                                 </div>
@@ -424,9 +450,11 @@
                                                     </div>
                                                     <span class="percent">
                                                         <span>
-                                                            <fmt:formatNumber
-                                                                value="${__REVIEW__.star2 / __REVIEW__.totalReview}"
-                                                                type="percent" />
+                                                        	<c:if test="${ __REVIEW__.totalReview != 0 }">
+	                                                            <fmt:formatNumber
+	                                                                value="${__REVIEW__.star2 / __REVIEW__.totalReview}"
+	                                                                type="percent" />
+                                                        	</c:if>
                                                         </span>
                                                     </span>
                                                 </div>
@@ -446,9 +474,11 @@
                                                     </div>
                                                     <span class="percent">
                                                         <span>
-                                                            <fmt:formatNumber
-                                                                value="${__REVIEW__.star1 / __REVIEW__.totalReview}"
-                                                                type="percent" />
+                                                        	<c:if test="${ __REVIEW__.totalReview != 0 }">
+	                                                            <fmt:formatNumber
+	                                                                value="${__REVIEW__.star1 / __REVIEW__.totalReview}"
+	                                                                type="percent" />
+                                                        	</c:if>
                                                         </span>
                                                     </span>
                                                 </div>
@@ -487,18 +517,21 @@
                             </div>
 
                             <div class="container mt-5">
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi explicabo ratione
-                                    vitae repudiandae minima enim, praesentium quasi! Similique odio assumenda maxime
-                                    amet cum saepe eligendi dolorem dolorum vero eveniet nesciunt ipsam quaerat eum
-                                    aliquam enim, nulla aut hic magnam! Vitae cum consectetur eum molestiae ea quaerat
-                                    eveniet et nihil aperiam quam, modi ab itaque assumenda neque deleniti recusandae.
-                                    Nesciunt ipsam error ullam iste deleniti natus at eum sit quidem quae, incidunt
-                                    facilis distinctio aperiam dolor ipsa. Iure tempore eos deleniti similique, unde
-                                    perspiciatis. Obcaecati maiores nobis doloribus odit blanditiis aspernatur, esse
-                                    voluptatibus quisquam distinctio nam magni harum beatae quis fugit?
-                                    환불규정아오오.....
-                                </p>
+                                <div class="page page-7" id="page-7">
+                                    <div class="refund">
+                                        <h2>환불규정 안내</h2>
+                                        
+                                        <h2>개강전</h2>
+                                        <p>· 수강료 전액 환불</p>
+                    
+                                        <h2>개강 이후</h2>
+                                        <p>· 단순 변심으로 인한 환불 요청 시 잔여 수업 금액의 10%를(위약금) 제외 후 나머지 금액을 환불 받게 됩니다.</p>
+                                        <p>· 시설 이용 및 강습 등에 관한 내용이 계약 내용 또는
+                                            광고 내용과 나른 경우 잔여 수업 금액의 100%를 환불 받게 됩니다.</p>
+                                        <p>· 이전, 휴업, 폐업, 시설 고장 등으로 시설물을 이용할 수
+                                            없는 경우 잔여 수업 금액의 100%를 환불 받게 됩니다.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

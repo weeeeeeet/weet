@@ -31,6 +31,7 @@
 		    class_tag1,
 		    class_tag2,
 		    class_tag3,
+		    class_photo_url,
 		    class_avg_star,
 		    class_running_time,
 		    class_count,
@@ -67,14 +68,14 @@
 		WHERE
 		    r.user_id = u.user_id
 		    AND r.class_id = #{classId}
-		<include refid="sort"/>
+		<include refid="reviewSort"/>
 		OFFSET
 		    (#{cri.currPage} - 1) * #{cri.amount} ROW
 		FETCH
 		    NEXT #{cri.amount} ROWS ONLY
 	</select>
 	
-	<sql id="sort">
+	<sql id="reviewSort">
 		<if test="cri.sort == 'undefined'">
 			ORDER BY review_id DESC
 		</if>
@@ -252,7 +253,6 @@
     </select>
     
     <!-- 클래스 검색 페이지 정렬 -->
-
     <sql id="classSort">
 		<if test="classSort == null">
 		ORDER BY class_recruit_start_date DESC

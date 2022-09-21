@@ -1,15 +1,11 @@
+const loginUserId = document.querySelector('input[name=userId]').value;
 
 const getMyCoupon = () => {
 	$('#my-coupon-list-area').empty();
 	
-	// 전송파라미터
-	const userId = { "userId": "user1" };
-	
 	$.ajax({
-		url: "/coupons/my",
+		url: "/coupons/my?userId=" + loginUserId,
 		type: "GET",
-		data: userId,
-		dataType: "JSON",
 		success: data => {
 			// console.log(data);
 			
@@ -68,7 +64,7 @@ const createMyCoupon = (inputValue) => {
 	const couponId = inputValue.toUpperCase();
 	// console.log(couponId);
 	
-	const params = { "couponId" : couponId, "userId" : "user1" };
+	const params = { "couponId" : couponId, "userId" : loginUserId };
 
 	$.ajax({
 		url: "/coupons/reg",

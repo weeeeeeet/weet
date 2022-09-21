@@ -31,7 +31,8 @@
 		FROM
 		    t_community c
 		WHERE
-		    comm_post_insert_ts between current_date - 7 AND current_date
+		    comm_tempsave = '0'
+			AND comm_delete_yn = 'N'
 		ORDER BY
 		    comm_like_num DESC
 		FETCH
@@ -149,7 +150,7 @@
 			comm_tempsave = '0'
 			AND comm_delete_yn = 'N'
 		<include refid="search"/>
-		<include refid="sort"/>
+		<include refid="boardSort"/>
 		OFFSET
 		    (#{cri.currPage} - 1) * #{cri.amount} ROW
 		FETCH
@@ -225,6 +226,19 @@
 			user_id = #{userId}
 		    AND comm_tempsave = '1'
 		    AND comm_delete_yn = 'N'
+	</select>
+	
+	<select 
+		id="selectSelectedReplyCountOfTrainer"
+		resultType="int">
+		
+		SELECT
+		    count(reply_id)
+		FROM
+		    t_reply
+		WHERE
+		    user_id = #{userId}
+		    AND reply_selected_yn = 'Y'
 	</select>
 	
 	<insert id="insertBoard">
@@ -362,10 +376,21 @@
 	</update>
 	
 	<update id="updateReplyGroup">
-	
 		UPDATE t_reply
 		SET reply_group = #{replyId}
 		WHERE reply_id = #{replyId}
+	</update>
+	
+	<update id="updateReplySelected">
+		UPDATE t_reply
+		SET reply_selected_yn = 'Y'
+		WHERE reply_id = #{replyId}
+	</update>
+	
+	<update id="updateTrainerLevel">
+		UPDATE t_tr
+		SET user_level = user_level + 1
+		WHERE user_id = #{userId}
 	</update>
 	
 	<delete id="deleteBoardLike">
@@ -375,7 +400,7 @@
 			AND comm_id = #{commId}
 	</delete>
 	
-	<sql id="sort">
+	<sql id="boardSort">
 		<if test="cri.sort == 'undefined'">
 			ORDER BY comm_id DESC
 		</if>

@@ -47,7 +47,7 @@
     <section id="commWrite">
         <form id="boardForm" onsubmit="return false;">
         	<input type="hidden" name="commId" value="${param.commId}">
-        	<input type="hidden" name="userId" value="${__USER__.userId}">
+        	<input type="hidden" name="userId" value="${__LOGIN__.userId}">
         	
             <br style="clear: both">
             <h3 style="margin-bottom: 10px;">커뮤니티 글 작성</h3>
