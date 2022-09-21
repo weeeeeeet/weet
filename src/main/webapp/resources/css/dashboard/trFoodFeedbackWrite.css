@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+/* WEB FONTS 적용 ----------------- */
+@import url(https://webfontworld.github.io/SCoreDream/SCoreDream.css);
+
+/* 기본적 css 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'SCoreDream';
+    box-sizing: border-box;
+}
+
+/* 가이드라인 */
+/* .g{
+    border: 1px solid rgb(192, 2, 255);
+} */
+
+
+/* 배경 스타일 작업 ================================================== */
+body {
+    background-color: rgb(227, 227, 227);
+    
+}
+section.wrap {
+    display: flex;
+}
+
+
