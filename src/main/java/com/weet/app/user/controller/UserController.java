@@ -13,7 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.weet.app.common.SharedScopeKeys;
 import com.weet.app.exception.ControllerException;
-import com.weet.app.exception.ServiceException;
 import com.weet.app.user.domain.LoginDTO;
 import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.TrainerVO;
@@ -31,10 +30,6 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/user")
 @Controller
 public class UserController {
-
-	private static final String loginKey = "__LOGIN__";
-	private static final String rememberMeKey = "__REMEMBER_ME__";		// Original Remember-Me Cookie name
-
 	
 	@Setter(onMethod_= {@Autowired})
 	private UserService service;
@@ -128,10 +123,9 @@ public class UserController {
 		try {
 			cnt = service.idCheck(id);
 			return cnt;
-		} catch (ServiceException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			throw new ControllerException(e);
 		}
-		return cnt;
 		
 	}
 
