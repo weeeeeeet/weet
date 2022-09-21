@@ -641,6 +641,25 @@ nav .navbar-nav .nav-link {
   background-color: #2370DF;
   color: white;
 }
+#page-7 {
+  width: 70%;
+  margin: 0 auto;
+  padding: 20px;
+  
+  border-radius: 10px;
+  background-color: #ebebeb;
+}
+#page-7 h2:first-of-type {
+	text-align: center;
+	font-size: 20px;
+}
+#page-7 h2 {
+	font-size: 16px;
+}
+#page-7 p {
+	line-height: 30px;
+	font-size: 14px;
+}
 
 /*---------------------------------------
   SIDE-BOX-HEART-ANIMATED     

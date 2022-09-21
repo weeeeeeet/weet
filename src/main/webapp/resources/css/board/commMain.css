@@ -151,7 +151,14 @@
 .board-contents {
     margin-top: 50px;
 }
-
+.recent-board-and-more {
+	display: flex;
+	justify-content: space-between;
+}
+.recent-board-and-more a {
+	font-size: 14px;
+	color: #2370DF !important;
+}
 .board-popular-title {
     font-size: 18px;
 }
