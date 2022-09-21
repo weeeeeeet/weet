@@ -64,7 +64,7 @@ public class BoardController {
 	
 	// 추천 TOP10 게시글 조회
 	@GetMapping("/list/top")
-	@ApiOperation(value = "인기글 조회", notes = "최근 7일간 인기글 10개를 조회합니다. 가장 최근 댓글 1개를 같이 반환")
+	@ApiOperation(value = "인기글 조회", notes = "인기글 10개를 조회합니다. 가장 최근 댓글 1개를 같이 반환")
 	public APIResponse boardBestList() throws ControllerException {
 		
 		APIResponse res = new APIResponse();
@@ -74,15 +74,9 @@ public class BoardController {
 		return res;
 	} // boardBestList
 	
-	// 최근 게시글 5개 목록 조회
-	@GetMapping("/list/recent")
-	public String boardRecentList() {
-		return "test!";
-	}
-	
 	// 대댓글 목록 조회
 	@GetMapping("/list/re/reply/{commId}/{replyGroup}")
-	@ApiOperation(value = "답글 목록 조회", notes = "특정 게시글의 특정 댓글에 대한 답글목록을 반환합니다.")
+	@ApiOperation(value = "대댓글 목록 조회", notes = "해당 댓글의 대댓글 목록을 반환합니다.")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = "commId", value = "게시글 번호", paramType = "path", required = true),
 		@ApiImplicitParam(name = "replyGroup", value = "댓글 번호(replyId)", paramType = "path", required = true)
@@ -292,6 +286,7 @@ public class BoardController {
 	
 	// 댓글 채택
 	@PutMapping("/reply/select/{replyId}")
+	@ApiOperation(value = "댓글 채택", notes = "댓글을 채택상태로 업데이트합니다. 성공여부를 반환합니다.")
 	public APIResponse replySelect(@PathVariable int replyId, String userId) throws ControllerException {
 		log.trace("replyDelete({}) invoked.", userId);
 		
@@ -327,6 +322,8 @@ public class BoardController {
 	
 	// 임시저장 목록 조회
 	@GetMapping("/tmp")
+	@ApiOperation(value = "임시저장 목록조회", notes = "유저의 임시저장 작성글 목록을 반환합니다.")
+	@ApiImplicitParam(name = "userId", value = "유저 아이디", paramType = "query", required = true)
 	public APIResponse tempSaveList(String userId) throws ControllerException {
 		log.trace("tempSaveList({}) invoked.", userId);
 		
