@@ -125,3 +125,4 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse,windows
 target/m2e-wtp/web-resources/META-INF/maven/com.weet/weet/pom.properties
+/target/
