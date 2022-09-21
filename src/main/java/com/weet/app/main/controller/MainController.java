@@ -2,6 +2,7 @@ package com.weet.app.main.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import com.weet.app.classes.service.ClassService;
 import com.weet.app.exception.ControllerException;
 
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -23,7 +25,9 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class MainController {
 	
+	@Setter(onMethod_= @Autowired)
 	private ClassService classService;
+	@Setter(onMethod_= @Autowired)
 	private BoardService boardService;
 	
 	// ======================= 메인페이지 ======================== //
