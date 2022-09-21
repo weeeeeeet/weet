@@ -31,7 +31,8 @@
 		FROM
 		    t_community c
 		WHERE
-		    comm_post_insert_ts between current_date - 7 AND current_date
+		    comm_tempsave = '0'
+			AND comm_delete_yn = 'N'
 		ORDER BY
 		    comm_like_num DESC
 		FETCH
