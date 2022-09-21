@@ -40,5 +40,6 @@ public class Criteria2 {
 	@Override
 	public String toString() {
 		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", keyword=" + keyword + ", classSort=" + classSort + ", type=" + type + "]";
+
 	}
 } // end class

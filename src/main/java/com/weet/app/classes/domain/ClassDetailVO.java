@@ -24,6 +24,7 @@ public class ClassDetailVO {
 	private String classTag1;
 	private String classTag2;
 	private String classTag3;
+	private String classPhotoUrl;
 	private Integer classAvgStar;
 	private Integer classRunningTime;
 	private Integer classCount;

@@ -17,5 +17,8 @@ public interface CouponMapper {
 	
 	// 내쿠폰에 쿠폰 등록(사용자 입장에서)
 	public abstract Integer insertMyCoupon(@Param("couponId") String couponId, @Param("userId") String userId) throws DAOException;
+	
+	// 쿠폰 사용완료
+	public abstract int updateCouponUsage(String couponId, String userId) throws DAOException;
 
 } // end interface

@@ -84,11 +84,12 @@
 
 
         </div>
-
+		
         <div class="board-contents">
             <div class="board-list"></div>
         </div>
-
+        
+        <nav id="pagination-area"></nav>
         <div class="chat"></div>
     </section>
 
