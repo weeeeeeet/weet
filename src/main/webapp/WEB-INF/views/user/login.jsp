@@ -53,6 +53,8 @@
             <div class="lgn-btn">
 
                 <div class="btn">
+                
+                    <!-- <a id="kakao-login-btn" href="javascript:loginWithKakao()" class="btn btn-primary kakao" -->
                     <a href="https://kauth.kakao.com/oauth/authorize?client_id=e633a1a319cc541dac0ec78d1f28cfa4&redirect_uri=http://localhost:8080/auth/kakao&response_type=code" class="btn btn-primary kakao"
                         role="button" aria-disabled="true">
                         <div class="button-box">
@@ -190,7 +192,10 @@
     </div>
     
     <!-- js -->
-    <!-- <script src="/resources/js/user/kakaoAuth.js"></script> -->
+    <script src="/resources/js/user/kakaoAuth.js"></script>
+    <!--  
+    
+    -->
 
 </body>
 

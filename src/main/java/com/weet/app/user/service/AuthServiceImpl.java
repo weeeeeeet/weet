@@ -2,7 +2,6 @@ package com.weet.app.user.service;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -62,7 +61,7 @@ public class AuthServiceImpl implements AuthService {
 	
 	// 카카오 로그인
 	@Override
-	public String getKaKaoAccessToken(String code){
+	public String getKaKaoAccessToken(String code) throws ServiceException {
         String access_Token="";
         String refresh_Token ="";
         String reqURL = "https://kauth.kakao.com/oauth/token";
@@ -79,8 +78,8 @@ public class AuthServiceImpl implements AuthService {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
-            sb.append("&client_id=e633a1a319cc541dac0ec78d1f28cfa4"); // TODO REST_API_KEY 입력
-            sb.append("&redirect_uri=http://localhost:8080/auth/kakao"); // TODO 인가코드 받은 redirect_uri 입력
+            sb.append("&client_id=e633a1a319cc541dac0ec78d1f28cfa4");    // REST_API_KEY 입력
+            sb.append("&redirect_uri=http://localhost:8080/auth/kakao"); // 인가코드 받은 redirect_uri 입력
             sb.append("&code=" + code);
             bw.write(sb.toString());
             bw.flush();
@@ -111,11 +110,13 @@ public class AuthServiceImpl implements AuthService {
 
             br.close();
             bw.close();
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
+            
+        } catch (Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
 
         return access_Token;
+        
     } // getKaKaoAccessToken
 
 
@@ -162,11 +163,73 @@ public class AuthServiceImpl implements AuthService {
 
             br.close();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
 		
 	}
+
+
+	@Override
+	public HashMap<String, Object> getUserInfo(String access_Token) throws ServiceException {
+//	    요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
+        HashMap<String, Object> userInfo = new HashMap<>();
+        String reqURL = "https://kapi.kakao.com/v2/user/me";
+        try {
+            URL url = new URL(reqURL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+            //    요청에 필요한 Header에 포함될 내용
+            conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+
+            int responseCode = conn.getResponseCode();
+            log.info("responseCode : {}", responseCode);
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+            String line = "";
+            String result = "";
+
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+            log.info("response body : {}", result);
+
+            //Gson 라이브러리로 JSON파싱
+            JsonElement element = JsonParser.parseString(result);
+            JsonObject object = element.getAsJsonObject();
+
+            JsonObject properties = object.get("properties").getAsJsonObject();
+            JsonObject kakao_account = object.get("kakao_account").getAsJsonObject();
+
+            String nickname = properties.getAsJsonObject().get("profile_nickname").getAsString();
+            String profile_image = properties.getAsJsonObject().get("profile_image").getAsString();
+            String email = kakao_account.getAsJsonObject().get("account_email").getAsString();
+            String name = kakao_account.getAsJsonObject().get("name").getAsString();
+            String gender = kakao_account.getAsJsonObject().get("gender").getAsString();
+            String phone = kakao_account.getAsJsonObject().get("phone_number").getAsString();
+
+            userInfo.put("nickname", nickname);
+            userInfo.put("email", email);
+            userInfo.put("profile_image", profile_image);
+            userInfo.put("name", name);
+            userInfo.put("gender", gender);
+            
+            log.info("\t + nickname :{}" , nickname);
+            log.info("\t + email :{}" , email);
+            log.info("\t + profile_image :{}" , profile_image);
+            log.info("\t + name :{}" , name);
+            log.info("\t + gender :{}" , gender);
+            log.info("\t + phone :{}" , phone);
+            
+            
+        } catch (Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+
+        return userInfo;
+    }
 	
 	
 }
