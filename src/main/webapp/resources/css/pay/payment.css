@@ -1,0 +1,275 @@
+@charset "UTF-8";
+
+* { 
+    margin: 0;
+    padding: 0;
+    font-family: 'SCoreDream';
+}
+a {                                      /* 링크 스타일 초기화 */
+    text-decoration: none;
+}
+body {
+    overflow-x: hidden;
+}
+.contents {                              /* 컨텐츠영역 잡기 */
+    width: 1040px;
+    margin: 0 auto;
+    margin-bottom: 100px;
+}
+legend {                                 /* 소제목 */
+    display: block;
+    font-weight: bold;
+    color: #2370DF;
+    width: 100%;
+    border-bottom: 1px solid #2370DF;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/* =====================상품정보 시작========================= */
+.card {
+    width: 100%;
+    z-index: -1;
+}
+.row, .g-0 {
+    padding: 20px 50px;
+}
+.card-body {
+    text-align: right;
+}
+.card-img-top {
+    width: 100%;
+    object-fit: fill;
+}
+.class-title {
+    font-weight: bold; 
+    font-size: 20px;
+}
+.class-amount {
+    font-weight: bold; 
+    font-size: 25px
+}
+/* =====================상품정보 끝========================= */
+
+/* =====================결제자 정보 시작========================= */
+input {
+    width: 100%;
+}
+.pay-info {
+    margin: 10px;
+}
+form span {
+    color: red;
+}
+/* =====================결제자 정보 끝========================= */
+
+/* =====================결제수단 시작========================= */
+.pay-method-container {
+    text-align: center;
+    width: 100%;
+}
+.pay-method-container .row {
+    overflow-x: hidden;
+}
+.pay-method-container label {
+    width: 100%;
+    height: 100%;
+    line-height: 50px;
+
+    border-color: rgb(108, 108, 108);
+    color: rgb(108, 108, 108);
+}
+.pay-method-container input[type="radio"]:hover + label {
+    border-color: #2370DF;
+    background-color: #ebf4ff;
+    color: black;
+    box-shadow: none;
+}
+.pay-method-container input[type="radio"]:checked + label {
+    border-color: #2370DF;
+    background-color: #ebf4ff;
+    color: black;
+    box-shadow: none;
+}
+.pay-method-container label>img {
+    width: 55px;
+}
+/* =====================결제수단 끝========================= */
+
+.total-amount {     /* 총 결제 금액 */
+    background-color: #e6e6e6;
+    border-radius: 10px;
+    font-weight: bold;
+}
+/* =====================이용약관 시작========================= */
+.pay-agmt-container> div:nth-of-type(1) {
+    border: 1px solid #2370DF;
+    border-radius: 10px;
+    background-color: #ebf4ff;
+}
+/* =====================이용약관 끝========================= */
+
+/* =====================결제버튼 시작========================= */
+.pay-submit button {
+    width: 30%;
+    margin-top: 50px;
+
+    background-color: #2370DF; 
+    border-color: #2370DF; 
+}
+/* =====================결제버튼 끝========================= */
+
+/* =====================쿠폰팝업(모달창) 시작========================= */
+#payModalLabel span {
+    color: #2370DF;
+}
+#coupon-close:focus {
+    box-shadow: none;
+}
+.form-check {
+    margin: 15px 0;
+    height: 50px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+.modal-body .form-check:hover {
+    border-color: #2370DF;
+    background-color: #ebf4ff;
+    color: black;
+}
+.modal-body .form-check:focus-within {
+    border-color: #2370DF;
+    background-color: #ebf4ff;
+    color: black;
+}
+.modal-body input {
+    width: 25px;
+    height: 25px;
+    margin-top: 10px;
+}
+.modal-body input:checked {
+    box-shadow: none;
+}
+.modal-body label {
+    display: inline-block;
+    line-height: 35px;
+    width: 100% - 25px;
+    margin: 5px;
+}
+.modal-body label table {
+    width: 700px;
+}
+.modal-body label td {
+    padding-left: 10px;
+}
+.modal-body label td:nth-of-type(1) {
+    font-weight: bold;
+    border-right: 1px solid lightgray;
+}
+.modal-body label td:nth-of-type(3) {
+    color: rgb(161, 161, 161);
+}
+.modal-footer {
+    margin-top: 50px;
+}
+.modal-footer button {
+    width: 100%;
+    height: 50px;
+    color: black;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+/* =====================쿠폰팝업(모달창) 끝========================= */
+
+.wrapper {
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+}
+.wrapper .box{
+  padding: 20px 30px;
+  background: #fff;
+  border-radius: 10px;
+}
+.wrapper .box .row {
+	width: 100%;
+}
+.wrapper .box label{
+      display: flex;
+    height: 53px;
+    width: 100%;
+    align-items: center;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    margin: 10px 0;
+    padding-left: 11px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.wrapper .box label:hover{
+    background: #ebf4ff;
+    border-color:#2370DF;
+}
+.wrapper .box input[type="radio"]:checked + label:after {
+  background: #2370DF;
+  border-color:#2370DF;
+}
+.wrapper .box label .select-dots{
+  height: 20px;
+  width: 20px;
+  background: #d9d9d9;
+  border-radius: 50%;
+  position: relative;
+  transition: all 0.3s ease;
+}
+#value-1:checked ~ .value-1 .select-dots,
+#value-2:checked ~ .value-2 .select-dots,
+#value-3:checked ~ .value-3 .select-dots,
+#value-4:checked ~ .value-4 .select-dots{
+  background: #fff;
+}
+.box label .select-dots::before{
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(2);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+#value-1:checked ~ .value-1 .select-dots::before,
+#value-2:checked ~ .value-2 .select-dots::before,
+#value-3:checked ~ .value-3 .select-dots::before,
+#value-4:checked ~ .value-4 .select-dots::before{
+  background: #2370DF;
+  transform: translate(-50%, -50%) scale(1);
+}
+.wrapper .box label .text{
+  color: #333;
+  font-size: 18px;
+  font-weight: 400;
+  padding-left: 10px;
+  transition: color 0.3s ease;
+}
+#value-1:checked ~ .value-1 .text,
+#value-2:checked ~ .value-2 .text,
+#value-3:checked ~ .value-3 .text,
+#value-4:checked ~ .value-4 .text{
+  color: #fff;
+}
+.text-dc-pct {
+	font-size: 18px;
+	font-weight: 500;
+}
+.text-ts {
+	color: darkgray;
+}
+.text-dc-pct, .text-name {
+    border-right: 1px solid lightgray;
+}
+.wrapper .box input[type="radio"]{
+  display: none;
+}

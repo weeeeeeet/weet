@@ -40,7 +40,7 @@
 						<div class="single-footer-widget tp_widgets">
 							<h4 class="footer_title">바로가기</h4>
 							<ul class="list">
-								<li><a href="/notice/list">공지사항</a></li>
+								<li><a href="/help/notice">공지사항</a></li>
 								<li><a href="/help/inquiry">고객센터</a></li>
 							</ul>
 
@@ -103,7 +103,7 @@
 	</footer>
 	<!--================ End footer Area  =================-->
 
-  <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
-  <script src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
+  <script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
+  <script src="/resources/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 </body>
 </html>

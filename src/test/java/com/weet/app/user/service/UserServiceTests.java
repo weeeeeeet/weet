@@ -16,15 +16,16 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.weet.app.exception.DAOException;
 import com.weet.app.exception.ServiceException;
-import com.weet.app.user.domain.JoinDTO;
 import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.UserDTO;
+import com.weet.app.user.mapper.UserMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -38,9 +39,9 @@ import lombok.extern.log4j.Log4j2;
 // @RunWith(SpringJunit4ClassRunner.class)
 
 // JUnit 5
+@WebAppConfiguration
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = "file:src/main/webapp/**/spring/**/*-context.xml")
-
 
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -48,6 +49,7 @@ public class UserServiceTests {
 
 	@Setter(onMethod_=@Autowired)
 	private UserService service;
+	
 	
 	@BeforeAll
 	void beforeAll() {
@@ -65,27 +67,19 @@ public class UserServiceTests {
 //	@Disabled
 	@Test
 	@Order(1)
-	@DisplayName("1. UserMapper.testInsertTr() test.")
+	@DisplayName("1. UserMapper.testTrJoin() test.")
 	@Timeout(value=5, unit=TimeUnit.SECONDS)
-	void testInsertTr() throws DAOException, ServiceException {
-		log.trace("testInsertTr() invoked.");
+	void testTrJoin() throws DAOException, ServiceException {
+		log.trace("testTrJoin() invoked.");
 		
-
 		// 1. UserTr 객체 생성 => SQL의 바인드변수들에 넘겨줄 파라미터
-		TrainerDTO trainerDTO = new TrainerDTO("testId", "testPwd!","testCareer","testIntro",1234567890);
-		UserDTO userDTO = new UserDTO("testId", "testName",'T',"testNick","01012344321","test@test.com","testProfile",'F','Y','Y','Y','Y');
-		log.info("\t+ 1-1. trainerDTO: {}", trainerDTO);
-		log.info("\t+ 1-2. userDTO: {}", userDTO);
+		UserDTO userDTO = new UserDTO("testId6", "testName3",'T',"testNick3","01098225432","test3@test.com","testProfile3",'W','Y','Y','Y','Y');
+		TrainerDTO trainerDTO = new TrainerDTO("testId6","1q2w3e4r!!","testCareer3","testIntro3", "1876543211");
 		
-		JoinDTO dto = new JoinDTO(trainerDTO, userDTO);
 		
-		if(service.trJoin(dto)){
-			log.info("\t+  New board modified.");
-			
-			log.info("\t+ newVO: ", dto);
-		} else {
-			log.info("\t+ No board modified.");
-		}
+		this.service.trJoin(userDTO, trainerDTO);
+		log.info("\t+ 1-1.newUser:{} ", userDTO);
+		log.info("\t+ 1-2.newUser: {} ", trainerDTO);
 		
 	} // testInsertTr
 	
@@ -104,5 +98,31 @@ public class UserServiceTests {
 
 		log.trace("\t+ cnt: {}", cnt);
 	} // testSelectId
+	
+//  아이디 중복 테스트
+//	@Disabled
+	@Test
+	@Order(3)
+	@DisplayName("2. UserMapper.testLogin() test.")
+	@Timeout(value=5, unit=TimeUnit.SECONDS)
+	void testLogin() throws ServiceException {
+		log.trace("testLogin() invoked.");
+
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		String userId = "testId6";
+		String userPwd= "1q2w3e4r!!";
+		String cipherText = encoder.encode(userPwd);	
+		
+		boolean isMatched = encoder.matches(userPwd,cipherText);
+		log.info("\t+ isMatched:{}", isMatched);
+		
+		if(!isMatched) { // loginDTO id, trainerV
+			
+		}
+	
+
+
+	} // testLogin
 	
 } // BoardServiceTests

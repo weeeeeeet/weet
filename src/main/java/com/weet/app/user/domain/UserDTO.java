@@ -20,7 +20,7 @@ public class UserDTO {	// T_User
 	private Character userGender;					// 성별
 	private Character userSvcUseAgmtYN;				// 이용약관동의
 	private Character userSvcPCYAgmtYN;				// 개인정보처리동의
-	private Character userReciveEmailAgmtYN;		// 이메일 수신
-	private Character userReciveSMSAgmtYN;			// SMS 수신
+	private Character userReceiveEmailAgmtYN;		// 이메일 수신
+	private Character userReceiveSMSAgmtYN;			// SMS 수신
 	
 }
