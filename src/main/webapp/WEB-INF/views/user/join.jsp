@@ -77,7 +77,7 @@
                         <input type="password" class="form-control-sm" name="user_pwd2" id="user_pwd2" minlength="8"
                             maxlength="14" placeholder="비밀번호를 한번 더 입력해주세요" autocomplete="off" required>
                     </div>
-                    <span class="checkment" id="pweCheck"></span>
+                    <span class="checkment" id="pwdCheck"></span>
                 </div>
                 <div class="email-box">
                     <label for="user_email" class="form-label"> 이메일 </label>
