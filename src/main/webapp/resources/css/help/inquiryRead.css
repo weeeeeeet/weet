@@ -211,6 +211,7 @@ textarea {
 /* ==== 답변 ==== */
 
 .answer {
+	clear: both;
     width: 190px;
     float:left;
     position: relative;

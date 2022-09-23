@@ -12,6 +12,7 @@
 	
 	<!-- css -->
 	<link rel="stylesheet" href="${path}/resources/css/help/inquiryModify.css">
+	<link rel="stylesheet" href="/resources/vendors/bootstrap/bootstrap.min.css">
 	
 	<!-- favicon -->
 	<link rel="shortcut icon" href="${path}/resources/ico/favicon.ico" type="image/x-icon">
