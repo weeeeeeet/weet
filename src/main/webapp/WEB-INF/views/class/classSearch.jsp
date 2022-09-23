@@ -95,11 +95,11 @@
 					<option name="type" value="group" id="group">그룹</option>
 				</select> 
 				
-				<button class="starBtn" name="sort" value="star">별점순</button>
+				<button class="starBtn" name="classSort" value="star">별점순</button>
 				|
-				<button class="newestBtn" name="sort" value="newest">최신순</button>
+				<button class="newestBtn" name="classSort" value="newest">최신순</button>
 				|
-				<button class="endBtn" name="sort" value="end">마감임박순</button>
+				<button class="endBtn" name="classSort" value="end">마감임박순</button>
 
 				<input type="hidden" name="keyword" id="s_keyword" value="">
 			</form>
