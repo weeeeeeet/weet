@@ -10,6 +10,7 @@
 	
 	<!-- css -->
 	<link rel="stylesheet" href="${path}/resources/css/class/classSearch.css" />
+	<link rel="stylesheet" href="/resources/vendors/bootstrap/bootstrap.min.css">
 	
 	<!-- font -->
 	<link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
@@ -72,7 +73,7 @@
 		<section class="banner">
 			<div class="banner_search">
 					<input type="hidden" name="type" value="personalandgroup">
-					<input type="hidden" name="classSort" value="newest">
+					<input type="hidden" name="sort" value="newest">
 					<input type="text" name="keyword" value="${pageMaker.cri.keyword}"
 						placeholder="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp트레이너명 또는 클래스명 입력"
 						autocomplete="off"> 
@@ -86,7 +87,7 @@
 
 	<section class="contents">
 
-		<div class="classSort">
+		<div class="sort">
 			<form id="typeForm" method="get" action="/class/search">
 				<select name="type" id="type">
 					<option name="type" value="personalandgroup" id="personalandgroup" >개인 / 그룹</option>
@@ -94,11 +95,11 @@
 					<option name="type" value="group" id="group">그룹</option>
 				</select> 
 				
-				<button class="starBtn" name="classSort" value="star">별점순</button>
+				<button class="starBtn" name="sort" value="star">별점순</button>
 				|
-				<button class="newestBtn" name="classSort" value="newest">최신순</button>
+				<button class="newestBtn" name="sort" value="newest">최신순</button>
 				|
-				<button class="endBtn" name="classSort" value="end">마감임박순</button>
+				<button class="endBtn" name="sort" value="end">마감임박순</button>
 
 				<input type="hidden" name="keyword" id="s_keyword" value="">
 			</form>
