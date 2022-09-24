@@ -30,6 +30,11 @@ const getBoard = () => {
             document.querySelector('.heartCount').innerHTML = "좋아요 " + boardData.commLikeNum;   // 좋아요 수
             document.querySelector('.reply-write-area>p>span').innerHTML = boardData.commReplyCount;    // 댓글 수
 
+			// 작성자 아닐 시 수정 / 삭제 금지
+			if( boardData.userId != loginUserId ) {
+				document.querySelector('.btn-area').style.display = "none";
+			} // if
+			
             if( replyData.length === 0 ) {
                 document.querySelector('.reply-content-area').innerHTML = str;
 
@@ -281,8 +286,17 @@ const goModify = () => {
 
 // 게시글 삭제
 const deleteBoard = () => {
+	
+	$.ajax({
+        url: "/board/api/" + commId,
+        type: "DELETE",
+        success: () => {
+	
+			$('#delModal').modal('show');
+        } // success
+    }); // .ajax
 
-}
+} // deleteBoard
 
 // 댓글 채택
 const selectReply = (replyId, userId) => {
