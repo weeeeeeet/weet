@@ -11,6 +11,7 @@ import com.weet.app.pay.domain.PaymentDTO;
 import com.weet.app.pay.domain.PaymentVO;
 import com.weet.app.pay.mapper.CouponMapper;
 import com.weet.app.pay.mapper.PayMapper;
+import com.weet.app.user.domain.UserVO;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -68,6 +69,13 @@ public class PayServiceImpl implements PayService {
 	public PaymentVO getPayInfo(String orderNum) throws ServiceException {
 		
 		try { return this.payMapper.selectPayInfo(orderNum); }
+		catch(DAOException e) { throw new ServiceException(e); }
+	} // goPayment
+
+	@Override
+	public UserVO getPayUserInfo(String userId) throws ServiceException {
+		
+		try { return this.payMapper.selectUserInfo(userId); }
 		catch(DAOException e) { throw new ServiceException(e); }
 	} // goPayment
 
