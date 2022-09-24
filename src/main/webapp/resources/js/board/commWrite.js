@@ -1,6 +1,6 @@
 let commId = document.querySelector('input[name=commId]').value;
 let userId = document.querySelector('input[name=userId]').value;
-var $1 = jQuery.noConflict();
+const $1 = jQuery.noConflict();
 
 // 섬머노트 세팅
 const readySummernote = () => {
