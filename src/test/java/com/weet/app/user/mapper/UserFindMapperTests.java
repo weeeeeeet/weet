@@ -63,7 +63,7 @@ public class UserFindMapperTests {
 	} // beforeAll
 	
 	
-//  아이디 중복 테스트
+//  아이디 찾기
 //	@Disabled
 	@Test
 	@Order(1)
