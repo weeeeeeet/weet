@@ -211,54 +211,21 @@ form span {
     background: #ebf4ff;
     border-color:#2370DF;
 }
-.wrapper .box input[type="radio"]:checked + label:after {
-  background: #2370DF;
+.wrapper .box input[name="select"]:checked + label {
+  background: #ebf4ff;
   border-color:#2370DF;
+}
+.wrapper .box input[name="select"]:checked + label .select-dots {
+  border: 6px solid #2370DF;
+  background: #fff;
 }
 .wrapper .box label .select-dots{
   height: 20px;
   width: 20px;
-  background: #d9d9d9;
+  background: #fff;
+  border: 1px solid lightgray;
   border-radius: 50%;
   position: relative;
-  transition: all 0.3s ease;
-}
-#value-1:checked ~ .value-1 .select-dots,
-#value-2:checked ~ .value-2 .select-dots,
-#value-3:checked ~ .value-3 .select-dots,
-#value-4:checked ~ .value-4 .select-dots{
-  background: #fff;
-}
-.box label .select-dots::before{
-  position: absolute;
-  content: "";
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(2);
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  transition: all 0.3s ease;
-}
-#value-1:checked ~ .value-1 .select-dots::before,
-#value-2:checked ~ .value-2 .select-dots::before,
-#value-3:checked ~ .value-3 .select-dots::before,
-#value-4:checked ~ .value-4 .select-dots::before{
-  background: #2370DF;
-  transform: translate(-50%, -50%) scale(1);
-}
-.wrapper .box label .text{
-  color: #333;
-  font-size: 18px;
-  font-weight: 400;
-  padding-left: 10px;
-  transition: color 0.3s ease;
-}
-#value-1:checked ~ .value-1 .text,
-#value-2:checked ~ .value-2 .text,
-#value-3:checked ~ .value-3 .text,
-#value-4:checked ~ .value-4 .text{
-  color: #fff;
 }
 .text-dc-pct {
 	font-size: 18px;

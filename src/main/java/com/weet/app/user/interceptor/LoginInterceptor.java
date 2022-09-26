@@ -1,25 +1,19 @@
 package com.weet.app.user.interceptor;
 
 
-import java.sql.Timestamp;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.weet.app.common.SharedScopeKeys;
 import com.weet.app.user.domain.TrainerVO;
-import com.weet.app.user.service.UserService;
 
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 
@@ -30,9 +24,13 @@ import lombok.extern.log4j.Log4j2;
 // Session Tracking 을 위한 Spring Interceptor
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
+	
+	private static final String loginKey = "__LOGIN__";
+	
+	private static final String requestURIKey = "__REQUEST_URI__";		// Original destination key
+	private static final String queryStringKey = "__QUERYSTRING__";		// Original query string key
+	private static final String rememberMeKey = "__REMEMBER_ME__";		// Original Remember-Me Cookie name
 
-	@Setter(onMethod_= {@Autowired})
-	private UserService service;
 	
 	
 	// Incoming Request 가 Controller's Handler Method로 위임되기 직전에 가로채는 부분
@@ -41,24 +39,23 @@ public class LoginInterceptor implements HandlerInterceptor {
 	// 뒤의 컨트롤러의 메소드가 호출되기 전에 수행.
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler) throws Exception {
-		log.trace("================================================================");
-		log.trace("1. preHandle(req, res, handler) invoked.");
-		log.trace("================================================================");
+		log.debug("=============================================================");
+		log.debug("1. preHandle(req, res, handler) invoked.");
+		log.debug("=============================================================");
 		
-		// Step.1 Session Scope에 접근할 수 있는 HttpSession 객체 획득
+		// 이전에 정상 로그인으로 인해서, Session Scope에 공유했었던 로그인 속성(여기서는 TrainerVO객체) 제거.
 		HttpSession session = req.getSession();
-		log.info("\t+ Current Session: {}", session.getId());
 		
-		// Step.2 Session Scope에 TrainerVO 객체가 공유되어 있다면 삭제처리
-		TrainerVO vo = (TrainerVO) session.getAttribute(SharedScopeKeys.USER_KEY);
-		log.info("\t+ 2. TrainerVO: {}", vo);
+		TrainerVO trainer = (TrainerVO) session.getAttribute(loginKey);
+		log.info("\t+ user: " + trainer);
 		
-		if(vo != null) { // Session Scope에 UserVO 객체가 있다 => 이미 로그인 되어있는 상태
-			session.removeAttribute(SharedScopeKeys.USER_KEY);
-			log.info("\t+ Removed UserVO: {}", vo);
-		} else {
-			log.info("\t+ No UserVO found in the Session Scope.");
-		} // if-else
+		if(trainer != null) {
+			session.removeAttribute(loginKey);
+			
+			log.info("\t+ ** Removed The Previous Login Key **");
+		} // if
+		
+		log.info("");
 		
 		return true;
 	} // preHandle
@@ -71,67 +68,87 @@ public class LoginInterceptor implements HandlerInterceptor {
 		log.trace("2. postHandle(req, res, handler, {}) invoked.", modelAndView);
 		log.trace("================================================================");
 		
-		// 매개변수인 ModelAndView 에, Model 상자 안에 UserVO객체가 있는지 확인해 보고(즉, 로그인 성공결과)
-		// 있다면(로그인 성공했다면), 이 UserVO객체를 Session Scope에 로그인 성공증빙으로 올려 놓기로 하였다!!!
-				
-		// Step.1 ModelAndView 객체 안에, TrainerVO 가 있는지 확인
-		ModelMap modelMap = modelAndView.getModelMap();
-		TrainerVO trainerVO = (TrainerVO) modelMap.get(SharedScopeKeys.LOGIN_KEY);
+		HttpSession session = req.getSession();
 		
-		// Step.2 TrainerVO 가 있다면(로그인 성공했다면..), 
-		//        Session Scope에 UserVO를 올려 놓자!!!(로그인 성공 증빙)
-		if(trainerVO != null) {	// 로그인 성공했다면...
-			HttpSession session = req.getSession();
-
-			// =============================================================== //
-			// (1) Session Scope 에 인증정보로 UserVO 객체 바인딩
-			// =============================================================== //
-			session.setAttribute(SharedScopeKeys.USER_KEY, trainerVO);
-						
-			// =============================================================== //
-			// (2) ** 자동로그인(Remember-Me) 기능 구현 **
-			// =============================================================== //			
-			// Step.1 자동로그인(Remember-Me) 옵션의 on/off 여부 Check
-			boolean isRememberMeOption = checkRememberMeOption(req);
-			log.info("\t+ isRememberMeOption: {}", isRememberMeOption);
+		ModelMap modelMap = modelAndView.getModelMap();
+		TrainerVO trainer = (TrainerVO) modelMap.get(loginKey);
+		
+		if(trainer != null) {	// If login succeeded, ...
+			log.info("** 로그인에 성공하였다면 ...");
 			
-			if(isRememberMeOption) {	// 자동로그인 기능 on 해 놓았다면...				
-				// Step.2 자동로그인 쿠키 생성
-				// Response Message's Header(`Set-Cookie`)에 쿠키를 저장해서 보냄
-				// 이때 쿠키값으로는 현재 브라우저의 이름인 세션ID를 저장하자!!
-				// (*주의*) 세션ID는 GUID(or UUID) 이다!!!
+			//-----------------------------------------------------//
+			// 1. Session Scope 에 로그인한 정보로 UserVO 객체를 속성 바인딩
+			//-----------------------------------------------------//
+			session.setAttribute(loginKey, trainer);
+			log.info("\t1. Session Scope에 로그인 정보(TrainerVO) 속성 바인딩 완료.");
+
+			//-----------------------------------------------------//
+			// 2. Remember-Me 처리
+			//-----------------------------------------------------//
+			String rememberMe = req.getParameter("rememberMe");
+			
+			if(rememberMe != null) {	// if Remember-Me on.
+				log.info("\t2. if Remember-Me on, ....");
+				
+				// Remember-Me 용 쿠키 생성하여, 응답문서 헤더에 설정.
 				String sessionId = session.getId();
 				
-				// Step.3 쿠키의 유효기간(즉, 자동로그인 유효설정기간 의미) 설정
-				final int maxAge = 1*60*60*24*7;	// in seconds
-				
-				Cookie rememberMeCookie = new Cookie(SharedScopeKeys.REMEMBER_ME_KEY, sessionId);				
-				rememberMeCookie.setMaxAge(maxAge);	// 유효기간: 1주일
+				Cookie rememberMeCookie = new Cookie(rememberMeKey, sessionId);
+				rememberMeCookie.setMaxAge(60*60*24*7);		// 1 Week
 				rememberMeCookie.setPath("/");
 				
-				// Step.4 응답메시지의 `Set-Cookie` 헤더에 자동설정됨
 				res.addCookie(rememberMeCookie);
+
+				log.info("\t\t+ rememberMeCookie: " + rememberMeCookie);
+				log.info("\t\t+ 응답문서 헤더에 rememberMe 쿠키설정 완료.");
+			} // if
+
+			//-----------------------------------------------------//
+			// 3. 원래의 요청 URI 복구하여, 이 URI로 이동시킴
+			//-----------------------------------------------------//
+			
+			// 3-1. 원래의 요청 URI가 있었다면, 그 URI로 이동시킴.
+			// 3-2. 원래의 요청 URI가 없었다면, /메인페이지로 이동시킴
+			
+			String originalRequestURI = (String) session.getAttribute(requestURIKey);
+			String originalQueryString = (String) session.getAttribute(queryStringKey);
+					
+			if(originalRequestURI != null) {
+				res.sendRedirect(
+					originalRequestURI+
+					( (originalQueryString != null && !"".equals(originalQueryString))? "?"+originalQueryString : "" )
+				);										// Redirect to original request page.
 				
-				// Step.5 tbl_user 테이블에 자동로그인 쿠키정보 기록
-				long currTime = System.currentTimeMillis();	// in milliseconds				
-				long expireTime = currTime + (maxAge * 1000L);	// in milliseconds
+				log.info("\t3. 원래의 요청 URI로 이동시킴.");
+			} else {
+				res.sendRedirect("/");		// Redirect to / main page.
 				
-				Timestamp expireTS = new Timestamp(expireTime);
-				
-				boolean isUpdated = this.service.modifyUserWithRememberMe(trainerVO.getUserId(), rememberMeCookie.getValue(), expireTS);
-				log.info("\t+ isUpdated: {}", isUpdated);				
-			} // if : 자동로그인 기능적용
-		} // if : 로그인 성공했다면...
+				log.info("\t4. /index 로 이동시킴.");
+			} // if-else
+			
+			log.info("");
+			
+			return;
+		} // if
+
+		res.sendRedirect("/user/tr/login");			// Redirect to Login Form.
+		
+		log.info("** 로그인에 실패하였다면... 다시 로그인 창으로 이동시킴.");
+		
+		log.info("");
 	} // postHandle
+	
 
+	// 뒤의 컨트롤러 메소드 수행시, 예외의 발생여부와 상관없이, View 까지 호출된 후에 수행.
+	@Override
+	public void afterCompletion(HttpServletRequest req, HttpServletResponse res, Object handler, Exception e) throws Exception {
+		log.debug("=============================================================");
+		log.debug("3. afterCompletion(req, res, handler, e) invoked.");
+		log.debug("=============================================================");
+		
+		log.info("");
 
-	private boolean checkRememberMeOption(HttpServletRequest req) {
-		log.trace("checkRememberMeOption(req) invoked.");
-		
-		String rememberMe = req.getParameter("rememberMe");	// if on, return "on"
-		log.info("\t+ rememberMe: {}", rememberMe);
-		
-		return rememberMe != null;
-	} // checkRememberMeOption
+	} // afterCompletion
+	
 
 } // end class

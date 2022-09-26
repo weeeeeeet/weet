@@ -89,7 +89,7 @@ const goPayment = () => {
             pay_method: "card",
             merchant_uid: "order_" + new Date().getTime(),
             name: productName,
-            amount: 10,
+            amount: amount,
             buyer_email: email,
             buyer_name: name,
             buyer_tel: tel

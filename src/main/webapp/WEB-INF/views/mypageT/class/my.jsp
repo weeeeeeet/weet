@@ -76,7 +76,6 @@
 
                 <ul class="mypage_toplist">
                     <li><a href="/mypageT/class/my" class="on">내 클래스 룸</a></li>
-                    <li><a href="/mypageT/class/expired">수강종료 클래스</a></li>
                     <li><a href="/mypageT/class/progress">클래스 검수</a></li>
                 </ul>
 

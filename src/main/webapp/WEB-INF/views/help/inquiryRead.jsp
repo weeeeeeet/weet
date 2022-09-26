@@ -10,7 +10,7 @@
 
 	<!-- css -->
     <link rel="stylesheet" href="${path}/resources/css/help/inquiryRead.css">
-    <script src="loadHTML.js"></script>
+    <link rel="stylesheet" href="/resources/vendors/bootstrap/bootstrap.min.css">
     
     <!-- favicon -->
 	<link rel="shortcut icon" href="${path}/resources/ico/favicon.ico" type="image/x-icon">
@@ -24,6 +24,7 @@
     <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
 
 
+    <script src="loadHTML.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 

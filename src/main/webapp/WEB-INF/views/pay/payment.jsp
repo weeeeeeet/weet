@@ -57,7 +57,7 @@
 <body>
     <section class="contents">
 		<input type="hidden" name="class-id" value="${__CLASS__.classId}" />
-		<input type="hidden" name="user-id" value="user1" />
+		<input type="hidden" name="user-id" value="${__LOGIN__.userId}" />
 		
         <form class="was-validated" name="payForm" onsubmit="goPayment()">
 
@@ -97,7 +97,7 @@
                         <label for="name" class="col-sm-2 col-form-label">이름<span>*</span></label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="buyer_name" id="name" placeholder="홍길동"
-                                pattern="^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}" required autofocus>
+                                pattern="^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}" value="${ __USER__.userName }" required autofocus>
                             <div class="invalid-feedback">
                                 올바른 이름을 입력해주세요.
                             </div>
@@ -107,7 +107,7 @@
                         <label for="phone" class="col-sm-2 col-form-label">전화번호<span>*</span></label>
                         <div class="col-sm-10">
                             <input type="tel" class="form-control" name="buyer_tel" id="phone"
-                                placeholder="010-0000-0000 ('-' 없이 입력)" pattern="\d*" minlength="10" maxlength="11"
+                                placeholder="010-0000-0000 ('-' 없이 입력)" value="${ __USER__.userPhone }" pattern="\d*" minlength="10" maxlength="11"
                                 required>
                             <div class="invalid-feedback">
                                 올바른 전화번호를 입력해주세요.
@@ -120,6 +120,7 @@
                             <input type="email" class="form-control" name="buyer_email" id="email"
                                 placeholder="example@example.com"
                                 pattern="^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}"
+                                value="${ __USER__.userEmail }"
                                 required>
                             <div class="invalid-feedback">
                                 올바른 이메일 형식을 입력해주세요.

@@ -1,9 +1,9 @@
 package com.weet.app.pay.controller;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,12 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.JsonObject;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.request.CancelData;
@@ -27,11 +25,10 @@ import com.weet.app.classes.service.ClassService;
 import com.weet.app.common.APIResponse;
 import com.weet.app.exception.ControllerException;
 import com.weet.app.exception.ServiceException;
-import com.weet.app.pay.domain.CouponVO;
-import com.weet.app.pay.domain.PaymentDTO;
 import com.weet.app.pay.service.PayService;
+import com.weet.app.user.domain.TrainerVO;
+import com.weet.app.user.domain.UserVO;
 
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
@@ -57,11 +54,19 @@ public class PayController {
 	@GetMapping("/payment")
 	public String paymentPage(
 		@RequestParam("buy") String classId,
+		HttpSession session,
 		Model model) throws ControllerException {
 		log.trace("paymentPage() invoked.");
 		
 		try {
 			ClassDetailVO vo = this.classService.getDetail(classId);
+			
+			TrainerVO trainervo = (TrainerVO) session.getAttribute("__LOGIN__");
+			
+			if(trainervo != null) {
+				UserVO uservo = this.payService.getPayUserInfo(trainervo.getUserId());
+				model.addAttribute("__USER__", uservo);
+			} // if
 			
 			Objects.requireNonNull(vo);
 			model.addAttribute("__CLASS__", vo);

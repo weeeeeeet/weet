@@ -59,12 +59,6 @@
                 <li class="list-item"><a href="/board/list?selected=N" title="작성자가 채택하지 않은 게시글만 보여줘요">미채택</a></li>
             </ul>
 
-            <nav>
-                <form class="input-group board-search" method="get">
-                    <input type="text" placeholder="커뮤니티 내 검색" name="keyword">
-                    <button type="submit"><span class="material-icons-outlined">search</span></button>
-                </form>
-            </nav>
             <div class="write-btn" onclick="location.href='/board/new'">
                 <i class="fas fa-pen"></i> 글쓰기
             </div>

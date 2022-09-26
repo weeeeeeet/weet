@@ -14,7 +14,7 @@
     <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/63eb3bc178.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="${path}/resources/css/classes/reg3.css" />
+    <link rel="stylesheet" href="${path}/resources/css/class/reg3.css" />
 
     <script src="/js/weet_class_reg2_4.js"></script>
     <script src="/js/loadHTML.js"></script>
