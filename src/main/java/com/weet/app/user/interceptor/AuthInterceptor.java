@@ -1,17 +1,18 @@
 package com.weet.app.user.interceptor;
 
+import java.util.Objects;
 
-import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
-import com.weet.app.common.SharedScopeKeys;
 import com.weet.app.user.domain.TrainerVO;
 import com.weet.app.user.service.UserService;
 
@@ -26,65 +27,112 @@ import lombok.extern.log4j.Log4j2;
 @Component("authInterceptor")
 public class AuthInterceptor implements HandlerInterceptor {
 	
-	@Setter(onMethod_= {@Inject})
+	private static final String loginKey = "__LOGIN__";
+	
+	private static final String requestURIKey = "__REQUEST_URI__";		// Original destination key
+	private static final String queryStringKey = "__QUERYSTRING__";		// Original query string key
+	private static final String rememberMeKey = "__REMEMBER_ME__";		// Original Remember-Me Cookie name
+	
+	
+	@Setter(onMethod_= {@Autowired})
 	private UserService service;
 	
 	
-	// --- Interceptor 가 해야할 일:
-	// (1) 게시판과 관련된 모든 요청에 대해서, 인증된 사용자(즉, 브라우저)인지를 가장 먼처 체크해야 하고
-	//     만일 인증되지 않은 사용자(웹브라우저)라면, 로그인을 하도록, 로그인 창으로 리다이렉트 시켜야 함
-	//     위의 로직은 모든 인증 기능에서 가장 먼저 수행해야 할 "공통보안로직" 임
-	// (2) 자동로그인(Remember-Me) 기능이 on되어 있는 경우, 특수한 처리가 필요
-	//     (해당하는 경우: 인증정보는 없는데 => 자동로그인 쿠키가 요청으로 날라오는 경우)
 	
+	// 뒤의 컨트롤러의 메소드가 호출되기 전에 수행.
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler) throws Exception {
 		log.debug("=============================================================");
 		log.debug("1. preHandle(req, res, handler) invoked.");
 		log.debug("=============================================================");
 		
-		// Step.1 현재 요청 URI을 전송한 사용자(웹브라우저)의 인증여부 확인
+		// 현재 이 요청을 보낸 브라우저가 인증된 상태인지 체크 수행.
 		HttpSession session = req.getSession();
-		TrainerVO trainer = (TrainerVO) session.getAttribute(SharedScopeKeys.LOGIN_KEY);
+		TrainerVO trainer = (TrainerVO) session.getAttribute(loginKey);
 		
 		if(trainer == null) {	// NOT logged in.
-			// Step.2
-			log.info("\t+ 3. Already Authenticated: {}", trainer);
+			log.info("& Current browser is ** NOT ** authenticated...");
 
-			return true;	// 요청을 컨트롤러의 핸들러로 넘김
-		} else {			// If 인증된 사용자(웹브라우저)가 아니라면... (*****)				
-			// ========================================== //	
-			// *** 자동로그인(Remember-Me) 처리 ***
-			// ========================================== //
-			// 필요한 처리는 2가지임:
-			//   (1) 현재 웹브라우저에 할당된 Session Scope에,
-			//		 웹브라우저를 종료시키기 전에 인증되었던 UserVO (인증정보)를 구해서 복구해줘야 함 (*** 이게 가장 중요한 처리)
-			//   (2) (1) 조치를 해놓은 상태에서 무사통과 시켜야 함
+			//----------------------------------------------------------//
+			// 1. To save original request URI and query string.
+			//----------------------------------------------------------//
+			this.saveDestination(req);
+			log.info("\t+ Saved Original Request URI And Query String.");
+
+			//----------------------------------------------------------//
+			// 2. To authenticate through Remember-Me option.
+			//----------------------------------------------------------//
+			Objects.requireNonNull(this.service);
+			log.info("\t+ service: " + this.service);
 			
-			Cookie rememberMeCookie = WebUtils.getCookie(req, SharedScopeKeys.REMEMBER_ME_KEY);
+			Cookie rememberMeCookie = WebUtils.getCookie(req, rememberMeKey);
+			log.info("\t+ rememberMeCookie: " + rememberMeCookie);
 			
-			if(rememberMeCookie != null) { // 자동로그인 처리 수행 => 즉, 무사통과!!!
-				// Step.1 자동로그인 쿠키를 이용하여, Session Scope 에 인증정보(UserVO) 복원
-				String cookieName = rememberMeCookie.getName();
-				String cookieValue = rememberMeCookie.getValue();
+			if(rememberMeCookie != null) {	// If Rememebr-Me Cookie exists, ....
+				String rememberMe = rememberMeCookie.getValue();
+				log.info("\t+ rememberMe: " + rememberMe);
 				
-				log.info("\t+ 3. RememberMe Cookie Found - name: {}, value: {}", cookieName, cookieValue);
+				trainer = this.service.findUserByRememberMe(rememberMe);
+				log.info("\t+ trainer: " + trainer);
 				
-				TrainerVO trainerVO = this.service.findUserByRememberMe(cookieValue);
-				log.info("\t+ 4. Found userVO: {}", trainerVO);
-				
-				session.setAttribute(SharedScopeKeys.USER_KEY, trainerVO);		// 인증정보 복구완료				
-				
-				// Step.2 무사통과(로그인 창으로 이동시키지 않고, 요청 처리)
-				return true;	// 무사통과: 컨트롤러의 핸들러로 요청을 넘긴다!!!
-			} // if
+				if(trainer != null) {
+					session.setAttribute(loginKey, trainer);
+					
+					return true;
+				} // inner-if
+			} // outer-if
+
+			//----------------------------------------------------------//
+			// 3. To redirect to login form (/user/login).
+			//----------------------------------------------------------//
+			res.sendRedirect("/user/tr/login");
+			log.info("\t+ Move to /user/tr/login");
 			
-			// Step.2
-			log.info("\t+ No Authenticated User");
-			
-			res.sendRedirect("/user/login");			
-			return false;	// 요청을 컨트롤러의 핸들러로 넘기지 않음
-		} // if-else
+			return false;		// *** //
+		} // if - NOT logged in.
+
+		// If logged In.
+		log.info("& Current browser ** ALREADY ** authenticated...");
+		log.info("\t+ trainer: " + trainer);
+		
+		return true;
 	} // preHandle
 	
+	
+	private void saveDestination(HttpServletRequest req) {
+		log.debug("saveDestination(req) invoked.");
+		
+		String uri = req.getRequestURI();
+		String queryString = req.getQueryString();
+		
+		HttpSession session = req.getSession();
+		
+		session.setAttribute(requestURIKey, uri);
+		session.setAttribute(queryStringKey, queryString);
+	} // saveDestination
+	
+
+	// 뒤의 컨트롤러 메소드 호출이 완료된 후, 그리고 View 가 호출되기 전에 수행.
+	// 단, 컨트롤러 메소드 수행에서 예외가 발생되지 말아야 함.
+	//    컨트롤러 메소드 수행에서 에외가 발생되면, 이 메소드는 수행되지 않음.
+	@Override
+	public void postHandle(HttpServletRequest req, HttpServletResponse res, Object handler, ModelAndView modelAndView) throws Exception {
+		log.debug("=============================================================");
+		log.debug("2. postHandle(req, res, handler, modelAndView) invoked.");
+		log.debug("=============================================================");
+
+		
+	} // postHandle
+	
+
+	// 뒤의 컨트롤러 메소드 수행시, 예외의 발생여부와 상관없이, View 까지 호출된 후에 수행.
+	@Override
+	public void afterCompletion(HttpServletRequest req, HttpServletResponse res, Object handler, Exception e) throws Exception {
+		log.debug("=============================================================");
+		log.debug("3. afterCompletion(req, res, handler, e) invoked.");
+		log.debug("=============================================================");
+		
+
+	} // afterCompletion
+
 } // end class

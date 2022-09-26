@@ -1,21 +1,13 @@
 package com.weet.app.user.controller;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.weet.app.exception.ControllerException;
-import com.weet.app.user.domain.UserVO;
-import com.weet.app.user.service.UserFindService;
 
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -24,9 +16,6 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/user/find")
 @Controller
 public class UserFindController {
-	
-	@Setter(onMethod_= {@Autowired})
-	private UserFindService findservice;
 	
 	// 1. 아이디 찾기 창
 	@GetMapping("/id")
@@ -39,22 +28,10 @@ public class UserFindController {
 	
 	// 2. 아이디 찾기 
 	@PostMapping("/id")
-	@ResponseBody
-	public String findId(String userId, String userPhone, Model model, RedirectAttributes rttrs) throws ControllerException {
+	public String findId() {
 		log.trace("findId() invoked.");
 		
-		try {
-			
-			UserVO vo = this.findservice.findId(userId, userPhone);
-			log.info("\t + vo: {}", vo);
-			
-			model.addAttribute("_USER_", vo);
-			
-		} catch(Exception e) {
-			throw new ControllerException(e);
-		}
-		return "redirect:/user/find/findId2";
-		
+		return "redirect:/user/find/id";
 	} // findId
 	
 	// 3. 아이디 확인

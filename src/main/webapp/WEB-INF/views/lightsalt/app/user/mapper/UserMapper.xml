@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.weet.app.user.mapper.UserMapper">
+
+	<!-- 아이디 중복 체크 -->
+	<select id="selectId" parameterType="com.weet.app.user.domain.TrainerVO" resultType="java.lang.Integer">
+		SELECT COUNT(user_id) FROM t_tr WHERE user_id= #{user_id}
+	</select>
+	
+
+	<!-- ==================== 로그인 ====================== -->
+	
+	<select
+        id="selectUser"
+        resultType="com.weet.app.user.domain.UserVO">        
+        SELECT *
+        FROM tbl_user
+        WHERE userId = #{user_id} AND userPwd = #{user_pwd}
+    </select>
+    
+
+    <select 
+        id="selectUserWithRememberMe"
+        resultType="com.weet.app.user.domain.UserVO"> 
+        SELECT userId, userPwd
+        FROM tbl_user
+        WHERE rememberme = #{rememberme} AND rememberage > current_date
+    </select>
+
+
+    <update id="updateUserWithRememberMe">
+        UPDATE tbl_user
+        SET
+            rememberme = #{rememberMe, jdbcType=VARCHAR},
+            rememberage = #{rememberAge, jdbcType=DATE}
+        WHERE
+            userId = #{user_id}
+    </update>
+	
+	
+</mapper>
