@@ -15,7 +15,6 @@ import com.weet.app.classes.mapper.ClassMapper;
 import com.weet.app.common.domain.Criteria;
 import com.weet.app.exception.DAOException;
 import com.weet.app.exception.ServiceException;
-import com.weet.app.user.domain.TrainerVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
@@ -195,13 +194,5 @@ public class ClassServiceImpl implements ClassService {
 			return selectedRows == 0 ? false : true;
 		} catch(DAOException e) { throw new ServiceException(e); } // try-catch
 	} // cancelClassLike
-
-	// 트레이너 프로필 조회
-	@Override
-	public TrainerVO getTrainerProfile(String userId) throws ServiceException {
-		
-		try { return this.mapper.selectTrainer(userId); }
-		catch(DAOException e) { throw new ServiceException(e); } // try-catch
-	} // getTrainerProfile
 
 } // end class

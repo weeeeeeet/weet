@@ -29,7 +29,6 @@ import com.weet.app.classes.service.ClassService;
 import com.weet.app.common.domain.Criteria;
 import com.weet.app.common.domain.PageDTO;
 import com.weet.app.exception.ControllerException;
-import com.weet.app.user.domain.TrainerVO;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -224,11 +223,9 @@ public class ClassController {
 		try {
 			ClassDetailVO vo = this.service.getDetail(classId);
 			TotalReviewVO review = this.service.getreviewInfo(classId);
-			TrainerVO trainervo = this.service.getTrainerProfile(vo.getUserId());
 			
 			model.addAttribute("__CLASS__", vo);
 			model.addAttribute("__REVIEW__", review);
-			model.addAttribute("__TR__", trainervo);
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		} // try-catch 

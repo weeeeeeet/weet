@@ -45,7 +45,6 @@
 
     <main>
         <section class="hero" id="hero">
-        	<input type="hidden" name="userId" value="${ __LOGIN__.userId }"> 
             <div class="row justify-content-center">
                 <div class="col-md-5">
                     <img class="main-img-url" src="/${__CLASS__.classMainImgUrl}" alt="">
@@ -110,7 +109,7 @@
             </div>
         </section>
 
-        <nav class="navbar navbar-expand-lg bg-light shadow-lg" id="navbar">
+        <nav class="navbar navbar-expand-lg bg-light shadow-lg">
             <div class="container">
 
                 <div class="collapse navbar-collapse" id="navbarNav">
@@ -152,7 +151,8 @@
                             </div>
 
                             <div class="container mt-5">
-                                <!-- 유튜브 링크 -->
+                                nav바 수정해야할거: 클릭시, 스크롤위치에 따라 스타일변경
+                                <!-- 유뷰브 링크 -->
                                 <iframe class="youtube" width="100%" height="350" src="${__CLASS__.classVideoUrl}"
                                     title="YouTube video player" frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -171,24 +171,37 @@
                             <div class="class-title">
                                 <h1>트레이너 소개</h1>
                             </div>
-                            
-                            <div class="container mt-5 mb-5 d-flex justify-content-center">
-							    <div class="card rounded trainer-intro-card">
-							        <div class=" d-block justify-content-center">
-							            <div class="area1 p-3 py-5"> </div>
-							            <div class="area2 p- text-center px-3">
-							                <div class="image mr-3"> <img src="https://cdn-icons-png.flaticon.com/512/2964/2964522.png" class="rounded-circle" width="100" />
-							                    <h4 class=" name mt-3 ">${ __CLASS__.classTrainerName } 트레이너</h4>
-							                    
-							                    <p class="information info-header mt-3 text-justify">경력사항</p>
-							                    <p class="information mt-3 text-justify">${ __TR__.userCareer }</p>
-							                    <p class="information info-header mt-3 text-justify">소개글</p>
-							                    <p class="information mt-3 text-justify">${ __TR__.userIntro }</p>
-							                </div>
-							            </div>
-							        </div>
-							    </div>
-							</div>
+
+                            <div class="container mt-5 trainer-profile">
+                                <div class="row trainer-profile-img">
+                                    <img src="/resources/img/static/trainer-profile.jpg" alt="트레이너 사진">
+                                </div>
+                                <div class="row">
+                                    <h2>Trainer. ${__CLASS__.userId}</h2>
+                                </div>
+                                <div class="row">
+                                    <h3>경력사항 및 수료사항</h3>
+
+                                    <ul>
+                                        <li>~~ 수상</li>
+                                        <li>어쩌고 헬스장 근무</li>
+                                        <li>PT경력 5년</li>
+                                        <li>머찐경력</li>
+                                        <li>대충있어보이는경력</li>
+                                    </ul>
+                                </div>
+                                <div class="row">
+                                    <h3>소개글</h3>
+
+                                    <p>
+                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Est, esse nesciunt
+                                        sapiente officia laboriosam consequatur dignissimos, pariatur eveniet neque
+                                        nulla sit? Saepe vel commodi exercitationem rem eligendi maiores reiciendis
+                                        iste?
+                                    </p>
+                                </div>
+
+                            </div>
                         </div>
 
                         <div class="class class-progress" id="section03">
