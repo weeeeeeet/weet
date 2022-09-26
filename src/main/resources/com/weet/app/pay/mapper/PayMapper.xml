@@ -30,6 +30,15 @@
 		    p.class_id = c.class_id
 		    AND pay_num = #{orderNum}
 	</select>
+	
+	<select 
+		id="selectUserInfo"
+		resultType="com.weet.app.user.domain.UserVO">
+		
+		SELECT *
+		FROM t_user
+		WHERE user_id = #{userId}
+	</select>
 
 	<insert id="insertClassListener">
 		INSERT INTO t_class_listener

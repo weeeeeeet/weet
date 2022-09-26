@@ -1,6 +1,7 @@
 package com.weet.app.pay.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +12,7 @@ import com.weet.app.pay.domain.PaymentDTO;
 import com.weet.app.pay.domain.PaymentVO;
 import com.weet.app.pay.mapper.CouponMapper;
 import com.weet.app.pay.mapper.PayMapper;
+import com.weet.app.user.domain.UserVO;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -59,7 +61,11 @@ public class PayServiceImpl implements PayService {
 			
 			// 모두 성공시 success 반환
 			return "SUCCESS";
-		} catch (DAOException e) {
+		} catch(UncategorizedSQLException e) {
+			throw e;
+		} catch(Exception e) {
+			log.info("\t+ Transfer Failure.");
+			
 			throw new ServiceException(e);
 		} // try-catch
 	} // savePayment
@@ -68,6 +74,13 @@ public class PayServiceImpl implements PayService {
 	public PaymentVO getPayInfo(String orderNum) throws ServiceException {
 		
 		try { return this.payMapper.selectPayInfo(orderNum); }
+		catch(DAOException e) { throw new ServiceException(e); }
+	} // goPayment
+
+	@Override
+	public UserVO getPayUserInfo(String userId) throws ServiceException {
+		
+		try { return this.payMapper.selectUserInfo(userId); }
 		catch(DAOException e) { throw new ServiceException(e); }
 	} // goPayment
 
