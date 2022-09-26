@@ -9,7 +9,7 @@ function joinform_check() {
     let id = document.getElementById("user_id");
     let pwd = document.getElementById("user_pwd");
     let pwd2 = document.getElementById("user_pwd2");
-    let pweCheck = document.getElementById("pweCheck");
+    let pwdCheck = document.getElementById("pwdCheck");
     let userEmail = document.getElementById("user_email");
     let userPhone = document.getElementById("user_phone");
     let phoneDoubleChk = document.getElementById("phoneDoubleChk");
@@ -50,11 +50,11 @@ function joinform_check() {
 
 	// 비밀번호 일치여부 확인
     if (pwd2.value == pwd.value) {
-      pweCheck.innerHTML='비밀번호가 일치합니다.'  /* innerHTML : HTML 내부에 추가적인 내용을 넣을 때 사용하는 것. */
-      pweCheck.style.color='blue';
+      pwdCheck.innerHTML='비밀번호가 일치합니다.'  /* innerHTML : HTML 내부에 추가적인 내용을 넣을 때 사용하는 것. */
+      pwdCheck.style.color='blue';
     } else {
-      pweCheck.innerHTML='비밀번호가 일치하지 않습니다.';
-      pweCheck.style.color='red';
+      pwdCheck.innerHTML='비밀번호가 일치하지 않습니다.';
+      pwdCheck.style.color='red';
       alert("비밀번호가 일치하지 않습니다.");
       pwd2.focus();
       return false;
@@ -193,16 +193,16 @@ function checkId() {
 
 $(document).ready(function(){
   // 전체 체크박스 클릭 시
-  $("#agreeAll").click(function() {
-if($("#agreeAll").is(":checked")) $("input[class=agree_check]").prop("checked", true);
-else $("input[class=agree_check]").prop("checked", false);
-});
-
-$("input[class=agreechk]").click(function() {
-const total = $("input[class=agree_check]").length;
-const checked = $("input[class=agree_check]:checked").length;
-
-if(total != checked) $("#agreeAll").prop("checked", false);
-else $("#agreeAll").prop("checked", true); 
-});
+	$("#agreeAll").click(function() {
+		if($("#agreeAll").is(":checked")) $("input[class=agree_check]").prop("checked", true);
+		else $("input[class=agree_check]").prop("checked", false);
+	});
+	
+	$("input[class=agreechk]").click(function() {
+		const total = $("input[class=agree_check]").length;
+		const checked = $("input[class=agree_check]:checked").length;
+	
+		if(total != checked) $("#agreeAll").prop("checked", false);
+		else $("#agreeAll").prop("checked", true); 
+	});
 });
