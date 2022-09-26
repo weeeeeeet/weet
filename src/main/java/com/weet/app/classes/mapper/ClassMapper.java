@@ -12,6 +12,7 @@ import com.weet.app.classes.domain.ReviewVO;
 import com.weet.app.classes.domain.TotalReviewVO;
 import com.weet.app.common.domain.Criteria;
 import com.weet.app.exception.DAOException;
+import com.weet.app.user.domain.TrainerVO;
 
 public interface ClassMapper {
 
@@ -63,4 +64,8 @@ public interface ClassMapper {
 	
 	// 좋아요 취소(삭제)
 	public abstract int deleteMyLike(String classId, String userId) throws DAOException;
+	
+	// 트레이너 프로필 불러오기
+	@Select("SELECT * FROM t_tr WHERE user_id = #{userId}")
+	public abstract TrainerVO selectTrainer(String userId) throws DAOException;
 } // end interface

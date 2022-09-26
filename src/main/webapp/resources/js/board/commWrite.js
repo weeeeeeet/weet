@@ -1,6 +1,6 @@
 let commId = document.querySelector('input[name=commId]').value;
 let userId = document.querySelector('input[name=userId]').value;
-var $1 = jQuery.noConflict();
+const $1 = jQuery.noConflict();
 
 // 섬머노트 세팅
 const readySummernote = () => {
@@ -160,8 +160,8 @@ const deleteTmpSave = (commId) => {
         url: "/board/api/" + commId,
         type: "DELETE",
         success: () => {
-            alert('임시저장 삭제가 완료되었습니다.', 'danger');
             getTmpList();
+            alert('임시저장 삭제가 완료되었습니다.', 'danger');
         } // success
     }) // .ajax
 } // deleteTmpSave
