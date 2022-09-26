@@ -25,7 +25,6 @@ import com.weet.app.exception.DAOException;
 import com.weet.app.exception.ServiceException;
 import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.UserDTO;
-import com.weet.app.user.mapper.UserMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -110,7 +109,7 @@ public class UserServiceTests {
 
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
-		String userId = "testId6";
+//		String userId = "testId6";
 		String userPwd= "1q2w3e4r!!";
 		String cipherText = encoder.encode(userPwd);	
 		

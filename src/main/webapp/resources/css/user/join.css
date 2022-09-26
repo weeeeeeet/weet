@@ -49,6 +49,12 @@ input{
     text-align: center;
 }
 
+.bizment{
+	font-size: 12px;
+	font-weight: 500;
+    text-align: center;
+}
+
 .form-label{                        /* 입력창 문구 */
     margin-top: 3px;
     margin-left: 10px;
@@ -73,6 +79,11 @@ input{
 .checkment{							/* id 중복확인멘트 */
 	font-size: 10px;
 	font-weight: 600;
+}
+
+.checkment2 {
+	font-size: 10px;
+	font-weight: 500;
 }
 
 .id_ok{								/* id 중복X 멘트 */
@@ -190,6 +201,23 @@ p {
   .btnbox{
     text-align: center;
   }
+
+  .authBtn{
+    display :inline-block;
+    
+    background-color: #9e9e9e;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    color: aliceblue;
+    width: 200px;
+    height: 34px;
+    border: none;
+    border-radius: 10px; 
+    margin-top: 20px;
+    margin-left: 85px;
+    
+    font-size: 15px
+  }
+
   .loginbtn{
     display :inline-block;
 
