@@ -38,7 +38,7 @@ const getBoardList = (currPage) => {
                     + '<span>요청하신 키워드</span>'
                     + '<span id="user-keyword">"' + pageData.cri.keyword + '"</span>'
                     + '<span>에 대한 검색결과가 없습니다.</span></div>'
-                    + '<a href="/board/list"><input type="button" value="커뮤니티로 이동"></a></div>';
+                    + '<a href="/board/main"><input type="button" value="커뮤니티로 이동"></a></div>';
 
                 document.querySelector(".board-list").innerHTML = str;
                 return;

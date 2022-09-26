@@ -4,7 +4,6 @@
 const heart = document.querySelector('#heartCheck');
 const path = window.location.pathname;
 const classId = path.substring(path.lastIndexOf("/") + 1);
-const loginUserId = document.querySelector('input[name=userId]').value;
 
 
 // ================ 함수 영역 ========================== //
@@ -170,17 +169,11 @@ const likeCancel = (classId, userId) => {
 
 // 하트버튼에 onclick 이벤트
 const clickLike = () => {
-	
-	if(loginUserId === '') {
-		alert('로그인이 필요한 서비스입니다.');
-		
-		return;
-	} // if
 
     if(heart.checked === false) {
-        like(classId, loginUserId);
+        like(classId, 'user1');
     } else {
-        likeCancel(classId, loginUserId);
+        likeCancel(classId, 'user1');
     } // if-else
     
     getTotalLikes(classId);
