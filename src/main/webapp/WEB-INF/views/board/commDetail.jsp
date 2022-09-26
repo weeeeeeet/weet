@@ -127,9 +127,11 @@
         <div class="reply-write-area">
             <p><span>2</span>개의 댓글</p>
             
-            <textarea id="reply-text" placeholder="댓글을 입력해 주세요." required></textarea>
-            <button id="comm-reply" name="reply" class="btn btn-primary" onclick="regReply()">댓글달기</button>
-            <c:if test="${ __USER__.userType == 'N' }">
+             <c:if test="${ not empty __LOGIN__ }">
+	            <textarea id="reply-text" placeholder="댓글을 입력해 주세요." required></textarea>
+	            <button id="comm-reply" name="reply" class="btn btn-primary" onclick="regReply()">댓글달기</button>
+            </c:if>
+            <c:if test="${ empty __LOGIN__ }">
 	            <textarea id="reply-text" placeholder="트레이너만 댓글 작성이 가능합니다." disabled></textarea>
             </c:if>
         </div>
@@ -227,20 +229,20 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                    <button type="button" class="btn btn-primary">네</button>
+                    <button type="button" class="btn btn-primary" onclick="deleteBoard()">네</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal" id="delModal" tabindex="-1">
+    <div class="modal" id="delModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
                     <p>삭제가 완료되었습니다.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">확인</button>
+                    <button type="button" class="btn btn-primary" onclick="location.href='/board/list'">확인</button>
                 </div>
             </div>
         </div>

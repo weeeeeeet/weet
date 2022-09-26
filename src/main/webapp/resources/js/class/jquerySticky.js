@@ -215,5 +215,6 @@
 })(jQuery);
 
 $(document).ready(function(){
+	$.noConflict();
       $(".navbar").sticky({topSpacing:0});
     });

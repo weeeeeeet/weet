@@ -11,6 +11,7 @@ import com.weet.app.classes.domain.ReviewVO;
 import com.weet.app.classes.domain.TotalReviewVO;
 import com.weet.app.common.domain.Criteria;
 import com.weet.app.exception.ServiceException;
+import com.weet.app.user.domain.TrainerVO;
 
 public interface ClassService {
 	
@@ -57,4 +58,7 @@ public interface ClassService {
 	
 	// 좋아요 취소 흑흑
 	public abstract boolean cancelClassLike(String classId, String userId) throws ServiceException;
+	
+	// 트레이너 프로필 조회
+	public abstract TrainerVO getTrainerProfile(String userId) throws ServiceException;
 } // end interface
