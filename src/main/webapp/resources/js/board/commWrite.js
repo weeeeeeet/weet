@@ -160,8 +160,8 @@ const deleteTmpSave = (commId) => {
         url: "/board/api/" + commId,
         type: "DELETE",
         success: () => {
-            alert('임시저장 삭제가 완료되었습니다.', 'danger');
             getTmpList();
+            alert('임시저장 삭제가 완료되었습니다.', 'danger');
         } // success
     }) // .ajax
 } // deleteTmpSave

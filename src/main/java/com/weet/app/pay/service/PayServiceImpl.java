@@ -1,6 +1,7 @@
 package com.weet.app.pay.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,7 +61,11 @@ public class PayServiceImpl implements PayService {
 			
 			// 모두 성공시 success 반환
 			return "SUCCESS";
-		} catch (DAOException e) {
+		} catch(UncategorizedSQLException e) {
+			throw e;
+		} catch(Exception e) {
+			log.info("\t+ Transfer Failure.");
+			
 			throw new ServiceException(e);
 		} // try-catch
 	} // savePayment
