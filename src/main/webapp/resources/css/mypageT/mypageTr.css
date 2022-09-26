@@ -2,6 +2,10 @@
 
 /* content ================================ */
 
+section{
+	padding-bottom : 600px;
+}
+
 /* 컨텐츠 영역에 양쪽 200px씩 여백주기 ( 수정!!!! ) */
 .content{
     margin: 20px 200px 0px;
@@ -347,7 +351,7 @@
     text-align: center;
     /* 세로 중앙 정렬 */
     line-height: 30px;
-
+    
     width: 30px;
     height: 30px;
 }

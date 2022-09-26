@@ -129,40 +129,74 @@
 
             </div>
 
-            <div class="TR_tables">
+            <table class="TR_tables">
 
-                <div class="tb1">
-                    <span class="tr_no">109</span>
-                    <a href="#" class="tr_title">운동을 처음 시작하는데, PT로 시작해도 ...</a>
-                    <span class="tr_date">2022.06.19</span>
-                    <span style="color: red;" class="heart"><i class="fas fa-heart"></i></span> <span class="tr_like">12</span>
-                    <span style="color: #2370DF;" class="comment"><i class="fa-regular fa-comment-dots"></i></span><span class="tr_comment">5</span>
-                </div>
+                <thead></thead>
 
-                <div class="tb1">
-                    <span class="tr_no">108</span>
-                    <a href="#" class="tr_title">다음주부터 PT를 시작하게 되었어요!</a>
-                    <span class="tr_date">2022.06.19</span>
-                    <span style="color: red;" class="heart"><i class="fas fa-heart"></i></span> <span class="tr_like">7</span>
-                    <span style="color: #2370DF;" class="comment"><i class="fa-regular fa-comment-dots"></i></span><span class="tr_comment">6</span>
-                </div>
+                <tbody>
 
-                <div class="tb1">
-                    <span class="tr_no">107</span>
-                    <a href="#" class="tr_title">제 식단 좀 봐주실 수 있을까요?</a>
-                    <span class="tr_date">2022.06.19</span>
-                    <span style="color: red;" class="heart"><i class="fas fa-heart"></i></span> <span class="tr_like">7</span>
-                    <span style="color: #2370DF;" class="comment"><i class="fa-regular fa-comment-dots"></i></span><span class="tr_comment">6</span>
-                </div>
 
-                <div class="tb1">
-                    <span class="tr_no">106</span>
-                    <a href="#" class="tr_title">게시물 제목</a>
-                    <span class="tr_date">2022.06.19</span>
-                    <span style="color: red;" class="heart"><i class="fas fa-heart"></i></span> <span class="tr_like">7</span>
-                    <span style="color: #2370DF;" class="comment"><i class="fa-regular fa-comment-dots"></i></span><span class="tr_comment">6</span>
-                </div>
+                    <c:forEach var="board" items="${__LIST__}">
+                        <tr class="tb1">
+                            <td class="tr_no"><a>${board.commId}</a></td>
+                            <td><a href="#" class="tr_title">${board.commPostTitle}</a></td>
+                            <td class="tr_date"><fmt:formatDate pattern="yyyy/MM/dd" value="${board.commPostInsertTs}" /></td>
+                            <td class="tr_like"><span style="color: red;" class="heart"><i class="fas fa-heart"></i></span> ${board.commLikeNum}</td>
+                            <td class="tr_comment"><span class="comment"><i class="fa-regular fa-comment-dots"></i> ${board.commReplyCount}</td>
+                        </tr>
+                    </c:forEach>
 
+                </tbody>
+
+                <tfoot></tfoot>
+
+            </table>
+
+            <p>&nbsp;</p>
+
+            <div id="pagenation">
+
+                <form id="pagenationForm">
+    
+                    <input type="hidden" name="currPage">
+                    <input type="hidden" name="userId">
+    
+                    <ul>
+    
+                        <!-- 이전 페이지 목록 -->
+                        <c:if test="${__PAGENATION__.prev}">
+    
+                            <li class="prev"> <a href="${__PAGENATION__.startPage -1}" class="prev">이전</a></li>
+    
+                        </c:if>
+    
+                        <!-- 현재 PAGENATION 범위에 속한 페이지 번호 목록 출력 -->
+                        <c:forEach var="pageNum" begin="${__PAGENATION__.startPage}" end="${__PAGENATION__.endPage}">
+    
+                            <li> 
+                            <!-- Userid 세션에서 받아 오는 것으로 수정해야 된다!!(********) -->
+                                <a 
+                                    href="/mypage/activity/boardreplydone?userId=user2&currPage=${pageNum}" 
+                                    class="${pageNum == __PAGENATION__.cri.currPage ? 'currPage' : '' }" > 
+    
+                                    <strong>${pageNum}</strong>
+    
+                                </a>
+                            </li>
+    
+                        </c:forEach>
+    
+                        <!-- 다음 페이지 목록 -->
+                        <c:if test="${__PAGENATION__.next}">
+    
+                            <li class="next"> <a href="${__PAGENATION__.endPage +1}" class="next">다음</a></li>
+    
+                        </c:if>
+    
+                    </ul>
+    
+                </form>
+    
             </div>
 
         </div>
