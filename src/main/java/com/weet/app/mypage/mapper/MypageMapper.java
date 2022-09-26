@@ -112,12 +112,18 @@ public interface MypageMapper {
 	public abstract Integer updateMyBody(MypageBodyDTO dto) throws DAOException;
 	
 	// ====================================================================
-	// 13. 마이바디 - 날짜선택
+	// 13. 마이바디 - 날짜선택 ( 그래프가 적용이 안됨... ) (**********)
 	// ====================================================================
 	public abstract List<MypageBodyDTO> selectMyBodyDate(MypageBodyDTO dto) throws DAOException;
 	
-		
-	// 13. 구매내역 - 전체 내역
+	
+	
+	// ====================================================================
+	// 14. 구매내역 - 전체 내역
+	// ====================================================================
+	@Select("SELECT count(CLASS_LISTENER) FROM t_class_listener WHERE USER_ID = #{userId}")
+	public abstract Integer selectAllPay(@Param("userId")String userId) throws DAOException;
+	
 	
 	// 14. 구매내역 - 상세 내역
 	

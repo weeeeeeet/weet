@@ -1,0 +1,239 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'SCoreDream';
+    box-sizing: border-box;
+}
+
+ul, ol{
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* content ================================ */
+
+/* 컨텐츠 영역에 양쪽 200px씩 여백주기 */
+.content{
+    margin: 20px 200px 0px;
+}
+
+/* 컨텐츠 영역의 왼쪽 가로 길이 잡아주기 */
+.content .content_left {
+    width: 259px;
+
+    margin: 20px 0px;
+    /* border: 1px solid red; */
+
+    float: left;
+}
+
+/* 컨텐츠 영역의 왼쪽상단의 프로필 전제 높이 잡아주기 */
+.content .content_left .profile {
+    height: 90px;
+
+    /* border: 1px solid palegreen; */
+}
+
+/* 컨텐츠 영역의 왼쪽상단의 프로필의 사진 전제 크기 잡아주기 */
+.content .content_left .profile_photo{
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+
+    float: left;
+
+    background-color: gainsboro;
+}
+
+/* 컨텐츠 영역의 왼쪽상단의 프로필의 닉네임 위치 및 크기 잡아주기 */
+.content .content_left .profile_id{
+    font-weight: bold;
+    font-size: 20px;
+    padding: 8px 9px 0px 20px;
+
+    float: left;
+}
+
+/* 컨텐츠 영역의 왼쪽상단의 프로필의 트레이너 표시 */
+.content .content_left .profile_social{
+    width: 18px;
+    height: 18px;
+
+    display: inline-block;
+
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    font-size: 13px;
+
+    background-color: #F18E50;
+    margin-top: 13px;
+}
+
+/* 컨텐츠 영역의 왼쪽상단의 프로필의 트레이너 레벨 표시 */
+.content .content_left .profile_level{
+    width: 35px;
+    height: 15px;
+
+    display: inline-block;
+
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+
+    background-color: #FF6565;
+    border-radius: 8px;
+}
+
+/* 컨텐츠 영역의 왼쪽상단의 프로필의 소설 로그인 아이디 위치 및 크기 잡아주기 */
+.content .content_left .profile_email{
+    padding-left: 20px;
+    font-size: 12px;
+    color: #595959;
+}
+
+
+/* 컨켄츠 영역의 왼쪽 목록 */
+.content .mypage_list{
+    clear: both;
+}
+
+/* 컨텐츠 영역의 왼쪽 목록에 프로필과의 사이 공백 주기 */
+.content .content_left .mypage_list ul li{
+    margin-top: 18px;
+}
+
+/* 컨텐츠 영역의 왼쪽 목록의 li태그들의 css속성 지정 */
+.content .content_left .mypage_list ul a {
+    font-weight: 450;
+    font-size: 14px;
+    color: #000000;
+}
+
+/* 현재 페이지는 클래스 이름으로 on을 주어 색을 변하게 한다. */
+.content .content_left .mypage_list ul a.on {
+    color: #2370DF;
+}
+
+/* 컨텐츠 영역의 왼쪽 목록의 마지막 li인 경우 밑에도 여백을 주어 밑의 목록과 구분해줘야 한다. */
+.content .content_left .mypage_list ul :last-of-type{
+    margin-bottom: 18px;
+}
+
+/* 목록1 위에 보더로 선 생성 */
+.content .content_left .mypage_list .mypage_list_top{
+    border-top: 1px solid black;
+}
+
+/* 목록2 위에 보더로 선 생성 */
+.content .content_left .mypage_list .mypage_list_bottom{
+    border-top: 1px solid black;
+}
+
+/* 컨텐츠 영역의 오른쪽 부분 정리 */
+.content .content_right {
+    margin: 20px 20px 0px 0px;
+    padding-left: 50px;
+    /* border: 1px solid blue; */
+
+    float: right;
+}
+
+/* 컨텐츠 영역의 오른쪽 영역의 위 목록을 감싸는 div css속성 지정 */
+.content .content_right .mypage_top{
+    width: 900px;
+    height: 50px;
+
+    margin-right: 200px;
+    margin-bottom: 20px;
+
+    border: 1px solid #595959;
+    border-radius: 8px;
+}
+
+/* 컨텐츠 영역 - 오른쪽 영역 - TR게시판 / 좋아요 / 댓글 목록 ul */
+.content .content_right .mypage_toplist{
+    margin-top: 15px;
+}
+
+/* 컨텐츠 영역 - 오른쪽 영역 - TR게시판 / 좋아요 / 댓글 목록 ul - li */
+.content .content_right .mypage_toplist li {
+    margin-left: 70px;
+    float: left;
+}
+
+/* 컨텐츠 영역 - 오른쪽 영역 - TR게시판 / 좋아요 / 댓글 목록 ul - li - a */
+.content .content_right .mypage_toplist a {
+    font-weight: 450;
+    font-size: 14px;
+    color: #6A6A6A;
+}
+
+/* 현재 탭의 경우에는 밑줄이 그어지고, 글씨가 두껍게 바뀐다. */
+.content .content_right .mypage_toplist a.on {
+    font-weight: bold;
+    color: black;
+    padding-bottom: 10px;
+
+    border-bottom: 2px solid black;
+}
+
+/* 클래스 클릭 시 해당 클래스의 대시보드로 이동합니다 */
+.content_right .content_p {
+    font-size: 14px;
+    color: #6B6B6B;
+
+    margin-left: 10px;
+}
+
+/* 클래스 카드 위치 및 크기 지정 */
+.content_right .class_card{
+    margin-left: 20px;
+    margin-right: 20px;
+    float: left;
+
+    width: 230px;
+}
+
+/* 클래스 카드 이미지 */
+.content_right .class_card .card_img{
+    width: 230px;
+    height: 125px;
+}
+
+/* 클래스 카드 - 클래스 제목 */
+.content_right .class_card .card-text{
+    display: inline-block;
+    margin-top: 10px;
+
+    height: 50px;
+
+    text-align: center;
+    font-size: 14px;
+    color: black;
+}
+
+/* 탑 버튼 */
+.TOP_btn{
+    width: 40px;
+    height: 40px;
+    border: 1px solid #A7A7A7;
+    border-radius: 8px;
+
+    padding-left: 2px;
+
+    font-size: 13px;
+    font-weight: bold;
+    color: #A7A7A7;
+    text-align: center;
+
+    position: fixed;
+    bottom: 300px;
+    right: 250px;
+}
