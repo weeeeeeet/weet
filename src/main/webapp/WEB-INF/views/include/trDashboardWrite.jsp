@@ -19,7 +19,6 @@
  
      <!-- 외부 스타일 시트 연결 -->
      <!-- 트레이너 글쓰기 팝업창 css -->
-    <!-- <link href="css/weet_admin_home.css" rel="stylesheet"> -->
     <link href="/resources/css/dashboard/trDashboardWrite.css" rel="stylesheet">
 
      <!-- 폰트어썸 설정 -->
@@ -38,10 +37,11 @@
 
     <!-- include summernote css/js -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
     <!-- summernote script 추가 -->
-    <script>$(document).ready(function () {
+      <script>$(document).ready(function () {
+    	$.noConflict();
         $('#summernote').summernote({
             height: 400,
             lang: "ko-KR"
@@ -77,7 +77,7 @@
                             <p class="subject boardcontents">본문</p>
 
                             <div class="write_box">
-                                <div name="content" id="summernote"></div>
+                                <div id="summernote" aria-placeholder="내용을 입력해주세요"></div>
                             </div>
                         </div>
 
