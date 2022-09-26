@@ -1,22 +1,36 @@
 package com.weet.app.user.controller;
 
+import java.util.Date;
+import java.util.Objects;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.WebUtils;
 
-import com.weet.app.common.SharedScopeKeys;
 import com.weet.app.exception.ControllerException;
+import com.weet.app.exception.ServiceException;
 import com.weet.app.user.domain.LoginDTO;
 import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.TrainerVO;
 import com.weet.app.user.domain.UserDTO;
+import com.weet.app.user.domain.UserVO;
 import com.weet.app.user.service.UserService;
 
 import lombok.NoArgsConstructor;
@@ -30,6 +44,10 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/user")
 @Controller
 public class UserController {
+
+	private static final String loginKey = "__LOGIN__";
+	private static final String rememberMeKey = "__REMEMBER_ME__";		// Original Remember-Me Cookie name
+
 	
 	@Setter(onMethod_= {@Autowired})
 	private UserService service;
@@ -53,29 +71,37 @@ public class UserController {
 	
 	// 3. TR 로그인처리
 	@PostMapping("/loginPost")
-	public String loginPost(LoginDTO dto, RedirectAttributes rttrs, Model model)
-			throws ControllerException {
-
-		log.trace("loginPost({}, {}) invoked.", dto, rttrs);
+	public void loginPost(
+			/* @ModelAttribute("loginDTO") */ LoginDTO dto,
+			Model model,
+			HttpSession session ) throws Exception {
 		
-		try {
-			TrainerVO vo = this.service.login(dto);
-			log.info("\t+ vo: {}", vo);
+		log.debug("loginPost(dto, model) invoked.");
+		
+		log.info("\t+ dto: " + dto);
+		
+		Objects.requireNonNull(this.service);
+		log.info("\t+ service: " + this.service);
+		
+		// 1. To check the user.
+		TrainerVO trainer = this.service.login(dto);	// To check the user.
+		
+		if(trainer != null) {							// if the check succeeded.
+			model.addAttribute(loginKey, trainer);		// To bind login attribute to the request scope.
 			
-			if(vo != null) {	// if sign-in succeed,				
-				// If redirected, model not transfered due to the 307 redirect response.
-				model.addAttribute(SharedScopeKeys.LOGIN_KEY, vo);
+			// 2. If rememberMe on, process Remember-Me option.
+			if(dto.isRememberMe()) {
+				int timeAmount = 1000 * 60 * 60 * 24 * 7;	// 7 days.
 				
-				return "user/loginPost";
-			} else {			// if sign-in failed,
-				// Request Scope Binding
-				rttrs.addFlashAttribute(SharedScopeKeys.RESULT_KEY, "Login Failed");
+				String userId = dto.getUserId();
+				String rememberMe = session.getId();
+				Date rememberAge = new Date(System.currentTimeMillis() + timeAmount);
 				
-				return "redirect:/user/login";
-			} // if-else
-		} catch(Exception e) {
-			throw new ControllerException(e);
-		} // try-catch
+				this.service.modifyUserWithRememberMe(userId, rememberMe, rememberAge);
+			} // if
+			
+		} // if
+		
 	} // loginPost
 
 		
@@ -123,9 +149,10 @@ public class UserController {
 		try {
 			cnt = service.idCheck(id);
 			return cnt;
-		} catch (Exception e) {
-			throw new ControllerException(e);
+		} catch (ServiceException e) {
+			e.printStackTrace();
 		}
+		return cnt;
 		
 	}
 
@@ -153,9 +180,37 @@ public class UserController {
 	
 	// Logout 처리 - 목적: LogoutInterceptor를 설정하기 위한 용도로만 사용될 뿐, 진짜 호출되지는 못한다!!
 	// 실제 로그아웃을 위한 모든 처리는 LogoutInterceptor에서 처리 (***)
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping("/logout")
-	public void logout() throws ControllerException {
-		log.trace("logout(req, res, session) invoked.");
+	public String logout(HttpServletRequest req, HttpServletResponse res, HttpSession session) throws Exception {
+		log.debug("logout(req, res, session) invoked.");
+		
+		// 1. To get login info from http session.
+		UserVO user = (UserVO) session.getAttribute(loginKey);
+		log.info("\t+ user: " + user);
+		
+		// 2. To destroy current http session.
+		session.invalidate();
+		log.info("\t+ session destroyed("+session.getId()+")");
+		
+		// 3. To destroy Remember-Me cookie.
+		Cookie destroyRememberMeCookie = WebUtils.getCookie(req, rememberMeKey);
+			if(destroyRememberMeCookie != null) {
+			destroyRememberMeCookie.setPath("/");
+			destroyRememberMeCookie.setMaxAge(0);
+			
+			res.addCookie(destroyRememberMeCookie);
+		} // if
+		
+		// 4. To update tbl_user.
+		if(user != null) {
+			String userId = user.getUserId();
+			
+			this.service.modifyUserWithRememberMe(userId, null, null);
+		} // if
+		
+		// 5. To redirect into the login form.
+		return "redirect:/user/login";
 	} // logout
 
 }
