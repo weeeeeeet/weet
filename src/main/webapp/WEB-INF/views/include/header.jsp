@@ -16,7 +16,7 @@
   <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css?ver=1.1" rel="stylesheet">
 
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200?ver=1.1" />
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 
   <link rel="stylesheet" href="/resources/vendors/themify-icons/themify-icons.css?ver=1.1">
@@ -78,7 +78,7 @@
             <c:choose>
 
               <%-- ${공유속성이름.필드명 !=null} : 이름은 구현하면서 맞게 수정하면 됩니다!! --%>
-                <c:when test="${login == true}">
+                <c:when test="${not empty __LOGIN__}">
 
                   <ul class="nav navbar-nav menu_nav">
                     <ul class="nav-shop menu_nav">
@@ -129,7 +129,7 @@
                           <c:choose>
 
                             <%-- 일반회원 / 트레이너 구별 --%>
-                              <c:when test="${trainer == true}">
+                              <c:when test="${not empty __LOGIN__}">
                                 <li class="nav-item"><a class="nav-link" href="/mypageT/activity/boardlist">마이페이지</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/class/reg">클래스등록</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/user/logout">로그아웃</a></li>

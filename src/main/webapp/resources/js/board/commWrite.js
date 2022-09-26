@@ -1,8 +1,11 @@
 let commId = document.querySelector('input[name=commId]').value;
+let userId = document.querySelector('input[name=userId]').value;
+var $1 = jQuery.noConflict();
 
 // 섬머노트 세팅
 const readySummernote = () => {
-    $('#summernote').summernote({
+	
+    $1('#summernote').summernote({
         height: 500,                // 에디터 높이
         minHeight: 500,             // 최소 높이
         maxHeight: 800,             // 최대 높이
@@ -23,10 +26,10 @@ const readySummernote = () => {
 
 // 이미지 업로드
 const sendFile = (file, el) => {
-
+	
     const form_data = new FormData();
     form_data.append('file', file);
-    $.ajax({
+    $1.ajax({
         url: "/img/new",
         type: "POST",
         data: form_data,
@@ -38,7 +41,7 @@ const sendFile = (file, el) => {
 
             // console.log(data.data.fileUrl);
 
-            $(el).summernote('insertImage', data.data.fileUrl, function ($image) {
+            $1(el).summernote('insertImage', data.data.fileUrl, function ($image) {
                 $image.css('width', "100%");
             });
         } // success
@@ -57,8 +60,8 @@ const alert = (message, type) => {
     setTimeout(() => alertArea.innerHTML = '', 2000);
 } // alert
 
+// 게시글 등록
 const regBoard = (tmpSave) => {
-    const userId = "user2";	// 나중에 수정 필요
     const title = document.querySelector('#title').value;
     const content = document.querySelector('#summernote').value;
 
@@ -69,7 +72,7 @@ const regBoard = (tmpSave) => {
         "commTempsave": tmpSave
     }
 
-    $.ajax({
+    $1.ajax({
 
         url: "/board/api/new",
         type: "POST",
@@ -90,6 +93,7 @@ const regBoard = (tmpSave) => {
     }) // .ajax
 } // regBoard
 
+// 게시글 수정
 const modifyBoard = () => {
     const title = document.querySelector('input[name=title]').value;
     const content = document.querySelector('#summernote').value;
@@ -102,7 +106,7 @@ const modifyBoard = () => {
     }
     console.log(params);
     
-    $.ajax({
+    $1.ajax({
 
         url: "/board/api/" + commId,
         type: "PUT",
@@ -117,16 +121,13 @@ const modifyBoard = () => {
     }) // .ajax
 } // modifyBoard
 
+// 임시저장목록 조회
 const getTmpList = () => {
-    const params = {
-        "userId": "user2"
-    }
 
-    $.ajax({
+    $1.ajax({
 
-        url: "/board/api/tmp",
+        url: "/board/api/tmp?userId=" + userId,
         type: "GET",
-        data: params,
         async: false,
         success: data => {
             console.log(data.data.result);
@@ -138,7 +139,7 @@ const getTmpList = () => {
                 str += '<p>임시저장된 글이 없습니다.</p>';
             } else {
 
-                $.each(data.data.result, (i, e) => {
+                $1.each(data.data.result, (i, e) => {
                     str += '<div class="tmpList">'
                         + '<small>' + e.commPostInsertTs + '</small>'
                         + '<p onclick="getBoard(' + e.commId + ')">' + e.commPostTitle + '</p>'
@@ -151,9 +152,10 @@ const getTmpList = () => {
     }) // .ajax
 } // getTmpList
 
+// 임시저장 삭제
 const deleteTmpSave = (commId) => {
 
-    $.ajax({
+    $1.ajax({
 
         url: "/board/api/" + commId,
         type: "DELETE",
@@ -164,8 +166,9 @@ const deleteTmpSave = (commId) => {
     }) // .ajax
 } // deleteTmpSave
 
+// 게시글 상세조회
 const getBoard = (id) => {
-    $.ajax({
+    $1.ajax({
 
         url: "/board/api/" + id,
         type: "GET",
@@ -177,11 +180,12 @@ const getBoard = (id) => {
             commId = board.commId;
             document.querySelector('input[name=userId]').value = board.userId;
             document.querySelector('input[name=title]').value = board.commPostTitle;
-            $('#summernote').summernote('code', `${board.commPostContents}`);
+            $1('#summernote').summernote('code', `${board.commPostContents}`);
         } // success
     }) // .ajax
 } // getBoard
 
+// 등록완료시 게시글상세조회 페이지로 넘어감
 const completeReg = () => {
 	location.href = "/board/" + commId;
 } // completeReg

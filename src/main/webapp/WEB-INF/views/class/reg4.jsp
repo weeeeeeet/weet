@@ -20,7 +20,7 @@
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
 
-   <link rel="stylesheet" href="${path}/resources/css/classes/reg4.css" />
+   <link rel="stylesheet" href="${path}/resources/css/class/reg4.css" />
 
     <script src="/js/weet_class_reg2_4.js"></script>
     <script src="/js/loadHTML.js"></script>

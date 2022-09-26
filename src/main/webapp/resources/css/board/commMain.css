@@ -9,6 +9,7 @@
     margin: 0 auto;
     padding: 0;
     margin-top: 50px;
+    margin-bottom: 100px;
 
 }
 
@@ -150,7 +151,14 @@
 .board-contents {
     margin-top: 50px;
 }
-
+.recent-board-and-more {
+	display: flex;
+	justify-content: space-between;
+}
+.recent-board-and-more a {
+	font-size: 14px;
+	color: #2370DF !important;
+}
 .board-popular-title {
     font-size: 18px;
 }
@@ -161,6 +169,8 @@
 
     border-radius: 10px;
     padding-top: 20px;
+    
+    margin-bottom: 80px;
 }
 
 @media (max-width:991.98px) {
@@ -214,7 +224,13 @@
 
 .profile {
     margin-top: 16px;
-    margin-left: 11px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.profile p {
+	margin: 0;
 }
 
 .profile-pic {
@@ -320,7 +336,7 @@
 }
 
 .board-list {
-    margin-top: 50px;
+    margin-top: 10px;
 
     min-height: 800px;
 }
@@ -328,7 +344,13 @@
 .board-list .card {
     width: 100%;
 }
-
+.count-area {
+	display: flex;
+	justify-content: flex-start;
+}
+.count-area div {
+	margin-right: 20px;
+}
 .count {
     font-size: 14px;
     color: #575757;
@@ -341,10 +363,7 @@
 .trainer-level {
     width: 30px;
     height: 15px;
-    position: relative;
-
-    right: 35px;
-    top: 5px;
+    margin-left: 10px;
 
     font-size: 10px;
     text-align: center;
@@ -372,6 +391,8 @@
     color: #575757;
     text-align: center;
     font-size: 12px;
+    
+	width: 100%;    
 }
 
 .board-list .card {
@@ -425,4 +446,35 @@
     height: 40px;
 
     font-size: 18px;
+}
+
+/* page */
+#pagination-area {
+	margin-bottom: 100px;
+}
+
+.pagination,
+.jsgrid .jsgrid-pager {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.25rem;
+}
+
+.page-link {
+  color: black
+}
+
+.pagination.pagination-rounded-flat .page-item {
+  margin: 0 .25rem
+}
+
+.pagination-success .page-item.active .page-link {
+  background: #2370DF;
+  border-color: #2370DF;
+}
+
+.pagination.pagination-rounded-flat .page-item .page-link {
+  border: none;
+  border-radius: 50px;
 }

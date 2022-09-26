@@ -12,7 +12,7 @@
 
 	<script>
 		setTimeout(function () {
-	        self.location = "/coupons/book";
+	        self.location = "/user/joinDone";
 	    }, 3000);
 		
 	        

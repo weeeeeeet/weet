@@ -1,5 +1,6 @@
 package com.weet.app.board.service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,9 @@ import com.weet.app.common.domain.Criteria;
 import com.weet.app.exception.ServiceException;
 
 public interface BoardService {
+	
+	public static final int[] LEVEL_TRIGGER = { 5, 10, 15 };	// 트레이너 레벨 상승 조건
+	
 	
 	// 인기게시글 top10 조회
 	public abstract List<Object> getListTop10() throws ServiceException;
@@ -64,8 +68,17 @@ public interface BoardService {
 	// 조회수 업데이트
 	public abstract boolean increaseView(int commId) throws ServiceException;
 	
+	// 댓글 채택
+	public abstract boolean replySelect(int replyId, String userId) throws ServiceException;
+	
 	// ==================================================================
 	// 메인페이지의 '커뮤니티 인기글'
 	public abstract List<BoardVO> getBoardMain() throws ServiceException;
 	
+	
+	// 채택답변수가 레벨상승 조건에 맞는지 체크
+	public static boolean contains(int[] levelArr, int target) {
+		
+		return Arrays.stream(levelArr).anyMatch(t -> t == target);
+	} // contains
 } // end interface

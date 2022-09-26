@@ -13,6 +13,5 @@ public class PaymentDTO {
 	private String payEmail;
 	private String payMethod;
 	private String payAgmtYn;
-	private String payBankName;
 	private String payCardName;
 } // end class

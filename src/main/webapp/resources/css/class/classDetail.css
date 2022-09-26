@@ -66,13 +66,19 @@ nav .navbar-nav .nav-link {
 -----------------------------------------*/
 .hero {
   width: 100%;
-  height: 70vh;
+  height: 65vh;
   overflow-x: hidden;
   margin: 0 auto;
   font-size: 14px;
 
-
-  background-color: #043550;
+  background-image: 
+  	 linear-gradient(
+   		to bottom,
+   		rgba(255, 214, 191, 0.2),
+   		rgba(0, 0, 3, 0.8),
+   		rgba(0, 0, 3, 1)),
+  	url("/resources/img/static/banner1.png");
+  background-size: cover;
 }
 
 .hero .row {
@@ -115,6 +121,16 @@ nav .navbar-nav .nav-link {
   font-weight: 500;
   line-height: 30px;
 }
+.badge-personal {
+  width: 60px;
+  
+  background-color: #2370DF;
+  
+  text-align: center;
+  color: white;
+  font-weight: 500;
+  line-height: 30px;
+}
 .hero-text .fa-star {
   width: 20px;
   line-height: 10px;
@@ -124,8 +140,8 @@ nav .navbar-nav .nav-link {
   line-height: 30px;
 }
 .hero-text .card div:last-of-type span {
-  width: 80px;
-
+  width: auto;
+  cursor: pointer;
   text-align: center;
   font-size: 14px;
   line-height: 28px;
@@ -133,6 +149,18 @@ nav .navbar-nav .nav-link {
   background-color: #FF730E;
   border-radius: 20px;
   margin: 0 5px;
+}
+.hero-text .card div:last-of-type span:hover {
+  background-color: #ffa766;
+}
+.tag-search-link,
+.tag-search-link:visited,
+.tag-search-link:hover {
+	color: #fff;
+}
+.tag-area {
+	display: flex;
+	justify-content: flex-start;
 }
 
 /*---------------------------------------
@@ -612,6 +640,25 @@ nav .navbar-nav .nav-link {
   border: none;
   background-color: #2370DF;
   color: white;
+}
+#page-7 {
+  width: 70%;
+  margin: 0 auto;
+  padding: 20px;
+  
+  border-radius: 10px;
+  background-color: #ebebeb;
+}
+#page-7 h2:first-of-type {
+	text-align: center;
+	font-size: 20px;
+}
+#page-7 h2 {
+	font-size: 16px;
+}
+#page-7 p {
+	line-height: 30px;
+	font-size: 14px;
 }
 
 /*---------------------------------------
