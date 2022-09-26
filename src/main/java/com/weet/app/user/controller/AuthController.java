@@ -1,5 +1,9 @@
 package com.weet.app.user.controller;
 
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.weet.app.exception.ServiceException;
+import com.weet.app.exception.ControllerException;
 import com.weet.app.user.service.AuthService;
 
 import lombok.NoArgsConstructor;
@@ -29,66 +33,48 @@ public class AuthController {
 	// 1. 본인 인증
 	@GetMapping("/phoneCheck")
 	@ResponseBody
-	public String sendSMS(@RequestParam("user_phone") String userPhone) { // 휴대폰 문자보내기
+	public String sendSMS(@RequestParam("user_phone") String userPhone) throws ControllerException { // 휴대폰 문자보내기
 		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
 		log.info("\t + randomNumber:{}",randomNumber);
-		
+
 		try {
 			service.certifiedPhoneNumber(userPhone,randomNumber);
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try-catch
 		
 		return Integer.toString(randomNumber);
-	}
-
-	// 2. 사업자 인증
-	@PostMapping("/business")
-	public String business() {
-		log.trace("business() invoked.");
-
-		return "redirect:..api/";
+	} // sendSMS
+	
+	
+//	 2. 카카오 로그인 - 인가코드받기
+	@GetMapping("/kakao")
+	public String kakaoCallback(@RequestParam String code, HttpServletRequest req) throws Exception {
 		
-	} // business
+//		HttpSession session = req.getSession();
 
-	// 3. 카카오 로그인
-//	@ResponseBody
-//	@GetMapping("/kakao")
-//	public BaseResponse<PostLoginRes> kakaoLogin(@RequestParam(required = false) String code) {
-//	    try {
-//	        // URL에 포함된 code를 이용하여 액세스 토큰 발급
-//	        String accessToken = loginService.getKakaoAccessToken(code);
-//	        System.out.println(accessToken);
-//
-//	        // 액세스 토큰을 이용하여 카카오 서버에서 유저 정보(닉네임, 이메일) 받아오기
-//	        HashMap<String, Object> userInfo = loginService.getUserInfo(accessToken);
-//	        System.out.println("login Controller : " + userInfo);
-//
-//	        PostLoginRes postLoginRes = null;
-//
-//	        // 만일, DB에 해당 email을 가지는 유저가 없으면 회원가입 시키고 유저 식별자와 JWT 반환
-//	        // 현재 카카오 유저의 전화번호를 받아올 권한이 없어서 테스트를 하지 못함.
-//	        if(loginProvider.checkEmail(String.valueOf(userInfo.get("email"))) == 0) {
-//	            //PostLoginRes postLoginRes = 해당 서비스;
-//	            return new BaseResponse<>(postLoginRes);
-//	        } else {
-//	            // 아니면 기존 유저의 로그인으로 판단하고 유저 식별자와 JWT 반환
-//	            postLoginRes = loginProvider.getUserInfo(String.valueOf(userInfo.get("email")));
-//	            return new BaseResponse<>(postLoginRes);
-//	        }
-//	    } catch (BaseException exception) {
-//	        return new BaseResponse<>((exception.getStatus()));
-//	    }
-//	}
-	
-	
+        String access_Token = service.getKaKaoAccessToken(code);
+        log.info("\t + access_Token:{}",access_Token);
+
+        HashMap<String, Object> userInfo = service.getUserInfo(access_Token);
+        log.info("\t+ access_Token : {}" + access_Token);
+        log.info("\t+ userInfo : {}", userInfo.get("email"));
+        log.info("\t+ nickname : {}", userInfo.get("nickname"));
+        log.info("\t+ profile_image : {}", userInfo.get("profile_image"));
+        log.info("\t+ name : {}", userInfo.get("name"));
+        log.info("\t+ gender : {}", userInfo.get("gender"));
+        log.info("\t+ phone : {}", userInfo.get("phone"));
+
+		return "redirect:/user/tr/joindone";
+
+	} // kakaoCallback
+
 	@PostMapping("/kakaologin")
 	public String kakaoLog() {
 		log.trace("kakaoLog() invoked.");
 		
 		return "redirect:..api/";
 	} // kakaoLog
-
 	// 4. 네이버 로그인
 //	@GetMapping("/naver")
 //	public ModelAndView logion(String code,HttpServletRequest request)throws Exception{

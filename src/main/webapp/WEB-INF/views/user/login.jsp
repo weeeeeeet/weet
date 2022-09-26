@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Weet Login</title>
     
     <!-- #### common ####-->
@@ -30,50 +27,32 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
     <!-- kakao js -->
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
  	<!-- google id -->
 	<meta name ="google-signin-client_id" content="9667579877-f1vqr5748vk9uuv5bm6nel4gbpr8mi7a.apps.googleusercontent.com">
      <!-- #### style ####-->
     <!-- css -->
     <link href="/resources/css/user/login.css" rel="stylesheet" />
-
 </head>
-
 <body>
-
 	<%@ include file= "/WEB-INF/views/include/header.jsp" %>
-
     <div class="login-contain">
-
 	
         <div class="d-grid gap-2 col-4 mx-auto mx-block">
-
             <div class="login-main-text">로그인</div>
-
             <div class="lgn-btn">
 
                 <div class="btn">
-                    <a id="kakao-login-btn" href="javascript:loginWithKakao()" class="btn btn-primary kakao"
+
+                    <!-- <a id="kakao-login-btn" href="javascript:loginWithKakao()" class="btn btn-primary kakao" -->
+                    <a href="https://kauth.kakao.com/oauth/authorize?client_id=e633a1a319cc541dac0ec78d1f28cfa4&redirect_uri=http://localhost:8080/auth/kakao&response_type=code" class="btn btn-primary kakao"
                         role="button" aria-disabled="true">
                         <div class="button-box">
                             <div class="login-icon kakao" width="90%"><img src="/resources/img/static/icon-kakao-medium.svg" alt="카카오 로그인 버튼"></div>
                             <div class="login-text kakao">카카오로 시작하기</div>
-                            <script type="text/javascript">
-                                function loginWithKakao() {
-                                    Kakao.Auth.login({
-                                        success: function (authObj) {
-                                            alert(JSON.stringify(authObj))
-                                        },
-                                        fail: function (err) {
-                                            alert(JSON.stringify(err))
-                                        },
-                                    })
-                                }
-                            </script>
                         </div>
                     </a>
                 </div>
-
                 <div class="btn">
                     <a id="naverIdLogin_loginButton" href="javascript:void(0)" class="btn btn-primary naver" id="naverIdLogin_loginButton" role="button" aria-disabled="true">
                         <div class="button-box">
@@ -82,14 +61,11 @@
                             <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 							<script type="text/javascript">
 							
-							    var naverLogin = new naver.LoginWithNaverId(
-							            {
+							    var naverLogin = new naver.LoginWithNaverId({
 							                clientId: "fIFa3pQsuGQOTwV5vGos", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
 										    callbackUrl: "http://localhost:8080/user/login", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
 							                isPopup: false
-							
-							            }
-							        );	
+							     });	
 							    
 							    naverLogin.init();
 							    
@@ -125,21 +101,17 @@
 							        setTimeout(function() {
 							            closePopUp();
 							            }, 1000);
-							        
-							        
 							    }
 						    </script>
                         </div>
                     </a>
                 </div>
-
                 <div class="btn">
                     <a id="GgCustomLogin" href="javascript:void(0)" class="btn btn-primary google" role="button" aria-disabled="true">
                         <div class="button-box">
                             <div class="login-icon google"><img src="/resources/img/static/icon-google-medium.svg" alt="구글로 시작하기"></div>
                             <div class="login-text google">구글로 시작하기</div>
                             <script>
-
                                 //처음 실행하는 함수
                                 function init() {
                                     gapi.load('auth2', function() {
@@ -182,7 +154,6 @@
                         </div>
                     </a>
                 </div>
-
                 <div class="btn">
                     <a href="/user/tr/login" class="btn btn-primary tr" role="button" aria-disabled="true">
                         <div class="button-box">
@@ -191,15 +162,19 @@
                         </div>
                     </a>
                 </div>
-
                 <div class="greement">
                     <a href="#" class="agree_txt" role="button" aria-disabled="true">이용약관</a> 및 <a href="#"
                         class="agree_txt" role="button" aria-disabled="true">개인정보 처리방침</a>확인 후 동의합니다.
                 </div>
-
             </div>
         </div>
     </div>
+
+    <!-- js -->
+    <script src="/resources/js/user/kakaoAuth.js"></script>
+    <!--  
+    
+    -->
 
 </body>
 
