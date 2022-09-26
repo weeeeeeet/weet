@@ -14,7 +14,7 @@
     <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/63eb3bc178.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="${path}/resources/css/classes/reg2.css" />
+    <link rel="stylesheet" href="${path}/resources/css/class/reg2.css" />
 
     <!-- favicon -->
 	<link rel="shortcut icon" href="${path}/resources/ico/favicon.ico" type="image/x-icon">

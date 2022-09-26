@@ -10,6 +10,7 @@
 	
 	<!-- css -->
 	<link rel="stylesheet" href="${path}/resources/css/class/classSearch.css" />
+	<link rel="stylesheet" href="/resources/vendors/bootstrap/bootstrap.min.css">
 	
 	<!-- font -->
 	<link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
@@ -72,7 +73,7 @@
 		<section class="banner">
 			<div class="banner_search">
 					<input type="hidden" name="type" value="personalandgroup">
-					<input type="hidden" name="classSort" value="newest">
+					<input type="hidden" name="sort" value="newest">
 					<input type="text" name="keyword" value="${pageMaker.cri.keyword}"
 						placeholder="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp트레이너명 또는 클래스명 입력"
 						autocomplete="off"> 
@@ -86,7 +87,7 @@
 
 	<section class="contents">
 
-		<div class="classSort">
+		<div class="sort">
 			<form id="typeForm" method="get" action="/class/search">
 				<select name="type" id="type">
 					<option name="type" value="personalandgroup" id="personalandgroup" >개인 / 그룹</option>

@@ -269,17 +269,17 @@
 						<div class="single-blog">
 							<div class="short_details">
 								<div class="meta-top d-flex">
-									<a href="#">${board.userId}</a> <a href="#"><i
-										class="fas fa-comment"></i>${board.commReplyCount}</a> <a href="#"><i
+									<a href="/board/${board.commId}">${board.userId}</a> <a href="/board/${board.commId}"><i
+										class="fas fa-comment"></i>${board.commReplyCount}</a> <a href="/board/${board.commId}"><i
 										class="fas fa-thumbs-up"></i>${board.commLikeNum}</a>
 								</div>
-								<a class="d-block" href="single-blog.html">
+								<a class="d-block" href="/board/${board.commId}">
 									<h4>${board.commPostTitle}</h4>
 								</a>
 								<div class="text-wrap">
 									<p>${board.commPostContents}</p>
 								</div>
-								<a href="#" class="blog_btn">+ 더보기 <span
+								<a href="/board/${board.commId}" class="blog_btn">+ 더보기 <span
 									class="ml-2 ti-arrow-right"></span></a>
 							</div>
 						</div>

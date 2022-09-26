@@ -39,6 +39,9 @@ public interface BoardMapper {
 	@Select("SELECT count(lb_id) FROM t_like_board WHERE comm_id = #{commId} AND user_id = #{userId}")
 	public abstract int selectMyLike(int commId, String userId) throws DAOException;
 	
+	// 트레이너의 채택답변수 조회
+	public abstract int selectSelectedReplyCountOfTrainer(String userId) throws DAOException;
+	
 	// 게시글 작성
 	public abstract int insertBoard(CommunityDTO dto) throws DAOException;
 	
@@ -68,6 +71,12 @@ public interface BoardMapper {
 	
 	// 댓글 수정
 	public abstract int updateReply(ReplyDTO dto) throws DAOException;
+	
+	// 댓글 채택
+	public abstract int updateReplySelected(int replyId) throws DAOException;
+	
+	// 트레이너 레벨 업데이트
+	public abstract int updateTrainerLevel(String userId) throws DAOException;
 	
 	// 게시글 삭제
 	public abstract int deleteBoard(int commId) throws DAOException;

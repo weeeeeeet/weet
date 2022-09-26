@@ -18,7 +18,7 @@ public class Criteria2 {
 	private String keyword;
 	
 	// ======= 클래스 정렬 ======
-	private String sort;
+	private String classSort;
 	
 	// ======= 클래스 개인 & 그룹 ======
 	private String type;
@@ -39,6 +39,7 @@ public class Criteria2 {
 
 	@Override
 	public String toString() {
-		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", keyword=" + keyword + ", sort=" + sort + ", type=" + type + "]";
+		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", keyword=" + keyword + ", classSort=" + classSort + ", type=" + type + "]";
+
 	}
 } // end class

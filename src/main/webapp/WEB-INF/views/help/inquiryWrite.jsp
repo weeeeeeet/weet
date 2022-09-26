@@ -10,6 +10,10 @@
 
     <title>1대1 문의 작성</title>
 
+	<!-- css -->
+    <link rel="stylesheet" href="${path}/resources/css/help/inquiryWrite.css">
+	<link rel="stylesheet" href="/resources/vendors/bootstrap/bootstrap.min.css">
+	
     <!-- favicon -->
 	<link rel="shortcut icon" href="${path}/resources/ico/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="${path}/resources/ico/favicon.ico" type="image/x-icon">
@@ -22,7 +26,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js" integrity="sha512-QDsjSX1mStBIAnNXx31dyvw4wVdHjonOwrkaIhpiIlzqGUCdsI62MwQtHpJF+Npy2SmSlGSROoNWQCOFpqbsOg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <link rel="stylesheet" href="${path}/resources/css/help/inquiryWrite.css">
     <script src="loadHTML.js"></script>
 
  	<script type="text/javascript">
