@@ -45,7 +45,6 @@
                 <h2>회원 가입</h2>
 	            <input type="hidden" id="userType" name="userType" value="T"/>
                 
-
                 <div class="userid-box">
                     <label for="user_id" class="form-label">아이디</label>
                     <div class="boxing">
@@ -77,7 +76,7 @@
                         <input type="password" class="form-control-sm" name="user_pwd2" id="user_pwd2" minlength="8"
                             maxlength="14" placeholder="비밀번호를 한번 더 입력해주세요" autocomplete="off" required>
                     </div>
-                    <span class="checkment" id="pweCheck"></span>
+                    <span class="checkment" id="pwdCheck"></span>
                 </div>
                 <div class="email-box">
                     <label for="user_email" class="form-label"> 이메일 </label>
@@ -96,7 +95,7 @@
                         <button type="button" id="phoneChk">코드전송</button>
                     </div>
                     
-                    <p class="checkment successPhoneChk">휴대폰 번호 입력후 코드전송 버튼을 누르세요</p>
+                    <p class="checkment2 successPhoneChk">휴대폰 번호 입력후 코드전송 버튼을 누르세요</p>
                     
                     <div class="boxing">
 	                    <input class="form-control-sm" id="user_phone2" type="text" name="user_phone2" title="인증번호 입력" disabled required/>
@@ -104,7 +103,6 @@
 	                   	<input type="hidden" id="phoneDoubleChk"/>
                     </div>
                     
-                    <p class="checkment">최초 가입 시에만 사용하고 있습니다. 따로 저장되지 않습니다. </p>
                 </div>
 
             </section>
@@ -132,8 +130,8 @@
                         <div class="info gender">
                             <ul>
                                 <li><label for="user_gender" class="form-label">성별</label><span>*</span></li>
-                                <li><input type="radio" value="W" name="userGender" id="female" required> 여 &nbsp
-                                    <input type="radio" value="M" name="userGender" id="male" required> 남
+                                <li><input class="checkment2" type="radio" value="W" name="userGender" id="female" required> 여 &nbsp
+                                    <input class="checkment2" type="radio" value="M" name="userGender" id="male" required> 남
                                 </li>
                             </ul>
                         </div>                                  
@@ -156,6 +154,7 @@
 
             <section class="join-contain bnum">
                 <h3>사업자 정보 확인</h3>
+                 <p class="bizment">사업자번호를 도용하여 가입시, 형사처벌 대상에 해당됩니다</p>
                     <div class="info biz">
                         <ul>
                             <li><label for="user_biz" class="form-label">사업자 번호 <span>*</span></label></li>
@@ -171,7 +170,7 @@
                         </ul>
                         
 	                   	 <input type="hidden" id="bizDoubleChk" value="false"/>
-           				 <button type="button" onclick="checkBusinessMan()">인증하기</button>
+           				 <button type="button"  class="authBtn" onclick="checkBusinessMan()">인증하기</button>
                     </div>
 
             </section>
