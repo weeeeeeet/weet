@@ -1,5 +1,9 @@
 package com.weet.app.user.controller;
 
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.weet.app.exception.ServiceException;
+import com.weet.app.exception.ControllerException;
 import com.weet.app.user.service.AuthService;
 
 import lombok.NoArgsConstructor;
@@ -29,30 +33,42 @@ public class AuthController {
 	// 1. 본인 인증
 	@GetMapping("/phoneCheck")
 	@ResponseBody
-	public String sendSMS(@RequestParam("user_phone") String userPhone) { // 휴대폰 문자보내기
+	public String sendSMS(@RequestParam("user_phone") String userPhone) throws ControllerException { // 휴대폰 문자보내기
 		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
 		log.info("\t + randomNumber:{}",randomNumber);
 		
 		try {
 			service.certifiedPhoneNumber(userPhone,randomNumber);
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try-catch
 		
 		return Integer.toString(randomNumber);
-	}
+	} // sendSMS
 
-	// 2. 사업자 인증
-	@PostMapping("/business")
-	public String business() {
-		log.trace("business() invoked.");
 
-		return "redirect:..api/";
+	// 2. 카카오 로그인 - 인가코드받기
+	@GetMapping("/kakao")
+	public String kakaoCallback(@RequestParam String code, HttpServletRequest req) throws Exception {
 		
-	} // business
+//		HttpSession session = req.getSession();
+		
+        String access_Token = service.getKaKaoAccessToken(code);
+        log.info("\t + access_Token:{}",access_Token);
+        
+        HashMap<String, Object> userInfo = service.getUserInfo(access_Token);
+        log.info("\t+ access_Token : {}" + access_Token);
+        log.info("\t+ userInfo : {}", userInfo.get("email"));
+        log.info("\t+ nickname : {}", userInfo.get("nickname"));
+        log.info("\t+ profile_image : {}", userInfo.get("profile_image"));
+        log.info("\t+ name : {}", userInfo.get("name"));
+        log.info("\t+ gender : {}", userInfo.get("gender"));
+        log.info("\t+ phone : {}", userInfo.get("phone"));
 
-	// 3. 카카오 로그인
-//	@ResponseBody
+		return "redirect:/user/tr/joindone";
+        
+	} // kakaoCallback
+	
 //	@GetMapping("/kakao")
 //	public BaseResponse<PostLoginRes> kakaoLogin(@RequestParam(required = false) String code) {
 //	    try {

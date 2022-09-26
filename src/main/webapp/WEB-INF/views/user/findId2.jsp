@@ -47,7 +47,7 @@
             <div class="sub-text">
                 <P>고객님의 정보와 일치하는 아이디 목록입니다.</P>
             </div>
-            <form action="Findid" class="findid">
+            <form action="#" class="findid">
                 <div class="inner_list">
                     <div class="findid_list">
                         <table class="findid-box">
@@ -63,12 +63,8 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th>example1234</th>
-                                    <th>2022.07.13</th>
-                                </tr>
-                                <tr>
-                                    <th>example1234</th>
-                                    <th>2022.07.13</th>
+                                    <th id="userName" vlaue="${_USER_.userId}" readonly></th>
+                                    <th id="userPhone" vlaue="${_USER_.userPhone}" readonly></th>
                                 </tr>
                             </tbody>
                         </table>
