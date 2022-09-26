@@ -10,10 +10,6 @@
 
     <title>마이페이지 - 내활동</title>
 
-    <link href="/resources/css/mypageTr.css" rel="stylesheet" />
-    <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/63eb3bc178.js" crossorigin="anonymous"></script>
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -21,6 +17,48 @@
     <!-- favicon -->
     <link rel="icon" href="/resources/ico/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/resources/ico/favicon.ico" type="image/x-icon">
+
+    <!-- 제이쿼리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js" integrity="sha512-QDsjSX1mStBIAnNXx31dyvw4wVdHjonOwrkaIhpiIlzqGUCdsI62MwQtHpJF+Npy2SmSlGSROoNWQCOFpqbsOg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- favicon -->
+    <link rel="icon" href="/resources/ico/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/resources/ico/favicon.ico" type="image/x-icon">
+
+    <link href="/resources/css/mypageT/mypageTr.css" rel="stylesheet" />
+    <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/63eb3bc178.js" crossorigin="anonymous"></script>
+
+    <script>
+
+        $(function() {
+
+            // 이전 / 다음 페이지 목록
+            $('a.prev, a.next').click( function (e) {
+
+                e.preventDefault();
+
+                // form태그 직접 조작 및 전송
+                let formObj = $('#pagenationForm');
+                formObj.attr('action', '/mypage/activity/boardlist');
+                formObj.attr('method', 'GET');
+
+                console.clear();
+                console.log('>>> this.href : ', $(this).attr('href'));
+
+                formObj.find('input[type=hidden][name=currPage]').val($(this).attr('href'));
+                formObj.find('input[type=hidden][name=userId]').val('user2');
+                // formObj.find('input[type=hidden][name=userId]').val(${userId});
+
+                formObj.submit();
+
+            });
+            
+
+         });
+
+    </script>
 
 </head>
 
