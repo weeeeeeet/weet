@@ -122,7 +122,7 @@ public class NaverLoginController {
 		} // if-else
 		
 		// 세션 scope에 등록
-		session.setAttribute(SharedScopeKeys.LOGIN_KEY, userDTO);
+		session.setAttribute(SharedScopeKeys.LOGIN_KEY, this.userService.getUserProfile(userDTO.getUserId()));
 		
 		return "redirect:/";
 	} // naverLoginCallback

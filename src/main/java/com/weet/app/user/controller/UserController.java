@@ -28,6 +28,7 @@ import com.weet.app.user.domain.LoginDTO;
 import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.TrainerVO;
 import com.weet.app.user.domain.UserDTO;
+import com.weet.app.user.domain.UserVO;
 import com.weet.app.user.service.UserService;
 
 import lombok.NoArgsConstructor;
@@ -84,7 +85,8 @@ public class UserController {
 		TrainerVO trainer = this.service.login(dto);	// To check the user.
 		
 		if(trainer != null) {							// if the check succeeded.
-			model.addAttribute(loginKey, trainer);		// To bind login attribute to the request scope.
+			
+			model.addAttribute(loginKey, this.service.getUserProfile(trainer.getUserId()));		// To bind login attribute to the request scope.
 			
 			// 2. If rememberMe on, process Remember-Me option.
 			if(dto.isRememberMe()) {
@@ -183,7 +185,7 @@ public class UserController {
 		log.debug("logout(req, res, session) invoked.");
 		
 		// 1. To get login info from http session.
-		UserDTO user = (UserDTO) session.getAttribute(loginKey);
+		UserVO user = (UserVO) session.getAttribute(loginKey);
 		log.info("\t+ user: " + user);
 		
 		// 2. To destroy current http session.
@@ -206,6 +208,7 @@ public class UserController {
 			this.service.modifyUserWithRememberMe(userId, null, null);
 		} // if
 		
+		res.sendRedirect("/user/login");
 		// 5. To redirect into the login form.
 		return "redirect:/user/login";
 	} // logout
