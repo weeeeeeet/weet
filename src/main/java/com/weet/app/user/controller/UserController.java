@@ -28,7 +28,6 @@ import com.weet.app.user.domain.LoginDTO;
 import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.TrainerVO;
 import com.weet.app.user.domain.UserDTO;
-import com.weet.app.user.domain.UserVO;
 import com.weet.app.user.service.UserService;
 
 import lombok.NoArgsConstructor;
@@ -58,15 +57,6 @@ public class UserController {
 		return "/user/login";
 	} // loginPage
 	
-	// 1. user Login	
-	@GetMapping("/naver/login")
-	public String naverLogin(String accessToken, String state) {
-		log.trace("naverLogin({}, {}) invoked.", accessToken, state);
-
-
-		return "/user/naverLogin";
-	} // loginPage
-
 	// 2. TR 로그인화면
 	@GetMapping("/tr/login")
 	public String trainerLoginPage() {
@@ -193,7 +183,7 @@ public class UserController {
 		log.debug("logout(req, res, session) invoked.");
 		
 		// 1. To get login info from http session.
-		UserVO user = (UserVO) session.getAttribute(loginKey);
+		UserDTO user = (UserDTO) session.getAttribute(loginKey);
 		log.info("\t+ user: " + user);
 		
 		// 2. To destroy current http session.
