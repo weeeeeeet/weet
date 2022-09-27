@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -28,36 +29,6 @@
     <link href="/resources/css/mypage/Mypage_Classroom.css" rel="stylesheet" />
     <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/63eb3bc178.js" crossorigin="anonymous"></script>
-
-    <script>
-
-        $(function() {
-
-            // 이전 / 다음 페이지 목록
-            $('a.prev, a.next').click( function (e) {
-
-                e.preventDefault();
-
-                // form태그 직접 조작 및 전송
-                let formObj = $('#pagenationForm');
-                formObj.attr('action', '/mypage/class/my');
-                formObj.attr('method', 'GET');
-
-                console.clear();
-                console.log('>>> this.href : ', $(this).attr('href'));
-
-                formObj.find('input[type=hidden][name=currPage]').val($(this).attr('href'));
-                formObj.find('input[type=hidden][name=userId]').val('user2');
-                // formObj.find('input[type=hidden][name=userId]').val(${userId});
-
-                formObj.submit();
-
-            });
-            
-
-        });
-
-    </script>
 
 </head>
 
@@ -123,7 +94,7 @@
             <c:forEach var="board" items="${__LIST__}">
 
                 <div class="class_card">
-                    <img src="${board.classMainImgUrl}" class="card_img" alt="해당 클래스의 대포사진 자리">
+                    <img src="<spring:url value='/${board.classMainImgUrl}'/>" class="card_img" alt="클래스대표사진">
                     <a href="#" class="card-text">${board.classTitle}</a>
                 </div>
 
@@ -131,51 +102,13 @@
 
             <p>&nbsp;</p>
             <p>&nbsp;</p>
-
-            <div id="pagenation">
-
-                <form id="pagenationForm">
-    
-                    <input type="hidden" name="currPage">
-                    <input type="hidden" name="userId">
-    
-                    <ul>
-    
-                        <!-- 이전 페이지 목록 -->
-                        <c:if test="${__PAGENATION__.prev}">
-    
-                            <li class="prev"> <a href="${__PAGENATION__.startPage -1}" class="prev">이전</a></li>
-    
-                        </c:if>
-    
-                        <!-- 현재 PAGENATION 범위에 속한 페이지 번호 목록 출력 -->
-                        <c:forEach var="pageNum" begin="${__PAGENATION__.startPage}" end="${__PAGENATION__.endPage}">
-    
-                            <li> 
-                            <!-- Userid 세션에서 받아 오는 것으로 수정해야 된다!!(********) -->
-                                <a 
-                                    href="/mypage/class/my?userId=user2&currPage=${pageNum}" 
-                                    class="${pageNum == __PAGENATION__.cri.currPage ? 'currPage' : '' }" > 
-    
-                                    <strong>${pageNum}</strong>
-    
-                                </a>
-                            </li>
-    
-                        </c:forEach>
-    
-                        <!-- 다음 페이지 목록 -->
-                        <c:if test="${__PAGENATION__.next}">
-    
-                            <li class="next"> <a href="${__PAGENATION__.endPage +1}" class="next">다음</a></li>
-    
-                        </c:if>
-    
-                    </ul>
-    
-                </form>
-    
-            </div>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
             
         </div>
 

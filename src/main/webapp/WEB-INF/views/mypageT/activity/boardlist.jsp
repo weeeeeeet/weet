@@ -65,7 +65,7 @@
 <body>
 
     <!-- ==================HEADER==================== -->
-    <%@ include file="/WEB-INF/views/include/header.jsp" %>
+    <jsp:include page="/WEB-INF/views/include/header.jsp" />
     
     <!-- ==================CONTENT==================== -->
 
@@ -203,7 +203,7 @@
     </section>
 
     <!-- ==================FOOTER==================== -->
-    <%@ include file="/WEB-INF/views/include/footer.jsp" %>
+    <jsp:include page="/WEB-INF/views/include/footer.jsp" />
    
 </body>
 
