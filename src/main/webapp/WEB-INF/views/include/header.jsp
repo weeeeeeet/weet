@@ -82,41 +82,7 @@
 
                   <ul class="nav navbar-nav menu_nav">
                     <ul class="nav-shop menu_nav">
-
-                      <li class="nav-item submenu dropdown">
-
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                          aria-haspopup="true" aria-expanded="false">
-                          <button aria-haspopup="true">
-                            <span class="material-symbols-outlined">
-                              circle_notifications
-                            </span>
-                            <div class="nav-shop__circle"></div>
-                          </button></a>
-
-                        <ul class="dropdown-menu notification">
-                          <li>알림 센터</li>
-
-                          <li class="nav-item">
-                            <a class="nav-link" href="category.html">
-                              light님이 <strong>헬스장 조언좀 부탁드..</strong>에 댓글을 남겼습니다.
-                            </a>
-                          </li>
-
-                          <li class="nav-item">
-                            <a class="nav-link" href="category.html">
-                              댓글이 채택되었습니다!
-                            </a>
-                          </li>
-
-                          <li class="nav-item read">
-                            <a class="nav-link" href="category.html">
-                              salt님이 <strong>프로틴쉐이크 추천..</strong>에 댓글을 남겼습니다.
-                            </a>
-                          </li>
-
-                        </ul>
-                      </li>
+                      <span>${ __LOGIN__.userNickname }</span>님, 환영합니다!
 
                       <li class="nav-item submenu dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
@@ -129,16 +95,16 @@
                           <c:choose>
 
                             <%-- 일반회원 / 트레이너 구별 --%>
-                              <c:when test="${not empty __LOGIN__}">
+                              <c:when test="${__LOGIN__.userType == 'T'.charAt(0)}">
                                 <li class="nav-item"><a class="nav-link" href="/mypageT/activity/boardlist">마이페이지</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/class/reg">클래스등록</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/user/logout">로그아웃</a></li>
                               </c:when>
 
                               <c:otherwise>
-                                <li class="nav-item"><a class="nav-link" href="/mypage/activity/boardlist">마이페이지</a>
+                                <li class="nav-item"><a class="nav-link" href="/mypage/activity/boardlist?userid=${__LOGIN__.userId}">마이페이지</a>
                                 </li>
-                                <li class="nav-item"><a class="nav-link" href="/mypage/class/my">수강중인 클래스</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/mypage/class/my">내 PT확인</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/coupons/book">쿠폰북</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/user/logout">로그아웃</a></li>
                               </c:otherwise>
