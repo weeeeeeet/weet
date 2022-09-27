@@ -40,13 +40,4 @@
             user_id = #{userId}
     </update>
 
-    <update id="updateUserWithRememberMe">
-        UPDATE t_tr
-        SET
-            rememberme = #{rememberMe, jdbcType=VARCHAR},
-            rememberage = #{rememberAge, jdbcType=DATE}
-        WHERE
-            user_id = #{userId}
-    </update>
-
 </mapper>
