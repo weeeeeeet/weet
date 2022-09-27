@@ -61,7 +61,7 @@ public class PayController {
 		try {
 			ClassDetailVO vo = this.classService.getDetail(classId);
 			
-			TrainerVO trainervo = (TrainerVO) session.getAttribute("__LOGIN__");
+			UserVO trainervo = (UserVO) session.getAttribute("__LOGIN__");
 			
 			if(trainervo != null) {
 				UserVO uservo = this.payService.getPayUserInfo(trainervo.getUserId());

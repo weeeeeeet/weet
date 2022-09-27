@@ -130,7 +130,20 @@
 	      <artifactId>spring-security-core</artifactId>
 	      <version>5.7.3</version>
 	    </dependency>
+	    
+		<dependency> <!--spring webflux-->
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-webflux</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
 		
+		<dependency>
+		    <groupId>io.projectreactor.netty</groupId>
+		    <artifactId>reactor-netty-http</artifactId>
+		    <version>1.0.23</version>
+		</dependency>
+
+
 		<!-- =============== 5. JDBC =============== -->
 
 		<dependency>
@@ -304,7 +317,7 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.4</version>
 		</dependency>
-	    
+		
 	</dependencies>
 
 

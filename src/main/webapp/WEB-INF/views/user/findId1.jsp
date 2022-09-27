@@ -50,14 +50,14 @@
                     <h3>회원정보에 등록한 휴대전화로 인증</h3>
                     <P>회원정보에 등록한 휴대전화 번호와 입력한 휴대전화 번호가 같아야, 인증번호를 받을 수 있습니다.</P>
                 </div>
-                <form action="Findid" class="findid">
+                <form action="/user/find/id" method="POST" class="findid">
                     <div class="input_list">
                         <div class="inner-list">
                             <div class="la_input">
                                 <label for="userName" class="form-label">이름</label>
                                 <div class="input_group">
                                     <input type="text" class="form-control-sm" name="userName" id="userName" minlength="2" maxlength="15"
-                                        placeholder="김영희" aria-label="Recipient's username"
+                                        placeholder="김영희" 
                                         aria-describedby="button-addon2">
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                                     <label for="mobile" class="form-label">핸드폰번호</label>
                                     <div class="input-group putbtn">
                                         <input type="text" class="form-control" name="userPhone" id="user_phone"  minlength="10" maxlength="13"
-                                            placeholder=" ' - ' 제외하고 입력해주세요" aria-label="Recipient's username" aria-describedby="button-addon2" required>
+                                            placeholder=" ' - ' 제외하고 입력해주세요"  aria-describedby="button-addon2" required>
                                         <button class="btn btn-outline-secondary putbtn" type="button" id="phoneChk">코드전송</button>
                                     </div>
                                 </div>
@@ -87,7 +87,7 @@
                             </div>
                         </div>
 
-                        <input class="loginbtn" id='findId_next' onclick="findId_form()" type="submit" value="다음">
+                        <input class="loginbtn" id='findId_next' onsubmit="findId_form()" type="submit" value="다음">
 
                     </div>
                 </form>

@@ -11,7 +11,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.util.WebUtils;
 
 import com.weet.app.common.SharedScopeKeys;
-import com.weet.app.user.domain.TrainerVO;
+import com.weet.app.user.domain.UserVO;
 import com.weet.app.user.service.UserService;
 
 import lombok.NoArgsConstructor;
@@ -44,7 +44,7 @@ public class LogoutInterceptor implements HandlerInterceptor {
 		HttpSession session = req.getSession();
 
 		String sessionId = session.getId();
-		TrainerVO trainerVO = (TrainerVO) session.getAttribute(SharedScopeKeys.USER_KEY);
+		UserVO trainerVO = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_KEY);
 
 		session.invalidate();
 

@@ -12,9 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.weet.app.exception.DAOException;
 import com.weet.app.exception.ServiceException;
 import com.weet.app.user.domain.LoginDTO;
+import com.weet.app.user.domain.MemberVO;
 import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.TrainerVO;
 import com.weet.app.user.domain.UserDTO;
+import com.weet.app.user.domain.UserVO;
 import com.weet.app.user.mapper.UserMapper;
 
 import lombok.NoArgsConstructor;
@@ -125,5 +127,40 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException(e);
 		} // try-catch
 	} // modifyUserWithRememberMe
+
+	// =============== 추가한 코드 ================= // 
+	// 일반유저 등록
+	@Override
+	@Transactional
+	public boolean userJoin(UserDTO userDTO, MemberVO memberVO) throws ServiceException {
+		log.trace("userJoin({}, {}) invoked.", userDTO, memberVO);
+		
+		try {
+			if ( this.mapper.insertUser(userDTO) == 1 && this.mapper.insertMem(memberVO) == 1 ) return true;
+			
+			return false;
+		} catch(UncategorizedSQLException e) {	// RuntimeException, and related with Global Transaction
+			throw e;							
+		} catch(Exception e) {throw new ServiceException(e); } // try-catch
+	} // userJoin
+
+	// 로그인 토큰 업데이트
+	@Override
+	public void userTokenUpdate(MemberVO memberVO) throws ServiceException {
+		log.trace("userTokenUpdate({}) invoked.", memberVO);
+		
+		try { this.mapper.updateToken(memberVO); } 
+		catch(DAOException e) { throw new ServiceException(e); } // try-catch
+	} // userTokenUpdate
+
+
+	// 유저 프로필 조회
+	@Override
+	public UserVO getUserProfile(String userId) throws ServiceException {
+		log.trace("getUserProfile({}) invoked.", userId);
+		
+		try { return this.mapper.selectUserInfo(userId); } 
+		catch(DAOException e) { throw new ServiceException(e); } // try-catch
+	} // getUserProfile
 
 } // end class
