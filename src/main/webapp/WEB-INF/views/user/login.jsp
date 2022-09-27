@@ -57,7 +57,7 @@
                     </a>
                 </div>
                 <div class="btn">
-                    <a id="naverIdLogin_loginButton" href="javascript:void(0)" class="btn btn-primary naver" id="naverIdLogin_loginButton" role="button" aria-disabled="true">
+                    <a id="naverIdLogin_loginButton" href="/api/naver/oauth" class="btn btn-primary naver" id="naverIdLogin_loginButton" role="button" aria-disabled="true">
                         <div class="button-box">
                             <div class="login-icon naver"><img src="/resources/img/static/icon-naver-medium.svg" alt="네이버로 시작하기"></div>
                             <div class="login-text naver">네이버로 시작하기</div>
