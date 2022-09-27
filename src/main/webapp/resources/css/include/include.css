@@ -5,7 +5,6 @@ header {
     font-family: "ScoreDream";
     font-size: 17px;
     font-weight: 400;
-    line-height: 1.667;
     background-color: #fff;
     
     position: sticky;
@@ -63,7 +62,20 @@ button:focus {
 .nav-item {
     list-style-type: none;
 }
-
+.nav-shop {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 14px;
+	font-weight: 500;
+}
+.nav-shop span {
+	color: #2370DF;
+	font-size: 16px;
+}
+.nav-shop li {
+	margin-left: 15px;
+}
 .header_area .navbar .nav .nav-item .nav-link {
     text-transform: capitalize;
     color: #222;

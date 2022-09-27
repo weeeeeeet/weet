@@ -57,8 +57,8 @@
                         </colgroup>
                             <thead>
                                 <tr>
-                                    <th id="userName" vlaue="${_USER_.userId}" readonly></th>
-                                    <th id="userPhone" vlaue="${_USER_.userPhone}" readonly></th>
+                                    <th id="userName" value="${ param._USERID_ }" readonly></th>
+                                    <th id="userPhone" value="${ param._USERJOINTS_ }" readonly></th>
                                 </tr>
                             </tbody>
                         </table>

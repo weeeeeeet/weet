@@ -4,9 +4,11 @@ import java.util.Date;
 
 import com.weet.app.exception.ServiceException;
 import com.weet.app.user.domain.LoginDTO;
+import com.weet.app.user.domain.MemberVO;
 import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.TrainerVO;
 import com.weet.app.user.domain.UserDTO;
+import com.weet.app.user.domain.UserVO;
 
 public interface UserService {
 	
@@ -25,6 +27,15 @@ public interface UserService {
 
 	/// 아이디로 사용자를 조회하여 인증정보(TrainerVO) 변경
 	public abstract boolean modifyUserWithRememberMe(String userid, String rememberMe, Date rememberAge) throws ServiceException;
-	
 
+	// =============== 추가한 코드 ================= // 
+	// 회원가입 : 일반유저 등록
+	public abstract boolean userJoin(UserDTO userDTO, MemberVO memberVO) throws ServiceException;
+	
+	// 로그인 토큰 업데이트
+	public abstract void userTokenUpdate(MemberVO memberVO) throws ServiceException;
+	
+	// 유저 프로필 조회
+	public abstract UserVO getUserProfile(String userId) throws ServiceException;
+	
 } // end interface

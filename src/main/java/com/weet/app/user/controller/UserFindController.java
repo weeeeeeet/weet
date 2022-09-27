@@ -39,21 +39,21 @@ public class UserFindController {
 	
 	// 2. 아이디 찾기 
 	@PostMapping("/id")
-	@ResponseBody
-	public String findId(String userId, String userPhone, Model model, RedirectAttributes rttrs) throws ControllerException {
+	public String findId(String userName, String userPhone, Model model, RedirectAttributes rttrs) throws ControllerException {
 		log.trace("findId() invoked.");
 		
 		try {
 
-			UserVO vo = this.findservice.findId(userId, userPhone);
+			UserVO vo = this.findservice.findId(userName, userPhone);
 			log.info("\t + vo: {}", vo);
 
-			model.addAttribute("_USER_", vo);
+			rttrs.addAttribute("_USERID_", vo.getUserId());
+			rttrs.addAttribute("_USERJOINTS_", vo.getUserJoinTs());
 
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		}
-		return "redirect:/user/find/findId2";
+		return "redirect:/user/find/findingid";
 
 	} // findId
 	
