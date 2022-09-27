@@ -12,6 +12,7 @@ public class TrainerVO {		// T_TR
 	private String userCareer;		// 경력
 	private String userIntro;		// 소개
 	private Long userBiz;		// 사업자정보 
+//	private String RememverMe;
+//	private String REMEMBERAGE;
 
-	
 } // EmployeeVO
