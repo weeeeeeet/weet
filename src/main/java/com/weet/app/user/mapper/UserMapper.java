@@ -3,6 +3,7 @@ package com.weet.app.user.mapper;
 import java.util.Date;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.weet.app.exception.DAOException;
@@ -11,6 +12,7 @@ import com.weet.app.user.domain.MemberVO;
 import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.TrainerVO;
 import com.weet.app.user.domain.UserDTO;
+import com.weet.app.user.domain.UserVO;
 
 public interface UserMapper {
 	
@@ -27,6 +29,10 @@ public interface UserMapper {
 	public abstract Integer insertTr(TrainerDTO trainerDTO) throws DAOException;
 	
 	// ============ 추가한 코드 ============= //
+	// 유저 정보 조회
+	@Select("SELECT * FROM t_user WHERE user_id = #{userId}")
+	public abstract UserVO selectUserInfo(String userId) throws DAOException;
+	
 	// 회원가입 T_MEM 데이터 입력
 	@Insert("INSERT INTO t_mem (user_id, user_platform, user_id_token) "
 			+ "VALUES (#{userId}, #{userPlatform}, #{userIdToken})")

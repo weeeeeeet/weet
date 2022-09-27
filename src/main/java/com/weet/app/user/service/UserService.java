@@ -8,6 +8,7 @@ import com.weet.app.user.domain.MemberVO;
 import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.TrainerVO;
 import com.weet.app.user.domain.UserDTO;
+import com.weet.app.user.domain.UserVO;
 
 public interface UserService {
 	
@@ -33,4 +34,8 @@ public interface UserService {
 	
 	// 로그인 토큰 업데이트
 	public abstract void userTokenUpdate(MemberVO memberVO) throws ServiceException;
+	
+	// 유저 프로필 조회
+	public abstract UserVO getUserProfile(String userId) throws ServiceException;
+	
 } // end interface

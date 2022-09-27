@@ -16,6 +16,7 @@ import com.weet.app.user.domain.MemberVO;
 import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.TrainerVO;
 import com.weet.app.user.domain.UserDTO;
+import com.weet.app.user.domain.UserVO;
 import com.weet.app.user.mapper.UserMapper;
 
 import lombok.NoArgsConstructor;
@@ -151,5 +152,15 @@ public class UserServiceImpl implements UserService {
 		try { this.mapper.updateToken(memberVO); } 
 		catch(DAOException e) { throw new ServiceException(e); } // try-catch
 	} // userTokenUpdate
+
+
+	// 유저 프로필 조회
+	@Override
+	public UserVO getUserProfile(String userId) throws ServiceException {
+		log.trace("getUserProfile({}) invoked.", userId);
+		
+		try { return this.mapper.selectUserInfo(userId); } 
+		catch(DAOException e) { throw new ServiceException(e); } // try-catch
+	} // getUserProfile
 
 } // end class
