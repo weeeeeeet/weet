@@ -26,8 +26,11 @@
     <!-- jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
+    
     <!-- kakao js -->
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <!-- naver js -->
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
  	<!-- google id -->
 	<meta name ="google-signin-client_id" content="9667579877-f1vqr5748vk9uuv5bm6nel4gbpr8mi7a.apps.googleusercontent.com">
      <!-- #### style ####-->
@@ -62,8 +65,8 @@
 							<script type="text/javascript">
 							
 							    var naverLogin = new naver.LoginWithNaverId({
-							                clientId: "fIFa3pQsuGQOTwV5vGos", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
-										    callbackUrl: "http://localhost:8080/user/login", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
+							                clientId: "PLyelPT7z3J8x6YB1Vx6", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
+										    callbackUrl: "http://localhost:8080/user/naver/login", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
 							                isPopup: false
 							     });	
 							    

@@ -57,6 +57,15 @@ public class UserController {
 		
 		return "/user/login";
 	} // loginPage
+	
+	// 1. user Login	
+	@GetMapping("/naver/login")
+	public String naverLogin(String accessToken, String state) {
+		log.trace("naverLogin({}, {}) invoked.", accessToken, state);
+
+
+		return "/user/naverLogin";
+	} // loginPage
 
 	// 2. TR 로그인화면
 	@GetMapping("/tr/login")
