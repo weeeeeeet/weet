@@ -7,7 +7,7 @@
 
 	<!-- ================ 아이디 중복 체크 ================ -->
 	<select id="selectId" parameterType="com.weet.app.user.domain.TrainerVO" resultType="java.lang.Integer">
-		SELECT COUNT(user_id) FROM t_tr WHERE user_id= #{user_id}
+		SELECT COUNT(user_id) FROM t_user WHERE user_id= #{user_id}
 	</select>
 
 
