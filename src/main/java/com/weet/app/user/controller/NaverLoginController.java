@@ -33,8 +33,8 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class NaverLoginController {
 	
-	private static final String CLIENT_ID = "PLyelPT7z3J8x6YB1Vx6";		//애플리케이션 클라이언트 아이디값"
-	private static final String CLIENT_SECRET = "cgBejgC5EG";		//애플리케이션 클라이언트 아이디값"
+	private static final String CLIENT_ID = "PLyelPT7z3J8x6YB1Vx6";		//애플리케이션 클라이언트 아이디"
+	private static final String CLIENT_SECRET = "cgBejgC5EG";		//애플리케이션 클라이언트 시크릿"
 	
 	@Setter(onMethod_= @Autowired)
 	private UserService userService;
