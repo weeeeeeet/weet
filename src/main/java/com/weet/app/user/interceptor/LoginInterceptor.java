@@ -52,13 +52,13 @@ public class LoginInterceptor implements HandlerInterceptor {
 		log.info("\t+ Current Session: {}", session.getId());
 		
 		// Step.2 Session Scope에 TrainerVO 객체가 공유되어 있다면 삭제처리
-		UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.USER_KEY);
+		UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_KEY);
 		log.info("\t+ 2. TrainerVO: {}", vo);
 		
 		log.info("");
 		
 		if(vo != null) { // Session Scope에 UserVO 객체가 있다 => 이미 로그인 되어있는 상태
-			session.removeAttribute(SharedScopeKeys.USER_KEY);
+			session.removeAttribute(SharedScopeKeys.LOGIN_KEY);
 			log.info("\t+ Removed UserVO: {}", vo);
 		} else {
 			log.info("\t+ No UserVO found in the Session Scope.");
