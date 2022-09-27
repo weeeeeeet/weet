@@ -19,7 +19,7 @@ public interface MypageMapper {
 	// ====================================================================
 	// 1. 전체 게시물 조회 (OK)
 	// ====================================================================
-	public abstract List<MypageBoardVO> selectListWithPaging(Criteria cri, @Param("userId")String userId) throws DAOException;
+	public abstract List<MypageBoardVO> selectListWithPaging(@Param("cri")Criteria cri, @Param("userId")String userId) throws DAOException;
 	
 	// ====================================================================
 	// + 페이징 처리에 필요한 총 게시물의 수 반환 (OK)
@@ -30,7 +30,7 @@ public interface MypageMapper {
 	// ====================================================================
 	// 2. 답변완료 게시물 조회 (OK)
 	// ====================================================================
-	public abstract List<MypageBoardVO> selectReplyDoneList(Criteria cri, @Param("userId")String userId) throws DAOException;
+	public abstract List<MypageBoardVO> selectReplyDoneList(@Param("cri")Criteria cri, @Param("userId")String userId) throws DAOException;
 	
 	// ====================================================================
 	// + 페이징 처리에 필요한 총 답변완료 게시물의 수 반환 (OK)
@@ -41,7 +41,7 @@ public interface MypageMapper {
 	// ====================================================================
 	// 3. 좋아요 게시물 조회 (OK)
 	// ====================================================================
-	public abstract List<MypageBoardVO> selectLikeList(Criteria cri, @Param("userId")String userId) throws DAOException;
+	public abstract List<MypageBoardVO> selectLikeList(@Param("cri")Criteria cri, @Param("userId")String userId) throws DAOException;
 	
 	// ====================================================================
 	// + 페이징 처리에 필요한 총 좋아요 게시물의 수 반환 (OK)
@@ -52,7 +52,7 @@ public interface MypageMapper {
 	// ====================================================================
 	// 4. 댓글 조회 (OK)
 	// ====================================================================
-	public abstract List<MypageReplyVO> selectReplyList(Criteria cri, @Param("userId")String userId) throws DAOException;
+	public abstract List<MypageReplyVO> selectReplyList(@Param("cri")Criteria cri, @Param("userId")String userId) throws DAOException;
 	
 	// ====================================================================
 	// + 페이징 처리에 필요한 총 댓글의 수 반환 (OK)
@@ -63,7 +63,7 @@ public interface MypageMapper {
 	// ====================================================================
 	// 5. 내 수강 중 클래스룸
 	// ====================================================================
-	public abstract List<MypageClassVO> selectClass(Criteria cri, @Param("userId")String userId) throws DAOException;
+	public abstract List<MypageClassVO> selectClass(@Param("cri")Criteria cri, @Param("userId")String userId) throws DAOException;
 	
 	// ====================================================================
 	// + 페이징 처리에 필요한 총 수강 중 클래스의 수 반환 (OK)
@@ -74,7 +74,7 @@ public interface MypageMapper {
 	// ====================================================================
 	// 6. 수강 종료 클래스룸 ( 페이지는 보입니다. )
 	// ====================================================================
-	public abstract List<MypageClassVO> selectDoneClass(Criteria cri, @Param("userId")String userId) throws DAOException;
+	public abstract List<MypageClassVO> selectDoneClass(@Param("cri")Criteria cri, @Param("userId")String userId) throws DAOException;
 	
 	// ====================================================================
 	// + 페이징 처리에 필요한 총 수강 중 클래스의 수 반환 (OK)
