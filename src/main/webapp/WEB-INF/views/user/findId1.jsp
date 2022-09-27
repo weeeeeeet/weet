@@ -87,7 +87,7 @@
                             </div>
                         </div>
 
-                        <input class="loginbtn" id='findId_next' onclick="findId_form()" type="submit" value="다음">
+                        <input class="loginbtn" id='findId_next' onsubmit="findId_form()" type="submit" value="다음">
 
                     </div>
                 </form>
