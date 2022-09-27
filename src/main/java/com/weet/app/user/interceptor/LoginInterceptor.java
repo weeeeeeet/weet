@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.weet.app.common.SharedScopeKeys;
 import com.weet.app.user.domain.TrainerVO;
+import com.weet.app.user.domain.UserVO;
 import com.weet.app.user.service.UserService;
 
 import lombok.NoArgsConstructor;
@@ -51,13 +52,13 @@ public class LoginInterceptor implements HandlerInterceptor {
 		log.info("\t+ Current Session: {}", session.getId());
 		
 		// Step.2 Session Scope에 TrainerVO 객체가 공유되어 있다면 삭제처리
-		TrainerVO vo = (TrainerVO) session.getAttribute(SharedScopeKeys.USER_KEY);
+		UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_KEY);
 		log.info("\t+ 2. TrainerVO: {}", vo);
 		
 		log.info("");
 		
 		if(vo != null) { // Session Scope에 UserVO 객체가 있다 => 이미 로그인 되어있는 상태
-			session.removeAttribute(SharedScopeKeys.USER_KEY);
+			session.removeAttribute(SharedScopeKeys.LOGIN_KEY);
 			log.info("\t+ Removed UserVO: {}", vo);
 		} else {
 			log.info("\t+ No UserVO found in the Session Scope.");
@@ -79,7 +80,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 		// Step.1 ModelAndView 객체 안에, TrainerVO 가 있는지 확인
 		ModelMap modelMap = modelAndView.getModelMap();
-		TrainerVO trainerVO = (TrainerVO) modelMap.get(SharedScopeKeys.LOGIN_KEY);
+		UserVO trainerVO = (UserVO) modelMap.get(SharedScopeKeys.LOGIN_KEY);
 		
 		// Step.2 TrainerVO 가 있다면(로그인 성공했다면..), 
 		//        Session Scope에 UserVO를 올려 놓자!!!(로그인 성공 증빙)
@@ -89,7 +90,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			// =============================================================== //
 			// (1) Session Scope 에 인증정보로 UserVO 객체 바인딩
 			// =============================================================== //
-			session.setAttribute(SharedScopeKeys.USER_KEY, trainerVO);
+			session.setAttribute(SharedScopeKeys.LOGIN_KEY, trainerVO);
 	
 			// =============================================================== //
 			// (2) ** 자동로그인(Remember-Me) 기능 구현 **
@@ -124,6 +125,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 				boolean isUpdated = this.service.modifyUserWithRememberMe(trainerVO.getUserId(), rememberMeCookie.getValue(), expireTS);
 				log.info("\t+ isUpdated: {}", isUpdated);				
 			} // if : 자동로그인 기능적용
+			
+			res.sendRedirect("/");
 		} // if : 로그인 성공했다면...
 	} // postHandle
 			

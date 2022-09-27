@@ -57,7 +57,7 @@ public class UserController {
 		
 		return "/user/login";
 	} // loginPage
-
+	
 	// 2. TR 로그인화면
 	@GetMapping("/tr/login")
 	public String trainerLoginPage() {
@@ -85,7 +85,8 @@ public class UserController {
 		TrainerVO trainer = this.service.login(dto);	// To check the user.
 		
 		if(trainer != null) {							// if the check succeeded.
-			model.addAttribute(loginKey, trainer);		// To bind login attribute to the request scope.
+			
+			model.addAttribute(loginKey, this.service.getUserProfile(trainer.getUserId()));		// To bind login attribute to the request scope.
 			
 			// 2. If rememberMe on, process Remember-Me option.
 			if(dto.isRememberMe()) {
@@ -207,6 +208,7 @@ public class UserController {
 			this.service.modifyUserWithRememberMe(userId, null, null);
 		} // if
 		
+		res.sendRedirect("/user/login");
 		// 5. To redirect into the login form.
 		return "redirect:/user/login";
 	} // logout
