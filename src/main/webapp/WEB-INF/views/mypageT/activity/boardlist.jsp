@@ -41,7 +41,7 @@
 
                 // form태그 직접 조작 및 전송
                 let formObj = $('#pagenationForm');
-                formObj.attr('action', '/mypage/activity/boardlist');
+                formObj.attr('action', '/mypageT/activity/boardlist');
                 formObj.attr('method', 'GET');
 
                 console.clear();
@@ -175,7 +175,7 @@
                             <li> 
                             <!-- Userid 세션에서 받아 오는 것으로 수정해야 된다!!(********) -->
                                 <a 
-                                    href="/mypage/activity/boardlist?userId=user2&currPage=${pageNum}" 
+                                    href="/mypageT/activity/boardlist?userId=user2&currPage=${pageNum}" 
                                     class="${pageNum == __PAGENATION__.cri.currPage ? 'currPage' : '' }" > 
     
                                     <strong>${pageNum}</strong>

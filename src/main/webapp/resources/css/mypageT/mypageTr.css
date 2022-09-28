@@ -126,13 +126,15 @@ section{
     border-top: 1px solid black;
 }
 
-/* 컨텐츠 영역의 오른쪽 부분 정리 ( 수정!!! ) */
+/* 여기서 부터 컨텐트 라이트!!!!!(***********) */
+
+/* 컨텐츠 영역의 오른쪽 부분 정리 ( 수정됨!!!!!!! ) */
 .content .content_right {
     margin: 50px 20px 0px 310px;
     padding-left: 50px;
     /* border: 1px solid blue; */
 
-    float: right;
+    /* float: right; */
 }
 
 /* 컨텐츠 영역의 오른쪽 영역의 위 목록을 감싸는 div css속성 지정 */
@@ -151,7 +153,7 @@ section{
     margin-top: 15px;
 }
 
-/* 컨텐츠 영역 - 오른쪽 영역 - TR게시판 / 좋아요 / 댓글 목록 ul - li */
+/* 컨텐츠 영역 - 오른쪽 영역 - TR게시판 / 좋아요 / 댓글 목록 ul - li ( 수정!!!!!!!) */
 .content .content_right .mypage_toplist li {
     margin-left: 70px;
     float: left;
@@ -159,7 +161,7 @@ section{
 
 /* 컨텐츠 영역 - 오른쪽 영역 - TR게시판 / 좋아요 / 댓글 목록 ul - li - a */
 .content .content_right .mypage_toplist a {
-    font-weight: 450;
+    font-weight: bold;
     font-size: 14px;
     color: #6A6A6A;
 }
@@ -175,6 +177,7 @@ section{
 
 /* 컨텐츠 영역 - 오른쪽 영역 - 전체 / 답변완료 탭 - 위쪽 영역과 아래쪽 영역 공백 넣기 */
 .mypage_top_tabs{
+	
     padding-top: 20px;
     padding-bottom: 20px;
 }
@@ -334,7 +337,7 @@ section{
 
  /* + 페이지 번호 목록 (***) */
 #pagenation{
-    margin-left: 270px;
+    margin-left: 250px;
 }
 
 #pagenation ul {
@@ -351,7 +354,7 @@ section{
     text-align: center;
     /* 세로 중앙 정렬 */
     line-height: 30px;
-    
+
     width: 30px;
     height: 30px;
 }
