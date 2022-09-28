@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.weet.app.exception.DAOException;
 import com.weet.app.exception.ServiceException;
 import com.weet.app.user.domain.LoginDTO;
-import com.weet.app.user.domain.MemberVO;
+import com.weet.app.user.domain.MemberDTO;
 import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.TrainerVO;
 import com.weet.app.user.domain.UserDTO;
@@ -132,11 +132,11 @@ public class UserServiceImpl implements UserService {
 	// 일반유저 등록
 	@Override
 	@Transactional
-	public boolean userJoin(UserDTO userDTO, MemberVO memberVO) throws ServiceException {
-		log.trace("userJoin({}, {}) invoked.", userDTO, memberVO);
+	public boolean userJoin(UserDTO userDTO, MemberDTO memberDTO) throws ServiceException {
+		log.trace("userJoin({}, {}) invoked.", userDTO, memberDTO);
 		
 		try {
-			if ( this.mapper.insertUser(userDTO) == 1 && this.mapper.insertMem(memberVO) == 1 ) return true;
+			if ( this.mapper.insertUser(userDTO) == 1 && this.mapper.insertMem(memberDTO) == 1 ) return true;
 			
 			return false;
 		} catch(UncategorizedSQLException e) {	// RuntimeException, and related with Global Transaction
@@ -146,10 +146,10 @@ public class UserServiceImpl implements UserService {
 
 	// 로그인 토큰 업데이트
 	@Override
-	public void userTokenUpdate(MemberVO memberVO) throws ServiceException {
-		log.trace("userTokenUpdate({}) invoked.", memberVO);
+	public void userTokenUpdate(MemberDTO memberDTO) throws ServiceException {
+		log.trace("userTokenUpdate({}) invoked.", memberDTO);
 		
-		try { this.mapper.updateToken(memberVO); } 
+		try { this.mapper.updateToken(memberDTO); } 
 		catch(DAOException e) { throw new ServiceException(e); } // try-catch
 	} // userTokenUpdate
 
