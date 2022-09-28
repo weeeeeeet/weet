@@ -145,7 +145,7 @@ public class UserServiceImpl implements UserService {
 	public String getKaKaoAccessToken(String code) throws ServiceException {
         String access_Token="";
         String refresh_Token ="";
-        String reqURL = " 		";
+        String reqURL = "https://kauth.kakao.com/oauth/token";
 
         try{
             URL url = new URL(reqURL);

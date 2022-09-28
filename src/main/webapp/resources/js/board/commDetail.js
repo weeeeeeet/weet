@@ -129,15 +129,21 @@ const getReReply = (replyId) => {
 			closeReReply(replyId);
 
             const replyData = data.data.result;
-			let str = ''
+			let str = '';
+			let id = '';
 			
             if(replyData.length > 0) {
 	
+	
 	            $.each(replyData, (i, e) => {
+					if(e.trainerId.length <= 10) {
+						id = maskingId(e.trainerId)
+					}// if
+					
 	                str += '<div class="item re-reply-area">'
 	                    + '<div class="reply-header">'
 	                    + '<div class="user-profile">'
-	                    + '<p>' + e.trainerNickname + ' <span>' + maskingId(e.trainerId) + '</span></p>'
+	                    + '<p>' + e.trainerNickname + ' <span>' + id + '</span></p>'
 	                    + '<p>' + e.replyInsertTs + '</p></div></div>'
 	                    + '<p>' + e.replyContents + '</p></div><hr>';
 	
