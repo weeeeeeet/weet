@@ -28,7 +28,7 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class TrainerDashboardController {
 	
-	// 비지니스계층의 빈(bean) 주입
+	// 비지니스계층의 빈(bean) 주입_
 		@Setter(onMethod_= {@Autowired})
 		private NoticeService noticeService;
 		
