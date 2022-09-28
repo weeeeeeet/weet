@@ -1,25 +1,15 @@
 @charset "UTF-8";
 
-* {
-    margin: 0;
-    padding: 0;
-    font-family: 'SCoreDream';
-    box-sizing: border-box;
-}
-
-ul, ol{
-    list-style: none;
-}
-
-a {
-    text-decoration: none;
-}
-
 /* content ================================ */
 
 /* 컨텐츠 영역에 양쪽 200px씩 여백주기 */
 .content{
     margin: 20px 200px 0px;
+    width: 1040px;
+
+    height: 600px;
+
+    width :calc(100% - 400px);
 }
 
 /* 컨텐츠 영역의 왼쪽 가로 길이 잡아주기 */
@@ -111,7 +101,7 @@ a {
 
 /* 컨텐츠 영역의 왼쪽 목록의 li태그들의 css속성 지정 */
 .content .content_left .mypage_list ul a {
-    font-weight: 450;
+    font-weight: bold;
     font-size: 14px;
     color: #000000;
 }
@@ -136,13 +126,14 @@ a {
     border-top: 1px solid black;
 }
 
-/* 컨텐츠 영역의 오른쪽 부분 정리 */
+/* 컨텐츠 영역의 오른쪽 부분 정리 ( 수정됨!!!) */
 .content .content_right {
-    margin: 20px 20px 0px 0px;
+    margin: 50px 20px 0px 310px;
+    width: 900px;
     padding-left: 50px;
     /* border: 1px solid blue; */
 
-    float: right;
+    /* float: right; */
 }
 
 /* 컨텐츠 영역의 오른쪽 영역의 위 목록을 감싸는 div css속성 지정 */
@@ -192,7 +183,7 @@ a {
     margin-left: 10px;
 }
 
-/* 클래스 카드 위치 및 크기 지정 */
+/* 클래스 카드 위치 및 크기 지정 ( 수정 *************** ) */
 .content_right .class_card{
     margin-left: 20px;
     margin-right: 20px;
@@ -201,7 +192,7 @@ a {
     width: 230px;
 }
 
-/* 클래스 카드 이미지 */
+/* 클래스 카드 이미지  */
 .content_right .class_card .card_img{
     width: 230px;
     height: 125px;
@@ -219,21 +210,41 @@ a {
     color: black;
 }
 
-/* 탑 버튼 */
-.TOP_btn{
-    width: 40px;
-    height: 40px;
-    border: 1px solid #A7A7A7;
-    border-radius: 8px;
+ /* + 페이지 번호 목록 (***) */
+#pagenation{
+    margin-left: 250px;
+}
 
-    padding-left: 2px;
+#pagenation ul {
+	
+	width: 400px;
 
-    font-size: 13px;
-    font-weight: bold;
-    color: #A7A7A7;
+}
+
+#pagenation li {
+    float: left;
+	display: inline-block;
+    list-style: none;
+    /* 가로 중앙 정렬 */
     text-align: center;
+    /* 세로 중앙 정렬 */
+    line-height: 30px;
 
-    position: fixed;
-    bottom: 300px;
-    right: 250px;
+    width: 30px;
+    height: 30px;
+}
+
+.prev, .next{
+	display: inline-block;
+    /* !important는 무조건 이것을 적용하라는 의미 */
+    width: 70px !important;
+
+    color: white !important;
+    background-color: darkgray !important;
+}
+
+/* 현재 페이지는 다르게 나오게 하기 */
+
+.currPage{
+    color: red;
 }
