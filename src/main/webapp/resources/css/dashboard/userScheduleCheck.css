@@ -70,9 +70,32 @@ section div.myScheduleTitle h2 { /*내 스케쥴 확인 타이틀*/
 }
 
 .ScheduleBoard {    /* 스케쥴 타임라인 여백*/
-    margin-top: 160px;
-    margin-left: 50px;
+    margin-top: 50px;
+    margin-left: 20px;
     margin-right: 50px;
+}
+/* 스크롤 */
+
+.ScheduleScroll{
+    overflow: auto;
+    overflow-x: hidden;
+    height: 600px; /* 박스 높이 */ 
+    padding-bottom: 20px;
+    font-size: 14px;/* 리스트 폰트 사이즈 */
+}
+.ScheduleScroll::-webkit-scrollbar { /*공지사항 리스트 스크롤 너비*/
+    width: 12px;
+}
+.ScheduleScroll::-webkit-scrollbar-thumb { /*공지사항 리스트 스크롤 막대*/
+    background-color: #95B4E0;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+.ScheduleScroll::-webkit-scrollbar-track { /*공지사항 리스트 스크롤 여백*/
+    background-color: rgb(224, 224, 224);
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
 }
 
 /* ----------codepen-------------------------------------------------------------- */
@@ -254,4 +277,8 @@ transition: color 0.3s linear 0.3s;
         display: none;
     }
 } /* @media */
-  
+
+/* 시간 */
+.time{
+    margin-left: 4px;
+}
