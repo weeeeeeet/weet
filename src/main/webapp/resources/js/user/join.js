@@ -7,6 +7,7 @@
 function joinform_check() {
     //변수에 담아주기
     let id = document.getElementById("user_id");
+    let userNickname = document.getElementById("user_nickname");
     let pwd = document.getElementById("user_pwd");
     let pwd2 = document.getElementById("user_pwd2");
     let pwdCheck = document.getElementById("pwdCheck");
@@ -31,6 +32,12 @@ function joinform_check() {
       return false; //return: 반환하다 return false:  아무것도 반환하지 말아라 아래 코드부터 아무것도 진행하지 말것
     };
 
+	// 아이디 입력 확인
+    if (userNickname.value == "") { 
+      alert("닉네임을 입력하세요.");
+      userNickname.focus(); 
+      return false; 
+    };
 
 	// 비밀번호 입력 확인
     if (pwd.value == "") {
