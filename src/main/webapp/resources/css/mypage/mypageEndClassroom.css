@@ -159,8 +159,8 @@
 
 /* 클래스 카드 위치 및 크기 지정 ( 수정 *************** ) */
 .content_right .class_card{
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
     float: left;
 
     width: 230px;
@@ -172,12 +172,12 @@
     height: 125px;
 }
 
-/* 클래스 카드 - 클래스 제목 */
+/* 클래스 카드 - 클래스 제목 ( 수정!!! ) */
 .content_right .class_card .card-text{
     display: inline-block;
     margin-top: 10px;
     width: 100%;
-    height: 50px;
+    height: 30px;
 
     text-align: center;
     font-weight: bold;
@@ -196,7 +196,7 @@
     background-color: #2370DF;
 
     float: right;
-    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 /* 모달창 ================================ */

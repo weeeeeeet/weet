@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.weet.app.mypage.mapper.MypageTMapper">
+    
+    <!-- 페이징 처리 : 전체 게시판 조회 (*****) -->
+    <select 
+        id="selectListWithPaging" 
+        resultType="com.weet.app.mypage.domain.MypageBoardVO">
+    
+        SELECT
+            /*+ INDEX_DESC(T_COMMUNITY) */
+            
+            comm_id,
+            user_id,
+            comm_post_title,
+            comm_like_num,
+            comm_reply_count,
+            comm_post_insert_ts
+            
+        FROM
+            T_COMMUNITY
+        WHERE
+        	USER_ID = #{userId}
+        OFFSET (#{cri.currPage} - 1) * #{cri.amount} ROWS
+        FETCH NEXT #{cri.amount} ROWS ONLY
+    
+    </select>
+
+    <!-- 답변 완료 게시판 조회 (*****) -->
+    <select 
+        id="selectReplyDoneList" 
+        resultType="com.weet.app.mypage.domain.MypageBoardVO">
+    
+        SELECT
+
+            /*+ INDEX_DESC(T_COMMUNITY) */
+            
+            comm_id,
+            user_id,
+            comm_post_title,
+            comm_like_num,
+            comm_reply_count,
+            comm_post_insert_ts
+            
+        FROM
+            T_COMMUNITY
+        WHERE
+        	USER_ID = #{userId}
+        AND COMM_REPLY_YN = 'Y'
+
+        OFFSET (#{cri.currPage} - 1) * #{cri.amount} ROWS
+        FETCH NEXT #{cri.amount} ROWS ONLY
+    
+    </select>
+
+    <!-- 좋아요 게시판 조회 -->
+    <select 
+        id="selectLikeList" 
+        resultType="com.weet.app.mypage.domain.MypageBoardVO">
+    
+        SELECT
+            
+            c.comm_id,
+            t.user_id,
+            c.comm_post_title,
+            c.comm_like_num,
+            c.comm_reply_count,
+            c.comm_post_insert_ts
+            
+        FROM
+            T_Like_Board t, T_COMMUNITY c
+        WHERE
+            t.comm_id = c.comm_id
+        AND t.user_id = #{userId}
+
+        OFFSET (#{cri.currPage} - 1) * #{cri.amount} ROWS
+        FETCH NEXT #{cri.amount} ROWS ONLY
+    
+    </select>
+
+    <!-- 댓글 조회 -->
+    <select 
+        id="selectReplyList" 
+        resultType="com.weet.app.mypage.domain.MypageReplyVO">
+    
+        SELECT
+
+            /*+ INDEX_DESC(T_REPLY) */
+            
+            reply_id,
+            comm_id,
+            user_id,
+            reply_contents,
+            reply_update_ts
+            
+        FROM
+            T_REPLY
+        WHERE
+        	USER_ID = #{userId}
+
+        OFFSET (#{cri.currPage} - 1) * #{cri.amount} ROWS
+        FETCH NEXT #{cri.amount} ROWS ONLY
+    
+    </select>
+
+    <!-- 수강중인 클래스 조회 -->
+    <select 
+        id="selectClass" 
+        resultType="com.weet.app.mypage.domain.MypageClassVO">
+    
+        SELECT
+
+            /*+ INDEX_DESC(T_CLASS) */
+            
+            t.class_id,
+            t.user_id,
+            t.class_trainer_name,
+            t.class_title,
+            t.CLASS_MAIN_IMG_URL
+            
+        FROM
+            T_CLASS t, t_class_listener ls
+        WHERE
+            t.class_id = ls.class_id
+        	AND t.USER_ID = #{userId}
+        	AND ls.STATUS = '0'
+
+        OFFSET (#{cri.currPage} - 1) * #{cri.amount} ROWS
+        FETCH NEXT #{cri.amount} ROWS ONLY
+    
+    </select>
+
+    <!-- 수강 종료 클래스 조회 -->
+    <select 
+        id="selectDoneClass" 
+        resultType="com.weet.app.mypage.domain.MypageClassVO">
+
+        <![CDATA[
+
+            SELECT
+
+                /*+ INDEX_DESC(T_CLASS) */
+                
+                t.class_id,
+	            t.user_id,
+	            t.class_trainer_name,
+	            t.class_title,
+	            t.CLASS_MAIN_IMG_URL
+                
+            FROM
+                T_CLASS t, t_class_listener ls
+            WHERE
+                t.class_id = ls.class_id
+                AND t.USER_ID = #{userId}
+                AND ls.STATUS = '1'
+
+            OFFSET (#{cri.currPage} - 1) * #{cri.amount} ROWS
+            FETCH NEXT #{cri.amount} ROWS ONLY
+        
+        ]]>
+    
+    </select>
+
+    <!-- 수강 종료 클래스 조회 - 페이징 -->
+    <select 
+        id="selectDoneClassAmount" 
+        resultType="Integer">
+
+        <![CDATA[
+
+            SELECT
+                count(CLASS_LISTENER)
+            FROM
+                T_CLASS t, t_class_listener ls
+            WHERE
+                t.class_id = ls.class_id
+                AND ls.USER_ID = #{userId}
+                AND ls.STATUS = '1'
+
+        ]]>
+    
+    </select>
+    
+    <!-- 클래스 검수 조회 -->
+    <select 
+        id="selectLikeClass" 
+        resultType="com.weet.app.mypage.domain.MypageCheckClassVO">
+
+        <![CDATA[
+
+            SELECT
+
+                /*+ INDEX_DESC(T_CLASS) */
+                
+                CLASS_ID,
+                USER_ID,
+                CLASS_TRAINER_NAME,
+                CLASS_TITLE,
+                CLASS_MAIN_IMG_URL,
+                CLASS_REGISTER_STATUS,
+                CLASS_TYPE,
+                CLASS_RECRUIT_START_DATE,
+                CLASS_RECRUIT_END_DATE,
+                CLASS_FEE,
+                CLASS_RECRUIT_MAX_NUM
+                
+            FROM
+                T_CLASS
+            WHERE
+                USER_ID = #{userId}
+
+        ]]>
+    
+    </select>
+    
+    <!-- 마이바디 조회 -->
+    <select 
+        id="selectMyBody" 
+        resultType="com.weet.app.mypage.domain.MypageBodyDTO">
+
+        <![CDATA[
+
+            SELECT
+
+                /*+ INDEX_ASC(T_BODY) */
+                
+                body_id,
+                user_id,
+                BODY_WEIGHT,
+                BODY_MUSCLE,
+                BODY_FAT_PCT,
+                TO_CHAR(BODY_DATE, 'YY.MM.DD')
+                
+            FROM
+                T_BODY
+            WHERE
+                USER_ID = #{userId}
+            FETCH FIRST 5 ROWS ONLY
+
+        ]]>
+    
+    </select>
+    
+    <!-- 마이바디 등록 -->
+    <insert id="insertMyBody">
+
+        INSERT INTO T_BODY ( BODY_ID, USER_ID, BODY_WEIGHT, BODY_MUSCLE, BODY_FAT_PCT, BODY_DATE )
+        VALUES( BODY_SEQ.NEXTVAL ,#{userId}, #{bodyWeight}, #{bodyMuscle}, #{bodyFatPct}, to_date(#{bodyDate},'yyyy/mm/dd') )
+
+    </insert>
+    
+    <!-- 마이바디 수정 -->
+    <update id="updateMyBody">
+        UPDATE T_BODY
+        SET BODY_WEIGHT = #{bodyWeight}, BODY_MUSCLE = #{bodyMuscle}, BODY_FAT_PCT = #{bodyFatPct}
+        WHERE BODY_DATE = to_date(#{bodyDate},'yyyy/mm/dd') AND USER_ID = #{userId}
+    </update>
+
+    <!-- 마이바디 날짜선택 조회 -->
+    <select 
+        id="selectMyBodyDate" 
+        resultType="com.weet.app.mypage.domain.MypageBodyDTO">
+
+        <![CDATA[
+
+            SELECT
+
+                /*+ INDEX_ASC(T_BODY) */
+                
+                body_id,
+                user_id,
+                BODY_WEIGHT,
+                BODY_MUSCLE,
+                BODY_FAT_PCT,
+                TO_CHAR(BODY_DATE, 'YY.MM.DD')
+                
+            FROM
+                T_BODY
+            WHERE
+                USER_ID = #{userId}
+                AND TO_Date(TO_CHAR(BODY_DATE, 'YY.MM.DD'), 'YY.MM.DD') <= TO_Date(#{bodyDate}, 'YY.MM.DD')
+            FETCH FIRST 5 ROWS ONLY
+
+        ]]>
+    
+    </select>
+
+</mapper>
