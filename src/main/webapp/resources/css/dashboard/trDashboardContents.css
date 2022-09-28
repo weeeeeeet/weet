@@ -101,18 +101,7 @@ section div.notice-content-dash h2 {   /*공지사항 컨텐츠 타이틀*/
 .c_contents_box {
     margin-left: 52px;
 }
-.contents_ctitle {
-    display: inline-flex;
-}
 
-.contents_cdate {
-    display: inline-flex;
-    color: #a7a7a7;
-}
-
-.c_contents {
-    margin-top: 50px;
-}
 
 /*버튼 ================================== */
 
