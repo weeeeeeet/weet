@@ -98,7 +98,7 @@
 
                 <ul class="mypage_list_bottom">
                     <li><a href="/mypage/pay/paylist?userId=${ __LOGIN__.userId }">구매 내역</a></li>
-                    <li><a href="#">고객센터</a></li>
+                    <li><a href="/help/inquiry">고객센터</a></li>
                 </ul>
 
             </div>

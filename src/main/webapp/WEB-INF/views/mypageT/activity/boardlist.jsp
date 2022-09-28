@@ -92,13 +92,13 @@
                 <!-- 왼쪽 목록 -->
 
                 <ul class="mypage_list_top">
-                    <li><a href="/mypageT/activity/boardlist" class="on">내 활동</a></li>
-                    <li><a href="/mypageT/class/my">내 클래스룸</a></li>
-                    <li><a href="/mypageT/mybody">MY BODY</a></li>
+                    <li><a href="/mypageT/activity/boardlist?userId=tr1" class="on">내 활동</a></li>
+                    <li><a href="/mypageT/class/my?userId=tr1">내 클래스룸</a></li>
+                    <li><a href="/mypageT/mybody?userId=tr1">MY BODY</a></li>
                 </ul>
 
                 <ul class="mypage_list_bottom">
-                    <li><a href="/mypageT/pay/paylist">구매 내역</a></li>
+                    <li><a href="/mypageT/pay/paylist?userId=tr1">구매 내역</a></li>
                     <li><a href="#">고객센터</a></li>
                 </ul>
 
@@ -112,9 +112,9 @@
             <div class="mypage_top">
 
                 <ul class="mypage_toplist">
-                    <li><a href="/mypageT/activity/boardlist" class="on">TR 게시판</a></li>
-                    <li><a href="/mypageT/activity/boardlike">좋아요</a></li>
-                    <li><a href="/mypageT/activity/boardreplye">댓글</a></li>
+                    <li><a href="/mypageT/activity/boardlist?userId=tr1" class="on">TR 게시판</a></li>
+                    <li><a href="/mypageT/activity/boardlike?userId=tr1">좋아요</a></li>
+                    <li><a href="/mypageT/activity/boardreplye?userId=tr1">댓글</a></li>
                 </ul>
 
             </div>
@@ -122,8 +122,8 @@
             <div>
 
                 <ul class="mypage_top_tabs">
-                    <li><a href="/mypageT/activity/boardlist" class="on"><span class="on2"></span> 전체</a></li>
-                    <li><a href="/mypageT/activity/boardreplydone"><span></span> 답변 완료</a></li>
+                    <li><a href="/mypageT/activity/boardlist?userId=tr1" class="on"><span class="on2"></span> 전체</a></li>
+                    <li><a href="/mypageT/activity/boardreplydone?userId=tr1"><span></span> 답변 완료</a></li>
                 </ul>
 
             </div>
