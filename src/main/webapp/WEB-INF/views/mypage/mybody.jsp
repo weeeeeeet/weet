@@ -273,7 +273,7 @@
                     <!-- 어디로 데이터를 보낼지 작성해야 한다. -->
                     <form action="/mypage/mybody/input" method="post" id="bodyInputForm">
 
-                        <input type="hidden" name="userId" value="user2">
+                        <input type="hidden" name="userId" value="${ __LOGIN__.userId }">
 
                         <!-- 날짜 -->
                         <div class="modal_mybody_date">
@@ -334,7 +334,7 @@
                         <!-- 어디로 데이터를 보낼지 작성해야 한다. -->
                         <form action="/mypage/mybody/update" method="post" id="bodyUpdateForm">
 
-                            <input type="hidden" name="userId" value="user2">
+                            <input type="hidden" name="userId" value="${ __LOGIN__.userId }">
 
                             <!-- 날짜 -->
                             <div class="modal_mybody_date">
@@ -395,7 +395,7 @@
                         <!-- 어디로 데이터를 보낼지 작성해야 한다. -->
                         <form action="/mypage/mybody/dateselect" method="post" id="bodydateselectForm">
 
-                            <input type="hidden" name="userId" value="user2">
+                            <input type="hidden" name="userId" value="${ __LOGIN__.userId }">
                             
                             <!-- 날짜 -->
                             <div class="modal_mybody_date">
