@@ -10,20 +10,26 @@
 	
 	<!--================스케쥴 가져오기========-->
 
-    <resultMap type="calender" id="calMap">
+	<!--<resultMap type="calender" id="calMap">
 		<result property="start" column="start1"/>
 		<result property="end" column="end1"/>
 	</resultMap>
 	
 	<select id="calenderList" resultMap="com.weet.app.dash.persistence.ScheduleDAO">
-		SELECT id, title,
-		TO_char(start1, 'YYYY-MM-DD"T"HH24:MI:SS') start1,
-		TO_char(end1, 'YYYY-MM-DD"T"HH24:MI:SS') end1,
-		ALLDAY,
-		TEXTCOLOR,
-		BACKGROUNDCOLOR,
-		BORDERCOLOR 
-		FROM CALENDAR
+		SELECT s.cs_id
+    , s.class_id
+    , s.cs_day
+    , s.cs_start_date
+    , s.cs_start_time_ampm
+    , s.cs_start_time_hh
+    , s.cs_start_time_mm
+    , l.user_id
+    
+	FROM T_CLASS_SCHEDULE s
+	    , T_CLASS_LISTENER l
+	
+	WHERE s.class_id = 'class1'
+	    AND s.class_id = l.class_id(+);
 	</select>
-
+-->
 </mapper>

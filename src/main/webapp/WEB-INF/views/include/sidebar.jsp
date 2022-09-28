@@ -37,9 +37,9 @@
 
             <!-- 프로필 -->
             <div class="profile g">
-                <img src="https://picsum.photos/id/823/200/200" alt="100x100 profile">
+                <img src="${ __LOGIN__.userProfile}">
                 <!-- 이름 -->
-                <h1 class="g">Darlene Robertson</h1>
+                <h1 class="g">${ __LOGIN__.userNickname}</h1>
 
                 <h2 class="g">클래스 진행 현황</h2>
                 <!-- 진행 바 -->

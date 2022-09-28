@@ -3,6 +3,7 @@ package com.weet.app.dash.mapper;
 import java.util.List;
 
 import com.weet.app.dash.domain.FeedbackVO;
+import com.weet.app.dash.domain.ScheduleVO;
 import com.weet.app.exception.DAOException;
 
 // 데이터 접근
@@ -14,7 +15,7 @@ public interface ScheduleMapper {
 	//==================================================
 	// 1. 스케쥴 불러오기
 	//==================================================
-	public abstract List<ScheduleMapper> selectAllScheduleList() throws DAOException;
+	public abstract List<ScheduleVO> selectAllScheduleList() throws DAOException;
 
 	//==================================================
 	// 2. 스케쥴 상세조회
