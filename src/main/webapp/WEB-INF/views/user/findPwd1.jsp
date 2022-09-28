@@ -48,7 +48,7 @@
                 <h3>비밀번호를 찾고자 하는 아이디, 이름, 연락처를 입력해 주세요.</h3>
                     <P>회원정보에 등록한 휴대전화 번호와 입력한 휴대전화 번호가 같아야, 인증번호를 받을 수 있습니다.</P>
             </div>
-            <form class="findpwd" name="findpwd_form" method="POST">
+            <form action="/user/find/pwd" class="findpwd" id="findpwd_form" name="findpwd_form" method="POST">
                 <div class="input_list">
                     <div class="inner-list">
                         <div class="la_input">
@@ -94,7 +94,7 @@
                         </div>
                     </div>
                     </div>
-                    <button class="loginbtn" onclick="findpwd_check()" type="button" >다음</button>
+                    <button class="loginbtn" onsubmit="findpwd_check()" type="submit" >다음</button>
                 
                 </div>
             </form>
