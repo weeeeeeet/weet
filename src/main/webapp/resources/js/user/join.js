@@ -51,16 +51,8 @@ function joinform_check() {
 	// 비밀번호 일치여부 확인
     if (pwd2.value == pwd.value) {
 
-
       pwdCheck.innerHTML='비밀번호가 일치합니다.';  /* innerHTML : HTML 내부에 추가적인 내용을 넣을 때 사용하는 것. */
-      pwdCheck.style.color='blue';
-
-      pweCheck.innerHTML='비밀번호가 일치합니다.'  /* innerHTML : HTML 내부에 추가적인 내용을 넣을 때 사용하는 것. */
-      pweCheck.style.color='blue';
-
-
-      pwdCheck.innerHTML='비밀번호가 일치합니다.'  /* innerHTML : HTML 내부에 추가적인 내용을 넣을 때 사용하는 것. */
-      pwdCheck.style.color='blue';
+      pwdCheck.style.color='green';
 
     } else {
       pwdCheck.innerHTML='비밀번호가 일치하지 않습니다.';

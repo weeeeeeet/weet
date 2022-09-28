@@ -3,14 +3,12 @@ package com.weet.app.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.weet.app.exception.ControllerException;
-import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.UserVO;
 import com.weet.app.user.service.UserFindService;
 
@@ -75,15 +73,25 @@ public class UserFindController {
 	
 	// 비밀번호 찾기(정보입력)
 	@PostMapping("/pwd")
-	public String findPwd(TrainerDTO trainerDTO, RedirectAttributes rttrs) {
-		log.trace("findPwd({}, {}) invoked.", trainerDTO, rttrs);
+	public String findPwd(String userId, String userName, String userPhone, RedirectAttributes rttrs) throws ControllerException {
+		log.trace("findPwd({}, {}) invoked.", userId, userName, userPhone, rttrs);
 		
+		try {
+
+			UserVO vo = this.findservice.getMatchUser(userId, userName, userPhone);
+			log.info("\t + vo: {}", vo);
+
+			rttrs.addAttribute("_USERID_", vo.getUserId());
+
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		}
 		return "redirect:/user/find/pwdch";
 	} // findPwd
 		
 	// 비밀번호 찾기 창(비밀번호변경)
 	@GetMapping("/pwdch")
-	public String findPwdChangePage(Model model) {
+	public String findPwdChangePage() throws ControllerException {
 		log.trace("findPwdChangePage() invoked.");
 		
 		return "/user/findPwd2";
@@ -91,10 +99,20 @@ public class UserFindController {
 	
 	// 비밀번호 찾기(비밀번호변경)
 	@PostMapping("/pwdch")
-	public String findPwdChange(Model model) {
+	public String findPwdChange(String userId, String userPwd, RedirectAttributes rttrs) throws ControllerException {
 		log.trace("findPwdChange() invoked.");
 		
-		return "redirect:/user/find/pwddone";
+		try {
+			if(this.findservice.updatePwd(userId,userPwd)) {
+				rttrs.addFlashAttribute("_RESULT_", "SUCCEED");	
+			} else {
+				rttrs.addFlashAttribute("_RESULT_", "FAILED");	
+			} // if-else
+			
+			return "redirect:/user/find/pwddone"; 
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		}
 	} // findPwdChange
 
 	// 비밀번호 찾기 완료

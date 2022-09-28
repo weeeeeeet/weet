@@ -18,7 +18,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.weet.app.common.SharedScopeKeys;
 import com.weet.app.exception.ControllerException;
-import com.weet.app.user.domain.MemberVO;
+import com.weet.app.user.domain.MemberDTO;
 import com.weet.app.user.domain.UserDTO;
 import com.weet.app.user.service.UserService;
 
@@ -107,18 +107,18 @@ public class NaverLoginController {
 		if(res.get("gender") == "M") userDTO.setUserGender('M');
 		else userDTO.setUserGender('W');
 		
-		MemberVO memverVO = new MemberVO();
-		memverVO.setUserId(res.get("id"));	// 아이디
-		memverVO.setUserIdToken(token);		// 토큰
-		memverVO.setUserPlatform("N");		// 플랫폼(N : 네이버)
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setUserId(res.get("id"));	// 아이디
+		memberDTO.setUserIdToken(token);		// 토큰
+		memberDTO.setUserPlatform("N");		// 플랫폼(N : 네이버)
 		
-		log.info("\t 세팅된 유저 DTO: {}, {}", userDTO, memverVO);
+		log.info("\t 세팅된 유저 DTO: {}, {}", userDTO, memberDTO);
 		
 		// DB에 없으면 등록, 있으면 토큰 업데이트
 		if( this.userService.idCheck(userDTO.getUserId()) == 0 ) {
-			this.userService.userJoin(userDTO, memverVO);
+			this.userService.userJoin(userDTO, memberDTO);
 		} else {
-			this.userService.userTokenUpdate(memverVO);
+			this.userService.userTokenUpdate(memberDTO);
 		} // if-else
 		
 		// 세션 scope에 등록
