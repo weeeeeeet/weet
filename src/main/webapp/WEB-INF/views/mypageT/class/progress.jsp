@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -13,14 +14,18 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
-    <link href="/resources/css/mypageTClass.css" rel="stylesheet" />
-    <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/63eb3bc178.js" crossorigin="anonymous"></script>
 
     <!-- favicon -->
     <link rel="icon" href="/resources/ico/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/resources/ico/favicon.ico" type="image/x-icon">
+
+    <!-- 제이쿼리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js" integrity="sha512-QDsjSX1mStBIAnNXx31dyvw4wVdHjonOwrkaIhpiIlzqGUCdsI62MwQtHpJF+Npy2SmSlGSROoNWQCOFpqbsOg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link href="/resources/css/mypageT/mypageTClass.css" rel="stylesheet" />
+    <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/63eb3bc178.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -28,7 +33,7 @@
 
     <!-- ==================HEADER==================== -->
     
-    <%@ include file="/WEB-INF/views/include/header.jsp" %>
+    <jsp:include page="/WEB-INF/views/include/header.jsp" />
     
     <!-- ==================CONTENT==================== -->
 
@@ -55,13 +60,13 @@
                 <!-- 왼쪽 목록 -->
 
                 <ul class="mypage_list_top">
-                    <li><a href="/마이페이지_트레이너_내활동.html">내 활동</a></li>
-                    <li><a href="#" class="on">내 클래스룸</a></li>
-                    <li><a href="#">MY BODY</a></li>
+                    <li><a href="/mypageT/activity/boardlist">내 활동</a></li>
+                    <li><a href="/mypageT/class/my" class="on">내 클래스룸</a></li>
+                    <li><a href="/mypageT/mybody">MY BODY</a></li>
                 </ul>
 
                 <ul class="mypage_list_bottom">
-                    <li><a href="#">구매 내역</a></li>
+                    <li><a href="/mypageT/pay/paylist">구매 내역</a></li>
                     <li><a href="#">고객센터</a></li>
                 </ul>
 
@@ -105,27 +110,20 @@
 
                     <tbody>
 
-                        <tr>
-                            <td>헬린이들 모여라!!!</td>
-                            <td>그룹</td>
-                            <td>450,000</td>
-                            <td>2022-06-13</td>
-                            <td> 2022-06-13 <br>
-                            ~ 2022-06-20</td>
-                            <td>4</td>
-                            <td>대기</td>
-                        </tr>
+                        <c:forEach var="board" items="${__LIST__}">
 
-                        <tr>
-                            <td>건강한 습관 만들기</td>
-                            <td>개인</td>
-                            <td>550,000</td>
-                            <td>2022-06-10</td>
-                            <td> 2022-06-10 <br>
-                            ~ 2022-06-17</td>
-                            <td>5</td>
-                            <td>완료</td>
-                        </tr>
+                            <tr>
+                                <td>${board.classTitle}</td>
+                                <td><c:if test="${board.classType} == 1">개인</c:if> <c:if test="${board.classType} == 2">그룹</c:if> </td>
+                                <td>${board.classFee}</td>
+                                <td><fmt:formatDate pattern="yyyy/MM/dd" value="${board.classRecruitStartDate}" /></td>
+                                <td> <fmt:formatDate pattern="yyyy/MM/dd" value="${board.classRecruitStartDate}" /> <br>
+                                ~ <fmt:formatDate pattern="yyyy/MM/dd" value="${board.classRecruitEndDate}" /> </td>
+                                <td>${board.classRecruitMaxNum}</td>
+                                <td><c:if test="${board.classRegisterStatus} == 1">대기</c:if> <c:if test="${board.classRegisterStatus} == 2">반려</c:if> <c:if test="${board.classRegisterStatus} == 3">승인</c:if></td>
+                            </tr>
+
+                        </c:forEach>
 
                     </tbody>
 
@@ -139,7 +137,7 @@
     </section>
 
     <!-- ==================FOOTER==================== -->
-    <%@ include file="/WEB-INF/views/include/footer.jsp" %>
+    <jsp:include page="/WEB-INF/views/include/footer.jsp" />
    
 </body>
 

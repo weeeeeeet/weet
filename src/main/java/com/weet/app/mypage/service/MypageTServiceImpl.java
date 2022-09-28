@@ -229,7 +229,7 @@ public class MypageTServiceImpl implements MypageTService, InitializingBean {
 	// ======================================================================
 	
 	@Override
-	public List<MypageCheckClassVO> getListLikeClass(MypageClassVO vo) throws ServiceException {
+	public List<MypageCheckClassVO> getListLikeClass(MypageCheckClassVO vo) throws ServiceException {
 		
 		log.trace("getListLikeClass() invoked.");
 		

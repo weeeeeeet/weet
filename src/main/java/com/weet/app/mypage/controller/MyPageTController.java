@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.weet.app.exception.ControllerException;
 import com.weet.app.mypage.domain.Criteria;
 import com.weet.app.mypage.domain.MypageBoardVO;
+import com.weet.app.mypage.domain.MypageCheckClassVO;
 import com.weet.app.mypage.domain.MypageClassVO;
 import com.weet.app.mypage.domain.MypageReplyVO;
 import com.weet.app.mypage.domain.PageDTO;
@@ -233,13 +234,27 @@ public class MyPageTController implements InitializingBean {
 	// =======================================================
 		// 5. 트레이너회원 - 마이페이지 - 내클래스룸 - 클래스 검수
 	// =======================================================
-	
+		
 	@GetMapping("/class/progress")
-	public String classProgress() {
+	public String likeClass(MypageCheckClassVO vo,Model model) throws ControllerException {
 		log.trace("classProgress() invoked.");
 		
-		return "mypageT/class/progress";
-	} // classProgress
+		try {
+			
+			//1. 게시물 출력
+			List<MypageCheckClassVO> list = this.service.getListLikeClass(vo);
+			list.forEach(log::info);
+						
+			// + value가 NULL이면 공유속성에 추가가 안되기에, NULL인지 아닌지 파악하지 않아도 OK!
+			model.addAttribute("__LIST__",list);
+			
+			return "mypageT/class/progress";
+			
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try - catch : ServiceException을 ControllerException으로
+		
+	} // likeClass
 	
 	// =======================================================
 		// 6. 트레이너회원 - 마이페이지 - 마이바디

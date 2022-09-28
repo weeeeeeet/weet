@@ -27,4 +27,19 @@ public class MypageCheckClassVO {
 	// 6. 승인 여부
 	private String classRegisterStatus;
 	
+	// 7. 클래스 유형
+	private String classType;
+	
+	// 8. 등록일 시작
+	private Date classRecruitStartDate;
+	
+	// 9. 등록일 끝
+	private Date classRecruitEndDate;
+	
+	// 10. 금액
+	private Integer classFee;
+	
+	// 11. 최대 모집인원
+	private Integer classRecruitMaxNum;
+	
 } // mypageClassVO

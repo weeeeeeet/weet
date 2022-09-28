@@ -49,7 +49,7 @@ public interface MypageTService {
 	public abstract Integer getTotalDoneClass(MypageClassVO vo) throws ServiceException;
 	
 	// 9. 좋아요 누른 클래스 조회
-	public abstract List <MypageCheckClassVO> getListLikeClass(MypageClassVO vo) throws ServiceException;
+	public abstract List <MypageCheckClassVO> getListLikeClass(MypageCheckClassVO vo) throws ServiceException;
 	
 	// 10. 마이페이지 조회
 	public abstract List <MypageBodyDTO> getListMybody(MypageBodyDTO vo) throws ServiceException;

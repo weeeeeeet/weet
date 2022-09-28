@@ -196,18 +196,22 @@
 
                 /*+ INDEX_DESC(T_CLASS) */
                 
-                t.class_id,
-                ls.user_id,
-                t.class_trainer_name,
-                t.class_title,
-                t.CLASS_MAIN_IMG_URL,
-                t.CLASS_REGISTER_STATUS
+                CLASS_ID,
+                USER_ID,
+                CLASS_TRAINER_NAME,
+                CLASS_TITLE,
+                CLASS_MAIN_IMG_URL,
+                CLASS_REGISTER_STATUS,
+                CLASS_TYPE,
+                CLASS_RECRUIT_START_DATE,
+                CLASS_RECRUIT_END_DATE,
+                CLASS_FEE,
+                CLASS_RECRUIT_MAX_NUM
                 
             FROM
-                T_CLASS t, t_like_class ls
+                T_CLASS
             WHERE
-                t.class_id = ls.class_id
-                AND ls.USER_ID = #{userId}
+                USER_ID = #{userId}
 
         ]]>
     

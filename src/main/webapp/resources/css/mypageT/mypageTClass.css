@@ -1,25 +1,15 @@
 @charset "UTF-8";
 
-* {
-    margin: 0;
-    padding: 0;
-    font-family: 'SCoreDream';
-    box-sizing: border-box;
-}
-
-ul, ol{
-    list-style: none;
-}
-
-a {
-    text-decoration: none;
-}
-
 /* content ================================ */
 
 /* 컨텐츠 영역에 양쪽 200px씩 여백주기 */
 .content{
     margin: 20px 200px 0px;
+    width: 1040px;
+
+    height: 600px;
+
+    width :calc(100% - 400px);
 }
 
 /* 컨텐츠 영역의 왼쪽 가로 길이 잡아주기 */
@@ -98,6 +88,7 @@ a {
     color: #595959;
 }
 
+
 /* 컨켄츠 영역의 왼쪽 목록 */
 .content .mypage_list{
     clear: both;
@@ -110,7 +101,7 @@ a {
 
 /* 컨텐츠 영역의 왼쪽 목록의 li태그들의 css속성 지정 */
 .content .content_left .mypage_list ul a {
-    font-weight: 450;
+    font-weight: bold;
     font-size: 14px;
     color: #000000;
 }
@@ -135,13 +126,14 @@ a {
     border-top: 1px solid black;
 }
 
-/* 컨텐츠 영역의 오른쪽 부분 정리 */
+/* 컨텐츠 영역의 오른쪽 부분 정리 ( 수정됨!!!) */
 .content .content_right {
-    margin: 20px 20px 0px 0px;
+    margin: 50px 20px 0px 310px;
+    width: 900px;
     padding-left: 50px;
     /* border: 1px solid blue; */
 
-    float: right;
+    /* float: right; */
 }
 
 /* 컨텐츠 영역의 오른쪽 영역의 위 목록을 감싸는 div css속성 지정 */
