@@ -16,6 +16,9 @@
     <!-- favicon -->
     <link rel="shortcut icon" href="/resources/ico/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/resources/ico/favicon.ico" type="image/x-icon">
+    <!-- jq -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
     <!-- icon -->
     <script src="https://kit.fontawesome.com/63eb3bc178.js" crossorigin="anonymous"></script>
     <!-- font -->
@@ -46,32 +49,42 @@
                     <P>영문 대소문자, 숫자, 특수문자를 조합하여 8이상 15자리 미만을 사용하세요.</P>
                 </div>
                 
-                <form action="Findpwd" class="findpwd">
+                <form action="/user/find/pwdch" class="findpwd" method="POST">
+                
+             		<input type="hidden" name="userId" id="userId" value="${ param._USERID_}" required/>
+             		
                     <div class="input_list">
                         <div class="inner-list">
                             <div class="la_input">
                                 <label for="pwd" class="form-label">새 비밀번호</label>
                                 <div class="input_group">
-                                    <input type="password" class="form-control-sm" name="userpwd" id="pwd" minlength="8"
+                                    <input type="password" class="form-control-sm" name="userpwd" id="user_pwd" minlength="8"
                                         maxlength="14" placeholder="새로운 비밀번호를 입력해주세요" autocomplete="off" required>
                                 </div>
                             </div>
-                            <div class="inner-list">
+                         </div>
+                         <div class="inner-list">
                                 <div class="la_input">
                                     <label for="pwd2" class="form-label">비밀번호 확인</label>
                                     <div class="input_group">
-                                        <input type="password" class="form-control-sm" name="userPwd2" id="pwd2"
+                                        <input type="password" class="form-control-sm" name="userPwd2" id="user_pwd2"
                                             minlength="8" maxlength="14" placeholder="비밀번호를 한번 더 입력해주세요"
                                             autocomplete="off" required>
                                     </div>
+                                    <span class="checkment" id="pwdCheck"></span>
                                 </div>
                             </div>
-                        <input class="loginbtn" type="submit" value="다음">
+                            
+                        <input class="loginbtn" id='findId_next' onsubmit="changePwd_form()" type="submit" value="다음">
+                    
                     </div>
                 </form>
             </div>
         </section>
     </div>
+    
+        <!-- js -->
+    <script src="/resources/js/user/findpwd.js"></script>
 </body>
 
 </html>
