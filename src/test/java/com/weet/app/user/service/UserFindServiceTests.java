@@ -77,5 +77,23 @@ public class UserFindServiceTests {
 
 	} // testSelectId
 
+	
+//  아이디 찾기 테스트
+//	@Disabled
+	@Test
+	@Order(2)
+	@DisplayName("2. UserMapper.testGetMatchUser() test.")
+	@Timeout(value=5, unit=TimeUnit.SECONDS)
+	void testGetMatchUser() throws ServiceException {
+		log.trace("testGetMatchUser() invoked.");
+		
+		String userId = "testId";
+		String userName = "testName";
+		String userPhone = "01012344321"; 
+
+		UserVO vo = this.findservice.getMatchUser(userId, userName, userPhone);
+		log.info("\t+ vo: {}", vo);
+
+	} // testSelectId
 
 } // BoardServiceTests

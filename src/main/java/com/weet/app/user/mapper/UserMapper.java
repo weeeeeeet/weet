@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Update;
 
 import com.weet.app.exception.DAOException;
 import com.weet.app.user.domain.LoginDTO;
-import com.weet.app.user.domain.MemberVO;
+import com.weet.app.user.domain.MemberDTO;
 import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.TrainerVO;
 import com.weet.app.user.domain.UserDTO;
@@ -36,11 +36,11 @@ public interface UserMapper {
 	// 회원가입 T_MEM 데이터 입력
 	@Insert("INSERT INTO t_mem (user_id, user_platform, user_id_token) "
 			+ "VALUES (#{userId}, #{userPlatform}, #{userIdToken})")
-	public abstract Integer insertMem(MemberVO memberVO) throws DAOException;
+	public abstract Integer insertMem(MemberDTO memberDTO) throws DAOException;
 	
 	// 유저 토큰 업데이트
 	@Update("UPDATE t_mem SET user_id_token = #{userIdToken} WHERE user_id = #{userId}")
-	public abstract Integer updateToken(MemberVO memberVO) throws DAOException;
+	public abstract Integer updateToken(MemberDTO memberDTO) throws DAOException;
 	// ============ Naver Join&Login End ============= //
 	
 	// 아이디 중복확인

@@ -10,7 +10,7 @@
 	        cache : false,
 	        success:function(data){
 	        	if(data == "error"){
-	        		alert("휴대폰 번호가 올바르지 않습니다.")
+	        		alert("휴대폰 번호가 올바르지 않습니다.");
 					$(".successPhoneChk").text("유효한 번호를 입력해주세요.");
 					$(".successPhoneChk").css("color","red");
 					$("#user_phone").attr("autofocus",true);
