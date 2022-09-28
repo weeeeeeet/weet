@@ -31,6 +31,7 @@ public class KakaoLoginController {
 	public String kakaoCallback(
 			@RequestParam String code, 
 			HttpSession session) throws Exception {
+		log.trace("kakaoCallback({}, {}) invoked.", code, session);
 
         String access_Token = userService.getKaKaoAccessToken(code);
         log.info("\t + access_Token:{}",access_Token);

@@ -49,7 +49,7 @@
                     <label for="user_id" class="form-label">아이디</label>
                     <div class="boxing">
                         <input type="text" class="form-control-sm" name="userId" id="user_id" minlength="8" maxlength="15"
-                            placeholder="8-15자의 영문 소문자, 숫자만 가능합니다."required>
+                            placeholder="8-15자의 영문 소문자, 숫자만 가능합니다." required>
                         <button type="button" id="checkIdBtn" onclick="checkId()">중복확인</button>
                     </div>
                     <span class="checkment id_ok">사용 가능한 아이디입니다.</span>
@@ -59,7 +59,7 @@
                 <div class="usernick-box">
                  	<label for="user_nickname" class="form-label">닉네임</label>
 					<div class="boxing">
-                        <input type="text" class="form-control-sm" name="userNickname" id="user_nickname" minlength="8" maxlength="14"
+                        <input type="text" class="form-control-sm" name="userNickname" id="user_nickname" minlength="2" maxlength="14"
                             placeholder="닉네임을 입력해주세요" required>
                     </div>
                 </div>

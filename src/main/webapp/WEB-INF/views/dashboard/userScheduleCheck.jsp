@@ -75,9 +75,9 @@
                             <li class='work'>
                                 <input class='radio' id='work5' name='works' type='radio' >
                                 <div class="relative">
-                                <label for='work5'><c:out value="${schedulelist.cs_day}"/>
+                                <label for='work5'><c:out value="${schedulelist.csDay}"/>
 
-                                <c:set target="${schedulelist.cs_start_time_ampm}" var="type" value="1" />
+                                <c:set target="${schedulelist.cs_startTimeAmpm}" var="type" value="1" />
                                 <c:if test="${type eq '1'}">
                                     <span class='time'>am</span>
                                 </c:if>
