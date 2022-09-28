@@ -63,13 +63,13 @@
                 <!-- 왼쪽 목록 -->
 
                 <ul class="mypage_list_top">
-                    <li><a href="/mypageT/activity/boardlist">내 활동</a></li>
-                    <li><a href="/mypageT/class/my" class="on">내 클래스룸</a></li>
-                    <li><a href="/mypageT/mybody">MY BODY</a></li>
+                    <li><a href="/mypageT/activity/boardlist?userId=tr1">내 활동</a></li>
+                    <li><a href="/mypageT/class/my?userId=tr1" class="on">내 클래스룸</a></li>
+                    <li><a href="/mypageT/mybody?userId=tr1">MY BODY</a></li>
                 </ul>
 
                 <ul class="mypage_list_bottom">
-                    <li><a href="/mypageT/pay/paylist">구매 내역</a></li>
+                    <li><a href="/mypageT/pay/paylist?userId=tr1">구매 내역</a></li>
                     <li><a href="#">고객센터</a></li>
                 </ul>
 
@@ -83,9 +83,9 @@
             <div class="mypage_top">
 
                 <ul class="mypage_toplist">
-                    <li><a href="/mypageT/class/my" class="on">내 클래스 룸</a></li>
-                    <li><a href="/mypageT/class/expired">종료 클래스 룸</a></li>
-                    <li><a href="/mypageT/class/progress">클래스 검수</a></li>
+                    <li><a href="/mypageT/class/my?userId=tr1" class="on">내 클래스 룸</a></li>
+                    <li><a href="/mypageT/class/expired?userId=tr1">종료 클래스 룸</a></li>
+                    <li><a href="/mypageT/class/progress?userId=tr1">클래스 검수</a></li>
                 </ul>
 
             </div>
@@ -96,7 +96,7 @@
 
                 <div class="class_card">
                     <img src="<spring:url value='/${board.classMainImgUrl}'/>" class="card_img" alt="클래스대표사진">
-                    <a href="#" class="card-text">${board.classTitle}</a>
+                    <a href="http://localhost:8080/dashboard/tr/noticeplan" class="card-text">${board.classTitle}</a>
                 </div>
 
             </c:forEach>

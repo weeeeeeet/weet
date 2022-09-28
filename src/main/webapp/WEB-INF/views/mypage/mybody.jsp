@@ -113,13 +113,14 @@
 
             <div class="profile">
 
-                <div class="profile_photo"></div>
-
-                <div class="profile_id">WEE.T</div>
-
-                <img src="/resources/img/static/naver2.png" class="profile_social" alt="소설로그인표시">
-
-                <a href="/mypage/profile/myprofile" class="profile_email">helloword@naver.com <i class="fas fa-angle-right"></i> </a>
+                <div class="profile_photo"><img src="${ __LOGIN__.userProfile }" style="width: 100%;" /></div>
+				
+				<div class="row">
+	                <div class="profile_id">${ __LOGIN__.userNickname }</div>
+		
+	                <img src="/resources/img/static/naver2.png" class="profile_social" alt="소설로그인표시">
+				</div>
+                <a href="/mypage/profile/myprofile" class="profile_email">${ __LOGIN__.userEmail } <i class="fas fa-angle-right"></i> </a>
 
             </div>
 
@@ -127,14 +128,14 @@
                 <!-- 왼쪽 목록 -->
 
                 <ul class="mypage_list_top">
-                    <li><a href="/mypage/activity/boardlist">내 활동</a></li>
-                    <li><a href="/mypage/class/my">내 클래스룸</a></li>
-                    <li><a href="/mypage/mybody" class="on">MY BODY</a></li>
+                    <li><a href="/mypage/activity/boardlist?userId=${ __LOGIN__.userId }" class="on">내 활동</a></li>
+                    <li><a href="/mypage/class/my?userId=${ __LOGIN__.userId }">내 클래스룸</a></li>
+                    <li><a href="/mypage/mybody?userId=${ __LOGIN__.userId }">MY BODY</a></li>
                 </ul>
 
                 <ul class="mypage_list_bottom">
-                    <li><a href="/mypage/pay/paylist">구매 내역</a></li>
-                    <li><a href="#">고객센터</a></li>
+                    <li><a href="/mypage/pay/paylist?userId=${ __LOGIN__.userId }">구매 내역</a></li>
+                    <li><a href="/help/inquiry">고객센터</a></li>
                 </ul>
 
             </div>

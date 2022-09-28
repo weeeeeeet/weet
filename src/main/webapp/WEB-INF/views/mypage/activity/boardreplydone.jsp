@@ -73,13 +73,14 @@
 
             <div class="profile">
 
-                <div class="profile_photo"></div>
-
-                <div class="profile_id">WEE.T</div>
-
-                <img src="/resources/img/static/naver2.png" class="profile_social" alt="소설로그인표시">
-
-                <a href="/mypage/profile/myprofile" class="profile_email">helloword@naver.com <i class="fas fa-angle-right"></i> </a>
+                <div class="profile_photo"><img src="${ __LOGIN__.userProfile }" style="width: 100%;" /></div>
+				
+				<div class="row">
+	                <div class="profile_id">${ __LOGIN__.userNickname }</div>
+		
+	                <img src="/resources/img/static/naver2.png" class="profile_social" alt="소설로그인표시">
+				</div>
+                <a href="/mypage/profile/myprofile" class="profile_email">${ __LOGIN__.userEmail } <i class="fas fa-angle-right"></i> </a>
 
             </div>
 
@@ -87,14 +88,14 @@
                 <!-- 왼쪽 목록 -->
 
                 <ul class="mypage_list_top">
-                    <li><a href="/mypage/activity/boardlist" class="on">내 활동</a></li>
-                    <li><a href="/mypage/class/my">내 클래스룸</a></li>
-                    <li><a href="/mypage/mybody">MY BODY</a></li>
+                    <li><a href="/mypage/activity/boardlist?userId=${ __LOGIN__.userId }" class="on">내 활동</a></li>
+                    <li><a href="/mypage/class/my?userId=${ __LOGIN__.userId }">내 클래스룸</a></li>
+                    <li><a href="/mypage/mybody?userId=${ __LOGIN__.userId }">MY BODY</a></li>
                 </ul>
 
                 <ul class="mypage_list_bottom">
-                    <li><a href="/mypage/pay/paylist">구매 내역</a></li>
-                    <li><a href="#">고객센터</a></li>
+                    <li><a href="/mypage/pay/paylist?userId=${ __LOGIN__.userId }">구매 내역</a></li>
+                    <li><a href="/help/inquiry">고객센터</a></li>
                 </ul>
 
             </div>
@@ -107,9 +108,9 @@
             <div class="mypage_top">
 
                 <ul class="mypage_toplist">
-                    <li><a href="/mypage/activity/boardlist" class="on">TR 게시판</a></li>
-                    <li><a href="/mypage/activity/boardlike">좋아요</a></li>
-                    <li><a href="/mypage/activity/boardreplye">댓글</a></li>
+                    <li><a href="/mypage/activity/boardlist?userId=${ __LOGIN__.userId }" class="on">TR 게시판</a></li>
+                    <li><a href="/mypage/activity/boardlike?userId=${ __LOGIN__.userId }">좋아요</a></li>
+                    <li><a href="/mypage/activity/boardreplye?userId=${ __LOGIN__.userId }">댓글</a></li>
                 </ul>
 
             </div>
@@ -117,8 +118,8 @@
             <div>
 
                 <ul class="mypage_top_tabs">
-                    <li><a href="/mypage/activity/boardlist"><span></span> 전체</a></li>
-                    <li><a href="/mypage/activity/boardreplydone" class="on"><span class="on2"></span> 답변 완료</a></li>
+                    <li><a href="/mypage/activity/boardlist?userId=${ __LOGIN__.userId }" class="on"><span class="on2"></span> 전체</a></li>
+                    <li><a href="/mypage/activity/boardreplydone?userId=${ __LOGIN__.userId }"><span></span> 답변 완료</a></li>
                 </ul>
 
             </div>

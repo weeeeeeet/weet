@@ -47,13 +47,14 @@
 
             <div class="profile">
 
-                <div class="profile_photo"></div>
-
-                <div class="profile_id">WEE.T</div>
-
-                <img src="/resources/img/static/naver2.png" class="profile_social" alt="소설로그인표시">
-
-                <a href="/mypage/profile/myprofile" class="profile_email">helloword@naver.com <i class="fas fa-angle-right"></i> </a>
+                <div class="profile_photo"><img src="${ __LOGIN__.userProfile }" style="width: 100%;" /></div>
+				
+				<div class="row">
+	                <div class="profile_id">${ __LOGIN__.userNickname }</div>
+		
+	                <img src="/resources/img/static/naver2.png" class="profile_social" alt="소설로그인표시">
+				</div>
+                <a href="/mypage/profile/myprofile" class="profile_email">${ __LOGIN__.userEmail } <i class="fas fa-angle-right"></i> </a>
 
             </div>
 
@@ -61,14 +62,14 @@
                 <!-- 왼쪽 목록 -->
 
                 <ul class="mypage_list_top">
-                    <li><a href="/mypage/activity/boardlist">내 활동</a></li>
-                    <li><a href="/mypage/class/my" class="on">내 클래스룸</a></li>
-                    <li><a href="/mypage/mybody">MY BODY</a></li>
+                    <li><a href="/mypage/activity/boardlist?userId=${ __LOGIN__.userId }" class="on">내 활동</a></li>
+                    <li><a href="/mypage/class/my?userId=${ __LOGIN__.userId }">내 클래스룸</a></li>
+                    <li><a href="/mypage/mybody?userId=${ __LOGIN__.userId }">MY BODY</a></li>
                 </ul>
 
                 <ul class="mypage_list_bottom">
-                    <li><a href="/mypage/pay/paylist">구매 내역</a></li>
-                    <li><a href="#">고객센터</a></li>
+                    <li><a href="/mypage/pay/paylist?userId=${ __LOGIN__.userId }">구매 내역</a></li>
+                    <li><a href="/help/inquiry">고객센터</a></li>
                 </ul>
 
             </div>
@@ -81,10 +82,10 @@
             <div class="mypage_top">
 
                 <ul class="mypage_toplist">
-                    <li><a href="/mypage/class/my" class="on">내 클래스 룸</a></li>
-                    <li><a href="/mypage/class/expired">수강종료 클래스</a></li>
-                    <li><a href="/mypage/class/before">예약 클래스</a></li>
-                    <li><a href="/mypage/class/like">찜 한 클래스</a></li>
+                    <li><a href="/mypage/class/my?userId=${ __LOGIN__.userId }" class="on">내 클래스 룸</a></li>
+                    <li><a href="/mypage/class/expired?userId=${ __LOGIN__.userId }">수강종료 클래스</a></li>
+                    <li><a href="/mypage/class/before?userId=${ __LOGIN__.userId }">예약 클래스</a></li>
+                    <li><a href="/mypage/class/like?userId=${ __LOGIN__.userId }">찜 한 클래스</a></li>
                 </ul>
 
             </div>
@@ -95,7 +96,7 @@
 
                 <div class="class_card">
                     <img src="<spring:url value='/${board.classMainImgUrl}'/>" class="card_img" alt="클래스대표사진">
-                    <a href="#" class="card-text">${board.classTitle}</a>
+                    <a href="/dashboard/user/noticeplan" class="card-text">${board.classTitle}</a>
                 </div>
 
             </c:forEach>

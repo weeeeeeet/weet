@@ -28,7 +28,7 @@
     
             <!-- 프로필 -->
             <div class="profile g">
-                <img src=" ${ __LOGIN__.userProfile}" >
+                <img src="https://cdn-icons-png.flaticon.com/512/2964/2964522.png" >
                 <!-- 이름 -->
                 <div class="name-level">
                     <span><h1 class="g">${ __LOGIN__.userNickname}</h1></span>
