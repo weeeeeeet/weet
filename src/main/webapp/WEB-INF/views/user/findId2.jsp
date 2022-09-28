@@ -68,8 +68,8 @@
                         </table>
                     </div>
                     <div class="btn-box">
-                        <button  class="findbtn" type="button" onclick="location.href='weet_login_tr'">로그인하기</button>
-                        <button class="findbtn" type="submit">비밀번호찾기</button>
+                        <button  class="findbtn" type="button" onclick="location.href='/user/tr/login'">로그인하기</button>
+                        <button class="findbtn" type="button" onclick="location.href='/user/find/pwd'">비밀번호찾기</button>
                     </div>
                 </div>
             </form>
