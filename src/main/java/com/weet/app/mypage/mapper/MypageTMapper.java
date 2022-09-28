@@ -81,7 +81,7 @@ public interface MypageTMapper {
 	public abstract Integer selectDoneClassAmount(@Param("userId")String userId) throws DAOException;
 	
 	// ====================================================================
-	// 9. 클래스 검수 (OK)
+	// 9. 클래스 검수 (OK) < ------------ 여기까지 완성
 	// ====================================================================
 	public abstract List<MypageCheckClassVO> selectLikeClass(@Param("userId")String userId) throws DAOException;
 	

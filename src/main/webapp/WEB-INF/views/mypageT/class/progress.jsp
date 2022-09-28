@@ -91,7 +91,6 @@
 
                 <div class="Myclass_checkclass_comment">
                     <div>● 클래스 등록을 요청하시면 하시면 검수를 통해서 승인 완료됩니다.</div>
-                    <div>● 클래스 검수 상태에서 대기는 1, 반려는 2, 승인은 3으로 나타납니다.</div>
                 </div>
 
                 <table class="table_checkclass_table table table-striped table-hover">
@@ -114,13 +113,35 @@
 
                             <tr>
                                 <td>${board.classTitle}</td>
-                                <td><c:if test="${board.classType} == 1">개인</c:if> <c:if test="${board.classType} == 2">그룹</c:if> </td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${board.classType eq '1'}">
+                                            개인 
+                                        </c:when>
+                                        <c:when test="${board.classType eq '2'}">
+                                            그룹
+                                        </c:when>
+                                    </c:choose>
+
+                                </td>
                                 <td>${board.classFee}</td>
                                 <td><fmt:formatDate pattern="yyyy/MM/dd" value="${board.classRecruitStartDate}" /></td>
                                 <td> <fmt:formatDate pattern="yyyy/MM/dd" value="${board.classRecruitStartDate}" /> <br>
                                 ~ <fmt:formatDate pattern="yyyy/MM/dd" value="${board.classRecruitEndDate}" /> </td>
                                 <td>${board.classRecruitMaxNum}</td>
-                                <td><c:if test="${board.classRegisterStatus} == 1">대기</c:if> <c:if test="${board.classRegisterStatus} == 2">반려</c:if> <c:if test="${board.classRegisterStatus} == 3">승인</c:if></td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${board.classRegisterStatus eq '1'}">
+                                            대기 
+                                        </c:when>
+                                        <c:when test="${board.classRegisterStatus eq '1'}">
+                                            반려
+                                        </c:when>
+                                        <c:when test="${board.classRegisterStatus eq '3'}">
+                                            승인
+                                        </c:when>
+                                    </c:choose>
+                                </td>
                             </tr>
 
                         </c:forEach>

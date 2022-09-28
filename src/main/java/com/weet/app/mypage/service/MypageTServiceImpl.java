@@ -225,7 +225,7 @@ public class MypageTServiceImpl implements MypageTService, InitializingBean {
 	} // getTotalDoneClass
 	
 	// ======================================================================
-	// 9 ) 좋아요 누른 클래스 조회
+	// 9 ) 클래스 조회 < -------- 여기 까지!!
 	// ======================================================================
 	
 	@Override
