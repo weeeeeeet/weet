@@ -2,6 +2,10 @@
 
 /* content ================================ */
 
+section{
+	padding-bottom : 600px;
+}
+
 /* 컨텐츠 영역에 양쪽 200px씩 여백주기 */
 .content{
     margin: 20px 200px 0px;
