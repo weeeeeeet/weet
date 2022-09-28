@@ -2,6 +2,7 @@ package com.weet.app.board.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.weet.app.board.domain.BoardVO;
@@ -24,7 +25,7 @@ public interface BoardMapper {
 	public abstract List<ReplyVO> selectReReplyList(int commId, int replyGroup) throws DAOException;
 	
 	// 전체 게시글 조회
-	public abstract List<CommunityVO> selectAllList(String keyword, Criteria cri) throws DAOException;
+	public abstract List<CommunityVO> selectAllList(@Param ("keyword") String keyword, Criteria cri) throws DAOException;
 	
 	// 게시글 수 카운트
 	public abstract int selectListCount(String keyword) throws DAOException;
