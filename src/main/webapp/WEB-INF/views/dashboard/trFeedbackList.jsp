@@ -89,7 +89,7 @@
     
                                 <td class="name-box g">
                                     <div class="name">
-                                            ${ __LOGIN__.userNickname}
+                                            Darlene Robertson
                                     </div>
                                 </td>
     

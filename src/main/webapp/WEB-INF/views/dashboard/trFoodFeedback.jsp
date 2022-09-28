@@ -61,7 +61,7 @@ pageEncoding="UTF-8"%>
 
         <div class="back-color">
             <div class="g">
-                <h2>${ __LOGIN__.userNickname} 회원님의 식단 관리</h2>
+                <h2>Robert Fox 회원님의 식단 관리</h2>
             </div>
         </div> <!--back-color-->  
         
