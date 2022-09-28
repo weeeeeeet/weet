@@ -12,9 +12,9 @@
 }
 
 /* 가이드라인 */
-/* .g {
+.g {
     border: 1px solid rgb(191, 0, 255);
-} */
+}
 
 
 /* 배경 스타일 작업 ================================================== */
@@ -49,14 +49,14 @@ section div.dash h1 {
     padding: 10px;
 }
 
-/* 오늘의 식단 올리기 대시보드----------------------------------*/
-section div.today-food {
-    background-color: rgb(255, 255, 255); /* 오늘의 식단 대시보드 색깔*/
+/* 공지사항 컨텐츠 대시보드----------------------------------*/
+section div.notice-content-dash {
+    background-color: rgb(255, 255, 255); /* 공지사항 컨텐츠 대시보드 색깔*/
     border-radius: 18px;
-    height: 800px;/* 오늘의 식단 대시보드 크기 (높이) */
+    height: 800px;/* 공지사항 컨텐츠 대시보드 크기 (높이) */
 }
 
-section div.today-food h2 {   /*스케쥴 확인 타이틀*/
+section div.notice-content-dash h2 {   /*공지사항 컨텐츠 타이틀*/
     font-size: 20px;
     font-weight: bold;
     color: #FF730E;
@@ -68,71 +68,60 @@ section div.today-food h2 {   /*스케쥴 확인 타이틀*/
     margin: 10px;
 }
 
-section div.today-food p {/*스케쥴 확인 문구*/
-    
-    padding-left: 45px;
 
-    padding-bottom: 15px;
+/* 컨텐츠 내용 ================================== */
 
-    border-bottom: solid #e7e7e7;
+/* 공지사항 */
+.n_contents_box {
+    margin-left: 52px;
 }
-
-
-/* 캘린더 ================================== */
-
-.container-fluid {
-    height: 620px;
-    width: 1050px;
+.title_name {
+    display: inline-flex;
+    color: #343434;
+    font-weight: bold;
 }
 
-.scheduler {
-    overflow: auto;
-    /* overflow-x: hidden; */
-    clear: both;
-    height: 620px;
+.contents_title {
+    display: inline-flex;
+    color: #343434;
+    font-weight: bold;
 }
-.scheduler h2 {     /* 날짜 텍스트 */
-    float: right;
-    font-size: 25px;
-    color: #FF730E;
-    width: 290px;
+
+.contents_date {
+    display: inline-flex;
+    color: #a7a7a7;
+    font-weight: bold;
 }
-.scheduler i {
-    float: right;
-    padding: 5px;
-    color: #FF730E;
-    margin-top: 40px;
-    margin-right: 20px;
+
+.contents {
+    margin-top: 50px;
 }
-section div.scheduler::-webkit-scrollbar { /* 스케쥴 스크롤 너비*/
-    width: 12px;
+ 
+/* 코칭계획 */
+.c_contents_box {
+    margin-left: 52px;
 }
-section div.scheduler::-webkit-scrollbar-thumb {  /*스케쥴 스크롤 막대*/
-    background-color: #ffcba6;
-    border-radius: 10px;
-    background-clip: padding-box;
-    border: 2px solid transparent;
+.contents_ctitle {
+    display: inline-flex;
 }
-section div.scheduler::-webkit-scrollbar-track { /*스케쥴 스크롤 여백*/
-    background-color: rgb(224, 224, 224);
-    border-radius: 10px;
-    box-shadow: inset 0px 0px 5px white;
+
+.contents_cdate {
+    display: inline-flex;
+    color: #a7a7a7;
+}
+
+.c_contents {
+    margin-top: 50px;
+}
+
+/*버튼 ================================== */
+
+.btn_box {
+    padding-left: 450px;
+    padding-top: 30px;
+    margin-top: 450px;
 }
 .update { /* 공지사항 수정 버튼 */
-    float: right;
-    display: inline-block;
-    border-radius: 7px;
-    font-size: 15px;
-    font-weight: bold;
-    background-color: #ffe3d0;
-    color: #FF730E;
-    width: 60px;
-    height: 25px;
-    padding-top: 4px;
-    text-align: center;
-}
-.list { /* 공지사항 목록 버튼 */
-    float: right;
     display: inline-block;
     border-radius: 7px;
     font-size: 15px;
@@ -142,11 +131,23 @@ section div.scheduler::-webkit-scrollbar-track { /*스케쥴 스크롤 여백*/
     width: 60px;
     height: 25px;
     padding-top: 4px;
+    text-align: center;
+}
+.list { /* 공지사항 목록 버튼 */
+    display: inline-block;
+    border-radius: 7px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #ffe3d0;
+    color: #FF730E;
+    width: 60px;
+    height: 25px;
+    padding-top: 4px;
     margin-left: 8px;
+    margin-right: 8px;
     text-align: center;
 }
 .delete { /* 공지사항 삭제 버튼 */
-    float: right;
     display: inline-block;
     border-radius: 7px;
     font-size: 15px;

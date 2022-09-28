@@ -56,14 +56,18 @@
                <h1>트레이너 대시보드</h1>
            </div>
 
-       <!-- 오늘의 식단 올리기 대시보드 -->
-       <div class="today-food g">
+       <!-- 공지사항 컨텐츠 대시보드 -->
+       <div class="notice-content-dash g">
            <div class="g">
                <h2>클래스 공지사항</h2>
            </div>
 
-           <div>
-               <!-- 공지사항 제목 -->
+           <div class="g n_contents_box">
+               <!--제목 -->
+               <div class="g title_name">
+                   제목 : 
+               </div>
+               <!--공지사항 제목 -->
                <div class="g contents_title">
                 <c:out value="${__NOTICECONTENTS__.n_title}"/>
                 </div> 
@@ -75,24 +79,29 @@
                 <div class="g contents">
                     <c:out value="${__NOTICECONTENTS__.n_content}"/>
                 </div>
-                
-                 <!-- 코칭계획 제목 -->
-                 <div class="g contents_title">
-                 <c:out value="${__COACHINGCONTENTS__.n_title}"/>
-                 </div> 
-                 <!-- 코칭계획 날짜 -->
-                 <div class="g contents_date">
-                     <fmt:formatDate pattern="yyyy/MM/dd" value="${__COACHINGCONTENTS__.n_ts}" />
-                 </div>
-                 <!-- 코칭계획 내용 -->
-                 <div class="g contents">
-                     <c:out value="${__COACHINGCONTENTS__.n_content}"/>
-                 </div>
+           </div>
+
+           <div class="g c_contents_box">
+                  <!-- 코칭계획 제목 -->
+                  <div class="g contents_ctitle">
+                    <c:out value="${__COACHINGCONTENTS__.n_title}"/>
+                    </div> 
+                    <!-- 코칭계획 날짜 -->
+                    <div class="g contents_cdate">
+                        <fmt:formatDate pattern="yyyy/MM/dd" value="${__COACHINGCONTENTS__.n_ts}" />
+                    </div>
+                    <!-- 코칭계획 내용 -->
+                    <div class="g c_contents">
+                        <c:out value="${__COACHINGCONTENTS__.n_content}"/>
+                    </div>
            </div>
            
-            <a href="#" target="self"><h5 class="update g">수정</h4></a>
-	        <a href="#" target="self"><h4 class="delete g">삭제</h4></a> 
-	        <a href="/dashboard/tr/noticeplan" target="self"><h4 class="list g">목록</h4></a> 
+           <div class="g btn_box">
+           		<a href="/dashboard/tr/noticeplan" target="self"><h4 class="list g">목록</h4></a>
+                <a href="#" target="self"><h5 class="update g">수정</h4></a>
+	            <a href="#" target="self"><h4 class="delete g">삭제</h4></a>
+           </div>
+            
 	
        </div>
 
