@@ -768,7 +768,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" class="loginbtn" id="btn_login_trhome" onsubmit="joinform_check()">가입하기</button>
+                <button type="submit" class="loginbtn" id="btn_login_trhome" onsubmit="joinform_check()">가입하기</button>
                 <div>
                 </div>
             
