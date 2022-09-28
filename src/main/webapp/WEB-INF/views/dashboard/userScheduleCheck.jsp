@@ -65,25 +65,39 @@
 
                  <div class="ScheduleBoard g">
                      <!-- 타임라인 -->
-                    <ul id='timeline'>
 
-                        <!-- 이전 -->
-                        <li class='work'>
-                            <input class='radio' id='work5' name='works' type='radio'>
-                            <div class="relative">
-                            <label for='work5'>8월 01일 오후 07:00</label>
-                            <span class='date'>이전 스케줄</span>
-                            <span class='circle'></span>
-                            </div>
-                            <div class='content'>
-                            <p>
-                                1회차
-                            </p>
-                            </div>
-                        </li>
+                    <div class="ScheduleScroll g">
+                        <ul id='timeline'>
 
+                            <!-- class1 시간표 -->
+                            <c:forEach var="schedulelist" items="${__SCHEDULELIST__}">
+                            <!-- 이전 -->
+                            <li class='work'>
+                                <input class='radio' id='work5' name='works' type='radio' >
+                                <div class="relative">
+                                <label for='work5'><c:out value="${schedulelist.cs_day}"/>
+
+                                <c:set target="${schedulelist.cs_start_time_ampm}" var="type" value="1" />
+                                <c:if test="${type eq '1'}">
+                                    <span class='time'>am</span>
+                                </c:if>
+                                <c:if test="${type eq '2'}">
+                                    <span class='time'>pm</span>
+                                </c:if>
+                                <c:out value="${schedulelist.cs_start_time_hh}"/>시
+                                <c:out value="${schedulelist.cs_start_time_mm}"/>분
+                                <span class='date'></span>
+                                <span class='circle'></span>
+                                </div>
+                                <div class='content'>
+
+                                </div>
+                            </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
                         <!-- 오늘 -->
-                        <li class='work'>
+                        <!-- <li class='work'>
                             <input class='radio' id='work4' name='works' type='radio' checked>
                             <div class="relative">
                             <label for='work4'> 8월 06일 오후 07:00</label>
@@ -95,10 +109,10 @@
                                 2회차
                             </p>
                             </div>
-                        </li>
+                        </li>-->
 
                         <!-- 다음 -->
-                        <li class='work'>
+                        <!--<li class='work'>
                             <input class='radio' id='work3' name='works' type='radio'>
                             <div class="relative">
                             <label for='work3'>8월 08일 오후 07:00</label>
@@ -110,8 +124,8 @@
                                 3회차
                             </p>
                             </div>
-                        </li>
-                    </ul>
+                        </li>-->
+                    
                  </div>
 
             </div> 

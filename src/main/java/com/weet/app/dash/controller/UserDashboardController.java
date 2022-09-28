@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.weet.app.dash.domain.FeedbackVO;
 import com.weet.app.dash.domain.NoticeContentDTO;
 import com.weet.app.dash.domain.NoticeVO;
+import com.weet.app.dash.domain.ScheduleVO;
 import com.weet.app.dash.service.FoodFeedbackService;
 import com.weet.app.dash.service.NoticeService;
+import com.weet.app.dash.service.ScheduleService;
 import com.weet.app.exception.ControllerException;
 
 import lombok.NoArgsConstructor;
@@ -34,6 +36,9 @@ public class UserDashboardController{
 	
 	@Setter(onMethod_= {@Autowired})
 	private FoodFeedbackService foodfeedbackService;
+	
+	@Setter(onMethod_= {@Autowired})
+	private ScheduleService scheduleService;
 	
 	// invoked. 로그가 찍히지 않음 => log4j 파일 수정 해결
 	
@@ -184,10 +189,22 @@ public class UserDashboardController{
 	//	userScheduleCheck : 회원 스케쥴 확인 
 	//-----------------------------------------------------------------//
 	@GetMapping("/schedule") // http://localhost:8080/dashboard/user/schedule
-	public String userScheduleCheck() {
-		log.trace("userScheduleCheck() invoked.");
+	public String userScheduleCheck(Model model) throws ControllerException {
+		log.trace("userScheduleCheck({}) invoked.", model);
 		
-		return "/dashboard/userScheduleCheck"; //=> /WEB-INF/views/ + dashboard/userScheduleCheck + .jsp
+		try {
+			List<ScheduleVO> schedulelist = this.scheduleService.getAllScheduleList();
+			schedulelist.forEach(log::info);
+
+
+			model.addAttribute("__SCHEDULELIST__", schedulelist);	// 스케쥴
+
+			return "/dashboard/userScheduleCheck"; //=> /WEB-INF/views/ + dashboard/userScheduleCheck + .jsp
+			
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try-catch
+
 	}// userScheduleCheck
 
 	
