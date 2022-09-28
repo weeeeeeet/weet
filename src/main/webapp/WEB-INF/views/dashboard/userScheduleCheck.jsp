@@ -69,7 +69,7 @@
 
                         <!-- 이전 -->
                         <li class='work'>
-                            <input class='radio' id='work5' name='works' type='radio' checked>
+                            <input class='radio' id='work5' name='works' type='radio'>
                             <div class="relative">
                             <label for='work5'>8월 01일 오후 07:00</label>
                             <span class='date'>이전 스케줄</span>
@@ -84,7 +84,7 @@
 
                         <!-- 오늘 -->
                         <li class='work'>
-                            <input class='radio' id='work4' name='works' type='radio'>
+                            <input class='radio' id='work4' name='works' type='radio' checked>
                             <div class="relative">
                             <label for='work4'> 8월 06일 오후 07:00</label>
                             <span class='date'>오늘 스케줄</span>

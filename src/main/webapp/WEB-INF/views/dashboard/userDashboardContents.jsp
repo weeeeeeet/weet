@@ -55,58 +55,54 @@
                 <h1>회원 대시보드</h1>
             </div>
 
-            <!-- 클래스 공지사항 -->
-            <div class="class-notice g">
+                <!-- 공지사항 컨텐츠 대시보드 -->
+                <div class="notice-content-dash g">
 
-                    <h2 class="g">클래스 공지사항</h2>
+                    <div class="g">
+                        <h2>클래스 공지사항</h2>
+                    </div>
+        
+                    <c:if test="${not empty __NOTICECONTENTS__}">
+                        <div class="g n_contents_box">
+                            <!--공지사항 제목 -->
+                            <div class="g contents_title">
+                                제목 : <c:out value="${__NOTICECONTENTS__.n_title}"/>
+                            </div> 
+        
+                            <!-- 공지사항 날짜 -->
+                            <div class="g contents_date">
+                                <fmt:formatDate pattern="yyyy/MM/dd" value="${__NOTICECONTENTS__.n_ts}" />
+                            </div>
+        
+                            <!-- 공지사항 내용 -->
+                            <div class="g contents">
+                                <c:out value="${__NOTICECONTENTS__.n_content}"/>
+                            </div>
+                        </div>
+                    </c:if>
+        
+                    <c:if test="${not empty __COACHINGCONTENTS__}">
+                        <div class="g c_contents_box">
+                            <!-- 코칭계획 제목 -->
+                            <div class="g contents_title">
+                                제목 : <c:out value="${__COACHINGCONTENTS__.n_title}"/>
+                            </div> 
+        
+                            <!-- 코칭계획 날짜 -->
+                            <div class="g contents_date">
+                                <fmt:formatDate pattern="yyyy/MM/dd" value="${__COACHINGCONTENTS__.n_ts}" />
+                            </div>
+        
+                            <!-- 코칭계획 내용 -->
+                            <div class="g contents">
+                                <c:out value="${__COACHINGCONTENTS__.n_content}"/>
+                            </div>
+                        </div>
+                    </c:if>
 
-
-                <div class="notice-contents g">
-					<!--제목 -->
-	               <div class="g title_name">
-	                   제목 : 
-	               </div>
-	               
-					<div class="notice-t-d">
-	                     <!-- 공지사항 제목 -->
-	                     <div class="g contents_title">
-	                     <c:out value="${__NOTICECONTENTS__.n_title}"/>
-	                     </div> 
-	                     <!-- 공지사항 날짜 -->
-	                     <div class="g contents_date">
-	                         <fmt:formatDate pattern="yyyy/MM/dd" value="${__NOTICECONTENTS__.n_ts}" />
-	                     </div>
-	                </div>   
-	                 
-	                <div class="notice-c">
-	                     <!-- 공지사항 내용 -->
-	                     <div class="g contents">
-	                         <c:out value="${__NOTICECONTENTS__.n_content}"/>
-	                     </div>
-					</div> 
-	
-                    <div class="notice-t-d">
-	                     <!-- 코칭계획 제목 -->
-	                     <div class="g contents_title">
-	                     <c:out value="${__COACHINGCONTENTS__.n_title}"/>
-	                     </div> 
-	                     <!-- 코칭계획 날짜 -->
-	                     <div class="g contents_date">
-	                         <fmt:formatDate pattern="yyyy/MM/dd" value="${__COACHINGCONTENTS__.n_ts}" />
-	                     </div>
-	                </div>    
-                     
-	                <div class="notice-c">
-	                     <!-- 코칭계획 내용 -->
-	                     <div class="g contents">
-	                         <c:out value="${__COACHINGCONTENTS__.n_content}"/>
-	                     </div>
-                    </div> 
-
-	                    <!-- 목록 list 버튼 -->
-    	            	<div class="g list-btn">
-    					<a href="/dashboard/user/noticeplan" target="self"><h4 class="list g">목록</h4></a> 
-    					</div>
+                    <div class="g btn_box">
+                        <a href="/dashboard/user/noticeplan" target="self"><h4 class="list g">목록</h4></a>
+                    </div>
                 </div>
             </div>
 
