@@ -62,7 +62,11 @@
 
 
                 <div class="notice-contents g">
-
+					<!--제목 -->
+	               <div class="g title_name">
+	                   제목 : 
+	               </div>
+	               
 					<div class="notice-t-d">
 	                     <!-- 공지사항 제목 -->
 	                     <div class="g contents_title">
