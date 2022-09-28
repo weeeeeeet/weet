@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -10,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Weet 비밀번호변경</title>
+    <title>Weet</title>
 
     <!-- #### common ####-->
     <!-- favicon -->
@@ -27,10 +26,10 @@
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
 
-     <!-- #### style ####-->
+    <!-- #### style ####-->
     <!-- css -->
-    <link href="/resources/css/user/findPwd3.css" rel="stylesheet" />
-
+    <link href="/resources/css/user/findPwd4.css" rel="stylesheet" />
+    
 </head>
 
 <body>
@@ -40,36 +39,17 @@
         <!-- header e -->
         <section class="login-contain">
             <div class="inner_box">
-                <div class="login-main-text"> 비밀번호 찾기 </div>
+            <div class="login-box">
+                <div class="login-main-text">비밀번호 변경 완료</div>
                 <div class="sub-text">
-                    <h3>비밀번호를 변경해 주세요.</h3>
-                    <P>영문 대소문자, 숫자, 특수문자를 조합하여 8이상 15자리 미만을 사용하세요.</P>
+                    <h3>새로운 비밀번호로 변경되었습니다.</h3>
+                    <p>변경된 비밀번호로 로그인하세요.</p>
                 </div>
-                
-                <form action="Findpwd" class="findpwd">
-                    <div class="input_list">
-                        <div class="inner-list">
-                            <div class="la_input">
-                                <label for="pwd" class="form-label">새 비밀번호</label>
-                                <div class="input_group">
-                                    <input type="password" class="form-control-sm" name="userpwd" id="pwd" minlength="8"
-                                        maxlength="14" placeholder="새로운 비밀번호를 입력해주세요" autocomplete="off" required>
-                                </div>
-                            </div>
-                            <div class="inner-list">
-                                <div class="la_input">
-                                    <label for="pwd2" class="form-label">비밀번호 확인</label>
-                                    <div class="input_group">
-                                        <input type="password" class="form-control-sm" name="userPwd2" id="pwd2"
-                                            minlength="8" maxlength="14" placeholder="비밀번호를 한번 더 입력해주세요"
-                                            autocomplete="off" required>
-                                    </div>
-                                </div>
-                            </div>
-                        <input class="loginbtn" type="submit" value="다음">
-                    </div>
-                </form>
+                <div class="inner-list alon">
+                    <button class="loginbtn" type="submit" value="로그인하기">로그인하기</button>
+                </div>
             </div>
+        </div>
         </section>
     </div>
 </body>

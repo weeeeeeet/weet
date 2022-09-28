@@ -79,16 +79,21 @@ h3{
     width: 360px;
 }
 
-.findid-box thead th{
-    padding-bottom: 10px;
-    font-size: 15px;
-    font-weight: 600;
-}
-
-.findid-box tbody th{
+.findid-box tbody tr td{
     padding: 3px 0;
     font-size: 14px;
     font-weight: 500;
+}
+
+.findid-box input{
+    background: none;
+    text-align: center;
+    border: none;
+
+    font-size: 16px;
+    font-weight: 600;
+    
+    margin-top: 5px;
 }
 
 .btn-box{

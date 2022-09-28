@@ -55,10 +55,14 @@
                             <col width="50%">
                             <col width="50%">
                         </colgroup>
-                            <thead>
+                            <tbody>
                                 <tr>
-                                    <th id="userName" value="${ param._USERID_ }" readonly></th>
-                                    <th id="userPhone" value="${ param._USERJOINTS_ }" readonly></th>
+                                	<td><label for="userId">아이디</label></td>
+                                	<td><label for="UserJoinTs">가입일</label></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="userId" id="userId" value="${ param._USERID_ }" readonly></td>
+                                    <td><input type="text" name="UserJoinTs" id="UserJoinTs" value="${ param._USERJOINTS_ }" readonly></td>
                                 </tr>
                             </tbody>
                         </table>

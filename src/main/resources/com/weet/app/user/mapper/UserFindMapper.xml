@@ -5,5 +5,10 @@
 
 <mapper namespace="com.weet.app.user.mapper.UserFindMapper">
 
-
+<update id="updatePwd">
+        UPDATE t_tr
+        SET user_pwd = #{userPwd}
+        WHERE user_id = #{userId}
+    </update>
+    
 </mapper>

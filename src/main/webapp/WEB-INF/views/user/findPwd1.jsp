@@ -41,18 +41,57 @@
         <section class="login-contain">
             <div class="inner_box">
             <div class="login-main-text"> 비밀번호 찾기 </div>
-            <div class="sub-text"> <h3>비밀번호를 찾고자 하는 아이디를 입력해 주세요.</h3>
+            <div class="sub-text"> 
+                <h3>비밀번호를 찾고자 하는 아이디를 입력해 주세요.</h3>
+                <h3>회원정보에 등록한 휴대전화로 인증</h3>
+                    <P>회원정보에 등록한 휴대전화 번호와 입력한 휴대전화 번호가 같아야, 인증번호를 받을 수 있습니다.</P>
             </div>
-            <form action="Findpwd" class="findpwd">
+            <form action="" class="findpwd">
                 <div class="input_list">
                     <div class="inner-list">
-                        <div class="la_input alon">
+                        <div class="la_input">
                             <label for="id" class="form-label">아이디</label>
                             <div class="input_group">
                                 <input type="text" class="form-control-sm" id="id" minlength="8" maxlength="15"
                                     placeholder="8-15자의 영문 소문자, 숫자만 가능합니다.">
                             </div>
                         </div>
+                    </div>
+
+                    <div class="inner-list">
+                        <div class="la_input">
+                            <label for="userName" class="form-label">이름</label>
+                            <div class="input_group">
+                                <input type="text" class="form-control-sm" name="userName" id="userName" minlength="2" maxlength="15"
+                                    placeholder="김영희" 
+                                    aria-describedby="button-addon2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inner-list">
+                        <div class="la_input">
+                            <label for="mobile" class="form-label">핸드폰번호</label>
+                             <div class="input-group putbtn">
+                                <input type="text" class="form-control" name="userPhone" id="user_phone"  minlength="10" maxlength="13"
+                                        placeholder=" ' - ' 제외하고 입력해주세요"  aria-describedby="button-addon2" required>
+                                <button class="btn btn-outline-secondary putbtn" type="button" id="phoneChk">코드전송</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="checkment2 successPhoneChk">휴대폰 번호 입력후 코드전송 버튼을 누르세요</p>
+
+                    <div class="inner-list">
+                        <div class="la_input">
+                            <label for="authCode" class="form-label">인증번호</label>
+                            <div class="input-group putbtn">
+                                <input type="text" class="form-control" name="userPhone2" id="user_phone2" length="11"
+                                    placeholder=" 인증번호를 입력해주세요" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                <button class="btn btn-outline-secondary putbtn" type="button" id="phoneChk2">인증하기</button>
+                                <input type="hidden" id="phoneDoubleChk"/>
+                            </div>
+                        </div>
+                    </div>
                     <button class="loginbtn" type="submit" value="다음">다음</button>
                 </div>
             </form>
