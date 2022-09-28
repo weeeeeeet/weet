@@ -76,13 +76,14 @@
 
             <div class="profile">
 
-                <div class="profile_photo"></div>
-
-                <div class="profile_id">WEE.T</div>
-
-                <img src="/resources/img/static/naver2.png" class="profile_social" alt="소설로그인표시">
-
-                <a href="/mypage/profile/myprofile" class="profile_email">helloword@naver.com <i class="fas fa-angle-right"></i> </a>
+                <div class="profile_photo"><img src="${ __LOGIN__.userProfile }" style="width: 100%;" /></div>
+				
+				<div class="row">
+	                <div class="profile_id">${ __LOGIN__.userNickname }</div>
+		
+	                <img src="/resources/img/static/naver2.png" class="profile_social" alt="소설로그인표시">
+				</div>
+                <a href="/mypage/profile/myprofile" class="profile_email">${ __LOGIN__.userEmail } <i class="fas fa-angle-right"></i> </a>
 
             </div>
 
@@ -90,13 +91,13 @@
                 <!-- 왼쪽 목록 -->
 
                 <ul class="mypage_list_top">
-                    <li><a href="/mypage/activity/boardlist" class="on">내 활동</a></li>
-                    <li><a href="/mypage/class/my">내 클래스룸</a></li>
-                    <li><a href="/mypage/mybody">MY BODY</a></li>
+                    <li><a href="/mypage/activity/boardlist?userId=${ __LOGIN__.userId }" class="on">내 활동</a></li>
+                    <li><a href="/mypage/class/my?userId=${ __LOGIN__.userId }">내 클래스룸</a></li>
+                    <li><a href="/mypage/mybody?userId=${ __LOGIN__.userId }">MY BODY</a></li>
                 </ul>
 
                 <ul class="mypage_list_bottom">
-                    <li><a href="/mypage/pay/paylist">구매 내역</a></li>
+                    <li><a href="/mypage/pay/paylist?userId=${ __LOGIN__.userId }">구매 내역</a></li>
                     <li><a href="#">고객센터</a></li>
                 </ul>
 
@@ -110,9 +111,9 @@
             <div class="mypage_top">
 
                 <ul class="mypage_toplist">
-                    <li><a href="/mypage/activity/boardlist" class="on">TR 게시판</a></li>
-                    <li><a href="/mypage/activity/boardlike">좋아요</a></li>
-                    <li><a href="/mypage/activity/boardreplye">댓글</a></li>
+                    <li><a href="/mypage/activity/boardlist?userId=${ __LOGIN__.userId }" class="on">TR 게시판</a></li>
+                    <li><a href="/mypage/activity/boardlike?userId=${ __LOGIN__.userId }">좋아요</a></li>
+                    <li><a href="/mypage/activity/boardreplye?userId=${ __LOGIN__.userId }">댓글</a></li>
                 </ul>
 
             </div>
@@ -120,8 +121,8 @@
             <div>
 
                 <ul class="mypage_top_tabs">
-                    <li><a href="/mypage/activity/boardlist" class="on"><span class="on2"></span> 전체</a></li>
-                    <li><a href="/mypage/activity/boardreplydone"><span></span> 답변 완료</a></li>
+                    <li><a href="/mypage/activity/boardlist?userId=${ __LOGIN__.userId }" class="on"><span class="on2"></span> 전체</a></li>
+                    <li><a href="/mypage/activity/boardreplydone?userId=${ __LOGIN__.userId }"><span></span> 답변 완료</a></li>
                 </ul>
 
             </div>
@@ -136,7 +137,7 @@
                     <c:forEach var="board" items="${__LIST__}">
                         <tr class="tb1">
                             <td class="tr_no"><a>${board.commId}</a></td>
-                            <td><a href="#" class="tr_title">${board.commPostTitle}</a></td>
+                            <td><a href="/board/${ board.commId }" class="tr_title">${board.commPostTitle}</a></td>
                             <td class="tr_date"><fmt:formatDate pattern="yyyy/MM/dd" value="${board.commPostInsertTs}" /></td>
                             <td class="tr_like"><span style="color: red;" class="heart"><i class="fas fa-heart"></i></span> ${board.commLikeNum}</td>
                             <td class="tr_comment"><span class="comment"><i class="fa-regular fa-comment-dots"></i> ${board.commReplyCount}</td>
@@ -173,7 +174,7 @@
                             <li> 
                             <!-- Userid 세션에서 받아 오는 것으로 수정해야 된다!!(********) -->
                                 <a 
-                                    href="/mypage/activity/boardlist?userId=user2&currPage=${pageNum}" 
+                                    href="/mypage/activity/boardlist?userId=${ __LOGIN__.userId }&currPage=${pageNum}" 
                                     class="${pageNum == __PAGENATION__.cri.currPage ? 'currPage' : '' }" > 
     
                                     <strong>${pageNum}</strong>

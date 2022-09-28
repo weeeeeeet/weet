@@ -22,9 +22,14 @@ const getBoard = () => {
             const replyData = data.data.result.reply;
             let str = '';
             
+            let boardWriter = '';
+            if(boardData.userId.length < 10) {
+                boardWriter = maskingId(boardData.userId);
+            } // if
+            
             document.querySelector('.board-title>h3').innerHTML = boardData.commPostTitle;          // 글제목
             document.querySelector('.user-profile').innerHTML                                       // 글 정보(닉네임, ID, 업로드일, 수정일, 조회수)
-                = "<p>" + boardData.userNickname + " <span>" + maskingId(boardData.userId) + "</span></p>"
+                = "<p>" + boardData.userNickname + " <span>" + boardWriter + "</span></p>"
                 + "<p>작성 " + boardData.commPostInsertTs + " | 마지막 수정 " + boardData.commPostUpdateTs + " | 조회 " + boardData.commViewCount + "</p>";
             document.querySelector('.board-contents>p').innerHTML = boardData.commPostContents;     // 글내용
             document.querySelector('.heartCount').innerHTML = "좋아요 " + boardData.commLikeNum;   // 좋아요 수

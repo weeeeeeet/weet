@@ -270,6 +270,7 @@
                 T_BODY
             WHERE
                 USER_ID = #{userId}
+            ORDER BY body_date ASC
             FETCH FIRST 5 ROWS ONLY
 
         ]]>

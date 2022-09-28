@@ -56,54 +56,61 @@
                <h1>트레이너 대시보드</h1>
            </div>
 
-       <!-- 공지사항 컨텐츠 대시보드 -->
-       <div class="notice-content-dash g">
-           <div class="g">
-               <h2>클래스 공지사항</h2>
-           </div>
+          <!-- 공지사항 컨텐츠 대시보드 -->
+          <div class="notice-content-dash g">
 
-           <div class="g n_contents_box">
-               <!--제목 -->
-               <div class="g title_name">
-                   제목 : 
-               </div>
-               <!--공지사항 제목 -->
-               <div class="g contents_title">
-                <c:out value="${__NOTICECONTENTS__.n_title}"/>
-                </div> 
-                <!-- 공지사항 날짜 -->
-                <div class="g contents_date">
-                    <fmt:formatDate pattern="yyyy/MM/dd" value="${__NOTICECONTENTS__.n_ts}" />
-                </div>
-                <!-- 공지사항 내용 -->
-                <div class="g contents">
-                    <c:out value="${__NOTICECONTENTS__.n_content}"/>
-                </div>
-           </div>
+            <div class="g">
+                <h2>클래스 공지사항</h2>
+            </div>
 
-           <div class="g c_contents_box">
-                  <!-- 코칭계획 제목 -->
-                  <div class="g contents_ctitle">
-                    <c:out value="${__COACHINGCONTENTS__.n_title}"/>
+            <c:if test="${not empty __NOTICECONTENTS__}">
+                <div class="g n_contents_box">
+                    <!--공지사항 제목 -->
+                    <div class="g contents_title">
+                        제목 : <c:out value="${__NOTICECONTENTS__.n_title}"/>
                     </div> 
+
+                    <!-- 공지사항 날짜 -->
+                    <div class="g contents_date">
+                        <fmt:formatDate pattern="yyyy/MM/dd" value="${__NOTICECONTENTS__.n_ts}" />
+                    </div>
+
+                    <!-- 공지사항 내용 -->
+                    <div class="g contents">
+                        <c:out value="${__NOTICECONTENTS__.n_content}"/>
+                    </div>
+                </div>
+            </c:if>
+
+            <c:if test="${not empty __COACHINGCONTENTS__}">
+                <div class="g c_contents_box">
+                    <!-- 코칭계획 제목 -->
+                    <div class="g contents_title">
+                        제목 : <c:out value="${__COACHINGCONTENTS__.n_title}"/>
+                    </div> 
+
                     <!-- 코칭계획 날짜 -->
-                    <div class="g contents_cdate">
+                    <div class="g contents_date">
                         <fmt:formatDate pattern="yyyy/MM/dd" value="${__COACHINGCONTENTS__.n_ts}" />
                     </div>
+
                     <!-- 코칭계획 내용 -->
-                    <div class="g c_contents">
+                    <div class="g contents">
                         <c:out value="${__COACHINGCONTENTS__.n_content}"/>
                     </div>
-           </div>
-           
-           <div class="g btn_box">
-           		<a href="/dashboard/tr/noticeplan" target="self"><h4 class="list g">목록</h4></a>
-                <a href="#" target="self"><h5 class="update g">수정</h4></a>
-	            <a href="#" target="self"><h4 class="delete g">삭제</h4></a>
-           </div>
+                </div>
+            </c:if>
             
-	
-       </div>
+
+
+            <div class="g btn_box">
+                    <a href="/dashboard/tr/noticeplan" target="self"><h4 class="list g">목록</h4></a>
+                 <a href="#" target="self"><h5 class="update g">수정</h4></a>
+                 <a href="#" target="self"><h4 class="delete g">삭제</h4></a>
+            </div>
+             
+     
+        </div>
 
        
    </section>

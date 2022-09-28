@@ -389,7 +389,7 @@ public class MyPageController implements InitializingBean {
 			} // if - else
 			
 			// + 업데이트 한 후에는 전체 목록 조회 페이지로 이동해야 한다. (***)
-			return "redirect:/mypage/mybody?userId=user2";
+			return "redirect:/mypage/mybody?userId=" + dto.getUserId();
 			
 		} catch(Exception e) { 
 			throw new ControllerException (e);
@@ -418,7 +418,7 @@ public class MyPageController implements InitializingBean {
 			} // if - else
 			
 			// + 업데이트 한 후에는 전체 목록 조회 페이지로 이동해야 한다. (***)
-			return "redirect:/mypage/mybody?userId=user2";
+			return "redirect:/mypage/mybody?userId=" + dto.getUserId();
 			
 		} catch(Exception e) { 
 			throw new ControllerException (e);
@@ -464,7 +464,7 @@ public class MyPageController implements InitializingBean {
 			model.addAttribute("dateArr",dateArr);
 			model.addAttribute("fatPctArr", fatPctArr);
 			
-			return "mypage/mybody?userId=user2";
+			return "mypage/mybody?userId=" + vo.getUserId();
 			
 		} catch(Exception e) {
 			throw new ControllerException(e);
