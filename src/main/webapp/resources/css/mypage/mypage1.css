@@ -102,6 +102,8 @@
     border-top: 1px solid black;
 }
 
+/* 여기서 부터 컨텐트 라이트!!!!!(***********) */
+
 /* 컨텐츠 영역의 오른쪽 부분 정리 ( 수정됨!!!!!!! ) */
 .content .content_right {
     margin: 50px 20px 0px 310px;

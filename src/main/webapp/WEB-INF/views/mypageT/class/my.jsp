@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -10,6 +11,9 @@
 
     <title>마이페이지 - 클래스룸</title>
 
+    <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/63eb3bc178.js" crossorigin="anonymous"></script>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -17,8 +21,12 @@
     <!-- favicon -->
     <link rel="icon" href="/resources/ico/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/resources/ico/favicon.ico" type="image/x-icon">
+
+    <!-- 제이쿼리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js" integrity="sha512-QDsjSX1mStBIAnNXx31dyvw4wVdHjonOwrkaIhpiIlzqGUCdsI62MwQtHpJF+Npy2SmSlGSROoNWQCOFpqbsOg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
-    <link href="/resources/css/mypageTClassNormal.css" rel="stylesheet" />
+    <link href="/resources/css/mypageT/mypageTClassNormal.css" rel="stylesheet" />
     <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/63eb3bc178.js" crossorigin="anonymous"></script>
 
@@ -28,7 +36,7 @@
 
     <!-- ==================HEADER==================== -->
     
-    <%@ include file="/WEB-INF/views/include/header.jsp" %>
+    <jsp:include page="/WEB-INF/views/include/header.jsp" />
     
     <!-- ==================CONTENT==================== -->
 
@@ -76,6 +84,7 @@
 
                 <ul class="mypage_toplist">
                     <li><a href="/mypageT/class/my" class="on">내 클래스 룸</a></li>
+                    <li><a href="/mypageT/class/expired">종료 클래스 룸</a></li>
                     <li><a href="/mypageT/class/progress">클래스 검수</a></li>
                 </ul>
 
@@ -83,21 +92,24 @@
 
             <p class="content_p"> ● 클래스 클릭 시 해당 클래스의 대시보드로 이동합니다.</p>
 
-            <div class="class_card">
-                <img src="/resources/img/static/classcard1.jpg" class="card_img" alt="해당 클래스의 대포사진 자리">
-                <a href="#" class="card-text">[인기 클래스] 국내1위 홈트계 끝판왕 '위이티'</a>
-            </div>
+            <c:forEach var="board" items="${__LIST__}">
 
-            <div class="class_card">
-                <img src="/resources/img/static/classcard2.jpg" class="card_img" alt="해당 클래스의 대포사진 자리">
-                <a href="#" class="card-text">[신규 클래스] 국내1위 홈트계 끝판왕 '위이티'</a>
-            </div>
+                <div class="class_card">
+                    <img src="<spring:url value='/${board.classMainImgUrl}'/>" class="card_img" alt="클래스대표사진">
+                    <a href="#" class="card-text">${board.classTitle}</a>
+                </div>
 
-            <div class="class_card">
-                <img src="/resources/img/static/classcard3.jpg" class="card_img" alt="해당 클래스의 대포사진 자리">
-                <a href="#" class="card-text">[PT] 국내1위 홈트계 끝판왕 '위이티'</a>
-            </div>
+            </c:forEach>
 
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
             
         </div>
 
@@ -105,7 +117,7 @@
 
     <!-- ==================FOOTER==================== -->
     
-    <%@ include file="/WEB-INF/views/include/footer.jsp" %>
+    <jsp:include page="/WEB-INF/views/include/footer.jsp" />
    
 </body>
 

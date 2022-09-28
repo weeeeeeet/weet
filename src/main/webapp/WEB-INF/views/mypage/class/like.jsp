@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -86,7 +87,7 @@
             <c:forEach var="board" items="${__LIST__}">
 
                 <div class="class_card">
-                    <img src="${board.classMainImgUrl}" class="card_img" alt="해당 클래스의 대포사진 자리">
+                    <img src="<spring:url value='/${board.classMainImgUrl}'/>" class="card_img" alt="클래스대표사진">
                     <a href="#" class="card-text">${board.classTitle}</a>
                 </div>
 
