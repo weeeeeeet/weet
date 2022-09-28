@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -8,12 +7,12 @@
 
 	<!-- ================ 아이디 중복 체크 ================ -->
 	<select id="selectId" parameterType="com.weet.app.user.domain.TrainerVO" resultType="java.lang.Integer">
-		SELECT COUNT(user_id) FROM t_tr WHERE user_id= #{user_id}
+		SELECT COUNT(user_id) FROM t_user WHERE user_id= #{user_id}
 	</select>
-	
+
 
 	<!-- ==================== 로그인 ====================== -->
-	
+
 	<select
         id="selectUser"
         resultType="com.weet.app.user.domain.TrainerVO">        
@@ -21,7 +20,7 @@
         FROM t_tr
         WHERE user_id = #{userId}
     </select>
-    
+
 
     <select 
         id="selectUserWithRememberMe"
@@ -40,6 +39,5 @@
         WHERE
             user_id = #{userId}
     </update>
-	
-	
+
 </mapper>

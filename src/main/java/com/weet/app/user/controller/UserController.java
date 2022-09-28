@@ -11,12 +11,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -59,7 +57,7 @@ public class UserController {
 		
 		return "/user/login";
 	} // loginPage
-
+	
 	// 2. TR 로그인화면
 	@GetMapping("/tr/login")
 	public String trainerLoginPage() {
@@ -87,7 +85,8 @@ public class UserController {
 		TrainerVO trainer = this.service.login(dto);	// To check the user.
 		
 		if(trainer != null) {							// if the check succeeded.
-			model.addAttribute(loginKey, trainer);		// To bind login attribute to the request scope.
+			
+			model.addAttribute(loginKey, this.service.getUserProfile(trainer.getUserId()));		// To bind login attribute to the request scope.
 			
 			// 2. If rememberMe on, process Remember-Me option.
 			if(dto.isRememberMe()) {
@@ -148,7 +147,7 @@ public class UserController {
 		Integer cnt = null;
 		try {
 			cnt = service.idCheck(id);
-			return cnt;
+			
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
@@ -209,9 +208,9 @@ public class UserController {
 			this.service.modifyUserWithRememberMe(userId, null, null);
 		} // if
 		
+		res.sendRedirect("/user/login");
 		// 5. To redirect into the login form.
 		return "redirect:/user/login";
 	} // logout
 
 }
-

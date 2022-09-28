@@ -12,9 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.weet.app.exception.DAOException;
 import com.weet.app.exception.ServiceException;
 import com.weet.app.user.domain.LoginDTO;
+import com.weet.app.user.domain.MemberVO;
 import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.TrainerVO;
 import com.weet.app.user.domain.UserDTO;
+import com.weet.app.user.domain.UserVO;
 import com.weet.app.user.mapper.UserMapper;
 
 import lombok.NoArgsConstructor;
@@ -71,61 +73,94 @@ public class UserServiceImpl implements UserService {
 	
 	// 로그인
 	@Override
-	public TrainerVO login(LoginDTO dto) throws Exception {
-		log.trace("login(dto) invoked. ");
-		log.info("\t+ dto: " + dto);                                                                                                                                                                                                                                                                            
+	public TrainerVO login(LoginDTO dto) throws ServiceException {
+		log.trace("login({}) invoked. ", dto);                                                                                                                                                                                                                                                          
 
-		TrainerVO loginUser = this.mapper.selectUser(dto);
-		Objects.requireNonNull(loginUser);
-		log.info("\t+ selectUser: " + loginUser);
+		try {
+			TrainerVO loginUser = this.mapper.selectUser(dto);
 
-		// dto의 pwd와 DB의 복호화된 pwd가 동일한지 비교한다.
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		boolean isMatched = encoder.matches(dto.getUserPwd(),loginUser.getUserPwd());
-		log.info("\t+ isMatched:{}", isMatched);
+			Objects.requireNonNull(loginUser);
+			log.info("\t+ selectUser: " + loginUser);
 
-		if(isMatched) {
-			log.info("\t+ loginUser: " + loginUser);
-			return loginUser;
-		} else {
-			return null;
-		}
+			// dto의 pwd와 DB의 복호화된 pwd가 동일한지 비교한다.
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			boolean isMatched = encoder.matches(dto.getUserPwd(),loginUser.getUserPwd());
+			log.info("\t+ isMatched:{}", isMatched);
+
+			if(isMatched) {
+				log.info("\t+ loginUser: " + loginUser);
+				return loginUser;
+			} else {
+				return null;
+			}
+
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+
 	} // login
 
 
 	// rememberMe 기능 사용유무
 	@Override
-	public TrainerVO findUserByRememberMe(String rememberMe) throws Exception {
+	public TrainerVO findUserByRememberMe(String rememberMe) throws ServiceException {
 		log.debug("findUserByRememberMe(rememberMe) invoked.");
 		
 		log.info("\t+ rememberMe: " + rememberMe);
 		
-		Objects.requireNonNull(this.mapper);
-		log.info("\t+ userMapper: " + this.mapper);
-		
-		TrainerVO trainer = this.mapper.selectUserWithRememberMe(rememberMe);
-		log.info("\t+ user: " + trainer);
-		
-		return trainer;
+		try {
+			return this.mapper.selectUserWithRememberMe(rememberMe);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
 	} // findUserByRememberMe
 
 
 	// rememberMe 정보 업데이트
 	@Override
-	public void modifyUserWithRememberMe(String userId, String rememberMe, Date rememberAge) throws Exception {
-		log.debug("modifyUserWithRememberMe(userId, rememberMe, rememberAge) invoked.");
+	public boolean modifyUserWithRememberMe(String userId, String rememberMe, Date rememberAge) throws ServiceException {
+		log.trace("modifyUserWithRememberMe({}, {}, {}) invoked.", userId, rememberMe, rememberAge);
 		
-		log.info("\t+ userId: " + userId);
-		log.info("\t+ rememberMe: " + rememberMe);
-		log.info("\t+ rememberAge: " + rememberAge);
-		
-		Objects.requireNonNull(this.mapper.updateUserWithRememberMe(userId, rememberMe, rememberAge));
-		log.info("\t+ mapper: " + this.mapper.updateUserWithRememberMe(userId, rememberMe, rememberAge));
-		
-		int modifiedUsers = this.mapper.updateUserWithRememberMe(userId, rememberMe, rememberAge);
-		log.info("\t+ modifiedUsers: " + modifiedUsers);
-
-	
+		try {
+			return this.mapper.updateUserWithRememberMe(userId, rememberMe, rememberAge) == 1;
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
 	} // modifyUserWithRememberMe
+
+	// =============== 추가한 코드 ================= // 
+	// 일반유저 등록
+	@Override
+	@Transactional
+	public boolean userJoin(UserDTO userDTO, MemberVO memberVO) throws ServiceException {
+		log.trace("userJoin({}, {}) invoked.", userDTO, memberVO);
+		
+		try {
+			if ( this.mapper.insertUser(userDTO) == 1 && this.mapper.insertMem(memberVO) == 1 ) return true;
+			
+			return false;
+		} catch(UncategorizedSQLException e) {	// RuntimeException, and related with Global Transaction
+			throw e;							
+		} catch(Exception e) {throw new ServiceException(e); } // try-catch
+	} // userJoin
+
+	// 로그인 토큰 업데이트
+	@Override
+	public void userTokenUpdate(MemberVO memberVO) throws ServiceException {
+		log.trace("userTokenUpdate({}) invoked.", memberVO);
+		
+		try { this.mapper.updateToken(memberVO); } 
+		catch(DAOException e) { throw new ServiceException(e); } // try-catch
+	} // userTokenUpdate
+
+
+	// 유저 프로필 조회
+	@Override
+	public UserVO getUserProfile(String userId) throws ServiceException {
+		log.trace("getUserProfile({}) invoked.", userId);
+		
+		try { return this.mapper.selectUserInfo(userId); } 
+		catch(DAOException e) { throw new ServiceException(e); } // try-catch
+	} // getUserProfile
 
 } // end class
