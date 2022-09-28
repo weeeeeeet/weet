@@ -74,6 +74,6 @@ function changePwd_form() {
     };
     
 	//입력 값 전송
-	document.findpwd_form.submit();
+	document.findpwd2_form.submit();
     
 }

@@ -48,8 +48,8 @@
                 <div class="btn">
 
                     <!-- 
-                    <a href="https://kauth.kakao.com/oauth/authorize?client_id=e633a1a319cc541dac0ec78d1f28cfa4&redirect_uri=http://localhost:8080/api/kakao/oauth&response_type=code" class="btn btn-primary kakao"
                     <a id="kakao-login-btn" href="javascript:loginWithKakao()" class="btn btn-primary kakao" 
+                    <a href="/api/kakao/oauth" class="btn btn-primary kakao"
                    -->
                     
                     <a href="https://kauth.kakao.com/oauth/authorize?client_id=e633a1a319cc541dac0ec78d1f28cfa4&redirect_uri=http://localhost:8080/api/kakao/oauth&response_type=code" class="btn btn-primary kakao"

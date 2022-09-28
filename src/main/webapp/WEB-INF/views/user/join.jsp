@@ -39,7 +39,7 @@
 
 
         <!-- 회원가입 -->
-        <form class="join-box" name="join_form" action="#" method="post">
+        <form class="join-box" id="join_form" name="join_form" action="/user/tr/join" method="POST">
             
             <section class="join-contain sig">
                 <h2>회원 가입</h2>
@@ -768,7 +768,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" class="loginbtn" id="btn_login_trhome" onclick="joinform_check()">가입하기</button>
+                <button type="submit" class="loginbtn" id="btn_login_trhome" onsubmit="joinform_check()">가입하기</button>
                 <div>
                 </div>
             
