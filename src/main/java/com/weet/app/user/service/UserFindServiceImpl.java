@@ -5,6 +5,7 @@ import java.util.Objects;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.weet.app.exception.DAOException;
@@ -56,6 +57,11 @@ public class UserFindServiceImpl implements UserFindService, InitializingBean, D
 	@Override
 	public boolean updatePwd(String userId, String userPwd) throws ServiceException {
 		log.trace("updatePwd({},{}) invoked.", userId, userPwd);
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		// dto.getpwd -> 암호화 -> dto.setpwd
+		userPwd = encoder.encode(userPwd);	// get으로 받아온 pwd -> encoding
+		log.info("\t+ userPwd:{}" , userPwd);
 		
 		try { return this.findmapper.updatePwd(userId, userPwd) == 1; }
 		catch (DAOException e) { throw new ServiceException(e); } // try-catch
