@@ -49,7 +49,7 @@
                     <P>영문 대소문자, 숫자, 특수문자를 조합하여 8이상 15자리 미만을 사용하세요.</P>
                 </div>
                 
-                <form action="/user/find/pwdch" class="findpwd" method="POST">
+                <form action="/user/find/pwdch" id="findpwd2_form" name="findpwd2_form" class="findpwd" method="POST">
                 
              		<input type="hidden" name="userId" id="userId" value="${ param._USERID_}" required/>
              		
@@ -58,7 +58,7 @@
                             <div class="la_input">
                                 <label for="pwd" class="form-label">새 비밀번호</label>
                                 <div class="input_group">
-                                    <input type="password" class="form-control-sm" name="userpwd" id="user_pwd" minlength="8"
+                                    <input type="password" class="form-control-sm" name="userPwd" id="user_pwd" minlength="8"
                                         maxlength="14" placeholder="새로운 비밀번호를 입력해주세요" autocomplete="off" required>
                                 </div>
                             </div>

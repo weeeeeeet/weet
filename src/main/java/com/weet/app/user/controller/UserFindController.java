@@ -74,7 +74,7 @@ public class UserFindController {
 	// 비밀번호 찾기(정보입력)
 	@PostMapping("/pwd")
 	public String findPwd(String userId, String userName, String userPhone, RedirectAttributes rttrs) throws ControllerException {
-		log.trace("findPwd({}, {}) invoked.", userId, userName, userPhone, rttrs);
+		log.trace("findPwd({}, {}, {}, {}) invoked.", userId, userName, userPhone, rttrs);
 		
 		try {
 

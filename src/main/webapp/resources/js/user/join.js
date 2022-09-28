@@ -7,6 +7,7 @@
 function joinform_check() {
     //변수에 담아주기
     let id = document.getElementById("user_id");
+    let userNickname = document.getElementById("user_nickname");
     let pwd = document.getElementById("user_pwd");
     let pwd2 = document.getElementById("user_pwd2");
     let pwdCheck = document.getElementById("pwdCheck");
@@ -31,6 +32,12 @@ function joinform_check() {
       return false; //return: 반환하다 return false:  아무것도 반환하지 말아라 아래 코드부터 아무것도 진행하지 말것
     };
 
+	// 아이디 입력 확인
+    if (userNickname.value == "") { 
+      alert("닉네임을 입력하세요.");
+      userNickname.focus(); 
+      return false; 
+    };
 
 	// 비밀번호 입력 확인
     if (pwd.value == "") {
@@ -77,7 +84,7 @@ function joinform_check() {
       return false;
     }
     
-    // 핸드폰번호 입력 및 형식 확인 - 인증을 따로 하는 데, 필요있을까...
+    // 핸드폰번호 입력 및 형식 확인
     let num = /^[0-9]+/g; //숫자만 입력하는 정규식
 
     if (!num.test(userPhone.value)) {
