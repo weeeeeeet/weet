@@ -14,7 +14,7 @@ import com.weet.app.mypage.domain.MypageClassVO;
 import com.weet.app.mypage.domain.MypageReplyVO;
 import com.weet.app.mypage.domain.MypageReviewDTO;
 
-public interface MypageMapper {
+public interface MypageTMapper {
 	
 	// ====================================================================
 	// 1. 전체 게시물 조회 (OK)
