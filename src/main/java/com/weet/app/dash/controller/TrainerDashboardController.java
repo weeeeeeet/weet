@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.weet.app.dash.domain.FeedbackVO;
 import com.weet.app.dash.domain.NoticeContentDTO;
 import com.weet.app.dash.domain.NoticeVO;
 import com.weet.app.dash.service.FoodFeedbackService;
@@ -180,10 +181,28 @@ public class TrainerDashboardController {
 	//	trFoodFeedback : 트레이너 식단 피드백 관리
 	//----------------------------------------------------------------------------------//
 	@GetMapping("/foodfb/manage") // http://localhost:8080/dashboard/tr/foodfb/manage
-	public String trFoodFeedback() {
-		log.trace("trFoodFeedback() invoked.");
+	public String trFoodFeedback(Model model) throws ControllerException {
+		log.trace("trFoodFeedback({}) invoked.", model);
 		
-		return "/dashboard/trFoodFeedback"; //=> /WEB-INF/views/ + dashboard/trFoodFeedback + .jsp
+		try {
+			List<FeedbackVO> list = this.foodfeedbackService.getAllFoodList();
+			List<FeedbackVO> coachinglist = this.foodfeedbackService.getAllFoodList();
+			list.forEach(log::info);
+			
+			// null이 아니면 model 상자에 넣어주고, null이면 안들어감
+			// value가 NULL 이면, 공유속성으로 추가안됨(***) => if문 필요없음
+
+			model.addAttribute("__FOODLIST__", list);	// 식단 리스트
+	
+//			log.trace("\t+ ===============================list: {}", list);
+			
+			//식단을 올리면 바로 식단목록에 반영된다
+			return "/dashboard/trFoodFeedback"; //=> /WEB-INF/views/ + dashboard/trFoodFeedback + .jsp
+		
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try-catch
+
 	} // trFoodFeedback
 	
 	//----------------------------------------------------------------------------------//
