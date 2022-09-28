@@ -28,8 +28,8 @@ var chart1 = new Chart(ctx1, {
 			scales: {
 				yAxes: [{
 					ticks: {
-						min: 60,
-						stepSize : 1,
+						min: 30,
+						stepSize : 5,
 						fontSize : 14,
 					}
 				}]

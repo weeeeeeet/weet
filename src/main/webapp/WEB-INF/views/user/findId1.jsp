@@ -57,8 +57,7 @@
                                 <label for="userName" class="form-label">이름</label>
                                 <div class="input_group">
                                     <input type="text" class="form-control-sm" name="userName" id="userName" minlength="2" maxlength="15"
-                                        placeholder="김영희" 
-                                        aria-describedby="button-addon2">
+                                        placeholder="김영희" aria-describedby="button-addon2" required>
                                 </div>
                             </div>
                             <div class="inner-list">
@@ -93,7 +92,8 @@
                 </form>
             </div>
         </section>
-        </div>
+        
+     </div>
 
     <!-- js -->
     <script src="/resources/js/user/phone.js"></script>

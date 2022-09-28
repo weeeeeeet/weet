@@ -79,17 +79,10 @@ const createMyCoupon = (inputValue) => {
 			icon.className = "fas fa-exclamation";
 			iconBox.style.background = "#FF730E";
 			modalButton.style.background = "#FF730E";
+			console.log(request);
 			
-			if( request.responseText.includes("ORA-02291") ) {
-				modalTitle.innerText = "존재하지 않는 쿠폰번호 입니다.";
-				modalText.innerText = "쿠폰번호를 정확히 입력해주세요";
-			} else if ( request.responseText.includes("ORA-00001") ) {
-				modalTitle.innerText = "이미 발급받은 쿠폰입니다.";
-				modalText.innerText = "쿠폰은 계정당 1개씩 발급됩니다.";
-			} else {
-				modalTitle.innerText = "처리 중 문제가 발생했습니다.";
-				modalText.innerText = "다시 시도해 주세요.";
-			} // if-else if-else
+			modalTitle.innerText = "쿠폰 발급에 실패하였습니다.";
+			modalText.innerText = "이미 발급받았거나 존재하지 않는 쿠폰입니다.";
 		}, // error
 		complete: () => {
 			$('#myModal').modal("show");

@@ -96,15 +96,15 @@
 
                             <%-- 일반회원 / 트레이너 구별 --%>
                               <c:when test="${__LOGIN__.userType == 'T'.charAt(0)}">
-                                <li class="nav-item"><a class="nav-link" href="/mypageT/activity/boardlist">마이페이지</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/mypageT/activity/boardlist?userId=${__LOGIN__.userId}">마이페이지</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/class/reg">클래스등록</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/user/logout">로그아웃</a></li>
                               </c:when>
 
                               <c:otherwise>
-                                <li class="nav-item"><a class="nav-link" href="/mypage/activity/boardlist?userid=${__LOGIN__.userId}">마이페이지</a>
+                                <li class="nav-item"><a class="nav-link" href="/mypage/activity/boardlist?userId=${__LOGIN__.userId}">마이페이지</a>
                                 </li>
-                                <li class="nav-item"><a class="nav-link" href="/mypage/class/my">내 PT확인</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/mypage/class/my?userId=${__LOGIN__.userId}">내 PT확인</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/coupons/book">쿠폰북</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/user/logout">로그아웃</a></li>
                               </c:otherwise>

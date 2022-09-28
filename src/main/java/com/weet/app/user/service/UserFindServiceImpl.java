@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.weet.app.exception.DAOException;
 import com.weet.app.exception.ServiceException;
-import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.UserVO;
 import com.weet.app.user.mapper.UserFindMapper;
 
@@ -34,20 +33,31 @@ public class UserFindServiceImpl implements UserFindService, InitializingBean, D
 		log.trace("findId({},{}) invoked.", userName, userPhone);
 
 		try { 
-			UserVO vo = this.findmapper.selectMatchId( userName, userPhone );
+			UserVO vo = this.findmapper.selectMatchId(userName, userPhone);
 			return vo; 
 
 		} catch (DAOException e) { throw new ServiceException(e); } // try-catch
 
 	} //findId
+	
+	// 사용자 정보 얻기
+	@Override
+	public UserVO getMatchUser(String userId, String userName, String userPhone) throws ServiceException {
+		try { 
+			UserVO vo = this.findmapper.selectMatchUser(userId, userName, userPhone);
+			
+			return vo; 
 
+		} catch (DAOException e) { throw new ServiceException(e); } // try-catch
+	
+	}
 
 	// 비밀번호 변경
 	@Override
-	public boolean updatePwd(TrainerDTO trainerDTO) throws ServiceException {
-		log.trace("updatePwd({}) invoked.", trainerDTO);
+	public boolean updatePwd(String userId, String userPwd) throws ServiceException {
+		log.trace("updatePwd({},{}) invoked.", userId, userPwd);
 		
-		try { return this.findmapper.updatePwd(trainerDTO) == 1; }
+		try { return this.findmapper.updatePwd(userId, userPwd) == 1; }
 		catch (DAOException e) { throw new ServiceException(e); } // try-catch
 		
 	} //updatePwd
@@ -73,6 +83,7 @@ public class UserFindServiceImpl implements UserFindService, InitializingBean, D
 		assert this.findmapper != null;						// 2nd. method
 
 		log.info("\t+ this.mapper: {}", this.findmapper);
+
 	} // afterPropertiesSet
 
 

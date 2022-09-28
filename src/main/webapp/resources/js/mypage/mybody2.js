@@ -27,8 +27,8 @@ var chart2 = new Chart(ctx2, {
 			scales: {
 				yAxes: [{
 					ticks: {
-						min: 60,
-						stepSize : 1,
+						min: 30,
+						stepSize : 10,
 						fontSize : 14,
 					}
 				}]

@@ -192,7 +192,7 @@ const clickLike = () => {
 
 getReviews(classId, 'recent', 1);
 getTotalLikes(classId);
-likeCheck(classId, 'user1');
+likeCheck(classId, loginUserId);
 
 const mainImg = (document.querySelector('.main-img-url').src);
 document.querySelector('.hero').style.backgroundImage 

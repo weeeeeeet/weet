@@ -56,8 +56,8 @@ h3{
 }
 
 .sub-text h3 {                  /* 서브 문구 1 */
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .sub-text p {                    /* 서브 문구 2 */
@@ -93,7 +93,7 @@ h3{
 
 .form-control-sm{                  /* input 스타일 */
     border: 2px solid #2370DF; 
-    width: 400px;
+    width: 380px;
     height: 35px;
 }
 
@@ -125,5 +125,5 @@ h3{
     border: none;
     border-radius: 10px; 
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 100px;
 }

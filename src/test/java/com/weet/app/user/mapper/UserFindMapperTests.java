@@ -39,10 +39,7 @@ import lombok.extern.log4j.Log4j2;
 // For JUnit Jupyter v5
 @ExtendWith(SpringExtension.class)
 
-@ContextConfiguration(locations= {
-	"file:src/main/webapp/WEB-INF/spring/root-context.xml",
-	"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"
-})
+@ContextConfiguration(locations = "file:src/main/webapp/**/spring/**/*-context.xml")
 
 @WebAppConfiguration
 @TestInstance(Lifecycle.PER_CLASS)
@@ -81,6 +78,45 @@ public class UserFindMapperTests {
 		log.info("\t+ vo: {}", vo);
 
 	} // testSelectId
+	
+//  아이디 찾기
+//	@Disabled
+	@Test
+	@Order(2)
+	@DisplayName("2. UserMapper.testSelectMatchUser() test.")
+	@Timeout(value=5, unit=TimeUnit.SECONDS)
+	void testSelectMatchUser() throws DAOException {
+		log.trace("testSelectMatchId() invoked.");
+		
+		String userId = "testId";
+		String userName = "testName";
+		String userPhone = "01012344321";
+		
+		UserVO vo = this.findmapper.selectMatchUser(userId, userName, userPhone);
+
+		Objects.requireNonNull(vo);
+		log.info("\t+ vo: {}", vo);
+
+	} // testSelectMatchUser
 
 
+//  아이디 찾기
+//	@Disabled
+	@Test
+	@Order(3)
+	@DisplayName("3. UserMapper.testUpdatePwd() test.")
+	@Timeout(value=5, unit=TimeUnit.SECONDS)
+	void testUpdatePwd() throws DAOException {
+		log.trace("testSelectMatchId() invoked.");
+		
+		String userId = "testId";
+		String userPwd = "ChangePwd";
+		
+		int affectedLines = this.findmapper.updatePwd(userId, userPwd);
+
+		log.info("\t+ affectedLines: {}", affectedLines);
+		
+		assert affectedLines == 1;
+
+	} // testUpdatePwd
 } // end class
