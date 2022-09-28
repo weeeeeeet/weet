@@ -1,6 +1,5 @@
 package com.weet.app.mypage.mapper;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -10,9 +9,9 @@ import com.weet.app.exception.DAOException;
 import com.weet.app.mypage.domain.Criteria;
 import com.weet.app.mypage.domain.MypageBoardVO;
 import com.weet.app.mypage.domain.MypageBodyDTO;
+import com.weet.app.mypage.domain.MypageCheckClassVO;
 import com.weet.app.mypage.domain.MypageClassVO;
 import com.weet.app.mypage.domain.MypageReplyVO;
-import com.weet.app.mypage.domain.MypageReviewDTO;
 
 public interface MypageTMapper {
 	
@@ -82,19 +81,9 @@ public interface MypageTMapper {
 	public abstract Integer selectDoneClassAmount(@Param("userId")String userId) throws DAOException;
 	
 	// ====================================================================
-	// 7. 후기 등록하기 ( 미완 : 파일업로드 관련 문제 )
+	// 9. 클래스 검수 (OK)
 	// ====================================================================
-	public abstract Integer insertReview(MypageReviewDTO dto) throws DAOException;
-	
-	// ====================================================================
-	// 8. 시작 전 클래스 (OK)
-	// ====================================================================
-	public abstract List<MypageClassVO> selectBeforeClass(@Param("userId")String userId) throws DAOException;
-	
-	// ====================================================================
-	// 9. 찜한 클래스 (OK)
-	// ====================================================================
-	public abstract List<MypageClassVO> selectLikeClass(@Param("userId")String userId) throws DAOException;
+	public abstract List<MypageCheckClassVO> selectLikeClass(@Param("userId")String userId) throws DAOException;
 	
 	// ====================================================================
 	// 10. 마이바디 페이지 불러오기

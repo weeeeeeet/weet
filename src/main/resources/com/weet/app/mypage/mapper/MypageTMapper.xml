@@ -117,7 +117,7 @@
             /*+ INDEX_DESC(T_CLASS) */
             
             t.class_id,
-            ls.user_id,
+            t.user_id,
             t.class_trainer_name,
             t.class_title,
             t.CLASS_MAIN_IMG_URL
@@ -126,7 +126,7 @@
             T_CLASS t, t_class_listener ls
         WHERE
             t.class_id = ls.class_id
-        	AND ls.USER_ID = #{userId}
+        	AND t.USER_ID = #{userId}
         	AND ls.STATUS = '0'
 
         OFFSET (#{cri.currPage} - 1) * #{cri.amount} ROWS
@@ -146,16 +146,16 @@
                 /*+ INDEX_DESC(T_CLASS) */
                 
                 t.class_id,
-                ls.user_id,
-                t.class_trainer_name,
-                t.class_title,
-                t.CLASS_MAIN_IMG_URL
+	            t.user_id,
+	            t.class_trainer_name,
+	            t.class_title,
+	            t.CLASS_MAIN_IMG_URL
                 
             FROM
                 T_CLASS t, t_class_listener ls
             WHERE
                 t.class_id = ls.class_id
-                AND ls.USER_ID = #{userId}
+                AND t.USER_ID = #{userId}
                 AND ls.STATUS = '1'
 
             OFFSET (#{cri.currPage} - 1) * #{cri.amount} ROWS
@@ -184,47 +184,11 @@
         ]]>
     
     </select>
-
-    <!-- 후기 등록 -->
-    <insert id="insertReview">
-
-        INSERT INTO t_review ( USER_ID, CLASS_ID, REVIEW_STAR, REVIEW_CONTENTS, REVIEW_DATETIME )
-        VALUES( #{userId}, #{classId}, #{reviewStar}, #{reviewContents}, to_date(CURRENT_DATE,'yyyy/mm/dd') )
-
-    </insert>
-
-    <!-- 수강 시작 전 클래스 조회 -->
-    <select 
-        id="selectBeforeClass" 
-        resultType="com.weet.app.mypage.domain.MypageClassVO">
-
-        <![CDATA[
-
-            SELECT
-
-                /*+ INDEX_DESC(T_CLASS) */
-                
-                t.class_id,
-                ls.user_id,
-                t.class_trainer_name,
-                t.class_title,
-                t.CLASS_MAIN_IMG_URL
-                
-            FROM
-                T_CLASS t, t_class_listener ls
-            WHERE
-                t.class_id = ls.class_id
-                AND ls.USER_ID = #{userId}
-                AND ls.PROGRESS = 0
-
-        ]]>
     
-    </select>
-    
-    <!-- 찜한 클래스 조회 -->
+    <!-- 클래스 검수 조회 -->
     <select 
         id="selectLikeClass" 
-        resultType="com.weet.app.mypage.domain.MypageClassVO">
+        resultType="com.weet.app.mypage.domain.MypageCheckClassVO">
 
         <![CDATA[
 
@@ -236,7 +200,8 @@
                 ls.user_id,
                 t.class_trainer_name,
                 t.class_title,
-                t.CLASS_MAIN_IMG_URL
+                t.CLASS_MAIN_IMG_URL,
+                t.CLASS_REGISTER_STATUS
                 
             FROM
                 T_CLASS t, t_like_class ls

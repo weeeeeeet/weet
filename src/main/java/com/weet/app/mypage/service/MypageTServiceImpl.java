@@ -12,9 +12,9 @@ import com.weet.app.exception.ServiceException;
 import com.weet.app.mypage.domain.Criteria;
 import com.weet.app.mypage.domain.MypageBoardVO;
 import com.weet.app.mypage.domain.MypageBodyDTO;
+import com.weet.app.mypage.domain.MypageCheckClassVO;
 import com.weet.app.mypage.domain.MypageClassVO;
 import com.weet.app.mypage.domain.MypageReplyVO;
-import com.weet.app.mypage.domain.MypageReviewDTO;
 import com.weet.app.mypage.mapper.MypageTMapper;
 
 import lombok.NoArgsConstructor;
@@ -225,45 +225,11 @@ public class MypageTServiceImpl implements MypageTService, InitializingBean {
 	} // getTotalDoneClass
 	
 	// ======================================================================
-	// + 후기 등록 기능
-	// ======================================================================
-	
-	@Override
-	public boolean addReview(MypageReviewDTO dto) throws ServiceException {
-		
-		log.trace("addReview({}) invoked.", dto);
-		
-		try {
-			return this.mapper.insertReview(dto) == 1;
-		} catch (DAOException e) {
-			throw new ServiceException(e);
-		} // try - catch
-		
-	} // addAuto
-	
-	// ======================================================================
-	// 8 ) 시작 전인 클래스 조회
-	// ======================================================================
-	
-	@Override
-	public List<MypageClassVO> getListPreClass(MypageClassVO vo) throws ServiceException {
-		
-		log.trace("getListPreClass() invoked.");
-		
-		try {
-			return this.mapper.selectBeforeClass(vo.getUserId());
-		} catch (DAOException e) {
-			throw new ServiceException(e);
-		} // try - catch
-		
-	} // getListPreClass
-	
-	// ======================================================================
 	// 9 ) 좋아요 누른 클래스 조회
 	// ======================================================================
 	
 	@Override
-	public List<MypageClassVO> getListLikeClass(MypageClassVO vo) throws ServiceException {
+	public List<MypageCheckClassVO> getListLikeClass(MypageClassVO vo) throws ServiceException {
 		
 		log.trace("getListLikeClass() invoked.");
 		

@@ -75,9 +75,9 @@
             <div class="mypage_top">
 
                 <ul class="mypage_toplist">
-                    <li><a href="#">내 클래스룸</a></li>
-                    <li><a href="#">완료 클래스</a></li>
-                    <li><a href="#" class="on">클래스 검수</a></li>
+                    <li><a href="/mypageT/class/my">내 클래스 룸</a></li>
+                    <li><a href="/mypageT/class/expired">종료 클래스 룸</a></li>
+                    <li><a href="/mypageT/class/progress" class="on">클래스 검수</a></li>
                 </ul>
 
             </div>
@@ -86,6 +86,7 @@
 
                 <div class="Myclass_checkclass_comment">
                     <div>● 클래스 등록을 요청하시면 하시면 검수를 통해서 승인 완료됩니다.</div>
+                    <div>● 클래스 검수 상태에서 대기는 1, 반려는 2, 승인은 3으로 나타납니다.</div>
                 </div>
 
                 <table class="table_checkclass_table table table-striped table-hover">

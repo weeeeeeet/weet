@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.weet.app.exception.ControllerException;
 import com.weet.app.mypage.domain.Criteria;
 import com.weet.app.mypage.domain.MypageBoardVO;
+import com.weet.app.mypage.domain.MypageClassVO;
+import com.weet.app.mypage.domain.MypageReplyVO;
 import com.weet.app.mypage.domain.PageDTO;
 import com.weet.app.mypage.service.MypageTService;
 
@@ -47,7 +49,7 @@ public class MyPageTController implements InitializingBean {
 	} // afterPropertiesSet
 	
 	// =======================================================
-		// 1. 일반회원 - 마이페이지 - 내활동 페이지 - TR게시판
+		// 1. 트레이너 회원 - 마이페이지 - 내활동 페이지 - TR게시판
 	// =======================================================
 	
 	@GetMapping("/activity/boardlist")
@@ -82,10 +84,30 @@ public class MyPageTController implements InitializingBean {
 	// =======================================================
 	
 	@GetMapping("/activity/boardlike")
-	public String myBoardLike() {
-		log.trace("myBoardLike() invoked.");
+	public String myBoardLike(Criteria cri, MypageBoardVO vo,Model model) throws ControllerException {
+		log.trace("myBoardLike({}, {}, {}) invoked.", cri, vo, model);
 		
-		return "mypageT/activity/boardlike";
+		try {
+			
+			// + uservo를 세션으로 등록하면 꺼내쓰면 된다.
+			
+			//1. 게시물 출력
+			List<MypageBoardVO> list = this.service.getListLike(cri, vo);
+			list.forEach(log::info);
+			
+			// 2. 페이징 처리
+			PageDTO pageDTO = new PageDTO( cri, this.service.getTotalLike(vo) );
+			model.addAttribute("__PAGENATION__", pageDTO);
+			
+			// + value가 NULL이면 공유속성에 추가가 안되기에, NULL인지 아닌지 파악하지 않아도 OK!
+			model.addAttribute("__LIST__",list);
+			
+			return "mypageT/activity/boardlike";
+			
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try - catch : ServiceException을 ControllerException으로
+		
 	} // myBoardLike
 	
 	// =======================================================
@@ -93,10 +115,30 @@ public class MyPageTController implements InitializingBean {
 	// =======================================================
 	
 	@GetMapping("/activity/boardreplye")
-	public String myBoardReplye() {
-		log.trace("myBoardReplye() invoked.");
+	public String myBoardReplye( Criteria cri, MypageReplyVO vo,Model model ) throws ControllerException {
+		log.trace("myBoardReplye({}, {}, {}) invoked.", cri, vo, model);
 		
-		return "mypageT/activity/boardreplye";
+		try {
+			
+			// + uservo를 세션으로 등록하면 꺼내쓰면 된다.
+			
+			//1. 게시물 출력
+			List<MypageReplyVO> list = this.service.getListReply(cri, vo);
+			list.forEach(log::info);
+			
+			// 2. 페이징 처리
+			PageDTO pageDTO = new PageDTO( cri, this.service.getTotalReplies(vo) );
+			model.addAttribute("__PAGENATION__", pageDTO);
+			
+			// + value가 NULL이면 공유속성에 추가가 안되기에, NULL인지 아닌지 파악하지 않아도 OK!
+			model.addAttribute("__LIST__",list);
+			
+			return "mypageT/activity/boardreplye";
+			
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try - catch : ServiceException을 ControllerException으로
+		
 	} // myBoardReply
 	
 	// =======================================================
@@ -104,10 +146,28 @@ public class MyPageTController implements InitializingBean {
 	// =======================================================
 	
 	@GetMapping("/activity/boardreplydone")
-	public String myBoardReplyDone() {
-		log.trace("myBoardReplyDone() invoked.");
+	public String myBoardReplyDone(Criteria cri, MypageBoardVO vo,Model model ) throws ControllerException {
+		log.trace("myBoardReplyDone({}, {}, {}) invoked.", cri, vo, model);
 		
-		return "mypageT/activity/boardreplydone";
+		try {
+			
+			//1. 게시물 출력
+			List<MypageBoardVO> list = this.service.getListReplyDone(cri, vo);
+			list.forEach(log::info);
+			
+			// 2. 페이징 처리
+			PageDTO pageDTO = new PageDTO( cri, this.service.getTotalReply(vo) );
+			model.addAttribute("__PAGENATION__", pageDTO);
+			
+			// + value가 NULL이면 공유속성에 추가가 안되기에, NULL인지 아닌지 파악하지 않아도 OK!
+			model.addAttribute("__LIST__",list);
+			
+			return "mypageT/activity/boardreplydone";
+			
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try - catch : ServiceException을 ControllerException으로
+		
 	} // myBoardReplyDone
 	
 	// =======================================================
@@ -115,21 +175,59 @@ public class MyPageTController implements InitializingBean {
 	// =======================================================
 	
 	@GetMapping("/class/my")
-	public String myClass() {
+	public String myClass(Criteria cri, MypageClassVO vo,Model model) throws ControllerException {
 		log.trace("myClass() invoked.");
 		
-		return "mypageT/class/my";
+		try {
+			
+			//1. 게시물 출력
+			List<MypageClassVO> list = this.service.getListClass(cri, vo);
+			list.forEach(log::info);
+			
+			// 2. 페이징 처리
+			cri.setAmount(3);
+			PageDTO pageDTO = new PageDTO( cri, this.service.getTotalClass(vo) );
+			model.addAttribute("__PAGENATION__", pageDTO);
+			
+			// + value가 NULL이면 공유속성에 추가가 안되기에, NULL인지 아닌지 파악하지 않아도 OK!
+			model.addAttribute("__LIST__",list);
+			
+			return "mypageT/class/my";
+			
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try - catch : ServiceException을 ControllerException으로
+		
 	} // myClass
 	
 	// =======================================================
 		// 5. 트레이너회원 - 마이페이지 - 내클래스룸 - 수강 종료 클래스룸 (***)
 	// =======================================================
 	
-	@GetMapping("/class/expired")
-	public String expiredClass() {
+	@GetMapping("/class/expired") // 페이지 확인용
+	public String expiredClass(Criteria cri, MypageClassVO vo,Model model) throws ControllerException {
 		log.trace("expiredClass() invoked.");
 		
-		return "mypageT/class/expired";
+		try {
+			
+			//1. 게시물 출력
+			List<MypageClassVO> list = this.service.getListDoneClass(cri, vo);
+			list.forEach(log::info);
+			
+			// 2. 페이징 처리
+			cri.setAmount(3);
+			PageDTO pageDTO = new PageDTO( cri, this.service.getTotalDoneClass(vo) );
+			model.addAttribute("__PAGENATION__", pageDTO);
+			
+			// + value가 NULL이면 공유속성에 추가가 안되기에, NULL인지 아닌지 파악하지 않아도 OK!
+			model.addAttribute("__LIST__",list);
+			
+			return "mypageT/class/expired";
+			
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try - catch : ServiceException을 ControllerException으로
+		
 	} // expiredClass
 	
 	// =======================================================

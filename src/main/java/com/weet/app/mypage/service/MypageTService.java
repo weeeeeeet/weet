@@ -6,9 +6,9 @@ import com.weet.app.exception.ServiceException;
 import com.weet.app.mypage.domain.Criteria;
 import com.weet.app.mypage.domain.MypageBoardVO;
 import com.weet.app.mypage.domain.MypageBodyDTO;
+import com.weet.app.mypage.domain.MypageCheckClassVO;
 import com.weet.app.mypage.domain.MypageClassVO;
 import com.weet.app.mypage.domain.MypageReplyVO;
-import com.weet.app.mypage.domain.MypageReviewDTO;
 
 public interface MypageTService {
 	
@@ -48,14 +48,8 @@ public interface MypageTService {
 	// + 페이징 처리에 필요한 수강 종료 클래스의 총 양 구하기
 	public abstract Integer getTotalDoneClass(MypageClassVO vo) throws ServiceException;
 	
-	// 7. 수강종료 클래스 후기 작성
-	public abstract boolean addReview(MypageReviewDTO dto) throws ServiceException;
-	
-	// 8. 수강 예정인 클래스 조회
-	public abstract List <MypageClassVO> getListPreClass(MypageClassVO vo) throws ServiceException;
-	
 	// 9. 좋아요 누른 클래스 조회
-	public abstract List <MypageClassVO> getListLikeClass(MypageClassVO vo) throws ServiceException;
+	public abstract List <MypageCheckClassVO> getListLikeClass(MypageClassVO vo) throws ServiceException;
 	
 	// 10. 마이페이지 조회
 	public abstract List <MypageBodyDTO> getListMybody(MypageBodyDTO vo) throws ServiceException;
