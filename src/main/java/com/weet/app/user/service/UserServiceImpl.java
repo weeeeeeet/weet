@@ -158,6 +158,7 @@ public class UserServiceImpl implements UserService {
             // POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             StringBuilder sb = new StringBuilder();
+            sb.append("grant_type=authorization_code");
             sb.append("&client_id=e633a1a319cc541dac0ec78d1f28cfa4");    // REST_API_KEY 입력
             sb.append("&redirect_uri=http://localhost:8080/api/kakao/oauth"); // 인가코드 받은 redirect_uri 입력
             sb.append("&code=");
@@ -246,11 +247,11 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException(e);
 		} // try-catch
 
-	}
+	} // createKakaoUser
 
 
 	@Override
-	public HashMap<String, Object> getUserInfo(String access_Token) throws ServiceException {
+	public UserVO getUserInfo(String access_Token) throws ServiceException {
 //	    요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
         HashMap<String, Object> userInfo = new HashMap<>();
         String reqURL = "https://kapi.kakao.com/v2/user/me";
@@ -277,38 +278,48 @@ public class UserServiceImpl implements UserService {
 
             //Gson 라이브러리로 JSON파싱
             JsonElement element = JsonParser.parseString(result);
+            log.info("\t+ element: {}", element);
             JsonObject object = element.getAsJsonObject();
-
+            log.info("\t+ object: {}", object);
+            
             JsonObject properties = object.get("properties").getAsJsonObject();
             JsonObject kakao_account = object.get("kakao_account").getAsJsonObject();
 
-            String nickname = properties.getAsJsonObject().get("profile_nickname").getAsString();
-            String profile_image = properties.getAsJsonObject().get("profile_image").getAsString();
-            String email = kakao_account.getAsJsonObject().get("account_email").getAsString();
-            String name = kakao_account.getAsJsonObject().get("name").getAsString();
-            String gender = kakao_account.getAsJsonObject().get("gender").getAsString();
-            String phone = kakao_account.getAsJsonObject().get("phone_number").getAsString();
-
-            userInfo.put("nickname", nickname);
-            userInfo.put("email", email);
-            userInfo.put("profile_image", profile_image);
-            userInfo.put("name", name);
-            userInfo.put("gender", gender);
-
-            log.info("\t + nickname :{}" , nickname);
-            log.info("\t + email :{}" , email);
-            log.info("\t + profile_image :{}" , profile_image);
-            log.info("\t + name :{}" , name);
-            log.info("\t + gender :{}" , gender);
-            log.info("\t + phone :{}" , phone);
-
-
+            UserDTO userDTO = new UserDTO();
+            userDTO.setUserEmail(kakao_account.get("email").getAsString());
+            userDTO.setUserId(object.get("id").getAsString());
+            userDTO.setUserName(properties.get("nickname").getAsString());
+            userDTO.setUserNickname(properties.get("nickname").getAsString());
+            userDTO.setUserPhone("01012341234");
+            userDTO.setUserProfile(properties.get("profile_image").getAsString());
+            userDTO.setUserReceiveEmailAgmtYN('N');
+            userDTO.setUserReceiveSMSAgmtYN('N');
+            userDTO.setUserSvcPCYAgmtYN('Y');
+            userDTO.setUserSvcUseAgmtYN('Y');
+            userDTO.setUserType('N');
+            
+            if ( kakao_account.get("gender").getAsString().equals("female") ) userDTO.setUserGender('W');
+            else userDTO.setUserGender('M');
+            
+            MemberDTO memberDTO = new MemberDTO();
+            memberDTO.setUserId(object.get("id").getAsString());
+            memberDTO.setUserIdToken(access_Token);
+            memberDTO.setUserPlatform("K");
+            
+            log.info("\t+ userDTO: {}", userDTO);
+            
+            // DB에 없으면 등록, 있으면 토큰 업데이트
+    		if( idCheck(userDTO.getUserId()) == 0 ) {
+    			userJoin(userDTO, memberDTO);
+    		} else {
+    			userTokenUpdate(memberDTO);
+    		} // if-else
+    		
+    		return getUserProfile(userDTO.getUserId());
         } catch (Exception e) {
 			throw new ServiceException(e);
 		} // try-catch
-
-        return userInfo;
-    }
+    } // getUserInfo
 	
 	
 	// =============== Naver Join&Login ================= // 
