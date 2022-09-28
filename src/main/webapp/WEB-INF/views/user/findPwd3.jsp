@@ -46,7 +46,7 @@
                     <p>변경된 비밀번호로 로그인하세요.</p>
                 </div>
                 <div class="inner-list alon">
-                    <button class="loginbtn" type="submit" value="로그인하기">로그인하기</button>
+                    <button class="loginbtn" type="button" onclick="location.href='/user/tr/login'" value="로그인하기">로그인하기</button>
                 </div>
             </div>
         </div>

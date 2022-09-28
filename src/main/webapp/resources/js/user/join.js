@@ -77,7 +77,7 @@ function joinform_check() {
       return false;
     }
     
-    // 핸드폰번호 입력 및 형식 확인 - 인증을 따로 하는 데, 필요있을까...
+    // 핸드폰번호 입력 및 형식 확인
     let num = /^[0-9]+/g; //숫자만 입력하는 정규식
 
     if (!num.test(userPhone.value)) {
