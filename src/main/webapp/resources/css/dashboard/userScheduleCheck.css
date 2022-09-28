@@ -70,7 +70,32 @@ section div.myScheduleTitle h2 { /*내 스케쥴 확인 타이틀*/
 }
 
 .ScheduleBoard {    /* 스케쥴 타임라인 여백*/
-    margin: 50px;
+    margin-top: 50px;
+    margin-left: 20px;
+    margin-right: 50px;
+}
+/* 스크롤 */
+
+.ScheduleScroll{
+    overflow: auto;
+    overflow-x: hidden;
+    height: 600px; /* 박스 높이 */ 
+    padding-bottom: 20px;
+    font-size: 14px;/* 리스트 폰트 사이즈 */
+}
+.ScheduleScroll::-webkit-scrollbar { /*공지사항 리스트 스크롤 너비*/
+    width: 12px;
+}
+.ScheduleScroll::-webkit-scrollbar-thumb { /*공지사항 리스트 스크롤 막대*/
+    background-color: #95B4E0;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+.ScheduleScroll::-webkit-scrollbar-track { /*공지사항 리스트 스크롤 여백*/
+    background-color: rgb(224, 224, 224);
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
 }
 
 /* ----------codepen-------------------------------------------------------------- */
@@ -89,7 +114,7 @@ h2 {
     list-style: none;
     margin: 50px 0 30px 120px;
     padding-left: 30px;
-    border-left: 8px solid #e7e7e7;
+    border-left: 5px solid #9bb4ff;
 }
 #timeline li {
 margin: 40px 0;
@@ -100,6 +125,7 @@ margin: 0 0 15px;
 }
   
 .date {
+font-weight: bold;
 margin-top: -10px;
 top: 50%;
 left: -158px;
@@ -115,7 +141,7 @@ left: -44px;
 width: 10px;
 height: 10px;
 background: #48b379;
-border: 5px solid #e7e7e7;
+border: 5px solid #9bb4ff;
 border-radius: 50%;
 display: block;
 position: absolute;
@@ -185,7 +211,7 @@ background: #f98262;
 }
 .radio:checked ~ .content {
 max-height: 180px;
-border-color: #424242;
+border-color: #9bb4ff;
 margin-right: 20px;
 transform: translateX(20px);
 transition: max-height 0.4s linear, border-color 0.5s linear, transform 0.2s linear;
@@ -251,4 +277,8 @@ transition: color 0.3s linear 0.3s;
         display: none;
     }
 } /* @media */
-  
+
+/* 시간 */
+.time{
+    margin-left: 4px;
+}

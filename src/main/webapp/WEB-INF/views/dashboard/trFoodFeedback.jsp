@@ -57,297 +57,36 @@ pageEncoding="UTF-8"%>
         </div>
 
     <!-- 회원님의 식단 관리 대시보드 -->
-    <div class="user-food g">
+        <div class="user-food g">
+
         <div class="back-color">
             <div class="g">
                 <h2>Robert Fox 회원님의 식단 관리</h2>
             </div>
-        </div>
+        </div> <!--back-color-->  
         
         <!-- 회원님 식단 리스트 -->
         <div class="pic-list g">
 
-            <div class="row">
+                <div class="row">
+                    <c:forEach var="foodfeedback" items="${__FOODLIST__}">
+                     <!-- 첫번째 라인 -->
+                     <div class="col">
+                       
+                             <div class="card g" >
+                                 <a href="/dashboard/tr/foodfb/detail" class="g" target="self">
+                                 	<img src="https://picsum.photos/id/889/600/400" class="card-img-top" alt="">
+                                	<h5 class="card-title g"><fmt:formatDate pattern="yyyy/MM/dd" value="${foodfeedback.feedback_diet_ts}" /></h5>
+                                 </a>
+                             </div>   
+                      
+                     </div> <!-- col -->
+                 
+                    </c:forEach>   
+                </div> <!-- row -->
 
-            <!-- 첫번째 라인 -->
-            <div class="col">
-                <div class="card g" >
-                    <a href="/dashboard/tr/foodfb/detail" class="g" target="self">
-                    <img src="https://picsum.photos/id/889/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                    
-                </div>
-
-                <div class="card g" >
-                    <a href="/dashboard/tr/foodfb/detail" class="g" target="self">
-                    <img src="https://picsum.photos/id/999/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="/dashboard/tr/foodfb/detail" class="g" target="self">
-                    <img src="https://picsum.photos/id/493/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="/dashboard/tr/foodfb/detail" class="g" target="self">
-                    <img src="https://picsum.photos/id/429/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="/dashboard/tr/foodfb/detail" class="g" target="self">
-                    <img src="https://picsum.photos/id/326/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="/dashboard/tr/foodfb/detail" class="g" target="self">
-                    <img src="https://picsum.photos/id/292/600/400" class="card-img-top" alt="">
-                        <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- 두번째 라인 -->
-            <div class="col">
-                <div class="card g" >
-                    <a href="/dashboard/tr/foodfb/detail" class="g" target="self">
-                    <img src="https://picsum.photos/id/889/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                    
-                </div>
-
-                <div class="card g" >
-                    <a href="/dashboard/tr/foodfb/detail" class="g" target="self">
-                    <img src="https://picsum.photos/id/999/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="/dashboard/tr/foodfb/detail" class="g" target="self">
-                    <img src="https://picsum.photos/id/493/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="/dashboard/tr/foodfb/detail" class="g" target="self">
-                    <img src="https://picsum.photos/id/429/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/326/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/292/600/400" class="card-img-top" alt="">
-                        <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- 세번째 라인 -->
-            <div class="col">
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/889/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                    
-                </div>
-
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/999/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/493/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/429/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/326/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/292/600/400" class="card-img-top" alt="">
-                        <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-            </div>
-
-            <!-- 네번째 라인 -->
-            <div class="col">
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/889/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                    
-                </div>
-
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/999/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/493/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/429/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/326/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/292/600/400" class="card-img-top" alt="">
-                        <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-            </div>
-        
-            <!-- 다섯번째 라인 -->
-            <div class="col">
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/889/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                    
-                </div>
-
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/999/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/493/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/429/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/326/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/292/600/400" class="card-img-top" alt="">
-                        <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-            </div>
-
-            <!-- 여섯번째 라인 -->
-            <div class="col">
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/889/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                    
-                </div>
-
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/999/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/493/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/429/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/326/600/400" class="card-img-top" alt="">
-                    <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-
-                <div class="card g" >
-                    <a href="#" class="g" target="self">
-                    <img src="https://picsum.photos/id/292/600/400" class="card-img-top" alt="">
-                        <h5 class="card-title g">2022.07.13</h5>
-                    </a>
-                </div>
-            </div>
-        </div>
-        </div>
-
-    </div>
+        </div> <!-- pic-list -->  
+    </div>  <!-- user-food -->  
 </div>
 
 </section>

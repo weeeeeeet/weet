@@ -24,6 +24,8 @@ public class ScheduleVO {
 	// 7. 수업 시작 분(mm)
 	private Integer cs_start_time_mm;
 	
-	private String userId;
+	// T_CLASS_LISTENER
+	// 8. 유저 id
+	private String user_id;
 	
 } // end class
