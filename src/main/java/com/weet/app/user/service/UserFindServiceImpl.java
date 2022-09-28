@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.weet.app.exception.DAOException;
 import com.weet.app.exception.ServiceException;
+import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.UserVO;
 import com.weet.app.user.mapper.UserFindMapper;
 
@@ -27,6 +28,7 @@ public class UserFindServiceImpl implements UserFindService, InitializingBean, D
 	@Setter(onMethod_= @Autowired)
 	private UserFindMapper findmapper;
 
+	// 아이디찾기
 	@Override
 	public UserVO findId(String userName, String userPhone) throws ServiceException {
 		log.trace("findId({},{}) invoked.", userName, userPhone);
@@ -37,8 +39,20 @@ public class UserFindServiceImpl implements UserFindService, InitializingBean, D
 
 		} catch (DAOException e) { throw new ServiceException(e); } // try-catch
 
-	} // FindId
+	} //findId
 
+
+	// 비밀번호 변경
+	@Override
+	public boolean updatePwd(TrainerDTO trainerDTO) throws ServiceException {
+		log.trace("updatePwd({}) invoked.", trainerDTO);
+		
+		try { return this.findmapper.updatePwd(trainerDTO) == 1; }
+		catch (DAOException e) { throw new ServiceException(e); } // try-catch
+		
+	} //updatePwd
+
+	
 	//===================================================//
 
 	// DisposableBean : 이 Bean 클래스로부터 생성된 bean 객체가 파괴되기 직전에 called back.
@@ -60,8 +74,6 @@ public class UserFindServiceImpl implements UserFindService, InitializingBean, D
 
 		log.info("\t+ this.mapper: {}", this.findmapper);
 	} // afterPropertiesSet
-
-
 
 
 } // end class

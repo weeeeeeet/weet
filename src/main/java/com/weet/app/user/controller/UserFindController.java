@@ -7,10 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.weet.app.exception.ControllerException;
+import com.weet.app.user.domain.TrainerDTO;
 import com.weet.app.user.domain.UserVO;
 import com.weet.app.user.service.UserFindService;
 
@@ -28,7 +28,7 @@ public class UserFindController {
 	@Setter(onMethod_= {@Autowired})
 	private UserFindService findservice;
 	
-	// 1. 아이디 찾기 창
+	// 아이디 찾기 창
 	@GetMapping("/id")
 	public String findIdPage() {
 		log.trace("findIdPage() invoked.");
@@ -37,10 +37,10 @@ public class UserFindController {
 	} // findIdPage	
 	
 	
-	// 2. 아이디 찾기 
+	// 아이디 찾기 
 	@PostMapping("/id")
-	public String findId(String userName, String userPhone, Model model, RedirectAttributes rttrs) throws ControllerException {
-		log.trace("findId() invoked.");
+	public String findId(String userName, String userPhone, RedirectAttributes rttrs) throws ControllerException {
+		log.trace("findId({},{},{}) invoked.", userName, userPhone, rttrs);
 		
 		try {
 
@@ -57,7 +57,7 @@ public class UserFindController {
 
 	} // findId
 	
-	// 3. 아이디 확인
+	// 아이디 확인
 	@GetMapping("/findingid")
 	public String findingIdPage() {
 		log.trace("findIdCheckPage() invoked.");
@@ -65,7 +65,7 @@ public class UserFindController {
 		return "/user/findId2";
 	} // findIdCheckPage
 	
-	// 4. 비밀번호 찾기 창
+	// 비밀번호 찾기 창
 	@GetMapping("/pwd")
 	public String findPwdPage() {
 		log.trace("findPwdPage() invoked.");
@@ -73,51 +73,35 @@ public class UserFindController {
 		return "/user/findPwd1";
 	} // findPwdPage
 	
-	// 5. 비밀번호 찾기(아이디입력)
+	// 비밀번호 찾기(정보입력)
 	@PostMapping("/pwd")
-	public String findPwd(Model model) {
-		log.trace("findPwd() invoked.");
+	public String findPwd(TrainerDTO trainerDTO, RedirectAttributes rttrs) {
+		log.trace("findPwd({}, {}) invoked.", trainerDTO, rttrs);
 		
-		return "/user/findPwd1";
+		return "redirect:/user/find/pwdch";
 	} // findPwd
-	
-	// 6. 비밀번호 찾기 창(번호인증)
-	@GetMapping("/pwdmb")
-	public String findPwdMobilePage(Model model) {
-		log.trace("findPwdMobilePage() invoked.");
 		
-		return "/user/findPwd2";
-	} // findPwdMobilePage	
-	
-	// 7. 비밀번호 찾기(번호인증)
-	@PostMapping("/pwdmb")
-	public String findPwdMobile(Model model) {
-		log.trace("findPwdMobile() invoked.");
-		
-		return "/user/findPwd2";
-	} // findPwdMobile	
-		
-	// 8. 비밀번호 찾기 창(비밀번호변경)
+	// 비밀번호 찾기 창(비밀번호변경)
 	@GetMapping("/pwdch")
 	public String findPwdChangePage(Model model) {
 		log.trace("findPwdChangePage() invoked.");
 		
-		return "/user/findPwd3";
+		return "/user/findPwd2";
 	} // findPwdChangePage
 	
-	// 9. 비밀번호 찾기(비밀번호변경)
+	// 비밀번호 찾기(비밀번호변경)
 	@PostMapping("/pwdch")
 	public String findPwdChange(Model model) {
 		log.trace("findPwdChange() invoked.");
 		
-		return "redirect:/user/find/findPwd4";
+		return "redirect:/user/find/pwddone";
 	} // findPwdChange
 
-	// 10. 비밀번호 찾기 완료
+	// 비밀번호 찾기 완료
 	@GetMapping("/pwddone")
 	public String findPwdDone() {
 		log.trace("findPwdDone() invoked.");
 		
-		return "/user/findPwd4";
+		return "/user/findPwd3";
 	} // findPwdDone
 }

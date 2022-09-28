@@ -64,6 +64,10 @@ h3{
     font-size: 14px;
 }
 
+.findid{
+    width: 400px;
+    display: inline-block;
+}
 
 .findpwd{
     width: 400px;
@@ -87,18 +91,29 @@ h3{
     /* border: 2px solid green; */
 }
 
-.alon {
-    padding: 40px 0;
-    /* border: 2px solid #2370DF;  */
-}
-
-
 .form-control-sm{                  /* input 스타일 */
     border: 2px solid #2370DF; 
     width: 400px;
     height: 35px;
 }
 
+.form-control{
+    border: 2px solid #2370DF; 
+    float: left;
+    height: 35px;
+    font-size: .875rem;
+    
+}
+
+.btn-outline-secondary {
+    height: 35px;
+    color: white;
+    background-color: #2370DF;
+    border: none;
+    font-size:12px;
+    flex-direction: column;
+    font-size: .875rem;
+}
 
 .loginbtn{                                 /* 로그인 버튼 */
     background-color: #2370DF;

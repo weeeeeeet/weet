@@ -28,7 +28,7 @@ public interface UserMapper {
 			+ "     VALUES(#{userId}, #{userPwd}, #{userCareer}, #{userIntro}, #{userBiz} )")
 	public abstract Integer insertTr(TrainerDTO trainerDTO) throws DAOException;
 	
-	// ============ 추가한 코드 ============= //
+	// ============ Naver Join&Login Start ============= //
 	// 유저 정보 조회
 	@Select("SELECT * FROM t_user WHERE user_id = #{userId}")
 	public abstract UserVO selectUserInfo(String userId) throws DAOException;
@@ -41,7 +41,7 @@ public interface UserMapper {
 	// 유저 토큰 업데이트
 	@Update("UPDATE t_mem SET user_id_token = #{userIdToken} WHERE user_id = #{userId}")
 	public abstract Integer updateToken(MemberVO memberVO) throws DAOException;
-	// ============ 추가한 코드 ============= //
+	// ============ Naver Join&Login End ============= //
 	
 	// 아이디 중복확인
 	public abstract Integer selectId(String id) throws DAOException;

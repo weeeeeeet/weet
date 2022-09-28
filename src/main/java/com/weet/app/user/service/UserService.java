@@ -28,7 +28,7 @@ public interface UserService {
 	/// 아이디로 사용자를 조회하여 인증정보(TrainerVO) 변경
 	public abstract boolean modifyUserWithRememberMe(String userid, String rememberMe, Date rememberAge) throws ServiceException;
 
-	// =============== 추가한 코드 ================= // 
+	// =============== Naver Join&Login ================= // 
 	// 회원가입 : 일반유저 등록
 	public abstract boolean userJoin(UserDTO userDTO, MemberVO memberVO) throws ServiceException;
 	
