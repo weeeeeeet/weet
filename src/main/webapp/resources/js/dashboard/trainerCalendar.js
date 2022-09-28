@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // title 값이 있을때, 화면에 calendat.addEvent() json 형식으로 일정을 추가
             if (title) {
                 calendar.addEvent({
-	               title: title,
+	               title: title, // title 대신 이름
 		           start: arg.start,
 		           end: arg.end,
 		           allDay: arg.allDay,
@@ -44,15 +44,15 @@ document.addEventListener('DOMContentLoaded', function () {
             calendar.unselect()
         }, // select
 
-        eventClick: function(arg) {
-            // 있는 일정 클릭시,
-            console.log("#등록된 일정 클릭#");
-            console.log(arg.event);
+        // eventClick: function(arg) {
+        //     // 있는 일정 클릭시,
+        //     console.log("#등록된 일정 클릭#");
+        //     console.log(arg.event);
             
-          if (confirm('Are you sure you want to delete this event?')) {
-            arg.event.remove()
-          }
-        },
+        //   if (confirm('Are you sure you want to delete this event?')) {
+        //     arg.event.remove()
+        //   }
+        // },
         
         editable: true,
         dayMaxEvents: true, // allow "more" link when too many events

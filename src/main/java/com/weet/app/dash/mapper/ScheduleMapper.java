@@ -3,6 +3,7 @@ package com.weet.app.dash.mapper;
 import java.util.List;
 
 import com.weet.app.dash.domain.FeedbackVO;
+import com.weet.app.dash.domain.ScheduleVO;
 import com.weet.app.exception.DAOException;
 
 // 데이터 접근
@@ -12,12 +13,12 @@ import com.weet.app.exception.DAOException;
 public interface ScheduleMapper {
 	
 	//==================================================
-	// 1. 내 식단 리스트
+	// 1. 스케쥴 불러오기
 	//==================================================
-	public abstract List<FeedbackVO> selectAllFoodList() throws DAOException;
+	public abstract List<ScheduleVO> selectAllScheduleList() throws DAOException;
 
 	//==================================================
-	// 2. 식단 상세조회 (컨텐츠)
+	// 2. 스케쥴 상세조회
 	//==================================================
 //	@Select("SELECT n_num, n_title, n_content, n_ts FROM t_notice WHERE n_num = #{n_numToBeRead}")
 //	public abstract NoticeVO select(@Param("n_numToBeRead") String n_num) throws DAOException;

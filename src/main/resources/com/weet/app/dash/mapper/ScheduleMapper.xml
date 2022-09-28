@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.weet.app.dash.mapper.ScheduleMapper">
+
+	<!-- * 하고 JSP 에서 골라서 해주기!-->
+	
+	<!--================스케쥴 가져오기========-->
+
+	<!--<resultMap type="calender" id="calMap">
+		<result property="start" column="start1"/>
+		<result property="end" column="end1"/>
+	</resultMap>
+	
+	<select id="calenderList" resultMap="com.weet.app.dash.persistence.ScheduleDAO">
+		SELECT s.cs_id
+    , s.class_id
+    , s.cs_day
+    , s.cs_start_date
+    , s.cs_start_time_ampm
+    , s.cs_start_time_hh
+    , s.cs_start_time_mm
+    , l.user_id
+    
+	FROM T_CLASS_SCHEDULE s
+	    , T_CLASS_LISTENER l
+	
+	WHERE s.class_id = 'class1'
+	    AND s.class_id = l.class_id(+);
+	</select>
+-->
+</mapper>

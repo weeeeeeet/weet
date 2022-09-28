@@ -28,10 +28,10 @@
     
             <!-- 프로필 -->
             <div class="profile g">
-                <img src="https://picsum.photos/id/550/200/200" alt="100x100 profile">
+                <img src=" ${ __LOGIN__.userProfile}" >
                 <!-- 이름 -->
                 <div class="name-level">
-                    <span><h1 class="g">Darlene Robertson</h1></span>
+                    <span><h1 class="g">${ __LOGIN__.userNickname}</h1></span>
                     <span><h2 class="trainer g">T</h2></span>
                     <span><h3 class="level g">LV.3</h3></span>
                 </div>
