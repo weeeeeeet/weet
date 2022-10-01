@@ -192,40 +192,6 @@
 							            </div>
                             </div>
 
-                    <div class="class class-progress" id="section03">
-
-                        <div class="class-title">
-                            <h1>커리큘럼</h1>
-                        </div>
-
-                        <ul>
-                            <li>
-                                <div class="step"><span>Step 1</span> 운동의 정석 : 1장</div>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et laudantium fugiat
-                                    excepturi possimus cupiditate, sit dignissimos non placeat harum aperiam?</p>
-                            </li>
-                            <li>
-                                <div class="step"><span>Step 2</span> 운동의 정석 : 2장</div>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et laudantium fugiat
-                                    excepturi possimus cupiditate, sit dignissimos non placeat harum aperiam?</p>
-                            </li>
-                            <li>
-                                <div class="step"><span>Step 3</span> 운동의 정석 : 3장</div>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et laudantium fugiat
-                                    excepturi possimus cupiditate, sit dignissimos non placeat harum aperiam?</p>
-                            </li>
-                            <li>
-                                <div class="step"><span>Step 4</span> 운동의 정석 : 4장</div>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et laudantium fugiat
-                                    excepturi possimus cupiditate, sit dignissimos non placeat harum aperiam?</p>
-                            </li>
-                            <li>
-                                <div class="step"><span>Step 5</span> 운동의 정석 : 5장</div>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et laudantium fugiat
-                                    excepturi possimus cupiditate, sit dignissimos non placeat harum aperiam?</p>
-                            </li>
-                        </ul>
-                    </div>
 
                     <div class="class center-info" id="section04">
 
@@ -255,51 +221,6 @@
                             <iframe src="https://www.google.com/maps?q=${__CLASS__.classAderess}&output=embed"
                                 width="100%" height="500"></iframe>
 
-                            지도는 나중에 수정
-
-                        </div>
-                    </div>
-
-                    <div class="class class-img" id="section05">
-
-                        <div class="class-title">
-                            <h1>클래스 사진</h1>
-                        </div>
-
-                        <div class="container mt-5">
-                            <div id="class-carousel" class="carousel slide" data-bs-ride="true">
-                                <div class="carousel-indicators">
-                                    <button type="button" data-bs-target="#class-carousel" data-bs-slide-to="0"
-                                        class="active" aria-current="true" aria-label="Slide 1"></button>
-                                    <button type="button" data-bs-target="#class-carousel" data-bs-slide-to="1"
-                                        aria-label="Slide 2"></button>
-                                    <button type="button" data-bs-target="#class-carousel" data-bs-slide-to="2"
-                                        aria-label="Slide 3"></button>
-                                </div>
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active" data-bs-interval="3000">
-                                        <img src="/${ __CLASS__.classPhotoUrl }" class="d-block w-100" alt="클래스 사진">
-                                    </div>
-                                    <div class="carousel-item" data-bs-interval="3000">
-                                        <img src="/resources/img/static/health.png" class="d-block w-100" alt="클래스 사진">
-                                    </div>
-                                    <div class="carousel-item" data-bs-interval="3000">
-                                        <img src="/resources/img/static/1000939.jpg" class="d-block w-100" alt="클래스 사진">
-                                    </div>
-                                </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#class-carousel"
-                                    data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#class-carousel"
-                                    data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-                            </div>
-
-                            캐러셀 높이 일정하게수정해야함
                         </div>
                     </div>
 
