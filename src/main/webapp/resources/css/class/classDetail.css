@@ -176,6 +176,9 @@ nav .navbar-nav .nav-link {
 #section01, #section02, #section04, #section05, #section07 {
   line-height: 40px;
 }
+#section06 {
+  line-height: 20px;
+}
 .class-title {
   margin-bottom: 50px;
 
