@@ -42,7 +42,7 @@ public class AuthServiceImpl implements AuthService {
 	         try {
 	             JSONObject obj = (JSONObject) coolsms.send(params);
 	             log.trace(obj.toString());
-	           } catch (CoolsmsException e) {
+	         } catch (CoolsmsException e) {
 	            log.trace(e.getMessage());
 	            log.trace(e.getCode());
 	         }  // try-catch
