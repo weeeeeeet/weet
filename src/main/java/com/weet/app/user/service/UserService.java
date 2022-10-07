@@ -36,6 +36,7 @@ public interface UserService {
 	// 카카오 사용자 로그인 처리
 	public void createKakaoUser(String token) throws ServiceException;
 
+	// 유저 프로필 가져오기
 	public UserVO getUserInfo (String access_Token) throws ServiceException;
 	
 	// =============== Naver Join&Login ================= // 
